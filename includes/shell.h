@@ -6,7 +6,7 @@
 /*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/04 15:55:39 by mjalenqu     #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/07 11:26:45 by mjalenqu    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/08 11:07:51 by mjalenqu    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -44,6 +44,13 @@ typedef struct	s_history
 	char				*cmd;
 	struct s_history	*next;
 }				t_history;
+
+typedef struct		s_env
+{
+	char				*name;
+	char				*data;
+	struct s_env		*next;
+}					t_env;
 
 /*
 ** color **
@@ -96,4 +103,12 @@ t_select				*init_term(t_select *select);
 */
 int						key_hook(void);
 
+/*
+*******************************************************************************
+***								env.c										***
+*******************************************************************************
+*/
+t_env					*init_env(char **env);
+char					*init_name(char *src);
+char					*init_data(char *src);
 #endif
