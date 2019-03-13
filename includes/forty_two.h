@@ -1,33 +1,16 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   ft_voidrev.c                                     .::    .:/ .      .::   */
+/*   forty_two.h                                      .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: shthevak <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2019/03/03 15:04:31 by shthevak     #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/05 14:17:33 by shthevak    ###    #+. /#+    ###.fr     */
+/*   Created: 2019/03/13 17:29:49 by shthevak     #+#   ##    ##    #+#       */
+/*   Updated: 2019/03/13 21:15:23 by shthevak    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "ft_str.h"
-
-void	*ft_voidrev(void *s)
-{
-	size_t		i;
-	size_t		j;
-	char		*c;
-
-	i = 0;
-	c = (char *)s;
-	while (c[i])
-		i++;
-	j = 0;
-	i--;
-	while (i > j)
-	{
-		ft_voidswap(&c[i--], &c[j++]);
-	}
-	return (s);
-}
+#include "ft_unix.h"
+#include "ft_int.h"
