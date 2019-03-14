@@ -6,7 +6,7 @@
 /*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/04 15:55:39 by mjalenqu     #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/08 11:07:51 by mjalenqu    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/14 00:29:19 by mjalenqu    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -32,9 +32,18 @@
 /*
 ** structures **
 */
+
+typedef struct	s_wind
+{
+	int					term_fd;
+	int					max_col;
+	int					max_line;
+	int					pos_line;
+	int					pos_col;
+}				t_wind;
+
 typedef struct	s_select
 {
-	int					pos;
 	struct termios		my_term;
 	struct termios		old_term;
 }				t_select;
@@ -43,12 +52,14 @@ typedef struct	s_history
 {
 	char				*cmd;
 	struct s_history	*next;
+	struct s_history	*prev;
 }				t_history;
 
 typedef struct		s_env
 {
 	char				*name;
 	char				*data;
+	int					type;
 	struct s_env		*next;
 }					t_env;
 
@@ -87,6 +98,12 @@ typedef struct		s_env
 # define MTERM	select->my_term
 # define CMD	history->cmd
 # define HNEXT	history->next
+# define HPREV	history->prev
+# define COL	wind->max_col
+# define LINE	wind->max_line
+# define PCOL	wind->pos_col
+# define PLINE	wind->pos_line
+# define FD		wind->term_fd
 # define BSIZE 6
 
 /*
@@ -98,10 +115,11 @@ t_select				*init_term(t_select *select);
 
 /*
 *******************************************************************************
-***							init_term.c										***
+***							key_hook.c										***
 *******************************************************************************
 */
-int						key_hook(void);
+int						key_hook(t_wind *wind);
+int						ft_put_c(int c);
 
 /*
 *******************************************************************************
@@ -111,4 +129,12 @@ int						key_hook(void);
 t_env					*init_env(char **env);
 char					*init_name(char *src);
 char					*init_data(char *src);
+
+/*
+*******************************************************************************
+***								windows.c									***
+*******************************************************************************
+*/
+t_wind					*init_wind(void);
+
 #endif

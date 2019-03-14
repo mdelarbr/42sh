@@ -6,7 +6,7 @@
 #    By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2019/03/04 18:02:46 by mjalenqu     #+#   ##    ##    #+#        #
-#    Updated: 2019/03/08 18:32:00 by mjalenqu    ###    #+. /#+    ###.fr      #
+#    Updated: 2019/03/14 03:21:47 by mjalenqu    ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -17,14 +17,15 @@ LIB_PATH = libft/libft.a
 SRC_PATH = ./src/
 OBJ_PATH = ./obj/
 INC_PATH = ./includes/
-SRC_NAME = main.c init_term.c key_hook.c env.c
+SRC_NAME = main.c init_term.c key_hook.c env.c windows.c
 OBJ_NAME = $(SRC_NAME:.c=.o)
 INC_NAME = shell.h
 
 INC = $(addprefix $(INC_PATH), $(INC_NAME))
 SRC = $(addprefix $(SRC_PATH), $(SRC_NAME))
 OBJ = $(addprefix $(OBJ_PATH), $(OBJ_NAME))
-FLAG += -Wall -Werror -Wexta -lcurses -g -fsanitize=address
+FLAG += -Wall -Werror -Wextra -g #-fsanitize=address
+FLAG_END = -lcurses
 NORME = norminette
 
 BLUE=\033[0;38;5;123m
@@ -40,14 +41,14 @@ all: $(NAME)
 $(NAME) : $(OBJ_PATH) $(OBJ) Makefile
 	@echo "$(LIGHT_GREEN)Compilation de la libft : "
 	@make -C libft
-	@gcc -o $@ $(OBJ) $(FLAG) $(LIB_PATH) -Iinclude
+	gcc $(FLAG) -o $@ $(OBJ) $(FLAG_END) $(LIB_PATH) -Iinclude
 	@echo "$(FLASH_GREEN)$(NAME) compilé et prêt à l'usage !\n"
 
 $(OBJ_PATH):
 	@mkdir -p $(OBJ_PATH) 2> /dev/null
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c $(INC)
-	@gcc $(FLAGS) -g -I $(INC) -o $@ -c $<
+	gcc $(FLAG) -g -I $(INC) -o $@ -c $<
 
 clean:
 	@make -C libft/ clean

@@ -1,28 +1,37 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   init_term.c                                      .::    .:/ .      .::   */
+/*   windows.c                                        .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2019/03/04 17:27:12 by mjalenqu     #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/14 03:58:33 by mjalenqu    ###    #+. /#+    ###.fr     */
+/*   Created: 2019/03/13 23:04:55 by mjalenqu     #+#   ##    ##    #+#       */
+/*   Updated: 2019/03/14 00:58:24 by mjalenqu    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "../includes/shell.h"
 
-t_select	*init_term(t_select *select)
+t_wind	*init_wind(void)
 {
-	select = malloc(sizeof(t_select));
-	if (tcgetattr(0, &(OTERM)) == -1 || tcgetattr(0, &(MTERM)) == -1)
-		return (NULL);
-	MTERM.c_lflag &= ~(ICANON | ECHO);
-	MTERM.c_cc[VMIN] = 1;
-	MTERM.c_cc[VTIME] = 0;
-	if (tcsetattr(2, TCSANOW, &(MTERM)) == -1)
-		return (NULL);
-	tputs(tgetstr("vi", NULL), 1, ft_put_c);
-	return (select);
+	struct winsize	w;
+	t_wind			*wind;
+	char			buf[42];
+	int				i;
+
+	i = 0;
+	ioctl(2, TIOCGWINSZ, &w);
+	wind = malloc(sizeof(t_wind));
+	wind->max_col = w.ws_col;
+	wind->max_line = w.ws_row;
+	write(1, "\033[6n", 4);
+	read(1, buf, 38);
+	buf[39] = '\0';
+	wind->pos_line = ft_atoi(buf + 2) - 1;
+	while (buf[i] && buf[i] != ';')
+		i++;
+	wind->pos_col = ft_atoi(buf + i + 1);
+	tputs(tgetstr("dl", NULL), 0, ft_put_c);
+	return (wind);
 }
