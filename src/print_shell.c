@@ -6,7 +6,7 @@
 /*   By: shthevak <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/13 21:38:56 by shthevak     #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/14 01:08:45 by shthevak    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/14 01:31:36 by shthevak    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -139,20 +139,4 @@ void	ft_print_shell_e(int w)
 	ft_putstr("\033[38;5;33m████████████████████████████████████████████████");
 	ft_putstr("\n");
 	ft_putstr("\033[0m");
-}
-
-void	ft_print_shell(void)
-{
-	int w;
-
-	w = ft_terminal_w(w) - 48;
-	if (w >= 0)
-	{
-		w = w / 2;
-		ft_print_shell_a(w);
-		ft_print_shell_b(w);
-		ft_print_shell_c(w);
-		ft_print_shell_d(w);
-		ft_print_shell_e(w);
-	}
 }
