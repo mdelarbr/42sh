@@ -6,7 +6,7 @@
 /*   By: shthevak <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/14 04:20:29 by shthevak     #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/14 05:53:56 by shthevak    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/14 09:26:17 by shthevak    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -17,10 +17,10 @@ int		ft_get_env(char **env, t_var **var)
 {
 	char		**tab;
 	int			i;
-	t_var	*new;
+	t_var		*new;
 
 	i = 0;
-		while (env[i])
+	while (env[i])
 	{
 		tab = ft_strsplit(env[i], '=');
 		new = create_var_str_elem(tab[0], tab[1]);
