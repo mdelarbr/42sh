@@ -1,43 +1,34 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   main.c                                           .::    .:/ .      .::   */
+/*   env.c                                            .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: shthevak <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2019/03/13 17:27:41 by shthevak     #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/14 09:11:56 by shthevak    ###    #+. /#+    ###.fr     */
+/*   Created: 2019/03/14 04:20:29 by shthevak     #+#   ##    ##    #+#       */
+/*   Updated: 2019/03/14 05:53:56 by shthevak    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "forty_two.h"
 
-void	ft_print_shell(void)
+int		ft_get_env(char **env, t_var **var)
 {
-	int w;
+	char		**tab;
+	int			i;
+	t_var	*new;
 
-	w = ft_terminal_w(STDIN_FILENO) - 48;
-	if (w >= 0)
+	i = 0;
+		while (env[i])
 	{
-		w = w / 2;
-		ft_print_shell_a(w);
-		ft_print_shell_b(w);
-		ft_print_shell_c(w);
-		ft_print_shell_d(w);
-		ft_print_shell_e(w);
+		tab = ft_strsplit(env[i], '=');
+		new = create_var_str_elem(tab[0], tab[1]);
+		new->type = 0;
+		ft_add_var_elem(var, new);
+		i++;
+		ft_free_tab(tab);
+		tab = NULL;
 	}
-}
-
-int		main(int av, char **ac, char **env)
-{
-	t_ft	*ft;
-
-	ft_print_shell();
-	int i;
-	if (!(ft = ft_getstruct(env)))
-		ft_error(1);
-	ft_print_var_list(&(ft->env));
-	ft_free_struct();
-	return (0);
+	return (i);
 }
