@@ -6,15 +6,15 @@
 /*   By: shthevak <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/13 17:27:41 by shthevak     #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/13 21:11:56 by shthevak    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/14 00:44:53 by shthevak    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "forty_two.h"
 
-int main(int av, char **ac)
+int	main(int av, char **ac)
 {
-	ft_putstr("Test");
-	return(0);
+	ft_print_shell();
+	return (0);
 }
