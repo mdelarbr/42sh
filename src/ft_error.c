@@ -1,43 +1,32 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   main.c                                           .::    .:/ .      .::   */
+/*   ft_error.c                                       .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: shthevak <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2019/03/13 17:27:41 by shthevak     #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/14 09:11:56 by shthevak    ###    #+. /#+    ###.fr     */
+/*   Created: 2019/03/14 03:30:24 by shthevak     #+#   ##    ##    #+#       */
+/*   Updated: 2019/03/14 09:11:58 by shthevak    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "forty_two.h"
 
-void	ft_print_shell(void)
-{
-	int w;
+#include "stdio.h"
 
-	w = ft_terminal_w(STDIN_FILENO) - 48;
-	if (w >= 0)
+void	ft_error(int nb)
+{
+	if (nb == 1)
 	{
-		w = w / 2;
-		ft_print_shell_a(w);
-		ft_print_shell_b(w);
-		ft_print_shell_c(w);
-		ft_print_shell_d(w);
-		ft_print_shell_e(w);
+		ft_putstr("an error occured at the begining,");
+		ft_putstr("very worrisome, anyway ... \n");
 	}
-}
+	if (nb == 2)
+	{
 
-int		main(int av, char **ac, char **env)
-{
-	t_ft	*ft;
-
-	ft_print_shell();
-	int i;
-	if (!(ft = ft_getstruct(env)))
-		ft_error(1);
-	ft_print_var_list(&(ft->env));
+	}
+	ft_putstr("quitting with class \n");
 	ft_free_struct();
-	return (0);
+	exit(0);
 }
