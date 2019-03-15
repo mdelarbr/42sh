@@ -6,7 +6,7 @@
 #    By: shthevak <marvin@le-101.fr>                +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2019/03/13 17:36:13 by shthevak     #+#   ##    ##    #+#        #
-#    Updated: 2019/03/14 04:20:21 by shthevak    ###    #+. /#+    ###.fr      #
+#    Updated: 2019/03/15 16:40:37 by shthevak    ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -33,7 +33,8 @@ LIB_NAME = libft.a
 
 INC_NAME = forty_two.h
 
-SRC_NAME = main.c print_shell.c struct.c ft_error.c free.c env.c
+SRC_NAME = main.c print_shell.c struct.c ft_error.c free.c env.c history.c\
+		   alias.c
 
 # **************************************************************************** #
 #  									VAR                                        #

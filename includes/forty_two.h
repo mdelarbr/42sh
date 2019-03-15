@@ -6,7 +6,7 @@
 /*   By: shthevak <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/13 17:29:49 by shthevak     #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/14 09:24:42 by shthevak    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/15 16:54:58 by shthevak    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -55,4 +55,10 @@ void			ft_free_struct(void);
 void			ft_free_env(void);
 
 int				ft_get_env(char **env, t_var **var);
+
+void			get_history(t_list **his);
+void			read_history(t_list **his);
+
+void			get_alias(t_var **list);
+void			read_alias(t_var **list);
 #endif

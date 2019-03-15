@@ -1,28 +1,35 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   free.c                                           .::    .:/ .      .::   */
+/*   history.c                                        .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: shthevak <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2019/03/14 04:04:12 by shthevak     #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/15 14:31:58 by shthevak    ###    #+. /#+    ###.fr     */
+/*   Created: 2019/03/15 16:41:37 by shthevak     #+#   ##    ##    #+#       */
+/*   Updated: 2019/03/15 17:02:32 by shthevak    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "forty_two.h"
 
-void	ft_free_struct(void)
-{
-	t_ft *ft;
+void	read_history(t_list **his);
 
-	ft = ft_getstruct(NULL);
-	if (ft)
+void	get_history(t_list **his)
+{
+	if (ft_file_exists(".42_history"))
 	{
-		if (ft->env)
-			ft_free_var_list(&(ft->env));
-		free(ft);
-		ft = NULL;
+		if (ft_file_rrights(".42_history") && ft_file_wrights(".42_history"))
+		{
+		}
+		else
+			ft_error(2);
+	}
+	else
+	{
+		if (ft_create_file(".42_history"))
+			ft_error(-2);
+		else
+			ft_error(2);
 	}
 }
