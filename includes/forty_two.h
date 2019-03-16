@@ -6,7 +6,7 @@
 /*   By: shthevak <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/13 17:29:49 by shthevak     #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/15 16:54:58 by shthevak    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/16 15:29:16 by shthevak    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -18,6 +18,18 @@
 # include "ft_unix.h"
 # include "ft_int.h"
 # include "ft_list.h"
+
+/*
+********************************************************************************
+**                                                                     Defines *
+********************************************************************************
+*/
+
+# define HISTORY ".42_history"
+# define ALIAS ".42_alias"
+# define ENV_VAR 0
+# define SHELL_VAR 1
+# define ALIAS_VAR 2
 
 /*
 ********************************************************************************
@@ -50,15 +62,18 @@ void			ft_print_shell_e(int w);
 t_ft			*ft_getstruct(char **env);
 
 void			ft_error(int nb);
+void			ft_error_quit(int nb, t_ft *ft);
 
 void			ft_free_struct(void);
 void			ft_free_env(void);
 
 int				ft_get_env(char **env, t_var **var);
 
-void			get_history(t_list **his);
-void			read_history(t_list **his);
+void			get_history(t_ft *ft);
+void			read_history(t_ft *ft);
 
-void			get_alias(t_var **list);
-void			read_alias(t_var **list);
+void			get_alias(t_ft *ft);
+void			read_alias(t_ft *ft);
+void			save_alias(t_ft *ft);
+void			write_alias(t_ft *ft);
 #endif
