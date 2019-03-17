@@ -6,7 +6,7 @@
 /*   By: shthevak <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/15 16:36:57 by shthevak     #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/16 15:42:36 by shthevak    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/17 13:50:50 by shthevak    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -18,7 +18,7 @@ void	write_alias(t_ft *ft)
 	char	*str;
 	t_var	*save;
 
-	ft->fd_alias = open(".42_alias", O_WRONLY | O_TRUNC);
+	ft->fd_alias = open(ALIAS, O_WRONLY | O_TRUNC);
 	save = ft->env;
 	while (save)
 	{
@@ -43,6 +43,7 @@ void	read_alias(t_ft *ft)
 	t_var	*new;
 
 	ft->fd_alias = open(ALIAS, O_RDONLY);
+	str = NULL;
 	while (get_next_line(ft->fd_alias, &str))
 	{
 		tab = ft_strsplit(str, '=');
@@ -55,6 +56,7 @@ void	read_alias(t_ft *ft)
 		ft_free_tab(tab);
 		ft_strdel(&str);
 	}
+	ft_strdel(&str);
 	close(ft->fd_alias);
 	ft->fd_alias = -1;
 }

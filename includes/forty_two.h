@@ -6,7 +6,7 @@
 /*   By: shthevak <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/13 17:29:49 by shthevak     #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/16 15:29:16 by shthevak    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/17 13:39:33 by shthevak    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -71,6 +71,8 @@ int				ft_get_env(char **env, t_var **var);
 
 void			get_history(t_ft *ft);
 void			read_history(t_ft *ft);
+void			save_history(t_ft *ft);
+void			write_history(t_ft *ft);
 
 void			get_alias(t_ft *ft);
 void			read_alias(t_ft *ft);
