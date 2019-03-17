@@ -6,7 +6,7 @@
 /*   By: shthevak <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/13 17:27:41 by shthevak     #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/17 13:51:42 by shthevak    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/17 16:07:13 by shthevak    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -36,9 +36,6 @@ int		main(int av, char **ac, char **env)
 	ft_print_shell();
 	if (!(ft = ft_getstruct(env)))
 		ft_error(1);
-//	ft_print_var_list(&(ft->env));
-//	ft_print_list(&(ft->his));
-	//ft_error(0);
 	ft_free_struct();
 	return (0);
 }

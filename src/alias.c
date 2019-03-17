@@ -6,7 +6,7 @@
 /*   By: shthevak <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/15 16:36:57 by shthevak     #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/17 13:50:50 by shthevak    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/17 16:06:21 by shthevak    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -38,8 +38,8 @@ void	write_alias(t_ft *ft)
 
 void	read_alias(t_ft *ft)
 {
-	char *str;
-	char **tab;
+	char	*str;
+	char	**tab;
 	t_var	*new;
 
 	ft->fd_alias = open(ALIAS, O_RDONLY);

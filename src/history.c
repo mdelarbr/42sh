@@ -6,7 +6,7 @@
 /*   By: shthevak <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/15 16:41:37 by shthevak     #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/17 13:51:33 by shthevak    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/17 16:07:50 by shthevak    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -15,22 +15,20 @@
 
 void	read_history(t_ft *ft)
 {
-	{
-		char *str;
-		char **tab;
-		t_list	*new;
+	char	*str;
+	char	**tab;
+	t_list	*new;
 
-		ft->fd_his = open(HISTORY, O_RDONLY);
-		while (get_next_line(ft->fd_his, &str))
-		{
-			new = create_list_elem(str);
-			ft_add_list_elem(&(ft->his), new);
-			ft_strdel(&str);
-		}
+	ft->fd_his = open(HISTORY, O_RDONLY);
+	while (get_next_line(ft->fd_his, &str))
+	{
+		new = create_list_elem(str);
+		ft_add_list_elem(&(ft->his), new);
 		ft_strdel(&str);
-		close(ft->fd_his);
-		ft->fd_his = -1;
 	}
+	ft_strdel(&str);
+	close(ft->fd_his);
+	ft->fd_his = -1;
 }
 
 void	get_history(t_ft *ft)
