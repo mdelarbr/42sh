@@ -6,7 +6,7 @@
 /*   By: shthevak <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/13 17:27:41 by shthevak     #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/18 12:13:08 by shthevak    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/18 16:32:26 by shthevak    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -36,6 +36,12 @@ int		main(int av, char **ac, char **env)
 	ft_print_shell();
 	if (!(ft = ft_getstruct(env)))
 		ft_error(1);
-	ft_free_struct();
+/*	ft_putstr("/tmp/a.out\n");
+	ft_execute_line("/tmp/a.out", ft);
+	ft_putstr("/tmp/test.sh\n");
+	ft_execute_line("/tmp/test.sh", ft);
+	ft_putstr("/tmp/try2 : no rights\n");
+	ft_execute_line("/tmp/try2", ft);
+*/	ft_free_struct();
 	return (0);
 }

@@ -1,22 +1,21 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   forty_two.h                                      .::    .:/ .      .::   */
+/*   launch.h                                         .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: shthevak <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/13 17:29:49 by shthevak     #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/17 13:39:33 by shthevak    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/18 15:06:10 by shthevak    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#ifndef FT_FORTY_TWO_H
-# define FT_FORTY_TWO_H
+#ifndef LAUNCH_H
+# define LAUNCH_H
 
 # include "ft_str.h"
 # include "ft_unix.h"
-# include "ft_int.h"
 # include "ft_list.h"
 
 /*
