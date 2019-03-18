@@ -3,10 +3,10 @@
 /*                                                              /             */
 /*   main.c                                           .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
+/*   By: mateodelarbre <mateodelarbre@student.le    +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/04 15:45:25 by mjalenqu     #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/14 03:59:51 by mjalenqu    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/18 15:06:43 by mateodelarb ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -70,11 +70,13 @@ int		main(int ac, char **av, char **env)
 		return (0);
 	select = init_term(select);
 	wind = init_wind();
-	while (1)
+/*	while (1)
 	{
 		if (key_hook(wind) == -1)
 			break ;
 	}
+*/
+	key_hook(wind);
 	tcsetattr(2, TCSANOW, &(OTERM));
 	tputs(tgetstr("ve", NULL), 1, ft_put_c);
 	free(select);

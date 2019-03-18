@@ -3,16 +3,16 @@
 /*                                                              /             */
 /*   key_hook.c                                       .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
+/*   By: mateodelarbre <mateodelarbre@student.le    +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/04 18:24:48 by mjalenqu     #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/14 04:07:51 by mjalenqu    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/18 16:34:57 by mateodelarb ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "../includes/shell.h"
-
+/*
 void	put_index(char *str, int i, t_wind *wind)
 {
 	int j;
@@ -40,6 +40,43 @@ void	put_index(char *str, int i, t_wind *wind)
 		tputs(tgetstr("mr", NULL), 1, ft_put_c);
 		ft_putchar(' ');
 		tputs(tgetstr("me", NULL), 1, ft_put_c);
+	}
+}*/
+
+void	print_test(char *str, t_wind *wind)
+{
+	int i;
+	int b;
+
+	i = 0;
+	b = 0;
+	tputs(tgetstr("dl", NULL), 1, ft_put_c);
+	tputs(tgoto(tgetstr("cm", NULL), 0, PLINE), 1, ft_put_c);
+	ft_putcolor(BRED, "prompt->", RESET);
+	while(str[i])
+	{
+		if (i == PCOL)
+		{
+			tputs(tgoto(tgetstr("cm", NULL), i + 8, PLINE), 1, ft_put_c);
+			tputs(tgetstr("mr", NULL), 1, ft_put_c);
+			ft_putchar(str[i]);
+			tputs(tgetstr("me", NULL), 1, ft_put_c);
+			b = 1;
+		}
+		else
+		{
+			tputs(tgoto(tgetstr("cm", NULL), i + 8, PLINE), 1, ft_put_c);
+			ft_putchar(str[i]);
+		}
+		i++;
+	}
+	if (b == 0)
+	{
+		tputs(tgoto(tgetstr("cm", NULL), PCOL + 8, PLINE), 1, ft_put_c);
+		tputs(tgetstr("mr", NULL), 1, ft_put_c);
+		ft_putchar(4);
+		tputs(tgetstr("me", NULL), 1, ft_put_c);
+//		tputs(tgetstr("dc", NULL), 1, ft_put_c);
 	}
 }
 
@@ -116,7 +153,7 @@ char	*check_char(char *res, long c, t_wind *wind)
 {
 	if (check_key(c, wind) == 0)
 		return (res);
-	put_index(res, PCOL, wind);
+//	put_index(res, PCOL, wind);
 	res = ft_fjoin(res, c, PCOL);
 	PCOL++;
 	return (res);
@@ -147,8 +184,9 @@ int		key_hook(t_wind *wind)
 			break ;
 		}
 		res = check_char(res, key, wind);
-		if (PCOL < (int)ft_strlen(res))
-			put_index(res, PCOL, wind);
+//		if (PCOL < (int)ft_strlen(res))
+		print_test(res, wind);
+//			put_index(res, PCOL, wind);
 		key = 0;
 	}
 	ft_putchar('\n');
