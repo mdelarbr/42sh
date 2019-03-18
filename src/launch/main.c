@@ -1,34 +1,41 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   struct.c                                         .::    .:/ .      .::   */
+/*   main.c                                           .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: shthevak <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2019/03/14 02:36:51 by shthevak     #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/17 13:46:08 by shthevak    ###    #+. /#+    ###.fr     */
+/*   Created: 2019/03/13 17:27:41 by shthevak     #+#   ##    ##    #+#       */
+/*   Updated: 2019/03/18 12:13:08 by shthevak    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "forty_two.h"
+#include "launch.h"
 
-t_ft	*ft_getstruct(char **env)
+void	ft_print_shell(void)
 {
-	static t_ft *ft = NULL;
+	int w;
 
-	if (ft == NULL)
+	w = ft_terminal_w(STDIN_FILENO) - 48;
+	if (w >= 0)
 	{
-		if (!(ft = malloc(sizeof(t_ft))))
-			return (NULL);
-		ft->env = NULL;
-		ft->his = NULL;
-		ft->fd_his = -1;
-		ft->fd_alias = -1;
-		ft->env_nb = ft_get_env(env, &(ft->env));
-		ft->env == NULL ? ft_error(-1) : 0;
-		get_history(ft);
-		get_alias(ft);
+		w = w / 2;
+		ft_print_shell_a(w);
+		ft_print_shell_b(w);
+		ft_print_shell_c(w);
+		ft_print_shell_d(w);
+		ft_print_shell_e(w);
 	}
-	return (ft);
+}
+
+int		main(int av, char **ac, char **env)
+{
+	t_ft	*ft;
+
+	ft_print_shell();
+	if (!(ft = ft_getstruct(env)))
+		ft_error(1);
+	ft_free_struct();
+	return (0);
 }

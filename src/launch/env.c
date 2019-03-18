@@ -6,12 +6,12 @@
 /*   By: shthevak <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/14 04:20:29 by shthevak     #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/16 15:16:34 by shthevak    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/18 12:08:23 by shthevak    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "forty_two.h"
+#include "launch.h"
 
 int		ft_get_env(char **env, t_var **var)
 {

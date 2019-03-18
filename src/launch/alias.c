@@ -6,12 +6,12 @@
 /*   By: shthevak <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/15 16:36:57 by shthevak     #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/17 16:06:21 by shthevak    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/18 12:08:07 by shthevak    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "forty_two.h"
+#include "launch.h"
 
 void	write_alias(t_ft *ft)
 {
@@ -47,12 +47,9 @@ void	read_alias(t_ft *ft)
 	while (get_next_line(ft->fd_alias, &str))
 	{
 		tab = ft_strsplit(str, '=');
-		if (tab[0] && tab[1] && tab[1] != '\0')
-		{
-			new = create_var_str_elem(tab[0], tab[1]);
-			new->type = ALIAS_VAR;
-			ft_add_var_elem(&(ft->env), new);
-		}
+		new = create_var_str_elem(tab[0], tab[1]);
+		new->type = ALIAS_VAR;
+		ft_add_var_elem(&(ft->env), new);
 		ft_free_tab(tab);
 		ft_strdel(&str);
 	}

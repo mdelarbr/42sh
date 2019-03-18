@@ -1,30 +1,34 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   free.c                                           .::    .:/ .      .::   */
+/*   struct.c                                         .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: shthevak <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2019/03/14 04:04:12 by shthevak     #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/17 13:46:17 by shthevak    ###    #+. /#+    ###.fr     */
+/*   Created: 2019/03/14 02:36:51 by shthevak     #+#   ##    ##    #+#       */
+/*   Updated: 2019/03/18 12:13:29 by shthevak    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "forty_two.h"
+#include "launch.h"
 
-void	ft_free_struct(void)
+t_ft	*ft_getstruct(char **env)
 {
-	t_ft *ft;
+	static t_ft *ft = NULL;
 
-	ft = ft_getstruct(NULL);
-	if (ft)
+	if (ft == NULL)
 	{
-		if (ft->env)
-			ft_free_var_list(&(ft->env));
-		if (ft->his)
-			ft_free_list(&(ft->his));
-		free(ft);
-		ft = NULL;
+		if (!(ft = malloc(sizeof(t_ft))))
+			return (NULL);
+		ft->env = NULL;
+		ft->his = NULL;
+		ft->fd_his = -1;
+		ft->fd_alias = -1;
+		ft->env_nb = ft_get_env(env, &(ft->env));
+		ft->env == NULL ? ft_error(-1) : 0;
+		get_history(ft);
+		get_alias(ft);
 	}
+	return (ft);
 }

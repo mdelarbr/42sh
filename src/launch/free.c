@@ -1,41 +1,30 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   main.c                                           .::    .:/ .      .::   */
+/*   free.c                                           .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: shthevak <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2019/03/13 17:27:41 by shthevak     #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/17 16:07:13 by shthevak    ###    #+. /#+    ###.fr     */
+/*   Created: 2019/03/14 04:04:12 by shthevak     #+#   ##    ##    #+#       */
+/*   Updated: 2019/03/18 12:08:31 by shthevak    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "forty_two.h"
+#include "launch.h"
 
-void	ft_print_shell(void)
+void	ft_free_struct(void)
 {
-	int w;
+	t_ft *ft;
 
-	w = ft_terminal_w(STDIN_FILENO) - 48;
-	if (w >= 0)
+	ft = ft_getstruct(NULL);
+	if (ft)
 	{
-		w = w / 2;
-		ft_print_shell_a(w);
-		ft_print_shell_b(w);
-		ft_print_shell_c(w);
-		ft_print_shell_d(w);
-		ft_print_shell_e(w);
+		if (ft->env)
+			ft_free_var_list(&(ft->env));
+		if (ft->his)
+			ft_free_list(&(ft->his));
+		free(ft);
+		ft = NULL;
 	}
-}
-
-int		main(int av, char **ac, char **env)
-{
-	t_ft	*ft;
-
-	ft_print_shell();
-	if (!(ft = ft_getstruct(env)))
-		ft_error(1);
-	ft_free_struct();
-	return (0);
 }
