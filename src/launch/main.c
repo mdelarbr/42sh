@@ -3,15 +3,16 @@
 /*                                                              /             */
 /*   main.c                                           .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: shthevak <marvin@le-101.fr>                +:+   +:    +:    +:+     */
+/*   By: shthevak <shthevak@student.42.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/13 17:27:41 by shthevak     #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/18 16:32:26 by shthevak    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/20 11:51:39 by husahuc     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "launch.h"
+void		test_redirection(char **argv_1, char **argv_2, char **env_test);
 
 void	ft_print_shell(void)
 {
@@ -33,9 +34,15 @@ int		main(int av, char **ac, char **env)
 {
 	t_ft	*ft;
 
-	ft_print_shell();
+	//ft_print_shell();
 	if (!(ft = ft_getstruct(env)))
 		ft_error(1);
+	char		**argv_1;
+	char		**argv_2;
+
+	argv_1 = ft_strsplit("ls -l", ' ');
+	argv_2 = ft_strsplit("wc", ' ');
+	test_redirection(argv_1, argv_2, env);
 /*	ft_putstr("/tmp/a.out\n");
 	ft_execute_line("/tmp/a.out", ft);
 	ft_putstr("/tmp/test.sh\n");
