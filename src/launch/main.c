@@ -6,13 +6,13 @@
 /*   By: shthevak <shthevak@student.42.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/13 17:27:41 by shthevak     #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/20 11:51:39 by husahuc     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/22 15:06:29 by husahuc     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "launch.h"
-void		test_redirection(char **argv_1, char **argv_2, char **env_test);
+void		test_pipe(char **argv_1, char **argv_2, char **env_test);
 
 void	ft_print_shell(void)
 {
@@ -42,13 +42,7 @@ int		main(int av, char **ac, char **env)
 
 	argv_1 = ft_strsplit("ls -l", ' ');
 	argv_2 = ft_strsplit("wc", ' ');
-	test_redirection(argv_1, argv_2, env);
-/*	ft_putstr("/tmp/a.out\n");
-	ft_execute_line("/tmp/a.out", ft);
-	ft_putstr("/tmp/test.sh\n");
-	ft_execute_line("/tmp/test.sh", ft);
-	ft_putstr("/tmp/try2 : no rights\n");
-	ft_execute_line("/tmp/try2", ft);
-*/	ft_free_struct();
+	test_pipe(argv_1, argv_2, env);
+	ft_free_struct();
 	return (0);
 }
