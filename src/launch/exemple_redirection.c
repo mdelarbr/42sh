@@ -6,7 +6,7 @@
 /*   By: husahuc <husahuc@student.42.fr>            +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/20 10:57:59 by husahuc      #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/22 16:51:48 by husahuc     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/22 17:51:18 by husahuc     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -40,7 +40,10 @@ void		test_redirection(char **comm_1, char **comm_2, char **env, int fd1, int fd
 	}
 }
 
-// remplacer parametre dans read pour ecrire apres O_APPEND a ajouter apres dans le fichier
+/*
+** remplacer parametre dans read pour ecrire apres O_APPEND a ajouter apres dans le fichier
+** commande > file
+*/
 
 void		test_file(char **argv_1, char *file, char **env_test)
 {
@@ -51,6 +54,22 @@ void		test_file(char **argv_1, char *file, char **env_test)
 	close(1);
 	dup(file_fd);
 	execve("/bin/ls", argv_1, env_test);
+}
+
+/*
+** test pour entree, un file inverse. depuis entree standart
+** commande < file
+*/
+
+void		test_entre(char **argv_1, char *file, char **env_test)
+{
+	int	file_fd;
+
+	file_fd = open(file, O_RDONLY);
+	printf("%d\n", file_fd);
+	close(0);
+	dup2(file_fd, 0);
+	execve("/bin/cat", argv_1, env_test);
 }
 
 void		test_pipe(char **argv_1, char **argv_2, char **env_test)
