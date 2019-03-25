@@ -6,7 +6,7 @@
 /*   By: shthevak <shthevak@student.42.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/13 17:27:41 by shthevak     #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/22 17:49:45 by husahuc     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/25 16:01:10 by husahuc     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -45,10 +45,12 @@ int		main(int av, char **ac, char **env)
 
 	argv_1 = ft_strsplit("cat", ' ');
 	argv_2 = ft_strsplit("wc -l", ' ');
+	ft_print_var_list(&(ft->env));
+	//printf("%s\n", ft->env->val);
 	//test_pipe(argv_1, argv_2, env);
 	//test_redirection(argv_1, argv_2, env, 2, 0);
 	//test_file(argv_1, "test", env);
 	//test_entre(argv_1, "test", env);
-	ft_free_struct();
+	//ft_free_struct();
 	return (0);
 }

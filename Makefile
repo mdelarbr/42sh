@@ -3,10 +3,10 @@
 #                                                               /              #
 #    Makefile                                         .::    .:/ .      .::    #
 #                                                  +:+:+   +:    +:  +:+:+     #
-#    By: shthevak <marvin@le-101.fr>                +:+   +:    +:    +:+      #
+#    By: shthevak <shthevak@student.42.fr>          +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2019/03/13 17:36:13 by shthevak     #+#   ##    ##    #+#        #
-#    Updated: 2019/03/18 16:02:29 by shthevak    ###    #+. /#+    ###.fr      #
+#    Updated: 2019/03/25 13:52:56 by husahuc     ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -31,6 +31,10 @@ LAUNCH_O_PATH = $(addprefix $(OBJ_PATH), launch/)
 
 EXEC_S_PATH = $(addprefix $(SRC_PATH), execute/)
 EXEC_O_PATH = $(addprefix $(OBJ_PATH), execute/)
+
+BUILTIN_S_PATH = $(addprefix $(SRC_PATH), builtin/)
+BUILTIN_O_PATH = $(addprefix $(OBJ_PATH), builtin/)
+
 # **************************************************************************** #
 # 									SRCS                                       #
 # **************************************************************************** #
@@ -38,11 +42,14 @@ EXEC_O_PATH = $(addprefix $(OBJ_PATH), execute/)
 LIB_NAME = libft.a
 
 LAUNCH_I_NAME = launch.h
-LAUNCH_S_NAME = main.c print_shell.c struct.c ft_error.c free.c env.c history.c\
-		   alias.c
+LAUNCH_S_NAME = main.c print_shell.c struct.c ft_error.c free.c history.c\
+		   alias.c exemple_redirection.c
 
 EXEC_I_NAME = execute.h
-EXEC_S_NAME = ft_execute.c ft_is_exec_verbose.c\
+EXEC_S_NAME = execute.c ft_execute.c ft_is_exec_verbose.c\
+
+BUILTIN_I_NAME = builtin.h
+BUILTIN_S_NAME =
 
 # **************************************************************************** #
 #  									VAR                                        #
@@ -58,6 +65,10 @@ EXEC_O_NAME = $(EXEC_S_NAME:.c=.o)
 EXEC_O = $(addprefix $(EXEC_O_PATH), $(EXEC_O_NAME))
 EXEC_INC = $(addprefix $(INC_PATH), $(EXEC_I_NAME))
 
+BUILTIN_O_NAME = $(BUILTIN_S_NAME:.c=.o)
+BUILTIN_O = $(addprefix $(BUILTIN_O_PATH), $(BUILTIN_O_NAME))
+BUILTIN_INC = $(addprefix $(INC_PATH), $(BUILTIN_I_NAME))
+
 # **************************************************************************** #
 #  									FLAG                                       #
 # **************************************************************************** #
@@ -72,13 +83,14 @@ endif
 
 all : $(OBJ_PATH) $(NAME)
 
-$(NAME): $(LIB) $(LAUNCH_O) $(EXEC_O)
-	@gcc $(42FLAGS) -o $@ $(LAUNCH_O) $(EXEC_O) $(LIB)
+$(NAME): $(LIB) $(LAUNCH_O) $(EXEC_O) $(BUILTIN_O)
+	gcc $(42FLAGS) -o $@ $(LAUNCH_O) $(BUILTIN_O) $(EXEC_O) $(LIB)
 
 $(OBJ_PATH):
 	@mkdir -p $(OBJ_PATH) 2> /dev/null
 	@mkdir -p $(LAUNCH_O_PATH) 2> /dev/null
 	@mkdir -p $(EXEC_O_PATH) 2> /dev/null
+	@mkdir -p $(BUILTIN_O_PATH) 2> /dev/null
 
 $(LIB):
 	@make -C $(LIBFT_PATH)
@@ -88,6 +100,9 @@ $(LAUNCH_O_PATH)%.o: $(LAUNCH_S_PATH)%.c $(LAUNCH_INC)
 
 $(EXEC_O_PATH)%.o: $(EXEC_S_PATH)%.c $(EXEC_INC)
 	@gcc $(42FLAGS) -I $(LIBFT_INC) -I $(INC_PATH) -o $@ -c $<
+
+$(BUILTIN_O_PATH)%.o: $(BUILTIN_S_PATH)%.c $(BUILTIN_INC)
+	gcc $(42FLAGS) -I $(LIBFT_INC) -I $(INC_PATH) -o $@ -c $<
 
 clean:
 	@make -C $(LIBFT_PATH) clean
