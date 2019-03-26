@@ -6,7 +6,7 @@
 #    By: shthevak <shthevak@student.42.fr>          +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2019/03/13 17:36:13 by shthevak     #+#   ##    ##    #+#        #
-#    Updated: 2019/03/25 13:52:56 by husahuc     ###    #+. /#+    ###.fr      #
+#    Updated: 2019/03/26 12:54:04 by husahuc     ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -46,10 +46,10 @@ LAUNCH_S_NAME = main.c print_shell.c struct.c ft_error.c free.c history.c\
 		   alias.c exemple_redirection.c
 
 EXEC_I_NAME = execute.h
-EXEC_S_NAME = execute.c ft_execute.c ft_is_exec_verbose.c\
+EXEC_S_NAME = execute.c ft_execute.c ft_is_exec_verbose.c \
 
 BUILTIN_I_NAME = builtin.h
-BUILTIN_S_NAME =
+BUILTIN_S_NAME = ft_cd.c ft_echo.c list_env.c
 
 # **************************************************************************** #
 #  									VAR                                        #
@@ -84,7 +84,7 @@ endif
 all : $(OBJ_PATH) $(NAME)
 
 $(NAME): $(LIB) $(LAUNCH_O) $(EXEC_O) $(BUILTIN_O)
-	gcc $(42FLAGS) -o $@ $(LAUNCH_O) $(BUILTIN_O) $(EXEC_O) $(LIB)
+	@gcc $(42FLAGS) -o $@ $(LIB) $(LAUNCH_O) $(BUILTIN_O) $(EXEC_O)
 
 $(OBJ_PATH):
 	@mkdir -p $(OBJ_PATH) 2> /dev/null
@@ -102,7 +102,7 @@ $(EXEC_O_PATH)%.o: $(EXEC_S_PATH)%.c $(EXEC_INC)
 	@gcc $(42FLAGS) -I $(LIBFT_INC) -I $(INC_PATH) -o $@ -c $<
 
 $(BUILTIN_O_PATH)%.o: $(BUILTIN_S_PATH)%.c $(BUILTIN_INC)
-	gcc $(42FLAGS) -I $(LIBFT_INC) -I $(INC_PATH) -o $@ -c $<
+	@gcc $(42FLAGS) -I $(LIBFT_INC) -I $(INC_PATH) -o $@ -c $<
 
 clean:
 	@make -C $(LIBFT_PATH) clean

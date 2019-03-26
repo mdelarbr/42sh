@@ -6,7 +6,7 @@
 /*   By: husahuc <husahuc@student.42.fr>            +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/23 15:48:11 by husahuc      #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/23 18:39:31 by husahuc     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/26 12:53:50 by husahuc     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -15,6 +15,8 @@
 # define BUILTIN_H
 
 # include "execute.h"
+# include "ft_list.h"
+# include "ft_str.h"
 
 /*
 ** ft_cd.c
@@ -24,6 +26,16 @@ int				ft_cd(char **argv, t_ft *ft_global);
 int				ft_cd_special(char *name, char *path_pwd, t_ft *ft_global);
 int				ft_change_dir(char *path, t_ft *ft_global, char *old);
 int				ft_error_cd(char *error, char *name);
+
+/*
+** list_env.c
+*/
+void			add_list_env(t_ft *global, char *name, char *env);
+
+/*
+** ft_echo.c
+*/
+int				ft_echo(char *argv[], t_ft *global);
 
 # define ARGUMENTS "cd: Too many arguments."
 # define CD_NO_HOME "cd: No HOME directory."

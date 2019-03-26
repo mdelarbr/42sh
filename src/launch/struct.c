@@ -6,7 +6,7 @@
 /*   By: shthevak <shthevak@student.42.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/14 02:36:51 by shthevak     #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/25 16:00:08 by husahuc     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/26 13:02:22 by husahuc     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -53,6 +53,7 @@ t_ft	*ft_getstruct(char **env)
 		ft->his = NULL;
 		ft->fd_his = -1;
 		ft->fd_alias = -1;
+		ft->end_shell = 1;
 		get_history(ft);
 		get_alias(ft);
 	}

@@ -3,10 +3,10 @@
 /*                                                              /             */
 /*   launch.h                                         .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: shthevak <marvin@le-101.fr>                +:+   +:    +:    +:+     */
+/*   By: shthevak <shthevak@student.42.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/13 17:29:49 by shthevak     #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/18 15:06:10 by shthevak    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/26 13:03:09 by husahuc     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -43,6 +43,7 @@ typedef struct	s_ft
 	t_list		*his;
 	int			fd_his;
 	int			fd_alias;
+	int			end_shell;
 }				t_ft;
 
 /*
@@ -77,4 +78,7 @@ void			get_alias(t_ft *ft);
 void			read_alias(t_ft *ft);
 void			save_alias(t_ft *ft);
 void			write_alias(t_ft *ft);
+
+
+# include "builtin.h"
 #endif
