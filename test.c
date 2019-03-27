@@ -1,30 +1,27 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   ft_strnew.c                                      .::    .:/ .      .::   */
+/*   test.c                                           .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2018/10/04 15:18:17 by tprzybyl     #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/27 17:40:45 by mjalenqu    ###    #+. /#+    ###.fr     */
+/*   Created: 2019/03/24 16:10:34 by mjalenqu     #+#   ##    ##    #+#       */
+/*   Updated: 2019/03/25 09:34:11 by mjalenqu    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "libft/libft.h"
 
-char	*ft_strnew(size_t size)
+int	main(int ac, char **av)
 {
-	char	*new;
-	size_t	i;
+	int i = 1;
+	(void)ac;
+	char *str;
+	char *tmp;
 
-	if (!(new = malloc(sizeof(char) * (size + 1))))
-		return (NULL);
-	i = 0;
-	while (size--)
-	{
-		new[i++] = '\0';
-	}
-	new[i] = '\0';
-	return (new);
+	tmp = ft_strdup(av[1]);
+	str = ft_strrmvi(tmp, i);
+	ft_putcolor("-->", str, "\n");
+	return (0);
 }

@@ -1,30 +1,40 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   ft_strnew.c                                      .::    .:/ .      .::   */
+/*   ft_strjoin_insert.c                              .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2018/10/04 15:18:17 by tprzybyl     #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/27 17:40:45 by mjalenqu    ###    #+. /#+    ###.fr     */
+/*   Created: 2019/03/02 17:13:45 by shthevak     #+#   ##    ##    #+#       */
+/*   Updated: 2019/03/25 10:10:45 by mjalenqu    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strnew(size_t size)
+void	ft_strjoin_insert(char **s1, char *s2, int i)
 {
-	char	*new;
-	size_t	i;
+	char	*ret;
+	int		j;
 
-	if (!(new = malloc(sizeof(char) * (size + 1))))
-		return (NULL);
-	i = 0;
-	while (size--)
+	ret = ft_strnew(ft_strlen(*s1) + ft_strlen(s2));
+	j = 0;
+	if (ret != NULL)
 	{
-		new[i++] = '\0';
+		while ((*s1)[j] && j < i)
+		{
+			ret[j] = (*s1)[j];
+			j++;
+		}
+		ret = ft_strcat(ret, s2);
+		if ((*s1)[j])
+		{
+			ret = ft_strcat(ret, (*s1) + j);
+		}
+		ft_strdel(s1);
+		*s1 = ret;
 	}
-	new[i] = '\0';
-	return (new);
+	else
+		ft_strdel(s1);
 }

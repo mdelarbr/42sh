@@ -6,7 +6,7 @@
 /*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/04 17:27:12 by mjalenqu     #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/14 03:58:33 by mjalenqu    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/24 11:14:40 by mjalenqu    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -23,6 +23,6 @@ t_select	*init_term(t_select *select)
 	MTERM.c_cc[VTIME] = 0;
 	if (tcsetattr(2, TCSANOW, &(MTERM)) == -1)
 		return (NULL);
-	tputs(tgetstr("vi", NULL), 1, ft_put_c);
+//	tputs(tgetstr("vi", NULL), 1, ft_put_c);
 	return (select);
 }

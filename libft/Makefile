@@ -25,9 +25,9 @@ SRC=ft_atoi.c \
 	ft_strsplit.c ft_strstr.c ft_strsub.c ft_strtrim.c ft_tolower.c ft_toupper.c \
 	ft_lstlen.c ft_islower.c ft_isupper.c ft_strfjoin.c ft_strclen.c ft_strfsub.c \
 	ft_strnclen.c ft_strcchr.c ft_arrstrdel.c ft_putstr2.c ft_putcolor.c ft_putsnb.c \
-	ft_putcolor2.c
+	ft_putcolor2.c get_next_line.c ft_free_tab.c ft_strjoin_insert.c ft_remove_c.c
 
-FLAGS= -Wall -Wextra -Werror -g
+FLAGS= -Wall -Wextra -Werror -g -fsanitize=address
 
 OBJ = $(subst .c,.o,$(SRC))
 

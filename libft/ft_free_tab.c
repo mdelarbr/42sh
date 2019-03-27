@@ -1,30 +1,27 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   ft_strnew.c                                      .::    .:/ .      .::   */
+/*   ft_free_tab.c                                    .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2018/10/04 15:18:17 by tprzybyl     #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/27 17:40:45 by mjalenqu    ###    #+. /#+    ###.fr     */
+/*   Created: 2019/03/22 14:18:40 by mjalenqu     #+#   ##    ##    #+#       */
+/*   Updated: 2019/03/22 14:20:54 by mjalenqu    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strnew(size_t size)
+void	ft_free_tab(char **s)
 {
-	char	*new;
-	size_t	i;
+	int	i;
 
-	if (!(new = malloc(sizeof(char) * (size + 1))))
-		return (NULL);
 	i = 0;
-	while (size--)
+	while (s[i])
 	{
-		new[i++] = '\0';
+		ft_strdel(&s[i]);
+		i++;
 	}
-	new[i] = '\0';
-	return (new);
+	free(s);
 }

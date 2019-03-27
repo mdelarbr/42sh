@@ -6,7 +6,7 @@
 /*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/04 15:55:39 by mjalenqu     #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/14 00:29:19 by mjalenqu    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/27 14:27:43 by mjalenqu    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -50,6 +50,7 @@ typedef struct	s_select
 
 typedef struct	s_history
 {
+	int					len;
 	char				*cmd;
 	struct s_history	*next;
 	struct s_history	*prev;
@@ -63,6 +64,13 @@ typedef struct		s_env
 	struct s_env		*next;
 }					t_env;
 
+typedef struct		s_all
+{
+	t_wind				*wind;
+	t_history			*history;
+	t_history			*first;
+	t_env				*env;
+}					t_all;
 /*
 ** color **
 */
@@ -93,17 +101,18 @@ typedef struct		s_env
 # define ENTER  10
 # define ESCAPE 27
 
+# define HIST	".42_history"
 # define POS	select->pos
 # define OTERM	select->old_term
 # define MTERM	select->my_term
-# define CMD	history->cmd
-# define HNEXT	history->next
-# define HPREV	history->prev
-# define COL	wind->max_col
-# define LINE	wind->max_line
-# define PCOL	wind->pos_col
-# define PLINE	wind->pos_line
-# define FD		wind->term_fd
+# define CMD	all->history->cmd
+# define HNEXT	all->history->next
+# define HPREV	all->history->prev
+# define COL	all->wind->max_col
+# define LINE	all->wind->max_line
+# define PCOL	all->wind->pos_col
+# define PLINE	all->wind->pos_line
+# define FD		all->wind->term_fd
 # define BSIZE 6
 
 /*
@@ -118,7 +127,7 @@ t_select				*init_term(t_select *select);
 ***							key_hook.c										***
 *******************************************************************************
 */
-int						key_hook(t_wind *wind);
+char					*key_hook(t_all *all);
 int						ft_put_c(int c);
 
 /*
@@ -137,4 +146,32 @@ char					*init_data(char *src);
 */
 t_wind					*init_wind(void);
 
+/*
+*******************************************************************************
+***								ft_error.c									***
+*******************************************************************************
+*/
+void					ft_error_quit(int nb);
+void					ft_error(int nb);
+
+/*
+*******************************************************************************
+***								history.c									***
+*******************************************************************************
+*/
+void					get_history(t_history **history);
+void					read_history(t_history **history);
+int						ft_create_file(char *path);
+int						ft_execute(char *exec, char **opt, char **env);
+int						ft_file_exists(char *path);
+int						ft_file_wrights(char *path);
+
+void					do_up(t_all *all);
+void					do_down(t_all *all);
+void					do_left(t_all *all);
+void					do_right(t_all *all);
+void					do_back(t_all *all);
+void					do_del(t_all *all);
+void					do_tab(t_all *all);
+char					*le_truc_qui_boucle(t_all *all);
 #endif

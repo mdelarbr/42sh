@@ -3,10 +3,10 @@
 /*                                                              /             */
 /*   main.c                                           .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: mateodelarbre <mateodelarbre@student.le    +:+   +:    +:    +:+     */
+/*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/04 15:45:25 by mjalenqu     #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/18 15:06:43 by mateodelarb ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/27 17:35:02 by mjalenqu    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -54,32 +54,65 @@ void	free_env(t_env *var)
 	}
 }
 
+void	free_all(t_all *all)
+{
+	t_history	*save;
+
+	free_env(all->env);
+	free(all->wind);
+	while (all->history && all->history->prev)
+		all->history = all->history->prev;
+	while (all->history && HNEXT)
+	{
+		save = all->history;
+		free(CMD);
+//		free(HPREV);
+		all->history = HNEXT;
+		free(save);
+	}
+	free(all->history);
+	free(all);
+}
+
 int		main(int ac, char **av, char **env)
 {
 	t_select	*select;
-	t_env		*var;
-	t_wind		*wind;
+	t_history	*history;
+	t_all		*all;
+	char		*res;
 
 	(void)ac;
 	(void)av;
+	all = malloc(sizeof(t_all));
+	history = NULL;
+	get_history(&history);
+	while (history->next)
+		history = history->next;
 	select = NULL;
-	var = init_env(env);
+	all->env = init_env(env);
+	all->history = history;
+//	free(history);
 	if (get_term() == -1)
 		return (0);
 	if (isatty(2) == 0)
 		return (0);
 	select = init_term(select);
-	wind = init_wind();
-/*	while (1)
+	all->wind = init_wind();
+	while (1)
 	{
-		if (key_hook(wind) == -1)
+		tputs(tgetstr("ve", NULL), 1, ft_put_c);
+		res = key_hook(all);
+		ft_putcolor("\n", res, "\n");
+		if (ft_strcmp("exit", res) == 0)
+		{
+			ft_strdel(&res);
 			break ;
+		}
 	}
-*/
-	key_hook(wind);
 	tcsetattr(2, TCSANOW, &(OTERM));
 	tputs(tgetstr("ve", NULL), 1, ft_put_c);
 	free(select);
-	free_env(var);
+//	free_all(all);
+//	free(history);
 	return (0);
 }

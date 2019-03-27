@@ -3,10 +3,10 @@
 /*                                                              /             */
 /*   libft.h                                          .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: tprzybyl <marvin@le-101.fr>                +:+   +:    +:    +:+     */
+/*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/10/03 11:20:22 by tprzybyl     #+#   ##    ##    #+#       */
-/*   Updated: 2019/01/11 09:20:41 by mjalenqu    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/24 15:59:43 by mjalenqu    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -18,12 +18,22 @@
 # include <stdlib.h>
 # include <unistd.h>
 
+# define BUFF_SIZE 1
+
 typedef struct		s_list
 {
 	void			*content;
 	size_t			content_size;
 	struct s_list	*next;
 }					t_list;
+
+typedef struct		s_stock
+{
+	char			*str;
+	int				fd;
+	struct s_stock	*next;
+}					t_stock;
+
 
 int					ft_isalpha(int c);
 int					ft_isupper(int c);
@@ -70,7 +80,7 @@ char				*ft_strdup(const char *src);
 
 char				**ft_strsplit(char const *s, char c);
 
-size_t				ft_strlen(const char *str);
+int					ft_strlen(const char *str);
 size_t				ft_strclen(const char *str, int c);
 size_t				ft_strnclen(const char *str, int c, int n);
 
@@ -152,4 +162,8 @@ t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 
 int					ft_lstlen(t_list *lst);
 
+int					get_next_line(int fd, char **line);
+void				ft_strjoin_insert(char **s1, char *s2, int i);
+char				*ft_strrmvi(char *str, int i);
+void				ft_free_tab(char **s);
 #endif

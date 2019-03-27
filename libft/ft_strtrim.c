@@ -3,10 +3,10 @@
 /*                                                              /             */
 /*   ft_strtrim.c                                     .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: tprzybyl <marvin@le-101.fr>                +:+   +:    +:    +:+     */
+/*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/10/04 18:03:24 by tprzybyl     #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/06 17:10:15 by tprzybyl    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/24 16:00:47 by mjalenqu    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -38,8 +38,8 @@ static void	gain_place(int j, int i, char *dest, char *s)
 char		*ft_strtrim(char const *s)
 {
 	char	*dest;
-	size_t	i;
-	size_t	j;
+	int		i;
+	int		j;
 
 	if (!(s))
 		return (0);

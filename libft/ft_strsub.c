@@ -3,16 +3,17 @@
 /*                                                              /             */
 /*   ft_strsub.c                                      .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: tprzybyl <marvin@le-101.fr>                +:+   +:    +:    +:+     */
+/*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/10/04 17:24:48 by tprzybyl     #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/06 12:03:09 by tprzybyl    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/24 11:31:47 by mjalenqu    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+/*
 char	*ft_strsub(char const *s, unsigned int start, size_t len)
 {
 	size_t	i;
@@ -22,10 +23,10 @@ char	*ft_strsub(char const *s, unsigned int start, size_t len)
 	if (!(s))
 		return (0);
 	i = start;
-	if (!(dest = (char*)malloc(sizeof(char) * len + 1)))
+	if (!(dest = (char*)malloc(sizeof(char) * (len + 1))))
 		return (0);
 	j = 0;
-	while (j < len)
+	while (s[i] && j < len)
 	{
 		dest[j] = s[i];
 		j++;
@@ -33,4 +34,26 @@ char	*ft_strsub(char const *s, unsigned int start, size_t len)
 	}
 	dest[j] = '\0';
 	return (dest);
+}*/
+
+char	*ft_strsub(char const *s, unsigned int start, size_t len)
+{
+	char	*str;
+	size_t	i;
+	size_t	j;
+	size_t	k;
+
+	i = start;
+	j = 0;
+	k = 0;
+	if (s == NULL)
+		return (NULL);
+	if (!(str = malloc(sizeof(*str) * (len + 1))))
+		return (NULL);
+	while (s[i] && k++ < len)
+	{
+		str[j++] = s[i++];
+	}
+	str[j] = '\0';
+	return (str);
 }

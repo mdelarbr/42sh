@@ -1,30 +1,38 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   ft_strnew.c                                      .::    .:/ .      .::   */
+/*   arrow.c                                          .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2018/10/04 15:18:17 by tprzybyl     #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/27 17:40:45 by mjalenqu    ###    #+. /#+    ###.fr     */
+/*   Created: 2019/03/26 16:35:58 by mjalenqu     #+#   ##    ##    #+#       */
+/*   Updated: 2019/03/27 10:11:49 by mjalenqu    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../includes/shell.h"
 
-char	*ft_strnew(size_t size)
+void	do_up(t_all *all)
 {
-	char	*new;
-	size_t	i;
+	(void)all;
+	ft_putstr("UP");
+}
 
-	if (!(new = malloc(sizeof(char) * (size + 1))))
-		return (NULL);
-	i = 0;
-	while (size--)
-	{
-		new[i++] = '\0';
-	}
-	new[i] = '\0';
-	return (new);
+void	do_down(t_all *all)
+{
+	(void)all;
+	ft_putstr("DOWN");
+}
+
+void	do_left(t_all *all)
+{
+	(void)all;
+	ft_putstr("LEFT");
+}
+
+void	do_right(t_all *all)
+{
+	(void)all;
+	ft_putstr("RIGHT");
 }

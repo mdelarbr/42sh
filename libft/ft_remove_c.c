@@ -1,30 +1,32 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   ft_strnew.c                                      .::    .:/ .      .::   */
+/*   ft_remove_c.c                                    .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2018/10/04 15:18:17 by tprzybyl     #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/27 17:40:45 by mjalenqu    ###    #+. /#+    ###.fr     */
+/*   Created: 2019/03/24 15:47:43 by mjalenqu     #+#   ##    ##    #+#       */
+/*   Updated: 2019/03/25 10:10:53 by mjalenqu    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strnew(size_t size)
+char	*ft_strrmvi(char *str, int i)
 {
-	char	*new;
-	size_t	i;
+	char	*ret;
 
-	if (!(new = malloc(sizeof(char) * (size + 1))))
-		return (NULL);
-	i = 0;
-	while (size--)
+	ret = NULL;
+	if (i < 0)
+		ret = ft_strdup(str);
+	else
 	{
-		new[i++] = '\0';
+		ret = ft_strsub(str, 0, i);
+		if (i + 1 < ft_strlen((const char *)str))
+			ret = ft_strfjoin(ret, str + i + 1);
 	}
-	new[i] = '\0';
-	return (new);
+//	if (str)
+//		ft_strdel(&str);
+	return (ret);
 }

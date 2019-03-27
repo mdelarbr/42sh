@@ -6,7 +6,7 @@
 #    By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2019/03/04 18:02:46 by mjalenqu     #+#   ##    ##    #+#        #
-#    Updated: 2019/03/14 03:21:47 by mjalenqu    ###    #+. /#+    ###.fr      #
+#    Updated: 2019/03/27 17:36:45 by mjalenqu    ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -17,14 +17,15 @@ LIB_PATH = libft/libft.a
 SRC_PATH = ./src/
 OBJ_PATH = ./obj/
 INC_PATH = ./includes/
-SRC_NAME = main.c init_term.c key_hook.c env.c windows.c
+SRC_NAME =	main.c init_term.c key_hook.c env.c windows.c ft_error.c history.c\
+			arrow.c other_key.c
 OBJ_NAME = $(SRC_NAME:.c=.o)
 INC_NAME = shell.h
 
 INC = $(addprefix $(INC_PATH), $(INC_NAME))
 SRC = $(addprefix $(SRC_PATH), $(SRC_NAME))
 OBJ = $(addprefix $(OBJ_PATH), $(OBJ_NAME))
-FLAG += -Wall -Werror -Wextra -g #-fsanitize=address
+FLAG += -Wall -Werror -Wextra -g -fsanitize=address
 FLAG_END = -lcurses
 NORME = norminette
 
