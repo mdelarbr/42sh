@@ -6,7 +6,7 @@
 /*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/04 18:24:48 by mjalenqu     #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/28 08:46:38 by mjalenqu    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/28 10:05:43 by mjalenqu    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -122,9 +122,8 @@ int		check_key(long c, t_all *all, char **res)
 	{
 		if (ft_strlen(*res) > 0)
 		{
-			PCOL--;
 			(*res) = remove_char(*res, PCOL);
-//			print_test(*res, wind);
+			PCOL--;
 			return (0);
 		}
 	}
@@ -165,7 +164,6 @@ char	*key_hook(t_all *all)
 	key = 0;
 	res = ft_strdup("");
 	ft_putcolor(BRED, "prompt->", RESET);
-	all->last = all->history;
 	PCOL = 0;
 	while (read(0, &key, 8) > -1)
 	{

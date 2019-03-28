@@ -6,7 +6,7 @@
 /*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/04 15:45:25 by mjalenqu     #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/28 08:44:42 by mjalenqu    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/28 09:34:56 by mjalenqu    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -97,6 +97,7 @@ int		main(int ac, char **av, char **env)
 		return (0);
 	select = init_term(select);
 	all->wind = init_wind();
+	all->last = all->history;
 	while (1)
 	{
 		tputs(tgetstr("ve", NULL), 1, ft_put_c);
@@ -104,6 +105,14 @@ int		main(int ac, char **av, char **env)
 		ft_putcolor("\n", res, "\n");
 		if (ft_strcmp("exit", res) == 0)
 		{
+			while (all->last->next != NULL)
+				all->last = all->last->next;
+			if (all->last->next == NULL)
+			{
+				all->last->next = malloc(sizeof(t_history));
+				all->last = all->last->next;
+				all->last->cmd = ft_strdup(res);
+			}
 			ft_strdel(&res);
 			break ;
 		}

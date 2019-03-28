@@ -6,7 +6,7 @@
 /*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/04 15:55:39 by mjalenqu     #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/28 08:41:42 by mjalenqu    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/28 10:11:11 by mjalenqu    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -17,6 +17,7 @@
 /*
 ** includes **
 */
+
 # include <curses.h>
 # include <fcntl.h>
 # include <stdlib.h>
@@ -33,45 +34,52 @@
 ** structures **
 */
 
-typedef struct	s_wind
+typedef struct			s_count
+{
+	int					quote;
+	int					dquote;
+}						t_count;
+
+
+typedef struct			s_wind
 {
 	int					term_fd;
 	int					max_col;
 	int					max_line;
 	int					pos_line;
 	int					pos_col;
-}				t_wind;
+}						t_wind;
 
-typedef struct	s_select
+typedef struct			s_select
 {
 	struct termios		my_term;
 	struct termios		old_term;
-}				t_select;
+}						t_select;
 
-typedef struct	s_history
+typedef struct			s_history
 {
 	int					len;
 	char				*cmd;
 	struct s_history	*next;
 	struct s_history	*prev;
-}				t_history;
+}						t_history;
 
-typedef struct		s_env
+typedef struct			s_env
 {
 	char				*name;
 	char				*data;
 	int					type;
 	struct s_env		*next;
-}					t_env;
+}						t_env;
 
-typedef struct		s_all
+typedef struct			s_all
 {
 	t_wind				*wind;
 	t_history			*history;
 	t_history			*last;
 	t_history			*first;
 	t_env				*env;
-}					t_all;
+}						t_all;
 /*
 ** color **
 */

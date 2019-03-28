@@ -6,7 +6,7 @@
 /*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/26 16:35:58 by mjalenqu     #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/28 08:44:57 by mjalenqu    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/28 08:49:53 by mjalenqu    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -25,8 +25,8 @@ void	do_up(t_all *all, char **res)
 	}
 	if (all->history->prev != NULL)
 	{
-		if (res)
-			ft_strdel(res);
+//		if (res)
+//			ft_strdel(res);
 		(*res) = ft_strdup(all->history->cmd);
 		all->history = all->history->prev;
 	}
