@@ -6,7 +6,7 @@
 /*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/04 15:45:25 by mjalenqu     #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/27 17:35:02 by mjalenqu    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/28 08:44:42 by mjalenqu    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -91,7 +91,6 @@ int		main(int ac, char **av, char **env)
 	select = NULL;
 	all->env = init_env(env);
 	all->history = history;
-//	free(history);
 	if (get_term() == -1)
 		return (0);
 	if (isatty(2) == 0)

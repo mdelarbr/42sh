@@ -6,7 +6,7 @@
 /*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/04 15:55:39 by mjalenqu     #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/27 14:27:43 by mjalenqu    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/28 08:41:42 by mjalenqu    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -68,6 +68,7 @@ typedef struct		s_all
 {
 	t_wind				*wind;
 	t_history			*history;
+	t_history			*last;
 	t_history			*first;
 	t_env				*env;
 }					t_all;
@@ -166,7 +167,7 @@ int						ft_execute(char *exec, char **opt, char **env);
 int						ft_file_exists(char *path);
 int						ft_file_wrights(char *path);
 
-void					do_up(t_all *all);
+void					do_up(t_all *all, char **res);
 void					do_down(t_all *all);
 void					do_left(t_all *all);
 void					do_right(t_all *all);

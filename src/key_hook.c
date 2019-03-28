@@ -6,43 +6,12 @@
 /*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/04 18:24:48 by mjalenqu     #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/27 15:35:38 by mjalenqu    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/28 08:46:38 by mjalenqu    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "../includes/shell.h"
-
-/*
-void	put_index(char *str, int i, t_wind *wind)
-{
-	int j;
-
-	j = 0;
-	while (str[j])
-	{
-		tputs(tgetstr("dl", NULL), 1, ft_put_c);
-		tputs(tgoto(tgetstr("cm", NULL), 0, PLINE + 1), 1, ft_put_c);
-		ft_putcolor(BRED, "prompt->", RESET);
-		if (j == i)
-		{
-			tputs(tgoto(tgetstr("cm", NULL), PCOL + 8, PLINE), 1, ft_put_c);
-			tputs(tgetstr("mr", NULL), 1, ft_put_c);
-			ft_putchar(str[j]);
-			tputs(tgetstr("me", NULL), 1, ft_put_c);
-		}
-		else
-			ft_putchar(str[j]);
-		j++;
-	}
-	tputs(tgoto(tgetstr("cm", NULL), PCOL, PLINE), 1, ft_put_c);
-	if (i > j)
-	{
-		tputs(tgetstr("mr", NULL), 1, ft_put_c);
-		ft_putchar(' ');
-		tputs(tgetstr("me", NULL), 1, ft_put_c);
-	}
-}*/
 
 void	print_test(char *str, t_all *all)
 {
@@ -144,7 +113,7 @@ int		check_key(long c, t_all *all, char **res)
 			PCOL++;
 	}
 	else if (c == UP)
-		return (0);
+		do_up(all, res);
 	else if (c == DOWN)
 		return (0);
 	else if (c == TAB)
@@ -191,35 +160,16 @@ char	*key_hook(t_all *all)
 	long		key;
 	char		*res;
 	int			i;
-	t_history	*last;
 
 	i = 0;
 	key = 0;
 	res = ft_strdup("");
 	ft_putcolor(BRED, "prompt->", RESET);
-	last = all->history;
+	all->last = all->history;
 	PCOL = 0;
 	while (read(0, &key, 8) > -1)
 	{
-		if (key == UP)
-		{
-			if (all->history->next == NULL)
-			{
-				last->next = malloc(sizeof(t_history));
-				last->next->prev = last;
-				last = last->next;
-				last->cmd = ft_strdup(res);
-				last->next = NULL;
-			}
-			if (all->history->prev)
-			{
-				if (res)
-					ft_strdel(&res);
-				all->history = all->history->prev;
-				res = ft_strdup(all->history->cmd);
-			}
-		}
-		else if (key == DOWN)
+		if (key == DOWN)
 		{
 			if (all->history && all->history->next)
 			{
