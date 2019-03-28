@@ -6,7 +6,7 @@
 /*   By: husahuc <husahuc@student.42.fr>            +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/23 15:48:11 by husahuc      #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/26 12:53:50 by husahuc     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/28 11:16:44 by husahuc     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -14,9 +14,13 @@
 #ifndef BUILTIN_H
 # define BUILTIN_H
 
+# include <sys/types.h>
+# include <sys/stat.h>
+
 # include "execute.h"
 # include "ft_list.h"
 # include "ft_str.h"
+# include "ft_int.h"
 
 /*
 ** ft_cd.c
@@ -26,6 +30,14 @@ int				ft_cd(char **argv, t_ft *ft_global);
 int				ft_cd_special(char *name, char *path_pwd, t_ft *ft_global);
 int				ft_change_dir(char *path, t_ft *ft_global, char *old);
 int				ft_error_cd(char *error, char *name);
+
+// temporary
+int		ft_tabclen(char **tab);
+
+/*
+** ft_test.c
+*/
+int				ft_test(char **argv);
 
 /*
 ** list_env.c

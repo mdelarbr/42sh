@@ -3,10 +3,10 @@
 /*                                                              /             */
 /*   ft_execute.c                                     .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: shthevak <marvin@le-101.fr>                +:+   +:    +:    +:+     */
+/*   By: shthevak <shthevak@student.42.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/18 14:50:47 by shthevak     #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/18 16:31:38 by shthevak    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/26 16:46:46 by husahuc     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -57,8 +57,6 @@ void	ft_execute_line(char *str, t_ft *ft)
 
 	com = ft_strsplit(str, ' ');
 	en = get_env_tab(&(ft->env));
-	if (ft_is_exec_verbose(com[0]))
-		ft_execute(com[0], com, en);
 	ft_free_tab(en);
 	ft_free_tab(com);
 }

@@ -6,7 +6,7 @@
 /*   By: shthevak <shthevak@student.42.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/13 17:29:49 by shthevak     #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/26 13:03:09 by husahuc     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/28 11:48:27 by husahuc     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -44,6 +44,7 @@ typedef struct	s_ft
 	int			fd_his;
 	int			fd_alias;
 	int			end_shell;
+	int			return_last;
 }				t_ft;
 
 /*
