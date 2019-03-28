@@ -6,7 +6,7 @@
 /*   By: shthevak <shthevak@student.42.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/13 17:29:49 by shthevak     #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/28 11:48:27 by husahuc     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/28 16:24:59 by husahuc     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -80,6 +80,6 @@ void			read_alias(t_ft *ft);
 void			save_alias(t_ft *ft);
 void			write_alias(t_ft *ft);
 
+# include "execute.h"
 
-# include "builtin.h"
 #endif

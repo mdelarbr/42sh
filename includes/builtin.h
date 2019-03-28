@@ -6,7 +6,7 @@
 /*   By: husahuc <husahuc@student.42.fr>            +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/23 15:48:11 by husahuc      #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/28 11:16:44 by husahuc     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/28 17:56:04 by husahuc     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -17,7 +17,7 @@
 # include <sys/types.h>
 # include <sys/stat.h>
 
-# include "execute.h"
+# include "launch.h"
 # include "ft_list.h"
 # include "ft_str.h"
 # include "ft_int.h"
@@ -37,7 +37,7 @@ int		ft_tabclen(char **tab);
 /*
 ** ft_test.c
 */
-int				ft_test(char **argv);
+int				ft_test(char **argv, t_ft *global);
 
 /*
 ** list_env.c
@@ -48,6 +48,23 @@ void			add_list_env(t_ft *global, char *name, char *env);
 ** ft_echo.c
 */
 int				ft_echo(char *argv[], t_ft *global);
+
+/*
+** ft_exit.c
+*/
+int				ft_exit(char **argv, t_ft *global);
+
+/*
+** builtin_list
+*/
+
+# define LEN_BUILTIN_LIST 4
+
+typedef struct	s_builtin
+{
+	const char	*name;
+	int			(*ptr_builtin)(char**, t_ft*);
+}				t_builtin;
 
 # define ARGUMENTS "cd: Too many arguments."
 # define CD_NO_HOME "cd: No HOME directory."

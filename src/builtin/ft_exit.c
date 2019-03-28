@@ -1,30 +1,21 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   ft_echo.c                                        .::    .:/ .      .::   */
+/*   ft_exit.c                                        .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: husahuc <husahuc@student.42.fr>            +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2019/01/26 15:00:57 by husahuc      #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/28 16:21:49 by husahuc     ###    #+. /#+    ###.fr     */
+/*   Created: 2019/03/28 16:57:20 by husahuc      #+#   ##    ##    #+#       */
+/*   Updated: 2019/03/28 17:09:59 by husahuc     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "builtin.h"
+# include "builtin.h"
 
-int		ft_echo(char **argv, t_ft *global)
+int		ft_exit(char **argv, t_ft *global)
 {
-	int i;
-
-	i = 1;
-	while (argv[i] != NULL)
-	{
-		if (i != 1)
-			ft_putchar(' ');
-		ft_putstr(argv[i]);
-		i++;
-	}
-	ft_putchar('\n');
+	ft_putendl("Exit");
+	global->end_shell = 0;
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: husahuc <husahuc@student.42.fr>            +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/15 12:55:43 by husahuc      #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/28 14:46:50 by husahuc     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/28 16:45:20 by husahuc     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -65,7 +65,7 @@ int			simple_operator(char *type, char *name)
 	return (-1);
 }
 
-int			ft_test(char **argv)
+int			ft_test(char **argv, t_ft *global)
 {
 	int i;
 

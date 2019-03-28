@@ -6,16 +6,35 @@
 /*   By: husahuc <husahuc@student.42.fr>            +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/23 14:31:05 by husahuc      #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/28 11:49:17 by husahuc     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/28 17:55:33 by husahuc     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "execute.h"
 
+const t_builtin	g_builtin_list[LEN_BUILTIN_LIST] =
+{
+	{"cd", &ft_cd},
+	{"echo", &ft_echo},
+	{"test", &ft_test},
+	{"exit", &ft_exit}
+};
+
 int		function_is_builtin(char **command, t_ft *global)
 {
-	if (ft_strcmp(command[0], "cd") == 0)
+	int i;
+
+	i = -1;
+	while (i++ < LEN_BUILTIN_LIST)
+	{
+		if (ft_strcmp(command[0], g_builtin_list[i].name) == 0)
+		{
+			(g_builtin_list[i].ptr_builtin(command, global));
+			return (1);
+		}
+	}
+	/*if (ft_strcmp(command[0], "cd") == 0)
 		ft_cd(command, global);
 	else if (ft_strcmp(command[0], "echo") == 0)
 		ft_echo(command, global);
@@ -25,15 +44,8 @@ int		function_is_builtin(char **command, t_ft *global)
 		ft_test(command);
 	else
 		return (0);
-	/*else if (ft_strcmp(func_name, "test") == 0)
-		ft_test(argv);
-	else if (ft_strcmp(func_name, "setenv") == 0)
-		ft_setenv(argv, env);
-	else if (ft_strcmp(func_name, "unsetenv") == 0)
-		ft_unsetenv(argv, env);
-	else if (ft_strcmp(func_name, "env") == 0)
-		ft_env(argv, *env);*/
-	return (1);
+	else if (ft_strcmp(func_name, "test") == 0)*/
+	return (0);
 }
 
 int		ft_execute(char *exec, char **opt, t_ft *global)
