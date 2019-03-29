@@ -6,7 +6,7 @@
 /*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/04 18:24:48 by mjalenqu     #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/28 10:05:43 by mjalenqu    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/28 17:27:44 by mjalenqu    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -115,7 +115,7 @@ int		check_key(long c, t_all *all, char **res)
 	else if (c == UP)
 		do_up(all, res);
 	else if (c == DOWN)
-		return (0);
+		do_down(all, res);
 	else if (c == TAB)
 		ft_putstr("tab");
 	else if (c == BACK)
@@ -169,11 +169,7 @@ char	*key_hook(t_all *all)
 	{
 		if (key == DOWN)
 		{
-			if (all->history && all->history->next)
-			{
-				all->history = all->history->next;
-				res = all->history->cmd;
-			}
+
 		}
 		else if (key == 10)
 		{

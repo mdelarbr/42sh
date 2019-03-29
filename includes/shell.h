@@ -6,7 +6,7 @@
 /*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/04 15:55:39 by mjalenqu     #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/28 10:11:11 by mjalenqu    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/28 17:27:42 by mjalenqu    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -77,8 +77,10 @@ typedef struct			s_all
 	t_wind				*wind;
 	t_history			*history;
 	t_history			*last;
-	t_history			*first;
 	t_env				*env;
+	t_select			*select;
+	char				*tmp;
+	int					up;
 }						t_all;
 /*
 ** color **
@@ -111,9 +113,9 @@ typedef struct			s_all
 # define ESCAPE 27
 
 # define HIST	".42_history"
-# define POS	select->pos
-# define OTERM	select->old_term
-# define MTERM	select->my_term
+# define POS	all->select->pos
+# define OTERM	all->select->old_term
+# define MTERM	all->select->my_term
 # define CMD	all->history->cmd
 # define HNEXT	all->history->next
 # define HPREV	all->history->prev
@@ -129,7 +131,9 @@ typedef struct			s_all
 ***							init_term.c										***
 *******************************************************************************
 */
-t_select				*init_term(t_select *select);
+t_select				*init_term(t_all *all);
+int						get_term(void);
+int						check_term(void);
 
 /*
 *******************************************************************************
@@ -176,11 +180,18 @@ int						ft_file_exists(char *path);
 int						ft_file_wrights(char *path);
 
 void					do_up(t_all *all, char **res);
-void					do_down(t_all *all);
+void					do_down(t_all *all, char **res);
 void					do_left(t_all *all);
 void					do_right(t_all *all);
 void					do_back(t_all *all);
 void					do_del(t_all *all);
 void					do_tab(t_all *all);
-char					*le_truc_qui_boucle(t_all *all);
+
+/*
+*******************************************************************************
+***								ft_error.c									***
+*******************************************************************************
+*/
+void					free_all(t_all *all);
+void					free_env(t_env *var);
 #endif
