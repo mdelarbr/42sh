@@ -6,7 +6,7 @@
 /*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/04 15:45:25 by mjalenqu     #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/29 13:33:14 by mjalenqu    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/04/06 10:03:36 by mjalenqu    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -37,8 +37,7 @@ t_all	*init_all(t_all *all, char **env)
 	all->env = init_env(env);
 	all->wind = init_wind();
 	all->last = all->history;
-	all->up = 0;
-	all->tmp = NULL;
+	all->prompt = ft_strdup("prompt->");
 	return (all);
 }
 
@@ -67,7 +66,6 @@ void	add_res(char *res, t_all *all)
 int		main(int ac, char **av, char **env)
 {
 	t_all		*all;
-	char		*res;
 
 	(void)ac;
 	(void)av;
@@ -77,18 +75,13 @@ int		main(int ac, char **av, char **env)
 		return (0);
 	while (1)
 	{
-		all->up = 0;
 		tputs(tgetstr("ve", NULL), 1, ft_put_c);
-		res = key_hook(all);
-		ft_putcolor("\n\033[0;32m", res, "\033[00m\n");
-		add_res(res, all);
-		if (ft_strcmp(res, "hist") == 0)
+		key_hook(all);
+		ft_putcolor("\n\033[0;32m", all->last->cmd, "\033[00m\n");
+		if (ft_strcmp(all->last->cmd, "hist") == 0)
 			print_history(all);
-		if (ft_strcmp("exit", res) == 0)
-		{
-			ft_strdel(&res);
+		if (ft_strcmp("exit", all->last->cmd) == 0)
 			break ;
-		}
 	}
 	end_of_shell(all);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/04 18:24:48 by mjalenqu     #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/28 17:27:44 by mjalenqu    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/04/06 10:08:39 by mjalenqu    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -58,40 +58,22 @@ int		ft_put_c(int c)
 	return (0);
 }
 
-char	*remove_char(char *str, int i)
+char	*remove_char(char **str, int i)
 {
 	char	*res;
-	int		j;
-	int		l;
+	char	*tmp;
 
-	j = 0;
-	l = 0;
-	res = malloc(sizeof(char) * ft_strlen(str));
-	if (i == 0)
-	{
-		while (str[j + 1])
-		{
-			if (j == i - 1)
-				j++;
-			res[l] = str[j + 1];
-			j++;
-			l++;
-		}
-	}
+	if (i < 1 || !(*str))
+		return (*str);
+	if (i == 1)
+		res = ft_strsub(*str, 1, ft_strlen(*str) - 1);
 	else
 	{
-		while (str[j + 1])
-		{
-			if (j == i - 1)
-				j++;
-			res[l] = str[j];
-			j++;
-			l++;
-		}
+		res = ft_strsub(*str, 0, i - 1);
+		tmp = ft_strsub(*str, i, ft_strlen(*str));
+		res = ft_strfjoin(res, tmp);
 	}
-	res[l] = '\0';
-	if (str)
-		ft_strdel(&str);
+	ft_strdel(str);
 	return (res);
 }
 
@@ -113,20 +95,13 @@ int		check_key(long c, t_all *all, char **res)
 			PCOL++;
 	}
 	else if (c == UP)
-		do_up(all, res);
+		do_up(all);
 	else if (c == DOWN)
-		do_down(all, res);
+		do_down(all);
 	else if (c == TAB)
 		ft_putstr("tab");
 	else if (c == BACK)
-	{
-		if (ft_strlen(*res) > 0)
-		{
-			(*res) = remove_char(*res, PCOL);
-			PCOL--;
-			return (0);
-		}
-	}
+		do_back(all, res);
 	else
 		return (1);
 	return (0);
@@ -154,34 +129,30 @@ char	*check_char(char *res, long c, t_all *all)
 	return (res);
 }
 
-char	*key_hook(t_all *all)
+int		*key_hook(t_all *all)
 {
 	long		key;
-	char		*res;
-	int			i;
 
-	i = 0;
 	key = 0;
-	res = ft_strdup("");
-	ft_putcolor(BRED, "prompt->", RESET);
+	ft_putcolor(BRED, all->prompt, RESET);
 	PCOL = 0;
+	while (all->last->next != NULL)
+		all->last = all->last->next;
+	all->last->next = add_history(all);
+	all->last = all->last->next;
 	while (read(0, &key, 8) > -1)
 	{
-		if (key == DOWN)
-		{
-
-		}
-		else if (key == 10)
+		if (key == 10)
 		{
 			tputs(tgetstr("dl", NULL), 1, ft_put_c);
 			tputs(tgoto(tgetstr("cm", NULL), 0, PLINE), 1, ft_put_c);
-			ft_putcolor2(BRED, "prompt->", RESET, res);
+			ft_putcolor2(BRED, "prompt->", RESET, all->last->cmd);
 			PLINE += 2;
 			PCOL = 1;
-			return (res);
+			return (0);
 		}
-		res = check_char(res, key, all);
-		print_test(res, all);
+		all->last->cmd = check_char(all->last->cmd, key, all);
+		print_test(all->last->cmd, all);
 		key = 0;
 	}
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/04 15:55:39 by mjalenqu     #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/28 17:27:42 by mjalenqu    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/04/06 10:08:19 by mjalenqu    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -79,8 +79,7 @@ typedef struct			s_all
 	t_history			*last;
 	t_env				*env;
 	t_select			*select;
-	char				*tmp;
-	int					up;
+	char				*prompt;
 }						t_all;
 /*
 ** color **
@@ -140,7 +139,7 @@ int						check_term(void);
 ***							key_hook.c										***
 *******************************************************************************
 */
-char					*key_hook(t_all *all);
+int						*key_hook(t_all *all);
 int						ft_put_c(int c);
 
 /*
@@ -179,13 +178,15 @@ int						ft_execute(char *exec, char **opt, char **env);
 int						ft_file_exists(char *path);
 int						ft_file_wrights(char *path);
 
-void					do_up(t_all *all, char **res);
-void					do_down(t_all *all, char **res);
+void					do_up(t_all *all);
+void					do_down(t_all *all);
 void					do_left(t_all *all);
 void					do_right(t_all *all);
-void					do_back(t_all *all);
+void					do_back(t_all *all, char **res);
 void					do_del(t_all *all);
 void					do_tab(t_all *all);
+char					*remove_char(char **str, int i);
+t_history				*add_history(t_all *all);
 
 /*
 *******************************************************************************

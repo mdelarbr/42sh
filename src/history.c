@@ -6,7 +6,7 @@
 /*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/22 12:59:36 by mjalenqu     #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/27 15:45:49 by mjalenqu    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/04/06 10:01:55 by mjalenqu    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -67,6 +67,17 @@ int		ft_create_file(char *path)
 		return (0);
 	}
 	return (0);
+}
+
+t_history	*add_history(t_all *all)
+{
+	t_history	*new;
+
+	new = malloc(sizeof(t_history));
+	new->prev = all->last;
+	new->next = NULL;
+	new->cmd = ft_strdup("");
+	return (new);
 }
 
 void	read_history(t_history **history)

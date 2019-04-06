@@ -6,17 +6,20 @@
 /*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/26 18:09:50 by mjalenqu     #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/27 10:11:37 by mjalenqu    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/04/06 09:32:09 by mjalenqu    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "../includes/shell.h"
 
-void	do_back(t_all *all)
+void	do_back(t_all *all, char **res)
 {
-	(void)all;
-	ft_putstr("BACK");
+	if (PCOL > 0 && (*res))
+	{
+		(*res) = remove_char(res, PCOL);
+		PCOL--;
+	}
 }
 
 void	do_tab(t_all *all)
