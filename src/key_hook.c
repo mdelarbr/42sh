@@ -6,7 +6,7 @@
 /*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/04 18:24:48 by mjalenqu     #+#   ##    ##    #+#       */
-/*   Updated: 2019/04/06 10:08:39 by mjalenqu    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/04/08 11:48:56 by mjalenqu    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -94,10 +94,6 @@ int		check_key(long c, t_all *all, char **res)
 		if (PCOL < ft_strlen(*res))
 			PCOL++;
 	}
-	else if (c == UP)
-		do_up(all);
-	else if (c == DOWN)
-		do_down(all);
 	else if (c == TAB)
 		ft_putstr("tab");
 	else if (c == BACK)
@@ -129,6 +125,27 @@ char	*check_char(char *res, long c, t_all *all)
 	return (res);
 }
 
+void	last_history(t_all *all)
+{
+	if (all->last && all->last->next != NULL)
+	{
+		all->history->cmd = ft_strdup(all->last->cmd);
+		all->history->next = NULL;
+	}
+	else
+	{
+		if (all->last && all->last->next == NULL)
+		{
+			if (ft_strcmp(all->last->cmd, "") == 0)
+			{
+				ft_strdel(&all->last->cmd);
+				all->last = all->last->prev;
+			}
+		}
+	}
+	
+}
+
 int		*key_hook(t_all *all)
 {
 	long		key;
@@ -140,6 +157,7 @@ int		*key_hook(t_all *all)
 		all->last = all->last->next;
 	all->last->next = add_history(all);
 	all->last = all->last->next;
+	all->history = all->last;
 	while (read(0, &key, 8) > -1)
 	{
 		if (key == 10)
@@ -149,10 +167,16 @@ int		*key_hook(t_all *all)
 			ft_putcolor2(BRED, "prompt->", RESET, all->last->cmd);
 			PLINE += 2;
 			PCOL = 1;
+			last_history(all);
 			return (0);
 		}
-		all->last->cmd = check_char(all->last->cmd, key, all);
+		if (key == UP && all->last && all->last->prev != NULL)
+			all->last = all->last->prev;
+/*		else if (key == DOWN && all->last && all->last->next != NULL)
+			all->last = all->last->next;
+*/		all->last->cmd = check_char(all->last->cmd, key, all);
 		print_test(all->last->cmd, all);
+		
 		key = 0;
 	}
 	return (0);
