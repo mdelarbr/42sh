@@ -6,7 +6,7 @@
 /*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/22 12:59:36 by mjalenqu     #+#   ##    ##    #+#       */
-/*   Updated: 2019/04/06 10:01:55 by mjalenqu    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/04/10 18:38:44 by mjalenqu    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -94,6 +94,7 @@ void	read_history(t_history **history)
 	prev = (*history);
 	(*history)->next = NULL;
 	(*history)->prev = NULL;
+	(*history)->cmd = NULL;
 	while (get_next_line(fd, &str))
 	{
 		prev = (*history);
@@ -126,4 +127,23 @@ void	get_history(t_history **history)
 	{
 		ft_create_file(HIST);
 	}
+}
+
+void	write_history(t_all *all)
+{
+	char		*str;
+	int			fd;
+
+	fd = open(HIST, O_WRONLY | O_TRUNC);
+	while (all->last->prev)
+		all->last = all->last->prev;
+	while (all->last)
+	{
+		str = ft_strjoin(all->last->cmd, "\n");
+		write(fd, str, ft_strlen(str));
+		all->last = all->last->next;
+		ft_strdel(&str);
+	}
+	close(fd);
+	fd= -1;
 }

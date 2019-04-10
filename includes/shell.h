@@ -6,7 +6,7 @@
 /*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/04 15:55:39 by mjalenqu     #+#   ##    ##    #+#       */
-/*   Updated: 2019/04/06 10:08:19 by mjalenqu    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/04/10 18:40:00 by mjalenqu    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -187,6 +187,7 @@ void					do_del(t_all *all);
 void					do_tab(t_all *all);
 char					*remove_char(char **str, int i);
 t_history				*add_history(t_all *all);
+void					write_history(t_all *all);
 
 /*
 *******************************************************************************

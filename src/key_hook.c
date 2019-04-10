@@ -6,7 +6,7 @@
 /*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/04 18:24:48 by mjalenqu     #+#   ##    ##    #+#       */
-/*   Updated: 2019/04/08 11:48:56 by mjalenqu    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/04/10 18:24:25 by mjalenqu    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -25,6 +25,11 @@ void	print_test(char *str, t_all *all)
 	tputs(tgetstr("dl", NULL), 1, ft_put_c);
 	tputs(tgoto(tgetstr("cm", NULL), 0, PLINE), 1, ft_put_c);
 	ft_putcolor(BRED, "prompt->", RESET);
+	if (PCOL == ft_strlen(str))
+	{
+		write(1, str, ft_strlen(str));
+		return ;
+	}
 	while (str[i])
 	{
 		if (i == PCOL)
@@ -94,6 +99,8 @@ int		check_key(long c, t_all *all, char **res)
 		if (PCOL < ft_strlen(*res))
 			PCOL++;
 	}
+	else if (c == UP || c == DOWN)
+		return (0);
 	else if (c == TAB)
 		ft_putstr("tab");
 	else if (c == BACK)
@@ -125,25 +132,28 @@ char	*check_char(char *res, long c, t_all *all)
 	return (res);
 }
 
-void	last_history(t_all *all)
+void	key_is_up(t_all **all)
 {
-	if (all->last && all->last->next != NULL)
+	if ((*all)->last->prev == NULL)
+		return ;
+	if ((*all)->last && (*all)->last->prev)
 	{
-		all->history->cmd = ft_strdup(all->last->cmd);
-		all->history->next = NULL;
+		(*all)->last = (*all)->last->prev;
+		(*all)->wind->pos_col = ft_strlen((*all)->last->cmd);
+		tputs(tgoto(tgetstr("cm", NULL), (*all)->wind->pos_col, (*all)->wind->pos_line), 1, ft_put_c);
 	}
-	else
+}
+
+void	key_is_down(t_all **all)
+{
+	if ((*all)->last->next == NULL)
+		return ;
+	if ((*all)->last && (*all)->last->next)
 	{
-		if (all->last && all->last->next == NULL)
-		{
-			if (ft_strcmp(all->last->cmd, "") == 0)
-			{
-				ft_strdel(&all->last->cmd);
-				all->last = all->last->prev;
-			}
-		}
+		(*all)->last = (*all)->last->next;
+		(*all)->wind->pos_col = ft_strlen((*all)->last->cmd);
+		tputs(tgoto(tgetstr("cm", NULL), (*all)->wind->pos_col, (*all)->wind->pos_line), 1, ft_put_c);
 	}
-	
 }
 
 int		*key_hook(t_all *all)
@@ -155,9 +165,12 @@ int		*key_hook(t_all *all)
 	PCOL = 0;
 	while (all->last->next != NULL)
 		all->last = all->last->next;
-	all->last->next = add_history(all);
-	all->last = all->last->next;
-	all->history = all->last;
+	if (all->last->cmd[0] != '\0')
+	{
+		all->last->next = add_history(all);
+		all->last = all->last->next;
+		all->history = all->last;
+	}
 	while (read(0, &key, 8) > -1)
 	{
 		if (key == 10)
@@ -167,16 +180,14 @@ int		*key_hook(t_all *all)
 			ft_putcolor2(BRED, "prompt->", RESET, all->last->cmd);
 			PLINE += 2;
 			PCOL = 1;
-			last_history(all);
 			return (0);
 		}
-		if (key == UP && all->last && all->last->prev != NULL)
-			all->last = all->last->prev;
-/*		else if (key == DOWN && all->last && all->last->next != NULL)
-			all->last = all->last->next;
-*/		all->last->cmd = check_char(all->last->cmd, key, all);
+		if (key == UP)
+			key_is_up(&all);
+		if (key == DOWN)
+			key_is_down(&all);
+		all->last->cmd = check_char(all->last->cmd, key, all);
 		print_test(all->last->cmd, all);
-		
 		key = 0;
 	}
 	return (0);
