@@ -6,7 +6,7 @@
 /*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/26 18:09:50 by mjalenqu     #+#   ##    ##    #+#       */
-/*   Updated: 2019/04/06 09:32:09 by mjalenqu    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/04/11 08:15:27 by mjalenqu    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -15,10 +15,10 @@
 
 void	do_back(t_all *all, char **res)
 {
-	if (PCOL > 0 && (*res))
+	if (all->wind->pos_col > 0 && (*res))
 	{
-		(*res) = remove_char(res, PCOL);
-		PCOL--;
+		(*res) = remove_char(res, all->wind->pos_col);
+		all->wind->pos_col--;
 	}
 }
 

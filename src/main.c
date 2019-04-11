@@ -6,7 +6,7 @@
 /*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/04 15:45:25 by mjalenqu     #+#   ##    ##    #+#       */
-/*   Updated: 2019/04/10 18:40:05 by mjalenqu    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/04/11 08:15:53 by mjalenqu    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -43,7 +43,7 @@ t_all	*init_all(t_all *all, char **env)
 
 void	end_of_shell(t_all *all)
 {
-	tcsetattr(2, TCSANOW, &(OTERM));
+	tcsetattr(2, TCSANOW, &(all->select->old_term));
 	tputs(tgetstr("ve", NULL), 1, ft_put_c);
 	write_history(all);
 	free(all->select);

@@ -6,7 +6,7 @@
 /*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/04 15:55:39 by mjalenqu     #+#   ##    ##    #+#       */
-/*   Updated: 2019/04/10 18:40:00 by mjalenqu    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/04/11 08:17:08 by mjalenqu    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -112,19 +112,13 @@ typedef struct			s_all
 # define ESCAPE 27
 
 # define HIST	".42_history"
-# define POS	all->select->pos
-# define OTERM	all->select->old_term
-# define MTERM	all->select->my_term
+/*
 # define CMD	all->history->cmd
 # define HNEXT	all->history->next
 # define HPREV	all->history->prev
-# define COL	all->wind->max_col
-# define LINE	all->wind->max_line
-# define PCOL	all->wind->pos_col
-# define PLINE	all->wind->pos_line
 # define FD		all->wind->term_fd
 # define BSIZE 6
-
+*/
 /*
 *******************************************************************************
 ***							init_term.c										***
