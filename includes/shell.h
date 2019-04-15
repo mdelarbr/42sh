@@ -6,7 +6,7 @@
 /*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/04 15:55:39 by mjalenqu     #+#   ##    ##    #+#       */
-/*   Updated: 2019/04/11 08:17:08 by mjalenqu    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/04/15 11:12:07 by mjalenqu    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -28,7 +28,10 @@
 # include <termios.h>
 # include <unistd.h>
 # include <sys/ioctl.h>
-# include "../libft/libft.h"
+# include "../libft/includes/ft_str.h"
+# include "../libft/includes/ft_int.h"
+# include "../libft/includes/ft_list.h"
+# include "../libft/includes/ft_unix.h"
 
 /*
 ** structures **
@@ -38,7 +41,18 @@ typedef struct			s_count
 {
 	int					quote;
 	int					dquote;
+	int					esp;
+	int					pipe;
+	int					subsh;
+	int					cursh;
 }						t_count;
+
+typedef struct 			s_command
+{
+	char				*res;
+	struct s_command	*next;
+	struct s_command	*prev;
+}						t_command;
 
 
 typedef struct			s_wind
@@ -48,6 +62,8 @@ typedef struct			s_wind
 	int					max_line;
 	int					pos_line;
 	int					pos_col;
+	int					srt_line;
+	int					srt_col;
 }						t_wind;
 
 typedef struct			s_select
@@ -74,11 +90,13 @@ typedef struct			s_env
 
 typedef struct			s_all
 {
-	t_wind				*wind;
+	t_wind				wind;
 	t_history			*history;
 	t_history			*last;
 	t_env				*env;
 	t_select			*select;
+	t_count				count;
+	char				*save;
 	char				*prompt;
 }						t_all;
 /*
@@ -110,6 +128,10 @@ typedef struct			s_all
 # define BACK   127
 # define ENTER  10
 # define ESCAPE 27
+# define CTRLUP	2117425947
+# define CTRLDOWN	2117491483
+# define HOME	4741915
+# define END	4610843
 
 # define HIST	".42_history"
 /*
@@ -150,7 +172,7 @@ char					*init_data(char *src);
 ***								windows.c									***
 *******************************************************************************
 */
-t_wind					*init_wind(void);
+t_wind					init_wind(void);
 
 /*
 *******************************************************************************
