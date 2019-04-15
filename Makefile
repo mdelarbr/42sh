@@ -6,7 +6,7 @@
 #    By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2019/03/04 18:02:46 by mjalenqu     #+#   ##    ##    #+#        #
-#    Updated: 2019/04/15 11:28:42 by mjalenqu    ###    #+. /#+    ###.fr      #
+#    Updated: 2019/04/15 13:32:51 by mjalenqu    ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -38,14 +38,15 @@ PINK = \033[0;38;5;198m
 DARK_BLUE = \033[0;38;5;110m
 GREEN = \033[0;38;5;111m
 LIGHT_GREEN = \033[1;38;5;121m
+LIGHT_RED = \033[1;31;5;121m
 FLASH_GREEN = \033[33;32m
 
 all: $(NAME)
 
 $(NAME) : $(OBJ_PATH) $(OBJ) Makefile
-	@echo "$(LIGHT_GREEN)Compilation de la libft : "
+	@echo "\n\n$(LIGHT_GREEN)Compilation de la libft : "
 	@make -C libft
-	gcc $(FLAG) -o $@ $(OBJ) $(FLAG_END) $(LIB_PATH) -Iinclude
+	@gcc $(FLAG) -o $@ $(OBJ) $(FLAG_END) $(LIB_PATH) -Iinclude
 	@echo "$(FLASH_GREEN)$(NAME) compilé et prêt à l'usage !\n"
 
 $(OBJ_PATH):
@@ -55,7 +56,8 @@ $(OBJ_PATH):
 	@mkdir -p obj/lexeur 2> /dev/null
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c $(INC)
-	gcc $(FLAG) -g -I $(INC) -o $@ -c $<
+	@gcc $(FLAG) -g -I $(INC) -o $@ -c $<
+	@echo "$(LIGHT_RED).\c"
 
 clean:
 	@make -C libft/ clean

@@ -6,7 +6,7 @@
 /*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/04 18:24:48 by mjalenqu     #+#   ##    ##    #+#       */
-/*   Updated: 2019/04/15 11:01:41 by mjalenqu    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/04/15 13:16:26 by mjalenqu    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -74,10 +74,7 @@ int		check_key(long c, t_all *all, char **res)
 		if (all->wind.pos_col > 1)
 			(all->wind.pos_col) -= 1;
 		else
-		{
 			all->wind.pos_col = 0;
-//			tputs(tgetstr("le", NULL), 0, ft_put_c);
-		}
 	}
 	else if (c == RIGHT)
 	{
@@ -86,11 +83,13 @@ int		check_key(long c, t_all *all, char **res)
 	}
 	else if (c == UP || c == DOWN)
 		return (0);
-	else if (c == TAB)
-		ft_putstr("tab");
+	else if (c == HOME)
+		all->wind.pos_col = 0;
+	else if (c == END)
+		all->wind.pos_col = ft_strlen(*res);
 	else if (c == BACK)
 		do_back(all, res);
-	else
+	else 
 		return (1);
 	return (0);
 }
