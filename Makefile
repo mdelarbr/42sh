@@ -6,7 +6,7 @@
 #    By: mdelarbr <mdelarbr@student.le-101.fr>      +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2019/03/04 18:02:46 by mjalenqu     #+#   ##    ##    #+#        #
-#    Updated: 2019/04/16 13:09:13 by mdelarbr    ###    #+. /#+    ###.fr      #
+#    Updated: 2019/04/16 17:44:05 by mdelarbr    ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -21,7 +21,7 @@ SRC_NAME =	line_edit/main.c line_edit/init_term.c line_edit/key_hook.c line_edit
 			line_edit/ft_error.c line_edit/history.c\
 			line_edit/arrow.c line_edit/other_key.c line_edit/ft_free.c lexeur/back_slash.c lexeur/error.c\
 			lexeur/fill_fd.c lexeur/lexeur.c lexeur/fill_lexeur.c lexeur/redirection.c \
-			replace/replace.c
+			replace/replace.c replace/env_replace.c replace/var_replace.c
 OBJ_NAME = $(SRC_NAME:.c=.o)
 INC_NAME = shell.h
 

@@ -6,7 +6,7 @@
 /*   By: mdelarbr <mdelarbr@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/22 13:48:08 by mdelarbr     #+#   ##    ##    #+#       */
-/*   Updated: 2019/04/16 16:10:30 by mdelarbr    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/04/16 16:42:03 by mdelarbr    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -95,7 +95,7 @@ int			start_lex(t_all *all)
 	array = NULL;
 	i = 0;
 	j = 0;
-	all->last->cmd = print_env(all, all->last->cmd);
+	all->last->cmd = remove_env(all, all->last->cmd);
 	if ((check_error(all->last->cmd)) == -1)
 		return (-1);
 	array = fill_lex(all->last->cmd, array);

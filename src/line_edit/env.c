@@ -6,12 +6,13 @@
 /*   By: mdelarbr <mdelarbr@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/08 10:53:46 by mjalenqu     #+#   ##    ##    #+#       */
-/*   Updated: 2019/04/15 18:42:13 by mdelarbr    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/04/16 21:32:49 by mdelarbr    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
+#include "../../includes/lexeur.h"
 
 char	*init_data(char *src)
 {
@@ -55,6 +56,7 @@ t_env	*init_env(char **env)
 	{
 		var->name = init_name(env[i]);
 		var->data = init_data(env[i]);
+		var->type = ENVIRONEMENT;
 		i++;
 		if (env[i])
 		{
@@ -62,6 +64,8 @@ t_env	*init_env(char **env)
 			var = var->next;
 		}
 	}
+	var->name = ft_strdup("test");
+	var->data = ft_strdup("Ceci est un test");
 	var->next = NULL;
 //	print_env(save);
 	return (save);
