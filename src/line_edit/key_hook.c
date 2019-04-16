@@ -6,7 +6,7 @@
 /*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/04 18:24:48 by mjalenqu     #+#   ##    ##    #+#       */
-/*   Updated: 2019/04/15 13:16:26 by mjalenqu    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/04/16 07:41:08 by mjalenqu    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -125,7 +125,7 @@ char	*check_char(char *res, long c, t_all *all)
 
 void	key_is_up(t_all **all)
 {
-	if ((*all)->history->next == NULL)
+	if ((*all)->last->cmd && (*all)->history && (*all)->history->next == NULL)
 		(*all)->save = ft_strdup((*all)->last->cmd);
 	if ((*all)->history->prev == NULL)
 		return ;

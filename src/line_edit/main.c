@@ -6,7 +6,7 @@
 /*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/04 15:45:25 by mjalenqu     #+#   ##    ##    #+#       */
-/*   Updated: 2019/04/15 11:10:24 by mjalenqu    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/04/16 08:23:07 by mjalenqu    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -31,7 +31,7 @@ t_all	*init_all(t_all *all, char **env)
 {
 	all = malloc(sizeof(t_all));
 	get_history(&all->history);
-	while (all->history->next)
+	while (all->history && all->history->next)
 		all->history = all->history->next;
 	all->select = NULL;
 	all->select = init_term(all);
