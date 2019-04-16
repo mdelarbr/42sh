@@ -3,10 +3,10 @@
 /*                                                              /             */
 /*   lexeur.h                                         .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
+/*   By: mdelarbr <mdelarbr@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/22 13:50:20 by mdelarbr     #+#   ##    ##    #+#       */
-/*   Updated: 2019/04/15 09:50:43 by mjalenqu    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/04/16 15:04:10 by mdelarbr    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -18,6 +18,7 @@
 # include "../libft/includes/ft_list.h"
 # include "../libft/includes/ft_unix.h"
 # include "../libft/includes/ft_str.h"
+# include "shell.h"
 # include <stdio.h>
 # include <unistd.h>
 # include <stdlib.h>
@@ -59,7 +60,7 @@ typedef struct
 **┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 */
 
-int			start_lex(char *str);
+int			start_lex(t_all *all);
 int			find_token(char *buf, int i);
 int			cnt_wrd(char *buf);
 t_token     g_fill_token[10];
@@ -100,4 +101,12 @@ t_lexeur	**check_redirection(t_lexeur ***tabe);
 */
 
 t_lexeur	*find_fd(char *buf, int *i);
+
+/*
+**┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+**┃                                 lexeur.c                                   ┃
+**┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+*/
+
+char		*print_env(t_all *all, char *str);
 #endif
