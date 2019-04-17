@@ -3,10 +3,10 @@
 /*                                                              /             */
 /*   fill_lexeur.c                                    .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
+/*   By: mdelarbr <mdelarbr@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/27 11:29:05 by mdelarbr     #+#   ##    ##    #+#       */
-/*   Updated: 2019/04/15 09:36:59 by mjalenqu    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/04/15 18:22:33 by mdelarbr    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -68,7 +68,7 @@ t_lexeur	*fill_lex_while(char *buf, int *i, int token)
 	return (NULL);
 }
 
-t_lexeur	**fill_lex(char *buf, t_lexeur **tab)
+t_lexeur	**fill_lex(char *buf, t_lexeur **array)
 {
 	int			i;
 	int			j;
@@ -76,20 +76,20 @@ t_lexeur	**fill_lex(char *buf, t_lexeur **tab)
 
 	i = 0;
 	j = 0;
-	tab = malloc(sizeof(t_lexeur *) * (cnt_wrd(buf) + 1));
+	array = malloc(sizeof(t_lexeur *) * (cnt_wrd(buf) + 1));
 	while (buf[i])
 	{
 		jump_space(buf, &i);
 		if (!buf[i])
 			break ;
 		if ((tmp = find_fd(buf, &i)) != NULL)
-			tab[j] = tmp;
+			array[j] = tmp;
 		else
-			tab[j] = fill_lex_while(buf, &i, find_token(buf, i));
+			array[j] = fill_lex_while(buf, &i, find_token(buf, i));
 		j++;
 	}
-	tab[j] = NULL;
-	check_redirection(&tab);
-	del_back_slash(&tab);
-	return (tab);
+	array[j] = NULL;
+	check_redirection(&array);
+	del_back_slash(&array);
+	return (array);
 }

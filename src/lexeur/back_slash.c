@@ -6,7 +6,7 @@
 /*   By: mdelarbr <mdelarbr@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/27 16:12:36 by mdelarbr     #+#   ##    ##    #+#       */
-/*   Updated: 2019/04/03 10:24:37 by mdelarbr    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/04/15 18:20:52 by mdelarbr    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -84,7 +84,7 @@ char		*solve_back_slash(char *str)
 	return (res);
 }
 
-void		del_back_slash(t_lexeur ***tab)
+void		del_back_slash(t_lexeur ***array)
 {
 	int		j;
 	int		k;
@@ -93,15 +93,15 @@ void		del_back_slash(t_lexeur ***tab)
 	j = 0;
 	k = 0;
 	start = 0;
-	while ((*tab)[j])
+	while ((*array)[j])
 	{
-		if ((*tab)[j]->word != NULL)
+		if ((*array)[j]->word != NULL)
 		{
-			while ((*tab)[j]->word[k])
+			while ((*array)[j]->word[k])
 			{
-				if ((*tab)[j]->word[k + 1] && (*tab)[j]->word[k] == '\\')
+				if ((*array)[j]->word[k + 1] && (*array)[j]->word[k] == '\\')
 				{
-					(*tab)[j]->word = solve_back_slash((*tab)[j]->word);
+					(*array)[j]->word = solve_back_slash((*array)[j]->word);
 					break ;
 				}
 				k++;

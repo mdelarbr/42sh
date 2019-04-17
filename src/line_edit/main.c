@@ -3,10 +3,10 @@
 /*                                                              /             */
 /*   main.c                                           .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
+/*   By: mdelarbr <mdelarbr@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/04 15:45:25 by mjalenqu     #+#   ##    ##    #+#       */
-/*   Updated: 2019/04/15 11:10:24 by mjalenqu    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/04/16 16:41:38 by mdelarbr    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -89,7 +89,7 @@ int		main(int ac, char **av, char **env)
 			print_history(all);
 		if (all->last->cmd && ft_strcmp("exit", all->last->cmd) == 0)
 			break ;
-		start_lex(all->last->cmd);
+		start_lex(all);
 		ft_strdel(&all->save);
 	}
 	ft_strdel(&all->save);

@@ -3,10 +3,10 @@
 /*                                                              /             */
 /*   history.c                                        .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
+/*   By: mdelarbr <mdelarbr@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/22 12:59:36 by mjalenqu     #+#   ##    ##    #+#       */
-/*   Updated: 2019/04/15 11:01:41 by mjalenqu    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/04/16 13:10:10 by mdelarbr    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -106,7 +106,6 @@ void	read_history(t_history **history)
 		}
 		(*history)->cmd = ft_strdup(str);
 		(*history)->len = ft_strlen(str);
-		printf("hist = %s\n", (*history)->cmd);
 		ft_strdel(&str);
 	}
 	ft_strdel(&str);

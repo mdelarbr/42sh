@@ -3,10 +3,10 @@
 /*                                                              /             */
 /*   lexeur.h                                         .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
+/*   By: mdelarbr <mdelarbr@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/22 13:50:20 by mdelarbr     #+#   ##    ##    #+#       */
-/*   Updated: 2019/04/15 09:50:43 by mjalenqu    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/04/17 13:09:51 by mdelarbr    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -18,9 +18,13 @@
 # include "../libft/includes/ft_list.h"
 # include "../libft/includes/ft_unix.h"
 # include "../libft/includes/ft_str.h"
+# include "shell.h"
 # include <stdio.h>
 # include <unistd.h>
 # include <stdlib.h>
+
+# define ENVIRONEMENT 0
+# define LOCAL 1
 
 typedef enum
 {
@@ -59,7 +63,7 @@ typedef struct
 **┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 */
 
-int			start_lex(char *str);
+int			start_lex(t_all *all);
 int			find_token(char *buf, int i);
 int			cnt_wrd(char *buf);
 t_token     g_fill_token[10];
@@ -100,4 +104,39 @@ t_lexeur	**check_redirection(t_lexeur ***tabe);
 */
 
 t_lexeur	*find_fd(char *buf, int *i);
+
+/*
+**┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+**┃                                 redirection.c                              ┃
+**┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+*/
+
+char		*remove_env(t_all *all, char *str);
+
+/*
+**┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+**┃                                 env_replace.c                              ┃
+**┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+*/
+
+char		*find_env_var(t_env *env, char *str, int i);
+char		*switch_word(char *str, char *tmp, int i);
+
+/*
+**┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+**┃                                 env_replace.c                              ┃
+**┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+*/
+
+void        check_var(t_env *env, char **str);
+
+/*
+**┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+**┃                                 var_replace.c                              ┃
+**┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+*/
+
+char		*check_var_alias(t_env *env, char *str);
+int			f_check_var_alias(t_env *env, char *str);
+
 #endif
