@@ -6,7 +6,7 @@
 #    By: mdelarbr <mdelarbr@student.le-101.fr>      +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2019/03/04 18:02:46 by mjalenqu     #+#   ##    ##    #+#        #
-#    Updated: 2019/04/17 14:31:26 by mdelarbr    ###    #+. /#+    ###.fr      #
+#    Updated: 2019/04/17 14:39:29 by mdelarbr    ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -45,17 +45,10 @@ RESET = \033[0m
 all: $(NAME)
 
 $(NAME) : $(OBJ_PATH) $(OBJ) Makefile
-<<<<<<< HEAD
 	@make -C libft
 	@echo "$(YELLOW)Libft$(RESET):\t...$(GREEN)\t[OK]"
 	@gcc $(FLAG) -o $@ $(OBJ) $(FLAG_END) $(LIB_PATH) -Iinclude
 	@echo "$(YELLOW)$(NAME)$(RESET):\t...$(GREEN)\t[OK]"
-=======
-	@echo "\n\n$(LIGHT_GREEN)Compilation de la libft : "
-	@make -C libft
-	@gcc $(FLAG) -o $@ $(OBJ) $(FLAG_END) $(LIB_PATH) -Iinclude
-	@echo "$(FLASH_GREEN)$(NAME) compilé et prêt à l'usage !\n"
->>>>>>> origin
 
 $(OBJ_PATH):
 	@mkdir -p obj 2> /dev/null
@@ -66,10 +59,6 @@ $(OBJ_PATH):
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c $(INC)
 	@gcc $(FLAG) -g -I $(INC) -o $@ -c $<
-<<<<<<< HEAD
-=======
-	@echo "$(LIGHT_RED).\c"
->>>>>>> origin
 
 clean:
 	@make -C libft/ clean
