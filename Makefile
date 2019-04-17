@@ -6,7 +6,7 @@
 #    By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2019/03/04 18:02:46 by mjalenqu     #+#   ##    ##    #+#        #
-#    Updated: 2019/04/17 10:35:11 by mjalenqu    ###    #+. /#+    ###.fr      #
+#    Updated: 2019/04/17 15:23:42 by mjalenqu    ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -37,16 +37,18 @@ PINK = \033[0;38;5;198m
 DARK_BLUE = \033[0;38;5;110m
 GREEN = \033[0;38;5;111m
 LIGHT_GREEN = \033[1;38;5;121m
+LIGHT_YELLOW = \033[1;33;5;121m
 LIGHT_RED = \033[1;31;5;121m
 FLASH_GREEN = \033[33;32m
+ORANGE = \033[1;38;2;255;100;0m
 
 all: $(NAME)
 
 $(NAME) : $(OBJ_PATH) $(OBJ) Makefile
-	@echo "\n\n$(LIGHT_GREEN)Compilation de la libft : "
+	@echo "\n\n$(ORANGE)Compilation de la libft : "
 	@make -C libft
 	@gcc $(FLAG) -o $@ $(OBJ) $(FLAG_END) $(LIB_PATH) -Iinclude
-	@echo "$(FLASH_GREEN)$(NAME) compilé et prêt à l'usage !\n"
+	@echo "$(LIGHT_YELLOW)$(NAME) compilé et prêt à l'usage !\033[0m\n"
 
 $(OBJ_PATH):
 	@mkdir -p obj 2> /dev/null

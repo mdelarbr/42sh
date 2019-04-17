@@ -6,7 +6,7 @@
 /*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/04 18:24:48 by mjalenqu     #+#   ##    ##    #+#       */
-/*   Updated: 2019/04/17 10:25:13 by mjalenqu    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/04/17 17:20:42 by mjalenqu    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -70,23 +70,36 @@ void	jump_left(t_all **all)
 {
 	int i;
 
-	i = (*all)->wind.pos_col;
-	printf("--%d|", i);
-	while ((*all)->last->cmd[i] && i > 0 &&
-				(is_space((*all)->last->cmd[i]) == 1))
-	{
-		i--;
-		printf("on fait moins\n");
-	}
+	i = (*all)->wind.pos_col - 1;
+	if (i == 1)
+		i = 0;
 	while ((*all)->last->cmd[i] && i > 0 &&
 				(is_space((*all)->last->cmd[i]) == 0))
-	{
 		i--;
-		printf("on fait moins encore\n");
-	}
+	while ((*all)->last->cmd[i] && i > 0 &&
+				(is_space((*all)->last->cmd[i]) == 1))
+		i--;
+	while ((*all)->last->cmd[i] && i > 0 &&
+				(is_space((*all)->last->cmd[i]) == 0))
+		i--;
+	(*all)->wind.pos_col = i + 1;
+}
+
+void	jump_right(t_all **all)
+{
+	int i;
+
+	i = (*all)->wind.pos_col - 1;
+	while ((*all)->last->cmd[i] && i < ft_strlen((*all)->last->cmd) &&
+				(is_space((*all)->last->cmd[i]) == 1))
+		i++;
+	while ((*all)->last->cmd[i] && i < ft_strlen((*all)->last->cmd) &&
+				(is_space((*all)->last->cmd[i]) == 0))
+		i++;
+	while ((*all)->last->cmd[i] && i < ft_strlen((*all)->last->cmd) &&
+				(is_space((*all)->last->cmd[i]) == 1))
+		i++;
 	(*all)->wind.pos_col = i;
-	printf("--%d|", i);
-	printf("\n");
 }
 
 int		check_key(long c, t_all *all, char **res)
@@ -210,6 +223,8 @@ int		*key_hook(t_all *all)
 			key_is_down(&all);
 		if (key == ALT_L)
 			jump_left(&all);
+		if (key == ALT_R)
+			jump_right(&all);
 		all->last->cmd = check_char(all->last->cmd, key, all);
 		display(all->last->cmd, all);
 		key = 0;
