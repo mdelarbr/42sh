@@ -6,7 +6,7 @@
 /*   By: mdelarbr <mdelarbr@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/04/15 17:27:56 by mdelarbr     #+#   ##    ##    #+#       */
-/*   Updated: 2019/04/17 13:40:04 by mdelarbr    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/04/17 13:56:56 by mdelarbr    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -81,7 +81,7 @@ char		*remove_env(t_all *all, char *str)
 	char	*tmp;
 
 	start = all->env;
-	array = ft_strsplit(str, ' ');
+	array = ft_strsplit(str, ' '); // TODO FAIRE UN VRAI SPLIT AVEC \T ETC.
 	while (1)
 		if (remove_env_while(&array, all) == 0)
 			break ;
