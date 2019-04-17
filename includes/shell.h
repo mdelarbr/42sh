@@ -6,7 +6,7 @@
 /*   By: mdelarbr <mdelarbr@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/04 15:55:39 by mjalenqu     #+#   ##    ##    #+#       */
-/*   Updated: 2019/04/16 14:32:20 by mdelarbr    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/04/17 12:04:05 by mdelarbr    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -132,6 +132,8 @@ typedef struct			s_all
 # define CTRLDOWN	2117491483
 # define HOME	4741915
 # define END	4610843
+# define ALT_L    25115
+# define ALT_R    26139
 
 # define HIST	".42_history"
 /*
@@ -204,6 +206,7 @@ void					do_tab(t_all *all);
 char					*remove_char(char **str, int i);
 t_history				*add_history(t_all *all);
 void					write_history(t_all *all);
+void					maj_pos(t_all *all);
 
 /*
 *******************************************************************************
@@ -212,4 +215,7 @@ void					write_history(t_all *all);
 */
 void					free_all(t_all *all);
 void					free_env(t_env *var);
+
+
+void					do_the_enter(t_all **all);
 #endif

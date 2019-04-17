@@ -6,7 +6,7 @@
 /*   By: mdelarbr <mdelarbr@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/08 10:53:46 by mjalenqu     #+#   ##    ##    #+#       */
-/*   Updated: 2019/04/16 21:32:49 by mdelarbr    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/04/17 13:41:06 by mdelarbr    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -64,9 +64,6 @@ t_env	*init_env(char **env)
 			var = var->next;
 		}
 	}
-	var->name = ft_strdup("test");
-	var->data = ft_strdup("Ceci est un test");
 	var->next = NULL;
-//	print_env(save);
 	return (save);
 }
