@@ -6,28 +6,28 @@
 /*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/22 12:59:36 by mjalenqu     #+#   ##    ##    #+#       */
-/*   Updated: 2019/04/15 11:01:41 by mjalenqu    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/04/17 10:00:41 by mjalenqu    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
 
-int		ft_file_wrights(char *path)
+int			ft_file_wrights(char *path)
 {
 	if (access(path, W_OK) != -1)
 		return (1);
 	return (0);
 }
 
-int		ft_file_exists(char *path)
+int			ft_file_exists(char *path)
 {
 	if (access(path, F_OK) != -1)
 		return (1);
 	return (0);
 }
 
-int		ft_execute(char *exec, char **opt, char **env)
+int			ft_execute(char *exec, char **opt, char **env)
 {
 	int		w;
 	pid_t	p;
@@ -43,7 +43,7 @@ int		ft_execute(char *exec, char **opt, char **env)
 	return (1);
 }
 
-int		ft_create_file(char *path)
+int			ft_create_file(char *path)
 {
 	char **s;
 
@@ -80,7 +80,7 @@ t_history	*add_history(t_all *all)
 	return (new);
 }
 
-void	read_history(t_history **history)
+void		read_history(t_history **history)
 {
 	int			fd;
 	char		*str;
@@ -114,7 +114,7 @@ void	read_history(t_history **history)
 	(*history) = save;
 }
 
-void	get_history(t_history **history)
+void		get_history(t_history **history)
 {
 	if (ft_file_exists(HIST))
 	{
@@ -129,7 +129,7 @@ void	get_history(t_history **history)
 	}
 }
 
-void	write_history(t_all *all)
+void		write_history(t_all *all)
 {
 	char		*str;
 	int			fd;
@@ -145,5 +145,5 @@ void	write_history(t_all *all)
 		ft_strdel(&str);
 	}
 	close(fd);
-	fd= -1;
+	fd = -1;
 }

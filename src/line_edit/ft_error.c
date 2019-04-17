@@ -6,7 +6,7 @@
 /*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/14 03:30:24 by mjalenqu     #+#   ##    ##    #+#       */
-/*   Updated: 2019/04/15 11:01:41 by mjalenqu    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/04/17 10:10:24 by mjalenqu    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -22,7 +22,6 @@ void	ft_error_quit(int nb)
 	nb == 3 ? ft_putstr("couldn't create .42_alias (no mkdir ?) ") : 0;
 	nb == 3 ? ft_putstr("or don't have rights on it...\nsad but...\n") : 0;
 	ft_putstr("quitting with class ;)\n");
-//	exit(0);
 }
 
 void	ft_error(int nb)

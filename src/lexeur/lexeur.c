@@ -6,7 +6,7 @@
 /*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/22 13:48:08 by mdelarbr     #+#   ##    ##    #+#       */
-/*   Updated: 2019/04/15 09:36:47 by mjalenqu    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/04/17 10:09:47 by mjalenqu    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -95,7 +95,7 @@ int			start_lex(char *str)
 	i = 0;
 	j = 0;
 	if ((check_error(str)) == -1)
-		return (-1) ;
+		return (-1);
 	tab = fill_lex(str, tab);
 	while (tab[j])
 	{

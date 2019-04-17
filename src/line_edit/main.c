@@ -6,13 +6,13 @@
 /*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/04 15:45:25 by mjalenqu     #+#   ##    ##    #+#       */
-/*   Updated: 2019/04/16 08:23:07 by mjalenqu    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/04/17 09:58:45 by mjalenqu    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
-# include "../../includes/lexeur.h"
+#include "../../includes/lexeur.h"
 
 void	print_history(t_all *all)
 {
@@ -82,6 +82,7 @@ int		main(int ac, char **av, char **env)
 		all->save = ft_strdup("");
 		while (all->last->next)
 			all->last = all->last->next;
+		all->history = all->last;
 		tputs(tgetstr("ve", NULL), 1, ft_put_c);
 		key_hook(all);
 		ft_putcolor("\n\033[0;32m", all->last->cmd, "\033[00m\n");
@@ -91,6 +92,7 @@ int		main(int ac, char **av, char **env)
 			break ;
 		start_lex(all->last->cmd);
 		ft_strdel(&all->save);
+		all->last->next = NULL;
 	}
 	ft_strdel(&all->save);
 	end_of_shell(all);

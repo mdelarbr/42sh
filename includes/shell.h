@@ -6,7 +6,7 @@
 /*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/04 15:55:39 by mjalenqu     #+#   ##    ##    #+#       */
-/*   Updated: 2019/04/15 11:12:07 by mjalenqu    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/04/17 10:25:06 by mjalenqu    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -18,6 +18,7 @@
 ** includes **
 */
 
+# include <signal.h>
 # include <curses.h>
 # include <fcntl.h>
 # include <stdlib.h>
@@ -128,10 +129,10 @@ typedef struct			s_all
 # define BACK   127
 # define ENTER  10
 # define ESCAPE 27
-# define CTRLUP	2117425947
-# define CTRLDOWN	2117491483
 # define HOME	4741915
 # define END	4610843
+# define ALT_L	25115
+# define ALT_R	26139
 
 # define HIST	".42_history"
 /*
@@ -204,6 +205,10 @@ void					do_tab(t_all *all);
 char					*remove_char(char **str, int i);
 t_history				*add_history(t_all *all);
 void					write_history(t_all *all);
+char					*check_char(char *res, long c, t_all *all);
+void					do_the_enter(t_all **all);
+int						check_quote(t_all *all);
+void					display(char *str, t_all *all);
 
 /*
 *******************************************************************************

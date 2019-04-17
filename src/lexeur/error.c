@@ -3,10 +3,10 @@
 /*                                                              /             */
 /*   error.c                                          .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: mdelarbr <mdelarbr@student.le-101.fr>      +:+   +:    +:    +:+     */
+/*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/04/02 16:15:56 by mdelarbr     #+#   ##    ##    #+#       */
-/*   Updated: 2019/04/03 18:20:23 by mdelarbr    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/04/17 10:17:23 by mjalenqu    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -79,7 +79,8 @@ int		check_error(char *str)
 		if (token != -1)
 			if (check_double_token(str, i, token))
 				return (-1);
-		i++;
+		if (str[i])
+			i++;
 	}
 	return (0);
 }
