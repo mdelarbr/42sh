@@ -6,7 +6,7 @@
 /*   By: mdelarbr <mdelarbr@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/04 18:24:48 by mjalenqu     #+#   ##    ##    #+#       */
-/*   Updated: 2019/04/17 12:43:29 by mdelarbr    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/04/17 14:31:20 by mdelarbr    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -118,7 +118,7 @@ int		check_key(long c, t_all *all, char **res)
 		all->wind.pos_col = ft_strlen(*res);
 	else if (c == BACK)
 		do_back(all, res);
-	else
+	else 
 		return (1);
 	return (0);
 }
