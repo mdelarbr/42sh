@@ -6,7 +6,7 @@
 /*   By: mdelarbr <mdelarbr@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/04 15:55:39 by mjalenqu     #+#   ##    ##    #+#       */
-/*   Updated: 2019/04/17 12:04:05 by mdelarbr    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/04/18 14:20:04 by mdelarbr    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -47,7 +47,7 @@ typedef struct			s_count
 	int					cursh;
 }						t_count;
 
-typedef struct 			s_command
+typedef struct			s_command
 {
 	char				*res;
 	struct s_command	*next;

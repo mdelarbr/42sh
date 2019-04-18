@@ -6,7 +6,7 @@
 #    By: mdelarbr <mdelarbr@student.le-101.fr>      +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2019/03/04 18:02:46 by mjalenqu     #+#   ##    ##    #+#        #
-#    Updated: 2019/04/17 14:31:26 by mdelarbr    ###    #+. /#+    ###.fr      #
+#    Updated: 2019/04/18 14:19:38 by mdelarbr    ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -21,7 +21,8 @@ SRC_NAME =	line_edit/main.c line_edit/init_term.c line_edit/key_hook.c line_edit
 			line_edit/ft_error.c line_edit/history.c\
 			line_edit/arrow.c line_edit/other_key.c line_edit/ft_free.c lexeur/back_slash.c lexeur/error.c\
 			lexeur/fill_fd.c lexeur/lexeur.c lexeur/fill_lexeur.c lexeur/redirection.c \
-			replace/replace.c replace/env_replace.c replace/var_replace.c
+			replace/replace.c replace/env_replace.c replace/var_replace.c \
+			exec/exec.c
 OBJ_NAME = $(SRC_NAME:.c=.o)
 INC_NAME = shell.h
 
@@ -45,17 +46,10 @@ RESET = \033[0m
 all: $(NAME)
 
 $(NAME) : $(OBJ_PATH) $(OBJ) Makefile
-<<<<<<< HEAD
 	@make -C libft
 	@echo "$(YELLOW)Libft$(RESET):\t...$(GREEN)\t[OK]"
 	@gcc $(FLAG) -o $@ $(OBJ) $(FLAG_END) $(LIB_PATH) -Iinclude
 	@echo "$(YELLOW)$(NAME)$(RESET):\t...$(GREEN)\t[OK]"
-=======
-	@echo "\n\n$(LIGHT_GREEN)Compilation de la libft : "
-	@make -C libft
-	@gcc $(FLAG) -o $@ $(OBJ) $(FLAG_END) $(LIB_PATH) -Iinclude
-	@echo "$(FLASH_GREEN)$(NAME) compilé et prêt à l'usage !\n"
->>>>>>> origin
 
 $(OBJ_PATH):
 	@mkdir -p obj 2> /dev/null
@@ -63,13 +57,10 @@ $(OBJ_PATH):
 	@mkdir -p obj/line_edit 2> /dev/null
 	@mkdir -p obj/lexeur 2> /dev/null
 	@mkdir -p obj/replace 2> /dev/null
+	@mkdir -p obj/exec 2> /dev/null
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c $(INC)
 	@gcc $(FLAG) -g -I $(INC) -o $@ -c $<
-<<<<<<< HEAD
-=======
-	@echo "$(LIGHT_RED).\c"
->>>>>>> origin
 
 clean:
 	@make -C libft/ clean

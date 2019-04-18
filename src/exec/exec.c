@@ -1,26 +1,28 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   ft_is_exec_verbose.c                             .::    .:/ .      .::   */
+/*   exec.c                                           .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: shthevak <marvin@le-101.fr>                +:+   +:    +:    +:+     */
+/*   By: mdelarbr <mdelarbr@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2019/03/18 15:52:42 by shthevak     #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/18 16:28:10 by shthevak    ###    #+. /#+    ###.fr     */
+/*   Created: 2019/04/18 13:43:41 by mdelarbr     #+#   ##    ##    #+#       */
+/*   Updated: 2019/04/18 16:58:58 by mdelarbr    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "execute.h"
+#include "../../includes/exec.h"
+#include "../../includes/lexeur.h"
 
-int		ft_is_exec_verbose(char *str)
+int		start_exec(t_lexeur **res)
 {
-	if (ft_file_exists(str))
+	int		j;
+
+	j = 0;
+	while (res[j])
 	{
-		if (ft_file_xrights(str))
-			return (1);
-		ft_putstr(str);
-		ft_putstr(": can't be executed, permission denied\n");
+		printf("res[%d].word: {%s}\tres[%d].token: {%d}\tres[%d].redirection:{%s}\tfd: %d\n", j, res[j]->word, j, res[j]->token, j, res[j]->redirection, res[j]->fd);
+		j++;
 	}
 	return (0);
 }
