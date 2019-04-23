@@ -6,7 +6,7 @@
 /*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/13 23:04:55 by mjalenqu     #+#   ##    ##    #+#       */
-/*   Updated: 2019/04/15 11:01:41 by mjalenqu    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/04/23 09:27:25 by mjalenqu    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -24,9 +24,9 @@ t_wind	init_wind(void)
 	ioctl(2, TIOCGWINSZ, &w);
 	wind.max_col = w.ws_col;
 	wind.max_line = w.ws_row;
-	write(1, "\033[6n", 4);
-	read(1, buf, 38);
-	buf[39] = '\0';
+	write(2, "\033[6n", 4);
+	read(2, buf, 38);
+	buf[38] = '\0';
 	wind.pos_line = ft_atoi(buf + 2) - 1;
 	while (buf[i] && buf[i] != ';')
 		i++;

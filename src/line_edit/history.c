@@ -6,7 +6,7 @@
 /*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/22 12:59:36 by mjalenqu     #+#   ##    ##    #+#       */
-/*   Updated: 2019/04/17 10:00:41 by mjalenqu    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/04/18 14:04:57 by mjalenqu    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -106,7 +106,6 @@ void		read_history(t_history **history)
 		}
 		(*history)->cmd = ft_strdup(str);
 		(*history)->len = ft_strlen(str);
-		printf("hist = %s\n", (*history)->cmd);
 		ft_strdel(&str);
 	}
 	ft_strdel(&str);

@@ -6,7 +6,7 @@
 /*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/04 15:55:39 by mjalenqu     #+#   ##    ##    #+#       */
-/*   Updated: 2019/04/17 10:25:06 by mjalenqu    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/04/19 08:56:34 by mjalenqu    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -99,6 +99,7 @@ typedef struct			s_all
 	t_count				count;
 	char				*save;
 	char				*prompt;
+	int					index;
 }						t_all;
 /*
 ** color **
@@ -208,7 +209,9 @@ void					write_history(t_all *all);
 char					*check_char(char *res, long c, t_all *all);
 void					do_the_enter(t_all **all);
 int						check_quote(t_all *all);
-void					display(char *str, t_all *all);
+void					display(char *str, t_all *all, int *start);
+void					jump_left(t_all **all);
+void					jump_right(t_all **all);
 
 /*
 *******************************************************************************

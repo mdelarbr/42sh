@@ -6,27 +6,33 @@
 /*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/04 18:24:48 by mjalenqu     #+#   ##    ##    #+#       */
-/*   Updated: 2019/04/17 17:20:42 by mjalenqu    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/04/23 09:57:09 by mjalenqu    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
 
-void	display(char *str, t_all *all)
+void	display(char *str, t_all *all, int *start)
 {
 	int i;
 
 	i = all->wind.pos_col;
-	tputs(tgoto(tgetstr("cm", NULL), 0, all->wind.srt_line), 1, ft_put_c);
+	if ((ft_strlen(str) / all->wind.max_col) > all->wind.max_line - all->wind.srt_line)
+	{
+		tputs(tgoto(tgetstr("cm", NULL), all->wind.max_col + 1, all->wind.max_line + 1), 1, ft_put_c);
+		(*start)--;
+		printf("passe\n");
+	}
+	tputs(tgoto(tgetstr("cm", NULL), 0, (*start)), 1, ft_put_c);
 	tputs(tgetstr("cd", NULL), 1, ft_put_c);
 	ft_putcolor(BRED, "prompt->", RESET);
 	if (!str || (str && str[0] == '\0'))
 		return ;
 	if (i == ft_strlen(str))
 	{
-		tputs(tgetstr("ve", NULL), 1, ft_put_c);
-		write(1, str, ft_strlen(str));
+			tputs(tgetstr("ve", NULL), 1, ft_put_c);
+			write(1, str, ft_strlen(str));
 	}
 	else
 	{
@@ -64,42 +70,6 @@ char	*remove_char(char **str, int i)
 	}
 	ft_strdel(str);
 	return (res);
-}
-
-void	jump_left(t_all **all)
-{
-	int i;
-
-	i = (*all)->wind.pos_col - 1;
-	if (i == 1)
-		i = 0;
-	while ((*all)->last->cmd[i] && i > 0 &&
-				(is_space((*all)->last->cmd[i]) == 0))
-		i--;
-	while ((*all)->last->cmd[i] && i > 0 &&
-				(is_space((*all)->last->cmd[i]) == 1))
-		i--;
-	while ((*all)->last->cmd[i] && i > 0 &&
-				(is_space((*all)->last->cmd[i]) == 0))
-		i--;
-	(*all)->wind.pos_col = i + 1;
-}
-
-void	jump_right(t_all **all)
-{
-	int i;
-
-	i = (*all)->wind.pos_col - 1;
-	while ((*all)->last->cmd[i] && i < ft_strlen((*all)->last->cmd) &&
-				(is_space((*all)->last->cmd[i]) == 1))
-		i++;
-	while ((*all)->last->cmd[i] && i < ft_strlen((*all)->last->cmd) &&
-				(is_space((*all)->last->cmd[i]) == 0))
-		i++;
-	while ((*all)->last->cmd[i] && i < ft_strlen((*all)->last->cmd) &&
-				(is_space((*all)->last->cmd[i]) == 1))
-		i++;
-	(*all)->wind.pos_col = i;
 }
 
 int		check_key(long c, t_all *all, char **res)
@@ -148,13 +118,7 @@ char	*check_char(char *res, long c, t_all *all)
 	}
 	else
 		ft_strjoin_insert(&res, tmp, all->wind.pos_col);
-	if (all->wind.pos_col == all->wind.max_col)
-	{
-		all->wind.pos_line++;
-		all->wind.pos_col = 0;
-	}
-	else
-		all->wind.pos_col++;
+	all->wind.pos_col++;
 	return (res);
 }
 
@@ -198,10 +162,12 @@ int		*key_hook(t_all *all)
 
 	key = 0;
 	i = 0;
+	all->wind = init_wind();
 	ft_putcolor(BRED, all->prompt, RESET);
 	all->wind.pos_col = 0;
 	all->wind.srt_col = 0;
 	all->wind.srt_line = all->wind.pos_line;
+//	printf("line1 = %d\n", all->wind.srt_line);
 	while (all->last->next != NULL)
 		all->last = all->last->next;
 	if (all->last && all->last->cmd && all->last->cmd[0] != '\0')
@@ -226,7 +192,9 @@ int		*key_hook(t_all *all)
 		if (key == ALT_R)
 			jump_right(&all);
 		all->last->cmd = check_char(all->last->cmd, key, all);
-		display(all->last->cmd, all);
+//		printf("line1 = %d -- ", all->wind.srt_line);
+		display(all->last->cmd, all, &all->wind.srt_line);
+//		printf("line2 = %d --\n", all->wind.srt_line);
 		key = 0;
 	}
 	return (0);

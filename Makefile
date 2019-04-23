@@ -6,7 +6,7 @@
 #    By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2019/03/04 18:02:46 by mjalenqu     #+#   ##    ##    #+#        #
-#    Updated: 2019/04/17 15:23:42 by mjalenqu    ###    #+. /#+    ###.fr      #
+#    Updated: 2019/04/23 08:50:31 by mjalenqu    ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -24,10 +24,10 @@ SRC_NAME =	line_edit/main.c line_edit/init_term.c line_edit/key_hook.c line_edit
 OBJ_NAME = $(SRC_NAME:.c=.o)
 INC_NAME = shell.h
 
-INC = $(addprefix $(INC_PATH), $(INC_NAME))
-SRC = $(addprefix $(SRC_PATH), $(SRC_NAME))
-OBJ = $(addprefix $(OBJ_PATH), $(OBJ_NAME))
-FLAG += -Wall -Werror -Wextra -g3 -fsanitize=address
+INC = $(addprefix $(INC_PATH),$(INC_NAME))
+SRC = $(addprefix $(SRC_PATH),$(SRC_NAME))
+OBJ = $(addprefix $(OBJ_PATH),$(OBJ_NAME))
+FLAG += -Wall -Werror -Wextra -g3 #-fsanitize=address
 FLAG_END = -lcurses
 NORME = norminette
 
