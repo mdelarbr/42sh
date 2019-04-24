@@ -6,7 +6,7 @@
 /*   By: mdelarbr <mdelarbr@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/04/18 13:43:41 by mdelarbr     #+#   ##    ##    #+#       */
-/*   Updated: 2019/04/24 11:39:51 by mdelarbr    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/04/24 11:44:06 by mdelarbr    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -16,12 +16,12 @@
 
 /*
 ** completer t_job->t_process->cmd jusqu'a un token ou la fin de la str.
-** Si on trouve un token alors on remplie t_job->t_process->next. (le char **
-** est la parce que execve en prend un).
+** Si on trouve un token alors on remplie t_job->t_process->next. (le char ** est
+** la parce que execve en prend un).
 ** Faire un split de jobs si on rencontre ; ou &.
 ** On verrq les pid_t plus tard.
-** t_process->completed/stopped sont la pour savoir l'etat du process et meme
-** principe pour les jobs.
+** t_process->completed/stopped sont la pour savoir l'etat du process et meme principe 
+** pour les jobs.
 */
 
 int		start_exec(t_lexeur **res)
