@@ -6,13 +6,15 @@
 /*   By: mdelarbr <mdelarbr@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/04 15:45:25 by mjalenqu     #+#   ##    ##    #+#       */
-/*   Updated: 2019/04/16 16:41:38 by mdelarbr    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/04/24 11:36:08 by mdelarbr    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
-# include "../../includes/lexeur.h"
+#include "../../includes/lexeur.h"
+#include "../../includes/exec.h"
+#include "../../includes/check_error.h"
 
 void	print_history(t_all *all)
 {
@@ -67,32 +69,13 @@ void	add_res(char *res, t_all *all)
 	all->history = all->last;
 }
 
-int		main(int ac, char **av, char **env)
+int		main_line_edit(t_all *all)
 {
-	t_all		*all;
-
-	(void)ac;
-	(void)av;
-	all = NULL;
-	all = init_all(all, env);
-	if (check_term() == -1)
+	all->save = ft_strdup("");
+	tputs(tgetstr("ve", NULL), 1, ft_put_c);
+	key_hook(all);
+	if (all->last->cmd && ft_strcmp("exit", all->last->cmd) == 0)
 		return (0);
-	while (1)
-	{
-		all->save = ft_strdup("");
-		while (all->last->next)
-			all->last = all->last->next;
-		tputs(tgetstr("ve", NULL), 1, ft_put_c);
-		key_hook(all);
-		ft_putcolor("\n\033[0;32m", all->last->cmd, "\033[00m\n");
-		if (all->last->cmd && ft_strcmp(all->last->cmd, "hist") == 0)
-			print_history(all);
-		if (all->last->cmd && ft_strcmp("exit", all->last->cmd) == 0)
-			break ;
-		start_lex(all);
-		ft_strdel(&all->save);
-	}
 	ft_strdel(&all->save);
-	end_of_shell(all);
-	return (0);
+	return (1);
 }

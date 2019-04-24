@@ -6,7 +6,7 @@
 /*   By: mdelarbr <mdelarbr@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/22 13:50:20 by mdelarbr     #+#   ##    ##    #+#       */
-/*   Updated: 2019/04/17 13:09:51 by mdelarbr    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/04/18 14:12:30 by mdelarbr    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -63,7 +63,7 @@ typedef struct
 **┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 */
 
-int			start_lex(t_all *all);
+t_lexeur	**start_lex(t_all *all);
 int			find_token(char *buf, int i);
 int			cnt_wrd(char *buf);
 t_token     g_fill_token[10];

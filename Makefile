@@ -6,7 +6,11 @@
 #    By: mdelarbr <mdelarbr@student.le-101.fr>      +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2019/03/04 18:02:46 by mjalenqu     #+#   ##    ##    #+#        #
+<<<<<<< HEAD
 #    Updated: 2019/04/17 14:39:29 by mdelarbr    ###    #+. /#+    ###.fr      #
+=======
+#    Updated: 2019/04/24 11:43:38 by mdelarbr    ###    #+. /#+    ###.fr      #
+>>>>>>> mdelarbr
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -17,11 +21,13 @@ LIB_PATH = libft/libft.a
 SRC_PATH = ./src/
 OBJ_PATH = ./obj/
 INC_PATH = ./includes/
-SRC_NAME =	line_edit/main.c line_edit/init_term.c line_edit/key_hook.c line_edit/env.c line_edit/windows.c\
+SRC_NAME =	main/main.c \
+			line_edit/main.c line_edit/init_term.c line_edit/key_hook.c line_edit/env.c line_edit/windows.c\
 			line_edit/ft_error.c line_edit/history.c\
 			line_edit/arrow.c line_edit/other_key.c line_edit/ft_free.c lexeur/back_slash.c lexeur/error.c\
 			lexeur/fill_fd.c lexeur/lexeur.c lexeur/fill_lexeur.c lexeur/redirection.c \
-			replace/replace.c replace/env_replace.c replace/var_replace.c
+			replace/replace.c replace/env_replace.c replace/var_replace.c \
+			exec/exec.c
 OBJ_NAME = $(SRC_NAME:.c=.o)
 INC_NAME = shell.h
 
@@ -56,6 +62,8 @@ $(OBJ_PATH):
 	@mkdir -p obj/line_edit 2> /dev/null
 	@mkdir -p obj/lexeur 2> /dev/null
 	@mkdir -p obj/replace 2> /dev/null
+	@mkdir -p obj/exec 2> /dev/null
+	@mkdir -p obj/main 2> /dev/null
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c $(INC)
 	@gcc $(FLAG) -g -I $(INC) -o $@ -c $<

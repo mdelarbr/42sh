@@ -6,7 +6,7 @@
 /*   By: mdelarbr <mdelarbr@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/22 13:48:08 by mdelarbr     #+#   ##    ##    #+#       */
-/*   Updated: 2019/04/16 16:42:03 by mdelarbr    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/04/24 11:15:23 by mdelarbr    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -86,23 +86,14 @@ int			cnt_wrd(char *buf)
 	return (cnt);
 }
 
-int			start_lex(t_all *all)
+//TODO Make 'and "s
+
+t_lexeur	**start_lex(t_all *all)
 {
-	int			i;
-	int			j;
 	t_lexeur	**array;
 
 	array = NULL;
-	i = 0;
-	j = 0;
 	all->last->cmd = remove_env(all, all->last->cmd);
-	if ((check_error(all->last->cmd)) == -1)
-		return (-1);
 	array = fill_lex(all->last->cmd, array);
-	while (array[j])
-	{
-		printf("tab[%d].word: {%s}\ttab[%d].token: {%d}\ttab[%d].redirection: {%s}\tfd: %d\n", j, array[j]->word, j, array[j]->token, j, array[j]->redirection, array[j]->fd);
-		j++;
-	}
-	return (0);
+	return (array);
 }

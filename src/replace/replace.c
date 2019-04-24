@@ -6,7 +6,7 @@
 /*   By: mdelarbr <mdelarbr@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/04/15 17:27:56 by mdelarbr     #+#   ##    ##    #+#       */
-/*   Updated: 2019/04/17 13:56:56 by mdelarbr    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/04/18 14:20:01 by mdelarbr    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -82,11 +82,10 @@ char		*remove_env(t_all *all, char *str)
 
 	start = all->env;
 	array = ft_strsplit(str, ' '); // TODO FAIRE UN VRAI SPLIT AVEC \T ETC.
-	while (1)
+	while (1) // TODO faire en sorte qu'on ne peut pas faire de boucle infinie comme bash on ne peut pas replace 2 fois une var.
 		if (remove_env_while(&array, all) == 0)
 			break ;
 	ft_strdel(&str);
 	tmp = make_string(array);
-	dprintf(1, "tmp -> {%s}\n", tmp);
 	return (tmp);
 }
