@@ -6,7 +6,7 @@
 /*   By: mdelarbr <mdelarbr@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/04 15:55:39 by mjalenqu     #+#   ##    ##    #+#       */
-/*   Updated: 2019/04/18 14:20:04 by mdelarbr    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/04/24 11:36:09 by mdelarbr    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -218,4 +218,8 @@ void					free_env(t_env *var);
 
 
 void					do_the_enter(t_all **all);
+
+t_all					*init_all(t_all *all, char **env);
+int						main_line_edit(t_all *all);
+void					end_of_shell(t_all *all);
 #endif

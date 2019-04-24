@@ -6,7 +6,7 @@
 /*   By: mdelarbr <mdelarbr@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/22 13:48:08 by mdelarbr     #+#   ##    ##    #+#       */
-/*   Updated: 2019/04/18 14:17:12 by mdelarbr    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/04/24 11:15:23 by mdelarbr    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -94,8 +94,6 @@ t_lexeur	**start_lex(t_all *all)
 
 	array = NULL;
 	all->last->cmd = remove_env(all, all->last->cmd);
-	if ((check_error(all->last->cmd)) == -1)
-		return (NULL);
 	array = fill_lex(all->last->cmd, array);
 	return (array);
 }
