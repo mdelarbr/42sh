@@ -6,7 +6,7 @@
 /*   By: mdelarbr <mdelarbr@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/04/18 13:43:41 by mdelarbr     #+#   ##    ##    #+#       */
-/*   Updated: 2019/04/24 11:44:06 by mdelarbr    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/04/24 16:09:00 by mdelarbr    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -14,39 +14,110 @@
 #include "../../includes/exec.h"
 #include "../../includes/lexeur.h"
 
-/*
-** completer t_job->t_process->cmd jusqu'a un token ou la fin de la str.
-** Si on trouve un token alors on remplie t_job->t_process->next. (le char ** est
-** la parce que execve en prend un).
-** Faire un split de jobs si on rencontre ; ou &.
-** On verrq les pid_t plus tard.
-** t_process->completed/stopped sont la pour savoir l'etat du process et meme principe 
-** pour les jobs.
-*/
+int			cnt_res(t_lexeur **res, int i)
+{
+	int		nb;
 
-int		start_exec(t_lexeur **res)
+	nb = 0;
+	while (res[i] && res[i]->word)
+	{
+		i++;
+		nb++;
+	}
+	return (nb);
+}
+
+void		fill_process(t_job *j, t_lexeur **res, int *i)
+{
+	int		k;
+	int		tmp;
+
+	k = 0;
+	tmp = (*i);
+	j->p = malloc(sizeof(t_process));
+	j->p->cmd = malloc(sizeof(char*) * (cnt_res(res, tmp) + 1));
+	while (res[*i] && (res[*i]->token))
+	{
+		j->p->cmd[k] = ft_strdup(res[*i]->word);
+		k++;
+		(*i)++;
+	}
+	j->p->cmd[k] = NULL;
+	j->p->next = NULL;
+}
+
+void		print_job(t_job *j)
+{
+	int		job;
+	int		i;
+	int		process;
+
+	job = 0;
+	i = 0;
+	process = 0;
+	while (j)
+	{
+		printf("\nj[%d]->next: _%p_\tsplit: _%c_\n", job, j->next, j->split);
+		job++;
+		/*while (j->p)
+		{
+			printf("\np[%d]->next: _%p_\n", process, j->p->next);
+			process++;
+			while (j->p->cmd[i])
+			{
+				printf("\ncmd[%d]-> _%s_\n", i, j->p->cmd[i]);
+				i++;
+			}
+			j->p = j->p->next;
+		}*/
+		process = 0;
+		j = j->next;
+	}
+}
+
+void		init_job(t_job *j)
+{
+	j->split = '\0';
+	j->completed = '\0';
+	j->stopped = '\0';
+}
+
+void		fill_job(t_job *j, t_lexeur **res)
 {
 	int			i;
 	int			k;
-	t_job		*j;
+	t_job		*start;
 
-	j = malloc(sizeof(t_job));
-	j->p = malloc(sizeof(t_process));
+	start = j;
 	i = 0;
 	k = 0;
 	while (res[i])
 	{
-		printf("res[%d].word: {%s}\tres[%d].token: {%d}\tres[%d].redirection:{%s}\tfd: %d\n", i, res[i]->word, i, res[i]->token, i, res[i]->redirection, res[i]->fd);
-		if (res[i]->word)
+		if (res[i]->token == 1 || res[i]->token == 8)
 		{
-			j->p->cmd = malloc(sizeof(char*) * 2); //attention
-			j->p->cmd[k] = ft_strdup(res[i]->word);
-			printf("j->p->cmd[%d]: _%s_\n", k, j->p->cmd[k]);
-			k++;
+			if (res[i]->token == 1)
+				j->split = '&';
+			else
+				j->split = ';';
+			j->next = malloc(sizeof(t_job));
+			j = j->next;
+			init_job(j);
 		}
-		if (!res[i]->word)
-			k = 0;
-		i++;
+		if (res[i])
+			i++;
 	}
+	j->next = NULL;
+	j = start;
+}
+
+int			start_exec(t_lexeur **res)
+{
+	t_job		*j;
+
+	j = malloc(sizeof(t_job));
+	init_job(j);
+	fill_job(j, res);
+//	fill_process(j, res);
+	print_job(j);
 	return (0);
 }

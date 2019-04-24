@@ -6,7 +6,7 @@
 /*   By: mdelarbr <mdelarbr@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/22 13:50:20 by mdelarbr     #+#   ##    ##    #+#       */
-/*   Updated: 2019/04/18 14:12:30 by mdelarbr    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/04/24 16:06:56 by mdelarbr    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -26,7 +26,7 @@
 # define ENVIRONEMENT 0
 # define LOCAL 1
 
-typedef enum
+enum e_token
 {
 	T_AND,
 	T_EXEC_SIM,
@@ -40,21 +40,21 @@ typedef enum
 	T_SUB,
 	T_ARITHMETIC,
 	T_HISTORY
-}	e_token;
+};
 
-typedef struct
+typedef struct s_token
 {
   const char    *name;
   int           size;
-  e_token       token;
+  enum e_token	token;
 } t_token;
 
-typedef struct
+typedef struct s_lexeur
 {
-	char        *word;
-	e_token     token;
-	char        *redirection;
-	int			fd;
+	char        	*word;
+	enum e_token	token;
+	char        	*redirection;
+	int				fd;
 } t_lexeur;
 
 /*

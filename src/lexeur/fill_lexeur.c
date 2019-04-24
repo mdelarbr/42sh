@@ -6,7 +6,7 @@
 /*   By: mdelarbr <mdelarbr@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/27 11:29:05 by mdelarbr     #+#   ##    ##    #+#       */
-/*   Updated: 2019/04/15 18:22:33 by mdelarbr    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/04/24 16:08:02 by mdelarbr    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -19,7 +19,8 @@ void		jump_space(char *buf, int *i)
 		(*i)++;
 }
 
-void		fill_struct(t_lexeur *res, char *word, e_token token, char *red)
+void		fill_struct(t_lexeur *res, char *word, enum e_token token,
+char *red)
 {
 	if (word)
 		res->word = ft_strdup(word);

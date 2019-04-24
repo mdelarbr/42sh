@@ -3,10 +3,10 @@
 /*                                                              /             */
 /*   exec.h                                           .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: mateodelarbre <mateodelarbre@student.le    +:+   +:    +:    +:+     */
+/*   By: mdelarbr <mdelarbr@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/04/18 13:44:02 by mdelarbr     #+#   ##    ##    #+#       */
-/*   Updated: 2019/04/19 17:53:06 by mateodelarb ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/04/24 13:49:34 by mdelarbr    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -31,6 +31,7 @@ typedef struct			s_job
 	struct s_job		*next;
 	t_process			*p;
 	pid_t				*pgid;
+	char				split;
 	char				completed;
 	char				stopped;
 }						t_job;
