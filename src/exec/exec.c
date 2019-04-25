@@ -6,7 +6,7 @@
 /*   By: mdelarbr <mdelarbr@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/04/18 13:43:41 by mdelarbr     #+#   ##    ##    #+#       */
-/*   Updated: 2019/04/24 22:19:01 by mdelarbr    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/04/25 15:08:53 by mdelarbr    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -50,29 +50,38 @@ void		fill_process(t_job *j, t_lexeur **res)
 		while (res[i] && res[i]->word)
 		{
 			j->p->cmd[k] = ft_strdup(res[i]->word);
+			printf("\ncmd[%d]->_%s_\n", k, j->p->cmd[k]);
 			i++;
 			k++;
 		}
 		j->p->cmd[k] = NULL;
 		if (res[i] && (res[i]->token != 1 && res[i]->token != 8))
 		{
+			puts("\nnew: process");
 			j->p->next = malloc(sizeof(t_process));
 			j->p = j->p->next;
 			init_process(j->p);
 		}
-		else if (res[i])
+		else if (res[i] && j->next != NULL)
 		{
+			puts("\nnew: job");
 			j->p->next = NULL;
+			printf("diff1: -%p-\n", j->p);
 			j->p = start;
 			j = j->next;
 			j->p = malloc(sizeof(t_process));
+			start = j->p;
+			printf("diff2: -%p-\n", j->p);
 		}
 		else
+		{
+//			j->p = start;
+			puts("\nfini");
 			break ;
+		}
 		i++;
 	}
 	j->p->next = NULL;
-	j->p = start;
 }
 
 void		print_job(t_job *j)
@@ -84,12 +93,12 @@ void		print_job(t_job *j)
 
 	job = 0;
 	i = 0;
-	start = j->p;
 	process = 0;
 	while (j)
 	{
 		printf("\n---jobs---[%d]->next: _%p_\tsplit: _%c_\n", job, j->next, j->split);
 		job++;
+		start = j->p;
 		while (j->p)
 		{
 			printf("--process--[%d]->next: _%p_\n", process, j->p->next);
@@ -119,29 +128,29 @@ void		fill_job(t_job *j, t_lexeur **res)
 {
 	int			i;
 	int			k;
-//	t_job		*start;
 
-//	start = *j;
 	i = 0;
 	k = 0;
 	while (res[i])
 	{
 		if (res[i]->token == 1 || res[i]->token == 8)
 		{
-			puts("\nlaaaaaaaa");
 			if (res[i]->token == 1)
 				j->split = '&';
 			else
 				j->split = ';';
-			j->next = malloc(sizeof(t_job));
-			j = j->next;
-			init_job(j);
+			if (res[i + 1])
+			{
+				puts("\nmalloc");
+				j->next = malloc(sizeof(t_job));
+				j = j->next;
+				init_job(j);
+			}
 		}
 		if (res[i])
 			i++;
 	}
 	j->next = NULL;
-//	j = start;
 }
 
 int			start_exec(t_lexeur **res)
