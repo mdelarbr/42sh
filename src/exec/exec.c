@@ -6,77 +6,13 @@
 /*   By: mdelarbr <mdelarbr@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/04/18 13:43:41 by mdelarbr     #+#   ##    ##    #+#       */
-/*   Updated: 2019/04/25 16:18:05 by mdelarbr    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/04/26 17:25:52 by mdelarbr    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "../../includes/exec.h"
 #include "../../includes/lexeur.h"
-
-int			cnt_process(t_lexeur **res, int i)
-{
-	int		nb;
-
-	nb = 0;
-	while (res[i] && res[i]->word)
-	{
-		i++;
-		nb++;
-	}
-	return (nb);
-}
-
-void		init_process(t_process *p)
-{
-	p->completed = '\0';
-	p->stopped = '\0';
-}
-
-void		fill_process(t_job *j, t_lexeur **res)
-{
-	int			i;
-	int			k;
-	t_process	*start;
-
-	i = 0;
-	j->p = malloc(sizeof(t_process));
-	start = j->p;
-	init_process(j->p);
-	while (res[i])
-	{
-		k = 0;
-		j->p->cmd = malloc(sizeof(char *) * (cnt_process(res, i) + 1)); //TODO faire ensorte que les >> ou << etc ne suis pas pris comme des process.
-		while (res[i] && res[i]->word)
-		{
-			j->p->cmd[k] = ft_strdup(res[i]->word);
-			i++;
-			k++;
-		}
-		j->p->cmd[k] = NULL;
-		if (res[i] && (res[i]->token != 1 && res[i]->token != 8))
-		{
-			j->p->next = malloc(sizeof(t_process));
-			j->p = j->p->next;
-			init_process(j->p);
-		}
-		else if (res[i] && j->next != NULL)
-		{
-			j->p->next = NULL;
-			j->p = start;
-			j = j->next;
-			j->p = malloc(sizeof(t_process));
-			start = j->p;
-		}
-		else
-		{
-			j->p->next = NULL;
-			j->p = start;
-			break ;
-		}
-		i++;
-	}
-}
 
 void		print_job(t_job *j)
 {
@@ -109,6 +45,12 @@ void		print_job(t_job *j)
 		process = 0;
 		j = j->next;
 	}
+}
+
+void		init_process(t_process *p)
+{
+	p->completed = '\0';
+	p->stopped = '\0';
 }
 
 void		init_job(t_job *j)
