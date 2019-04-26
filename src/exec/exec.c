@@ -6,7 +6,7 @@
 /*   By: mdelarbr <mdelarbr@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/04/18 13:43:41 by mdelarbr     #+#   ##    ##    #+#       */
-/*   Updated: 2019/04/26 17:25:52 by mdelarbr    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/04/26 20:15:47 by mdelarbr    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -31,7 +31,7 @@ void		print_job(t_job *j)
 		start = j->p;
 		while (j->p)
 		{
-			printf("--process--[%d]->next: _%p_\n", process, j->p->next);
+			printf("--process--[%d]->next: _%p_\tsplit:_%c_\n", process, j->p->next, j->p->split);
 			process++;
 			while (j->p->cmd[i])
 			{
@@ -47,17 +47,10 @@ void		print_job(t_job *j)
 	}
 }
 
-void		init_process(t_process *p)
-{
-	p->completed = '\0';
-	p->stopped = '\0';
-}
-
 void		init_job(t_job *j)
 {
 	j->split = '\0';
-	j->completed = '\0';
-	j->stopped = '\0';
+	j->status = '\0';
 }
 
 void		fill_job(t_job *j, t_lexeur **res)

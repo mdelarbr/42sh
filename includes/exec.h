@@ -6,7 +6,7 @@
 /*   By: mdelarbr <mdelarbr@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/04/18 13:44:02 by mdelarbr     #+#   ##    ##    #+#       */
-/*   Updated: 2019/04/26 17:25:46 by mdelarbr    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/04/26 19:34:28 by mdelarbr    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -22,8 +22,8 @@ typedef	struct			s_process
 	struct s_process	*next;
 	char				**cmd;
 	pid_t				pid;
-	char				completed;
-	char				stopped;
+	char				status;
+	char				split;
 }						t_process;
 
 typedef struct			s_job
@@ -32,8 +32,7 @@ typedef struct			s_job
 	t_process			*p;
 	pid_t				*pgid;
 	char				split;
-	char				completed;
-	char				stopped;
+	char				status;
 }						t_job;
 
 /*
@@ -43,7 +42,6 @@ typedef struct			s_job
 */
 
 int		start_exec(t_lexeur **res);
-void	init_process(t_process *p);
 
 
 /*
