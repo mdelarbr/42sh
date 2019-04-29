@@ -6,7 +6,7 @@
 /*   By: mdelarbr <mdelarbr@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/04/18 13:43:41 by mdelarbr     #+#   ##    ##    #+#       */
-/*   Updated: 2019/04/27 13:11:45 by mdelarbr    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/04/29 11:27:30 by mdelarbr    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -31,7 +31,7 @@ void		print_job(t_job *j)
 		start = j->p;
 		while (j->p)
 		{
-			printf("--process--[%d]->next: _%p_\tsplit:_%c_\ttoken: |%c|\n", process, j->p->next, j->p->split, j->p->split);
+			printf("--process--[%d]->next: _%p_\tsplit:_%c_\ttoken: |%s|\n", process, j->p->next, j->p->split, j->p->token);
 			process++;
 			while (j->p->cmd[i])
 			{

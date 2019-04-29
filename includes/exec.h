@@ -6,7 +6,7 @@
 /*   By: mdelarbr <mdelarbr@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/04/18 13:44:02 by mdelarbr     #+#   ##    ##    #+#       */
-/*   Updated: 2019/04/27 13:01:53 by mdelarbr    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/04/29 11:24:25 by mdelarbr    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -24,7 +24,7 @@ typedef	struct			s_process
 	pid_t				pid;
 	char				status;
 	char				split;
-	char				token;
+	char				*token;
 }						t_process;
 
 typedef struct			s_job
