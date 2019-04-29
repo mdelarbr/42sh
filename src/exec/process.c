@@ -6,7 +6,7 @@
 /*   By: mdelarbr <mdelarbr@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/04/26 14:34:20 by mdelarbr     #+#   ##    ##    #+#       */
-/*   Updated: 2019/04/29 13:01:21 by mdelarbr    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/04/29 17:35:12 by mdelarbr    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -39,7 +39,7 @@ void		fill_cmd(t_lexeur **res, t_job **j, int *k, int *i)
 		(*j)->p->token = ft_strdup(ft_strjoin("<", res[*i]->redirection));
 	else
 	{
-		if (!(*j)->p->token)
+		if (!res[*i]->redirection)
 			(*j)->p->token = ft_strdup("");
 		(*j)->p->cmd[*k] = ft_strdup(res[*i]->word);
 		(*k)++;
