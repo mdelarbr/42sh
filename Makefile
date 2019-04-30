@@ -6,7 +6,7 @@
 #    By: shthevak <shthevak@student.42.fr>          +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2019/03/13 17:36:13 by shthevak     #+#   ##    ##    #+#        #
-#    Updated: 2019/03/28 17:00:36 by husahuc     ###    #+. /#+    ###.fr      #
+#    Updated: 2019/03/29 16:21:09 by husahuc     ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -49,7 +49,7 @@ EXEC_I_NAME = execute.h
 EXEC_S_NAME = execute.c ft_execute.c ft_is_exec_verbose.c \
 
 BUILTIN_I_NAME = builtin.h
-BUILTIN_S_NAME = ft_cd.c ft_echo.c list_env.c ft_test.c ft_exit.c
+BUILTIN_S_NAME = ft_cd.c ft_echo.c list_env.c ft_test.c ft_exit.c ft_type.c
 
 # **************************************************************************** #
 #  									VAR                                        #

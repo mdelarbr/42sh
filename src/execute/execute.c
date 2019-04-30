@@ -6,7 +6,7 @@
 /*   By: husahuc <husahuc@student.42.fr>            +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/23 14:31:05 by husahuc      #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/28 17:55:33 by husahuc     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/30 13:31:33 by husahuc     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -18,7 +18,8 @@ const t_builtin	g_builtin_list[LEN_BUILTIN_LIST] =
 	{"cd", &ft_cd},
 	{"echo", &ft_echo},
 	{"test", &ft_test},
-	{"exit", &ft_exit}
+	{"exit", &ft_exit},
+	{"type", &ft_type}
 };
 
 int		function_is_builtin(char **command, t_ft *global)
@@ -30,21 +31,10 @@ int		function_is_builtin(char **command, t_ft *global)
 	{
 		if (ft_strcmp(command[0], g_builtin_list[i].name) == 0)
 		{
-			(g_builtin_list[i].ptr_builtin(command, global));
+			g_builtin_list[i].ptr_builtin(command, global);
 			return (1);
 		}
 	}
-	/*if (ft_strcmp(command[0], "cd") == 0)
-		ft_cd(command, global);
-	else if (ft_strcmp(command[0], "echo") == 0)
-		ft_echo(command, global);
-	else if (ft_strcmp(command[0], "exit") == 0)
-		global->end_shell = 0;
-	else if (ft_strcmp(command[0], "test") == 0)
-		ft_test(command);
-	else
-		return (0);
-	else if (ft_strcmp(func_name, "test") == 0)*/
 	return (0);
 }
 
@@ -58,14 +48,15 @@ int		ft_execute(char *exec, char **opt, t_ft *global)
 		return (-1);
 	if (p == 0)
 	{
-		execve(exec, opt, get_env_tab(&global->env));
+		if (execve(exec, opt, get_env_tab(&global->env)) == -1)
+			return(-1);
 	}
 	else
 	{
 		wait(&w);
 		global->return_last = WEXITSTATUS(w);
 	}
-	exit(1);
+	return(1);
 }
 
 int		error_path_function(char *path)
@@ -79,7 +70,7 @@ int		error_path_function(char *path)
 	return (1);
 }
 
-int		function_path(char *path_function, char **command, t_ft *global)
+char		*function_path(char *path_function, char **command, t_ft *global)
 {
 	char		*buf;
 	char		*path;
@@ -88,20 +79,20 @@ int		function_path(char *path_function, char **command, t_ft *global)
 	path = ft_strjoin(path_function,
 		buf = ft_strjoin("/", command[0]));
 	free(buf);
-	if (error_path_function(path) == 1)
-		return (-1);
-	if ((f = ft_execute(path, command, global)) <= 0)
+	if (access(path, F_OK))
+		return (NULL);
+	else if (access(path, X_OK))
 	{
-		free(path);
-		return (f);
+		ft_putendl(RIGHTS);
+		return (NULL);
 	}
-	free(path);
-	return (1);
+	return (path);
 }
 
 int		ft_execute_bin(char **command, t_ft *global)
 {
 	char	**path_function;
+	char	*path_bin;
 	int		f;
 	int		i;
 
@@ -111,8 +102,12 @@ int		ft_execute_bin(char **command, t_ft *global)
 		i = -1;
 		while (path_function[++i] != NULL)
 		{
-			if (function_path(path_function[i], command, global) == 1)
-				return (1);
+			if ((path_bin = function_path(path_function[i], command, global)) != NULL)
+			{
+				printf("%s\n", path_bin);
+				if (ft_execute(path_bin, command, global) == 1)
+					return (1);
+			}
 		}
 	}
 	if ((f = ft_execute(command[0], command, global)) <= 0)

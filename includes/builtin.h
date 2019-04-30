@@ -6,7 +6,7 @@
 /*   By: husahuc <husahuc@student.42.fr>            +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/23 15:48:11 by husahuc      #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/28 17:56:04 by husahuc     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/29 16:29:38 by husahuc     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -55,16 +55,24 @@ int				ft_echo(char *argv[], t_ft *global);
 int				ft_exit(char **argv, t_ft *global);
 
 /*
+** ft_builtin.c
+*/
+
+int				ft_type(char **argv, t_ft *global);
+
+/*
 ** builtin_list
 */
 
-# define LEN_BUILTIN_LIST 4
+# define LEN_BUILTIN_LIST 5
 
 typedef struct	s_builtin
 {
 	const char	*name;
 	int			(*ptr_builtin)(char**, t_ft*);
 }				t_builtin;
+
+extern const t_builtin	g_builtin_list[LEN_BUILTIN_LIST];
 
 # define ARGUMENTS "cd: Too many arguments."
 # define CD_NO_HOME "cd: No HOME directory."
