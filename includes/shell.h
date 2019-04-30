@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   shell.h                                          .::    .:/ .      .::   */
+/*   termcaps.h                                          .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: mdelarbr <mdelarbr@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
@@ -30,7 +30,6 @@
 # include <sys/ioctl.h>
 # include "../libft/includes/ft_str.h"
 # include "../libft/includes/ft_int.h"
-# include "../libft/includes/ft_list.h"
 # include "../libft/includes/ft_unix.h"
 
 /*
@@ -86,14 +85,14 @@ typedef struct			s_env
 	char				*data;
 	int					type;
 	struct s_env		*next;
-}						t_env;
+}						t_var;
 
 typedef struct			s_all
 {
 	t_wind				wind;
 	t_history			*history;
 	t_history			*last;
-	t_env				*env;
+	t_var				*env;
 	t_select			*select;
 	t_count				count;
 	char				*save;
@@ -165,7 +164,7 @@ int						ft_put_c(int c);
 ***								env.c										***
 *******************************************************************************
 */
-t_env					*init_env(char **env);
+t_var					*init_env(char **env);
 char					*init_name(char *src);
 char					*init_data(char *src);
 
@@ -214,7 +213,7 @@ void					maj_pos(t_all *all);
 *******************************************************************************
 */
 void					free_all(t_all *all);
-void					free_env(t_env *var);
+void					free_env(t_var *var);
 
 
 void					do_the_enter(t_all **all);
