@@ -6,11 +6,7 @@
 #    By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2019/02/25 12:55:34 by shthevak     #+#   ##    ##    #+#        #
-<<<<<<< HEAD
-#    Updated: 2019/04/30 13:28:56 by mjalenqu    ###    #+. /#+    ###.fr      #
-=======
-#    Updated: 2019/04/17 14:57:54 by mjalenqu    ###    #+. /#+    ###.fr      #
->>>>>>> 981db7e95c7692eff7faa80a5d0fd8494a45ab2c
+#    Updated: 2019/04/30 18:17:03 by mjalenqu    ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -60,21 +56,14 @@ SSRC_NAME = ft_bzero.c ft_isalpha.c ft_isascii.c ft_itoa.c ft_itoa_base.c\
 			ft_strcpy.c ft_strdel.c ft_strdup.c ft_strequ.c ft_strjoin.c\
 			ft_strjoin_free.c ft_strjoin_insert.c ft_strlen.c ft_strnew.c\
 			ft_strstr.c ft_strsub.c ft_voidrev.c ft_voidswap.c ft_put_space.c\
-<<<<<<< HEAD
 			ft_strsplit.c ft_free_tab.c get_next_line.c ft_putcolor.c ft_putcolor2.c ft_isspace.c\
 			ft_strncpy.c ft_strjoinf.c ft_strchr.c ft_strcapitalizer.c ft_copy_part_str.c\
 			ft_swap_let_string.c ft_strrev.c
-=======
-			ft_strsplit.c ft_free_tab.c get_next_line.c ft_putcolor.c ft_putcolor2.c ft_ispsace.c
->>>>>>> 981db7e95c7692eff7faa80a5d0fd8494a45ab2c
 
 UINC_NAME = ft_unix.h
 USRC_NAME = ft_terminal_h.c ft_terminal_w.c ft_file_exists.c ft_create_file.c\
 			ft_execute.c ft_file_arights.c ft_file_rrights.c ft_file_wrights.c\
 			ft_file_xrights.c ft_is_exec.c
-
-
-
 
 IINC_NAME = ft_int.h
 ISRC_NAME = ft_atoi.c ft_int_len_base.c ft_isdigit.c ft_isxdigit.c ft_putnbr.c\
@@ -142,14 +131,7 @@ $(UOBJ_PATH)%.o: $(USRC_PATH)%.c $(UINC)
 $(IOBJ_PATH)%.o: $(ISRC_PATH)%.c $(IINC)
 	@gcc $(FLAGS) -I $(INC_PATH) -o $@ -c $<
 	@echo "$(LIGHT_RED).\c"
-	
-<<<<<<< HEAD
-=======
-$(LOBJ_PATH)%.o: $(LSRC_PATH)%.c $(LINC)
-	@gcc $(FLAGS) -I $(INC_PATH) -o $@ -c $<
-	@echo "$(LIGHT_RED).\c"
 
->>>>>>> 981db7e95c7692eff7faa80a5d0fd8494a45ab2c
 $(MOBJ_PATH)%.o: $(MSRC_PATH)%.c $(MINC)
 	@gcc $(FLAGS) -I $(INC_PATH) -o $@ -c $<
 	@echo "$(LIGHT_RED).\c"

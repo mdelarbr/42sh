@@ -6,11 +6,7 @@
 /*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/03 15:18:39 by shthevak     #+#   ##    ##    #+#       */
-<<<<<<< HEAD
-/*   Updated: 2019/04/29 13:01:40 by mjalenqu    ###    #+. /#+    ###.fr     */
-=======
-/*   Updated: 2019/04/16 12:56:22 by mjalenqu    ###    #+. /#+    ###.fr     */
->>>>>>> 981db7e95c7692eff7faa80a5d0fd8494a45ab2c
+/*   Updated: 2019/04/30 18:17:40 by mjalenqu    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -73,14 +69,10 @@ char				**ft_strsplit(const char *str, char c);
 void				ft_free_tab(char **tabe);
 int					get_next_line(int fd, char **line);
 void				*ft_memset(void *mem, int c, size_t l);
-<<<<<<< HEAD
 char				*ft_strjoinf(char *s1, char *s2, int mode);
 char				*ft_strchr(const char *s, int c);
 char				*ft_strcapitalizer(char *str);
 char				*ft_copy_part_str(char *str, int i, int usage);
 char				*ft_swap_let_string(char *str, int let1, int let2);
 char				*ft_strrev(char *str);
-=======
-int					is_space(char c);
->>>>>>> 981db7e95c7692eff7faa80a5d0fd8494a45ab2c
 #endif
