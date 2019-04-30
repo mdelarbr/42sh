@@ -6,7 +6,7 @@
 /*   By: vde-sain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/04/24 07:42:17 by vde-sain     #+#   ##    ##    #+#       */
-/*   Updated: 2019/04/26 14:58:37 by rlegendr    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/04/29 13:53:16 by vde-sain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -27,7 +27,6 @@ void		update_position(t_pos *pos, char *cmd)
 		pos->act_li -= 1;
 		prompt_is_on_last_char(pos);
 	}
-
 	//		if (pos->is_complete == 0 && (get_len_with_lines(pos) > pos->max_co || pos->act_co < pos->len_prompt))
 	//			pos->act_co += pos->len_prompt;
 	pos->let_nb = ft_strlen(pos->ans);
@@ -89,7 +88,8 @@ static t_hist		*go_back_in_history(t_hist *hist, t_pos *pos)
 		return (hist);
 	if (hist && hist->prev != NULL)
 		hist = hist->prev;
-	if (hist && hist->next != NULL && hist->next->cmd != NULL && pos->is_complete == 0 && pos->history_loop++ == 0)
+	if (hist && hist->next != NULL && hist->next->cmd != NULL &&
+			pos->is_complete == 0 && pos->history_loop++ == 0)
 		hist = hist->next;
 	if (pos->is_complete == 0)
 	{
@@ -108,20 +108,12 @@ static t_hist		*go_back_in_history(t_hist *hist, t_pos *pos)
 t_hist		*move_through_history(t_hist *hist, t_pos *pos, char *usage, char *buf)
 {
 	(void)buf;
-	if (pos->is_complete == 1 && pos->history_mode == 1 &&
-			ft_strcmp(usage, "up") == 0)
+	if (pos->history_mode == 1 && ft_strcmp(usage, "up") == 0)
 		hist = search_up_complete_in_history(hist, pos);
-	else if (pos->is_complete == 1 && pos->history_mode == 1 &&
-			ft_strcmp(usage, "down") == 0)
+	else if (pos->history_mode == 1 && ft_strcmp(usage, "down") == 0)
 		hist = search_down_complete_in_history(hist, pos);
-	/*	else if (pos->is_complete == 0 && pos->history_mode == 1 &&
-		ft_strcmp(usage, "up") == 0)
-		hist = search_up_incomplete_in_history(hist, pos);
-		else if (pos->is_complete == 0 && pos->history_mode == 1 &&
-		ft_strcmp(usage, "down") == 0)
-		hist = search_down_incomplete_in_history(hist, pos);
-		*/	else if (ft_strcmp(usage, "up") == 0 && hist && hist->prev)
-	hist = go_back_in_history(hist, pos);
+	else if (ft_strcmp(usage, "up") == 0 && hist && hist->prev)
+		hist = go_back_in_history(hist, pos);
 	else if (ft_strcmp(usage, "down") == 0 && hist && hist->next)
 		hist = go_back_down_in_history(hist, pos);
 	else if (ft_strcmp(usage, "down") == 0)

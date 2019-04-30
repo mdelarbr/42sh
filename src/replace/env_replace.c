@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   env_replpace.c                                   .::    .:/ .      .::   */
+/*   env_replace.c                                    .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: mdelarbr <mdelarbr@student.le-101.fr>      +:+   +:    +:    +:+     */
+/*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/04/16 17:41:43 by mdelarbr     #+#   ##    ##    #+#       */
-/*   Updated: 2019/04/16 17:43:05 by mdelarbr    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/04/30 12:37:14 by mjalenqu    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "../../includes/lexeur.h"
-#include "../../includes/shell.h"
+#include "../../includes/termcaps.h"
 
 char		*switch_word(char *str, char *tmp, int i)
 {
@@ -38,11 +38,11 @@ char		*switch_word(char *str, char *tmp, int i)
 	return (res);
 }
 
-char		*find_env_var(t_env *env, char *str, int i)
+char		*find_env_var(t_var *env, char *str, int i)
 {
 	int		s;
 	char	*tmp;
-	t_env	*start;
+	t_var	*start;
 
 	s = i + 1;
 	while (str[i] && ((str[i] < 9 && str[i] > 13) || str[i] != ' '))

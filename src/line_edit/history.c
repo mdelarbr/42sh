@@ -5,17 +5,17 @@
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2019/04/05 21:32:49 by rlegendr     #+#   ##    ##    #+#       */
-/*   Updated: 2019/04/29 11:17:50 by mjalenqu    ###    #+. /#+    ###.fr     */
+/*   Created: 2019/04/05 21:32:49 by mjalenqu     #+#   ##    ##    #+#       */
+/*   Updated: 2019/04/30 13:13:53 by mjalenqu    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "termcaps.h"
 
-void            free_t_hist(t_hist *hist)
+void		free_t_hist(t_hist *hist)
 {
-	t_hist *tmp;
+	t_hist	*tmp;
 
 	while (hist->next)
 		hist = hist->next;

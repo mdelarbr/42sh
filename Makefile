@@ -6,7 +6,7 @@
 #    By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2019/03/04 18:02:46 by mjalenqu     #+#   ##    ##    #+#        #
-#    Updated: 2019/04/29 11:05:38 by mjalenqu    ###    #+. /#+    ###.fr      #
+#    Updated: 2019/04/30 13:32:42 by mjalenqu    ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -17,18 +17,14 @@ LIB_PATH = libft/libft.a
 SRC_PATH = ./src/
 OBJ_PATH = ./obj/
 INC_PATH = ./includes/
-SRC_NAME =	main/main.c\
-			line_edit/calcul_line.c line_edit/check_input.c line_edit/escape_code.c line_edit/history.c line_edit/init_termcaps.c\
+SRC_NAME =	line_edit/calcul_line.c line_edit/check_input.c line_edit/escape_code.c line_edit/history.c line_edit/init_termcaps.c\
 			line_edit/input_is_entry.c line_edit/input_is_printable_char.c line_edit/jump.c line_edit/main_termcaps.c line_edit/move_through_history.c\
-			line_edit/search_in_history.c line_edit/termcaps_tools.c\
+			line_edit/search_in_history.c line_edit/env.c line_edit/input_is_remove_char.c line_edit/print_ans.c\
 			lexeur/back_slash.c lexeur/error.c\
 			lexeur/fill_fd.c lexeur/lexeur.c lexeur/fill_lexeur.c lexeur/redirection.c \
 			replace/replace.c replace/env_replace.c replace/var_replace.c \
-			exec/exec.c exec/process.c\
-			ft_printf/add_conversion.c ft_printf/add_flag2.c ft_printf/add_flags.c ft_printf/bonus_conversion_type_1.c\
-			ft_printf/bonus_conversion_type_2.c ft_printf/bonus_conversion_type_3.c ft_printf/conversion_type.c ft_printf/conversion_type2.c\
-			ft_printf/determ_data.c ft_printf/ft_printf.c ft_printf/handle_flags_order.c ft_printf/handle_float.c\
-			ft_printf/handle_prec_and_width.c ft_printf/others.c ft_printf/others2.c ft_printf/print_colors.c ft_printf/print_printf.c
+			exec/exec.c exec/process.c
+			
 OBJ_NAME = $(SRC_NAME:.c=.o)
 INC_NAME = termcaps.h
 

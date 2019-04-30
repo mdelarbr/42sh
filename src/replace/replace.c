@@ -3,20 +3,20 @@
 /*                                                              /             */
 /*   replace.c                                        .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: mdelarbr <mdelarbr@student.le-101.fr>      +:+   +:    +:    +:+     */
+/*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/04/15 17:27:56 by mdelarbr     #+#   ##    ##    #+#       */
-/*   Updated: 2019/04/18 14:20:01 by mdelarbr    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/04/30 13:00:29 by mjalenqu    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "../../includes/lexeur.h"
-#include "../../includes/shell.h"
+#include "../../includes/termcaps.h"
 
-char		*env_var(t_env *env, char *str)
+char		*env_var(t_var *env, char *str)
 {
-	t_env	*start;
+	t_var	*start;
 
 	start = env;
 	while (start)
@@ -49,7 +49,7 @@ char		*make_string(char **array)
 	return (res);
 }
 
-int			remove_env_while(char ***array, t_all *all)
+int			remove_env_while(char ***array, t_var *var)
 {
 	int		done;
 	int		i;
@@ -61,29 +61,27 @@ int			remove_env_while(char ***array, t_all *all)
 		if ((*array)[i][0] == '$')
 		{
 			done = 1;
-			(*array)[i] = env_var(all->env, ft_strsub((*array)[i], 1,
+			(*array)[i] = env_var(var, ft_strsub((*array)[i], 1,
 			ft_strlen((*array)[i])));
 		}
-		if (f_check_var_alias(all->env, (*array)[i]) == 1)
+		if (f_check_var_alias(var, (*array)[i]) == 1)
 		{
 			done = 1;
-			(*array)[i] = check_var_alias(all->env, (*array)[i]);
+			(*array)[i] = check_var_alias(var, (*array)[i]);
 		}
 		i++;
 	}
 	return (done);
 }
 
-char		*remove_env(t_all *all, char *str)
+char		*remove_env(t_var *start, char *str)
 {
-	t_env	*start;
 	char	**array;
 	char	*tmp;
 
-	start = all->env;
 	array = ft_strsplit(str, ' '); // TODO FAIRE UN VRAI SPLIT AVEC \T ETC.
 	while (1) // TODO faire en sorte qu'on ne peut pas faire de boucle infinie comme bash on ne peut pas replace 2 fois une var.
-		if (remove_env_while(&array, all) == 0)
+		if (remove_env_while(&array, start) == 0)
 			break ;
 	ft_strdel(&str);
 	tmp = make_string(array);
