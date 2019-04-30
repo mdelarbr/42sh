@@ -3,20 +3,20 @@
 /*                                                              /             */
 /*   var_replace.c                                    .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: mdelarbr <mdelarbr@student.le-101.fr>      +:+   +:    +:    +:+     */
+/*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/04/16 17:44:11 by mdelarbr     #+#   ##    ##    #+#       */
-/*   Updated: 2019/04/17 13:10:53 by mdelarbr    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/04/30 12:37:14 by mjalenqu    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "../../includes/lexeur.h"
-#include "../../includes/shell.h"
+#include "../../includes/termcaps.h"
 
-char		*check_var_alias(t_env *env, char *str)
+char		*check_var_alias(t_var *env, char *str)
 {
-	t_env	*start;
+	t_var	*start;
 	char	*tmp;
 
 	start = env;
@@ -34,9 +34,9 @@ char		*check_var_alias(t_env *env, char *str)
 	return (tmp);
 }
 
-int			f_check_var_alias(t_env *env, char *str)
+int			f_check_var_alias(t_var *env, char *str)
 {
-	t_env	*start;
+	t_var	*start;
 
 	start = env;
 	while (start)

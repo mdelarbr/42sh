@@ -3,10 +3,10 @@
 /*                                                              /             */
 /*   lexeur.h                                         .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: mdelarbr <mdelarbr@student.le-101.fr>      +:+   +:    +:    +:+     */
+/*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/22 13:50:20 by mdelarbr     #+#   ##    ##    #+#       */
-/*   Updated: 2019/04/18 14:12:30 by mdelarbr    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/04/30 13:24:06 by mjalenqu    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -15,10 +15,9 @@
 # define LEXEUR_H
 
 # include "../libft/includes/ft_int.h"
-# include "../libft/includes/ft_list.h"
 # include "../libft/includes/ft_unix.h"
 # include "../libft/includes/ft_str.h"
-# include "shell.h"
+# include "termcaps.h"
 # include <stdio.h>
 # include <unistd.h>
 # include <stdlib.h>
@@ -26,7 +25,7 @@
 # define ENVIRONEMENT 0
 # define LOCAL 1
 
-typedef enum
+enum e_token
 {
 	T_AND,
 	T_EXEC_SIM,
@@ -40,21 +39,23 @@ typedef enum
 	T_SUB,
 	T_ARITHMETIC,
 	T_HISTORY
-}	e_token;
+};
 
-typedef struct
+typedef struct s_var t_var;
+
+typedef struct s_token
 {
   const char    *name;
   int           size;
-  e_token       token;
+  enum e_token	token;
 } t_token;
 
-typedef struct
+typedef struct s_lexeur
 {
-	char        *word;
-	e_token     token;
-	char        *redirection;
-	int			fd;
+	char        	*word;
+	enum e_token	token;
+	char        	*redirection;
+	int				fd;
 } t_lexeur;
 
 /*
@@ -63,7 +64,7 @@ typedef struct
 **┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 */
 
-t_lexeur	**start_lex(t_all *all);
+t_lexeur	**start_lex(t_var *var, char *res);
 int			find_token(char *buf, int i);
 int			cnt_wrd(char *buf);
 t_token     g_fill_token[10];
@@ -111,7 +112,7 @@ t_lexeur	*find_fd(char *buf, int *i);
 **┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 */
 
-char		*remove_env(t_all *all, char *str);
+char		*remove_env(t_var *var, char *str);
 
 /*
 **┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -119,7 +120,7 @@ char		*remove_env(t_all *all, char *str);
 **┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 */
 
-char		*find_env_var(t_env *env, char *str, int i);
+char		*find_env_var(t_var *env, char *str, int i);
 char		*switch_word(char *str, char *tmp, int i);
 
 /*
@@ -128,7 +129,7 @@ char		*switch_word(char *str, char *tmp, int i);
 **┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 */
 
-void        check_var(t_env *env, char **str);
+void        check_var(t_var *env, char **str);
 
 /*
 **┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -136,7 +137,7 @@ void        check_var(t_env *env, char **str);
 **┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 */
 
-char		*check_var_alias(t_env *env, char *str);
-int			f_check_var_alias(t_env *env, char *str);
+char		*check_var_alias(t_var *env, char *str);
+int			f_check_var_alias(t_var *env, char *str);
 
 #endif
