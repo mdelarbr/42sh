@@ -95,5 +95,3 @@ tags
 # End of https://www.gitignore.io/api/c,vim,visualstudiocode
 
 \.vscode/settings\.json
-
-libft
