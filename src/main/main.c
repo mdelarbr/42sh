@@ -1,41 +1,47 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   main.c                                           .::    .:/ .      .::   */
+/*   main_termcaps.c                                  .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: mdelarbr <mdelarbr@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2019/04/24 11:17:48 by mdelarbr     #+#   ##    ##    #+#       */
-/*   Updated: 2019/04/24 11:37:07 by mdelarbr    ###    #+. /#+    ###.fr     */
+/*   Created: 2019/04/09 14:32:39 by mjalenqu     #+#   ##    ##    #+#       */
+/*   Updated: 2019/05/02 10:24:36 by mdelarbr    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "../../includes/shell.h"
-#include "../../includes/lexeur.h"
-#include "../../includes/exec.h"
-#include "../../includes/check_error.h"
+#include "termcaps.h"
 
-int		main(int ac, char **av, char **env)
+int			main(int ac, char **av, char **env)
 {
-	t_all		*all;
-
+	char	*ans;
+	t_hist	*hist;
+	t_var	*my_env;
+	t_pos	pos;
+	
 	(void)ac;
 	(void)av;
-	all = NULL;
-	all = init_all(all, env);
-	if (check_term() == -1)
-		return (0);
-	while (all->last->next)
-		all->last = all->last->next;
+	hist = (t_hist *)malloc(sizeof(t_hist));
+	init_t_hist(hist);
+	my_env = init_env(env);
+	pos.prompt = NULL;
+	pos.is_complete = 1;
+	hist = create_history(&pos, hist);
 	while (1)
 	{
-		if (main_line_edit(all) == 0)
+		ans = termcaps42sh("$ ", 0, &pos, hist);
+		if (ans == NULL)
 			break ;
-		if ((check_error(all->last->cmd)) != -1)
-			start_exec(start_lex(all));
-		ft_strdel(&all->save);
+		if (ft_strcmp("exit", ans) == 0)
+		{
+			free(pos.prompt);
+			close(pos.history);
+			free_t_hist(hist);
+			tcsetattr(2, TCSANOW, &(pos.old_term));
+			exit(0);
+		}
+		if ((check_error(ans)) != -1)
+			start_exec(start_lex(my_env, ans), my_env);
 	}
-	end_of_shell(all);
-	return (0);
 }

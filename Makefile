@@ -6,7 +6,7 @@
 #    By: mdelarbr <mdelarbr@student.le-101.fr>      +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2019/03/04 18:02:46 by mjalenqu     #+#   ##    ##    #+#        #
-#    Updated: 2019/04/30 11:30:44 by mdelarbr    ###    #+. /#+    ###.fr      #
+#    Updated: 2019/05/02 11:14:02 by mdelarbr    ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -17,15 +17,16 @@ LIB_PATH = libft/libft.a
 SRC_PATH = ./src/
 OBJ_PATH = ./obj/
 INC_PATH = ./includes/
-SRC_NAME =	main/main.c \
-			line_edit/main.c line_edit/init_term.c line_edit/key_hook.c line_edit/env.c line_edit/windows.c\
-			line_edit/ft_error.c line_edit/history.c\
-			line_edit/arrow.c line_edit/other_key.c line_edit/ft_free.c lexeur/back_slash.c lexeur/error.c\
+SRC_NAME =	main/main.c\
+			line_edit/calcul_line.c line_edit/check_input.c line_edit/escape_code.c line_edit/history.c line_edit/init_termcaps.c\
+			line_edit/input_is_entry.c line_edit/input_is_printable_char.c line_edit/jump.c line_edit/move_through_history.c\
+			line_edit/search_in_history.c line_edit/env.c line_edit/input_is_remove_char.c line_edit/print_ans.c\
+			lexeur/back_slash.c lexeur/error.c\
 			lexeur/fill_fd.c lexeur/lexeur.c lexeur/fill_lexeur.c lexeur/redirection.c \
 			replace/replace.c replace/env_replace.c replace/var_replace.c \
-			exec/exec.c exec/process.c exec/exec_main.c
+			exec/exec.c exec/process.c exec/exec_main.c exec/tools.c exec/builtins.c
 OBJ_NAME = $(SRC_NAME:.c=.o)
-INC_NAME = shell.h
+INC_NAME = termcaps.h
 
 INC = $(addprefix $(INC_PATH), $(INC_NAME))
 SRC = $(addprefix $(SRC_PATH), $(SRC_NAME))
@@ -38,6 +39,7 @@ BLUE=\033[0;38;5;123m
 DARK_BLUE = \033[0;38;5;110m
 GREEN = \033[0;32m
 LIGHT_GREEN = \033[1;38;5;121m
+LIGHT_YELLOW = \033[1;33;5;121m
 LIGHT_RED = \033[1;31;5;121m
 FLASH_GREEN = \033[33;32m
 YELLOW = \033[1;33m
@@ -60,9 +62,10 @@ $(OBJ_PATH):
 	@mkdir -p obj/replace 2> /dev/null
 	@mkdir -p obj/exec 2> /dev/null
 	@mkdir -p obj/main 2> /dev/null
+	@mkdir -p obj/ft_printf 2> /dev/null
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c $(INC)
-	@gcc $(FLAG) -g -I $(INC) -o $@ -c $<
+	@gcc $(FLAG) -g -I $(INC_PATH) -o $@ -c $<
 
 clean:
 	@make -C libft/ clean

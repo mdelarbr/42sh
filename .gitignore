@@ -91,9 +91,12 @@ tags
 .42_alias
 42sh
 21sh
+<<<<<<< HEAD
 
+.DS_Store
+=======
+.DS_Strore
+>>>>>>> 9d1674d75b6a54e84365c41fb7328f303a3c87dc
 # End of https://www.gitignore.io/api/c,vim,visualstudiocode
 
 \.vscode/settings\.json
-
-libft

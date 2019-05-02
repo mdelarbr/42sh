@@ -6,14 +6,14 @@
 /*   By: mdelarbr <mdelarbr@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/22 13:48:08 by mdelarbr     #+#   ##    ##    #+#       */
-/*   Updated: 2019/04/28 11:32:20 by mdelarbr    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/02 10:28:52 by mdelarbr    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "../../includes/lexeur.h"
 #include "../../includes/check_error.h"
-#include "../../includes/shell.h"
+#include "../../includes/termcaps.h"
 
 t_token g_fill_token[10] =
 {
@@ -88,12 +88,12 @@ int			cnt_wrd(char *buf)
 
 //TODO Make 'and "s
 
-t_lexeur	**start_lex(t_all *all)
+t_lexeur	**start_lex(t_var *var, char *res)
 {
 	t_lexeur	**array;
 
 	array = NULL;
-	all->last->cmd = remove_env(all, all->last->cmd);
-	array = fill_lex(all->last->cmd, array);
+	res = remove_env(var, res);
+	array = fill_lex(res, array);
 	return (array);
 }

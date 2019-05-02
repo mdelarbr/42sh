@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   shell.h                                          .::    .:/ .      .::   */
+/*   termcaps.h                                          .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: mdelarbr <mdelarbr@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
@@ -18,6 +18,7 @@
 ** includes **
 */
 
+# include <signal.h>
 # include <curses.h>
 # include <fcntl.h>
 # include <stdlib.h>
@@ -30,7 +31,6 @@
 # include <sys/ioctl.h>
 # include "../libft/includes/ft_str.h"
 # include "../libft/includes/ft_int.h"
-# include "../libft/includes/ft_list.h"
 # include "../libft/includes/ft_unix.h"
 
 /*
@@ -86,18 +86,19 @@ typedef struct			s_env
 	char				*data;
 	int					type;
 	struct s_env		*next;
-}						t_env;
+}						t_var;
 
 typedef struct			s_all
 {
 	t_wind				wind;
 	t_history			*history;
 	t_history			*last;
-	t_env				*env;
+	t_var				*env;
 	t_select			*select;
 	t_count				count;
 	char				*save;
 	char				*prompt;
+	int					index;
 }						t_all;
 /*
 ** color **
@@ -128,8 +129,6 @@ typedef struct			s_all
 # define BACK   127
 # define ENTER  10
 # define ESCAPE 27
-# define CTRLUP	2117425947
-# define CTRLDOWN	2117491483
 # define HOME	4741915
 # define END	4610843
 # define ALT_L    25115
@@ -165,7 +164,7 @@ int						ft_put_c(int c);
 ***								env.c										***
 *******************************************************************************
 */
-t_env					*init_env(char **env);
+t_var					*init_env(char **env);
 char					*init_name(char *src);
 char					*init_data(char *src);
 
@@ -214,7 +213,7 @@ void					maj_pos(t_all *all);
 *******************************************************************************
 */
 void					free_all(t_all *all);
-void					free_env(t_env *var);
+void					free_env(t_var *var);
 
 
 void					do_the_enter(t_all **all);

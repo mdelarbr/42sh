@@ -3,15 +3,15 @@
 /*                                                              /             */
 /*   env.c                                            .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: mdelarbr <mdelarbr@student.le-101.fr>      +:+   +:    +:    +:+     */
+/*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/08 10:53:46 by mjalenqu     #+#   ##    ##    #+#       */
-/*   Updated: 2019/04/17 13:41:06 by mdelarbr    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/04/30 19:38:01 by mjalenqu    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "../../includes/shell.h"
+#include "../../includes/termcaps.h"
 #include "../../includes/lexeur.h"
 
 char	*init_data(char *src)
@@ -43,27 +43,27 @@ char	*init_name(char *src)
 	return (dest);
 }
 
-t_env	*init_env(char **env)
+t_var	*init_env(char **env)
 {
-	t_env	*var;
-	t_env	*save;
+	t_var	*new;
+	t_var	*save;
 	int		i;
 
 	i = 0;
-	var = malloc(sizeof(t_env));
-	save = var;
+	new = malloc(sizeof(t_var));
+	save = new;
 	while (env[i])
 	{
-		var->name = init_name(env[i]);
-		var->data = init_data(env[i]);
-		var->type = ENVIRONEMENT;
+		new->name = init_name(env[i]);
+		new->data = init_data(env[i]);
+		new->type = ENVIRONEMENT;
 		i++;
 		if (env[i])
 		{
-			var->next = malloc(sizeof(t_env));
-			var = var->next;
+			new->next = malloc(sizeof(t_var));
+			new = new->next;
 		}
 	}
-	var->next = NULL;
+	new->next = NULL;
 	return (save);
 }

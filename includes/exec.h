@@ -6,7 +6,7 @@
 /*   By: mdelarbr <mdelarbr@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/04/18 13:44:02 by mdelarbr     #+#   ##    ##    #+#       */
-/*   Updated: 2019/04/30 12:05:54 by mdelarbr    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/02 11:07:58 by mdelarbr    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -15,7 +15,11 @@
 # define EXEC_H
 
 # include "lexeur.h"
+# include "termcaps.h"
 # include <unistd.h>
+
+typedef struct			s_lexeur t_lexeur;
+typedef struct			s_var t_var;
 
 typedef	struct			s_process
 {
@@ -60,4 +64,24 @@ void		fill_process(t_job *j, t_lexeur **res);
 */
 
 void		main_exec(t_job *j, t_var *var);
+int			solve_execve(char *path, char **arg, t_var *var);
+
+/*
+**┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+**┃                                 tools.c       	                           ┃
+**┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+*/
+
+char		*ft_join_env(char *s1, char const *s2);
+char		**split_env(t_var *var);
+char		*strjoin_path(char *s1, char *s2);
+int			use_execve_acces(char *tmp, char **res, t_var *l_var);
+
+/*
+**┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+**┃                                 tools.c       	                           ┃
+**┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+*/
+
+int			find_builtins(t_job *j);
 #endif

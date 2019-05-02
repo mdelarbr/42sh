@@ -6,7 +6,7 @@
 /*   By: mdelarbr <mdelarbr@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/04/18 13:43:41 by mdelarbr     #+#   ##    ##    #+#       */
-/*   Updated: 2019/04/30 12:05:14 by mdelarbr    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/02 11:08:02 by mdelarbr    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -89,7 +89,7 @@ int			start_exec(t_lexeur **res, t_var *var)
 	init_job(j);
 	fill_job(j, res);
 	fill_process(j, res);
-	print_job(j);
+	//print_job(j);
 	main_exec(j, var);
 	return (0);
 }

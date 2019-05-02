@@ -6,7 +6,7 @@
 /*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/04 17:27:12 by mjalenqu     #+#   ##    ##    #+#       */
-/*   Updated: 2019/04/15 11:01:41 by mjalenqu    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/04/17 09:53:55 by mjalenqu    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -16,7 +16,8 @@
 t_select	*init_term(t_all *all)
 {
 	all->select = malloc(sizeof(t_select));
-	if (tcgetattr(0, &(all->select->old_term)) == -1 || tcgetattr(0, &(all->select->my_term)) == -1)
+	if (tcgetattr(0, &(all->select->old_term)) == -1 ||
+						tcgetattr(0, &(all->select->my_term)) == -1)
 		return (NULL);
 	all->select->my_term.c_lflag &= ~(ICANON | ECHO);
 	all->select->my_term.c_cc[VMIN] = 1;
