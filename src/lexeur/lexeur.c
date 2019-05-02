@@ -6,13 +6,14 @@
 /*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/22 13:48:08 by mdelarbr     #+#   ##    ##    #+#       */
-/*   Updated: 2019/04/17 10:09:47 by mjalenqu    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/04/30 19:38:51 by mjalenqu    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "../../includes/lexeur.h"
 #include "../../includes/check_error.h"
+#include "../../includes/termcaps.h"
 
 t_token g_fill_token[10] =
 {
@@ -85,23 +86,14 @@ int			cnt_wrd(char *buf)
 	return (cnt);
 }
 
-int			start_lex(char *str)
-{
-	int			i;
-	int			j;
-	t_lexeur	**tab;
+//TODO Make 'and "s
 
-	tab = NULL;
-	i = 0;
-	j = 0;
-	if ((check_error(str)) == -1)
-		return (-1);
-	tab = fill_lex(str, tab);
-	while (tab[j])
-	{
-		printf("tab[%d].word: {%s}\ttab[%d].token: {%d}\ttab[%d].redirection: {%s}\tfd: %d\n", j, tab[j]->word, j, tab[j]->token, j, tab[j]->redirection, tab[j]->fd);
-		puts("-----------------------------------------------------------------------");
-		j++;
-	}
-	return (0);
+t_lexeur	**start_lex(t_var *var, char *res)
+{
+	t_lexeur	**array;
+
+	array = NULL;
+	res = remove_env(var, res);
+	array = fill_lex(res, array);
+	return (array);
 }

@@ -6,21 +6,13 @@
 /*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/08 10:53:46 by mjalenqu     #+#   ##    ##    #+#       */
-/*   Updated: 2019/04/17 10:17:25 by mjalenqu    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/04/30 19:38:01 by mjalenqu    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "../../includes/shell.h"
-
-void	print_env(t_env *var)
-{
-	while (var)
-	{
-		ft_putcolor2(var->name, "=", var->data, "\n");
-		var = var->next;
-	}
-}
+#include "../../includes/termcaps.h"
+#include "../../includes/lexeur.h"
 
 char	*init_data(char *src)
 {
@@ -51,26 +43,27 @@ char	*init_name(char *src)
 	return (dest);
 }
 
-t_env	*init_env(char **env)
+t_var	*init_env(char **env)
 {
-	t_env	*var;
-	t_env	*save;
+	t_var	*new;
+	t_var	*save;
 	int		i;
 
 	i = 0;
-	var = malloc(sizeof(t_env));
-	save = var;
+	new = malloc(sizeof(t_var));
+	save = new;
 	while (env[i])
 	{
-		var->name = init_name(env[i]);
-		var->data = init_data(env[i]);
+		new->name = init_name(env[i]);
+		new->data = init_data(env[i]);
+		new->type = ENVIRONEMENT;
 		i++;
 		if (env[i])
 		{
-			var->next = malloc(sizeof(t_env));
-			var = var->next;
+			new->next = malloc(sizeof(t_var));
+			new = new->next;
 		}
 	}
-	var->next = NULL;
+	new->next = NULL;
 	return (save);
 }

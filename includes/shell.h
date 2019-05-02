@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   shell.h                                          .::    .:/ .      .::   */
+/*   termcaps.h                                          .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
+/*   By: mdelarbr <mdelarbr@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/04 15:55:39 by mjalenqu     #+#   ##    ##    #+#       */
-/*   Updated: 2019/04/19 08:56:34 by mjalenqu    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/04/24 11:36:09 by mdelarbr    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -31,7 +31,6 @@
 # include <sys/ioctl.h>
 # include "../libft/includes/ft_str.h"
 # include "../libft/includes/ft_int.h"
-# include "../libft/includes/ft_list.h"
 # include "../libft/includes/ft_unix.h"
 
 /*
@@ -48,7 +47,7 @@ typedef struct			s_count
 	int					cursh;
 }						t_count;
 
-typedef struct 			s_command
+typedef struct			s_command
 {
 	char				*res;
 	struct s_command	*next;
@@ -87,14 +86,14 @@ typedef struct			s_env
 	char				*data;
 	int					type;
 	struct s_env		*next;
-}						t_env;
+}						t_var;
 
 typedef struct			s_all
 {
 	t_wind				wind;
 	t_history			*history;
 	t_history			*last;
-	t_env				*env;
+	t_var				*env;
 	t_select			*select;
 	t_count				count;
 	char				*save;
@@ -132,8 +131,8 @@ typedef struct			s_all
 # define ESCAPE 27
 # define HOME	4741915
 # define END	4610843
-# define ALT_L	25115
-# define ALT_R	26139
+# define ALT_L    25115
+# define ALT_R    26139
 
 # define HIST	".42_history"
 /*
@@ -165,7 +164,7 @@ int						ft_put_c(int c);
 ***								env.c										***
 *******************************************************************************
 */
-t_env					*init_env(char **env);
+t_var					*init_env(char **env);
 char					*init_name(char *src);
 char					*init_data(char *src);
 
@@ -206,12 +205,7 @@ void					do_tab(t_all *all);
 char					*remove_char(char **str, int i);
 t_history				*add_history(t_all *all);
 void					write_history(t_all *all);
-char					*check_char(char *res, long c, t_all *all);
-void					do_the_enter(t_all **all);
-int						check_quote(t_all *all);
-void					display(char *str, t_all *all, int *start);
-void					jump_left(t_all **all);
-void					jump_right(t_all **all);
+void					maj_pos(t_all *all);
 
 /*
 *******************************************************************************
@@ -219,5 +213,12 @@ void					jump_right(t_all **all);
 *******************************************************************************
 */
 void					free_all(t_all *all);
-void					free_env(t_env *var);
+void					free_env(t_var *var);
+
+
+void					do_the_enter(t_all **all);
+
+t_all					*init_all(t_all *all, char **env);
+int						main_line_edit(t_all *all);
+void					end_of_shell(t_all *all);
 #endif

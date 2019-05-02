@@ -5,144 +5,82 @@
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2019/03/22 12:59:36 by mjalenqu     #+#   ##    ##    #+#       */
-/*   Updated: 2019/04/18 14:04:57 by mjalenqu    ###    #+. /#+    ###.fr     */
+/*   Created: 2019/04/05 21:32:49 by mjalenqu     #+#   ##    ##    #+#       */
+/*   Updated: 2019/04/30 19:37:33 by mjalenqu    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "../../includes/shell.h"
+#include "termcaps.h"
 
-int			ft_file_wrights(char *path)
+void		free_t_hist(t_hist *hist)
 {
-	if (access(path, W_OK) != -1)
-		return (1);
-	return (0);
-}
+	t_hist	*tmp;
 
-int			ft_file_exists(char *path)
-{
-	if (access(path, F_OK) != -1)
-		return (1);
-	return (0);
-}
-
-int			ft_execute(char *exec, char **opt, char **env)
-{
-	int		w;
-	pid_t	p;
-
-	p = fork();
-	if (p == 0)
+	while (hist->next)
+		hist = hist->next;
+	while (hist)
 	{
-		if (execve(exec, opt, env) == -1)
-			return (0);
+		tmp = hist;
+		if (hist->cmd)
+			ft_strdel(&hist->cmd);
+		hist = hist->prev;
+		free(tmp);
 	}
-	else
-		wait(&w);
-	return (1);
 }
 
-int			ft_create_file(char *path)
+void		init_t_hist(t_hist *hist)
 {
-	char **s;
+	if (hist == NULL)
+		return ;
+	hist->cmd = NULL;
+	hist->next = NULL;
+	hist->prev = NULL;
+	hist->cmd_no = 0;
+}
 
-	s = malloc(sizeof(char *) * 3);
-	if (access(path, F_OK) != 0)
+t_hist		*add_list_back_hist(t_hist *hist)
+{
+	t_hist	*new;
+
+	new = NULL;
+	if (!(new = (t_hist*)malloc(sizeof(t_hist))))
+		return (NULL);
+	if (hist == NULL)
 	{
-		if (access("/usr/bin/touch", X_OK) == 0)
-		{
-			s[0] = ft_strdup("/usr/bin/touch");
-			s[1] = ft_strdup(path);
-			s[2] = NULL;
-			if (ft_execute("/usr/bin/touch", s, NULL))
-			{
-				ft_free_tab(s);
-				return (1);
-			}
-			ft_free_tab(s);
-			return (0);
-		}
-		ft_free_tab(s);
-		return (0);
+		init_t_hist(new);
+		return (new);
 	}
-	return (0);
-}
-
-t_history	*add_history(t_all *all)
-{
-	t_history	*new;
-
-	new = malloc(sizeof(t_history));
-	new->prev = all->last;
-	new->next = NULL;
-	new->cmd = ft_strdup("");
+	while (hist->next != NULL)
+		hist = hist->next;
+	init_t_hist(new);
+	hist->next = new;
+	new->prev = hist;
+	new->cmd_no = hist->cmd_no + 1;
 	return (new);
 }
 
-void		read_history(t_history **history)
+t_hist		*create_history(t_pos *pos, t_hist *hist)
 {
-	int			fd;
-	char		*str;
-	t_history	*prev;
-	t_history	*save;
+	char	*pwd;
+	int		ret;
+	char	*line;
 
-	str = NULL;
-	fd = open(HIST, O_RDONLY);
-	(*history) = malloc(sizeof(t_history));
-	save = (*history);
-	prev = (*history);
-	(*history)->next = NULL;
-	(*history)->prev = NULL;
-	(*history)->cmd = NULL;
-	while (get_next_line(fd, &str))
+	ret = 1;
+	line = NULL;
+	pwd = getcwd(NULL, 255);
+	pwd = ft_strjoinf(pwd, "/.history", 1);
+	pos->history = open(pwd, O_RDWR | O_APPEND | O_CREAT, 0666);
+	free(pwd);
+	while ((ret = get_next_line(pos->history, &line)))
 	{
-		prev = (*history);
-		if ((*history)->cmd != NULL)
+		if (ft_strlen(line) > 0)
 		{
-			(*history)->next = malloc(sizeof(t_history));
-			(*history) = (*history)->next;
-			(*history)->prev = prev;
+			hist->cmd = ft_strnew(0);
+			hist->cmd = ft_strjoinf(hist->cmd, line, 3);
+			hist = add_list_back_hist(hist);
 		}
-		(*history)->cmd = ft_strdup(str);
-		(*history)->len = ft_strlen(str);
-		ft_strdel(&str);
+		line = NULL;
 	}
-	ft_strdel(&str);
-	(*history)->next = NULL;
-	(*history) = save;
-}
-
-void		get_history(t_history **history)
-{
-	if (ft_file_exists(HIST))
-	{
-		if (ft_file_wrights(HIST))
-			read_history(history);
-		else
-			ft_error(2);
-	}
-	else
-	{
-		ft_create_file(HIST);
-	}
-}
-
-void		write_history(t_all *all)
-{
-	char		*str;
-	int			fd;
-
-	fd = open(HIST, O_WRONLY | O_TRUNC);
-	while (all->last->prev)
-		all->last = all->last->prev;
-	while (all->last)
-	{
-		str = ft_strjoin(all->last->cmd, "\n");
-		write(fd, str, ft_strlen(str));
-		all->last = all->last->next;
-		ft_strdel(&str);
-	}
-	close(fd);
-	fd = -1;
+	return (hist);
 }
