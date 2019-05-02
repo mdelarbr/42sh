@@ -6,7 +6,7 @@
 /*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/04/25 08:12:14 by mjalenqu     #+#   ##    ##    #+#       */
-/*   Updated: 2019/04/29 08:32:07 by mjalenqu    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/02 14:55:08 by mjalenqu    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -27,15 +27,8 @@ void		jump_left(t_pos *pos)
 	if (ft_isspace(pos->ans[pos->let_nb]) == 1)
 		while (pos->let_nb > 0 && ft_isspace(pos->ans[pos->let_nb]) == 1)
 		{
-			pos->debug2 = pos->ans[pos->let_nb];
-			pos->let_nb--;
-			/*if (pos->act_co > 0)
-				pos->act_co--;
-			else if (pos->act_co <= 0 && pos->act_li > pos->start_li)
-			{
-				pos->act_co = pos->max_co - 1;
-				pos->act_li--;
-			}*/
+			left_arrow(NULL, pos);
+			/*pos->let_nb--;
 			if (pos->act_co > 0)
 				pos->act_co--;
 			else
@@ -43,29 +36,33 @@ void		jump_left(t_pos *pos)
 				if (pos->act_co == 0 && pos->act_li > pos->start_li)
 				{
 					pos->act_li--;
-					if (pos->ans[pos->let_nb - 1] == '\n')
+					if (pos->ans[pos->let_nb] == '\n')
 						pos->act_co = len_of_previous_line(pos);
 					else
 						pos->act_co = pos->max_co - 1;
 				}
-			}
+			}*/
 		}
-	while (pos->let_nb > 0 && ft_isspace(pos->ans[pos->let_nb]) == 0)
+	while (pos->let_nb > 0 && ft_isspace(pos->ans[pos->let_nb - 1]) == 0)
 	{
-		if (ft_isspace(pos->ans[pos->let_nb - 1]) == 1)
+		left_arrow(NULL, pos);
+		/*if (ft_isspace(pos->ans[pos->let_nb - 1]) == 1)
 			break ;
 		pos->let_nb--;
 		if (pos->act_co > 0)
 			pos->act_co--;
-		else if (pos->act_co <= 0 && pos->act_li > pos->start_li)
+		else
 		{
-			pos->act_co = pos->max_co - 1;
-			pos->act_li--;
-		}
+			if (pos->act_co == 0 && pos->act_li > pos->start_li)
+				{
+					pos->act_li--;
+					if (pos->ans[pos->let_nb] == '\n')
+						pos->act_co = len_of_previous_line(pos);
+					else
+						pos->act_co = pos->max_co - 1;
+				}
+		}*/
 	}
-	pos->debug = pos->act_co;
-	pos->debug2 = pos->act_li;
-	pos->debug3 = pos->let_nb;
 	tputs(tgoto(tgetstr("cm", NULL), pos->act_co, pos->act_li), 1, ft_putchar);
 }
 

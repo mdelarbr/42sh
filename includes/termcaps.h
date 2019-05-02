@@ -6,7 +6,7 @@
 /*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/28 09:15:13 by mjalenqu     #+#   ##    ##    #+#       */
-/*   Updated: 2019/04/30 13:25:06 by mjalenqu    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/02 14:51:21 by mjalenqu    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -42,25 +42,6 @@
 # define BBLUE "\033[1;34m"
 # define BPURPLE "\033[1;35m"
 # define BCYAN "\033[1;36m"
-
-/*
-** key **
-*/
-# define UP     4283163
-# define DOWN   4348699
-# define LEFT   4479771
-# define RIGHT  4414235
-# define TAB    9
-# define DEL    2117294875
-# define BACK   127
-# define ENTER  10
-# define ESCAPE 27
-# define CTRLUP	2117425947
-# define CTRLDOWN	2117491483
-# define HOME	4741915
-# define END	4610843
-# define ALT_L    25115
-# define ALT_R    26139
 
 # define HIST	".42_history"
 
@@ -293,7 +274,7 @@ char					*remove_char(char **str, int i);
 //void					free_all(t_all *all);
 void					free_env(t_var *var);
 
-
+void					find_jump(char *buf, t_pos *pos);
 # include "lexeur.h"
 
 #endif
