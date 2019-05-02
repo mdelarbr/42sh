@@ -6,7 +6,7 @@
 /*   By: mdelarbr <mdelarbr@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/02 10:55:32 by mdelarbr     #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/02 11:02:44 by mdelarbr    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/02 18:11:00 by mdelarbr    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -91,4 +91,11 @@ int		use_execve_acces(char *tmp, char **res, t_var *l_var)
 		return (0);
 	}
 	return (1);
+}
+
+void	cnf_print_error(char *str)
+{
+	ft_putstr("42sh: \033[1;31mcommand not found\033[0m: ");
+	ft_putstr(str);
+	ft_putstr("\n");
 }

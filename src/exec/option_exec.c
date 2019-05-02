@@ -1,26 +1,36 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   builtins.c                                       .::    .:/ .      .::   */
+/*   option_exec.c                                    .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: mdelarbr <mdelarbr@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2019/05/02 11:06:30 by mdelarbr     #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/02 18:10:24 by mdelarbr    ###    #+. /#+    ###.fr     */
+/*   Created: 2019/05/02 15:35:45 by mdelarbr     #+#   ##    ##    #+#       */
+/*   Updated: 2019/05/02 18:10:18 by mdelarbr    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "../../includes/exec.h"
 
-/*
-** TODO faire en sorte qu'on puisse exec un builtins au milieu d'autres
-** comme ls.
-*/
-
-int		find_builtins(t_process *p)
+void	exec_and(t_process *first, t_process *second, t_var *var)
 {
-	if (ft_strcmp(p->cmd[0], "cd") == 0)
-		return (1);
-	return (0);
+	if (main_exec_while(first, var) == 0)
+		main_exec_while(second, var);
+	(*first) = (*second);
+}
+
+int		main_option_exec(t_process **first, t_process **second, t_var *var)
+{
+	if ((*first)->split == 'A')
+	{
+		exec_and((*first), (*second), var);
+		if ((*second) && ((*second)->next) && (*second)->split == 'A')
+			(*second)->next->split = 'A';
+	}
+	/*if (first->split == 'P')
+		exec_pipe(first, second, var);
+	if (first->split == '|')
+		exec_or();*/
+	return (1);
 }

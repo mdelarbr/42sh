@@ -6,7 +6,7 @@
 /*   By: mdelarbr <mdelarbr@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/04/18 13:43:41 by mdelarbr     #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/02 11:08:02 by mdelarbr    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/02 18:03:57 by mdelarbr    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -45,6 +45,7 @@ void		print_job(t_job *j)
 		process = 0;
 		j = j->next;
 	}
+	puts("");
 }
 
 void		init_job(t_job *j)

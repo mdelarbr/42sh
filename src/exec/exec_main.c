@@ -6,7 +6,7 @@
 /*   By: mdelarbr <mdelarbr@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/04/30 11:29:02 by mdelarbr     #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/02 11:10:31 by mdelarbr    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/02 18:08:40 by mdelarbr    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -41,15 +41,9 @@ int			use_execve(char **res, t_var *l_var)
 
 int			exec_path(char **res, t_var *var)
 {
-	int		ret;
-
-	ret = 0;
 	if (access(res[0], F_OK) == 0)
-	{
-		ret = 1;
-		solve_execve(res[0], res, var);
-	}
-	return (ret);
+		return (solve_execve(res[0], res, var));
+	return (-1);
 }
 
 int			solve_execve(char *path, char **arg, t_var *var)
@@ -69,19 +63,42 @@ int			solve_execve(char *path, char **arg, t_var *var)
 	return (1);
 }
 
-void		main_exec(t_job *j, t_var *var)
+int			main_exec_while(t_process *p, t_var *var)
 {
-	if (find_builtins(j) == 0)
+	if (find_builtins(p) == 0)
 	{
-		if (ft_strchr(j->p->cmd[0], '/') != 0)
+		if (ft_strchr(p->cmd[0], '/') != 0)
 		{
-			if (exec_path(j->p->cmd, var) == -1)
-				ft_putstr("command not found.\n");
+			if (exec_path(p->cmd, var) != 1)
+			{
+				cnf_print_error(p->cmd[0]);
+				return (-1);
+			}
 		}
 		else
 		{
-			if (use_execve(j->p->cmd, var) == -1)
-				ft_putstr("command not found.\n");
+			if (use_execve(p->cmd, var) == -1)
+			{
+				cnf_print_error(p->cmd[0]);
+				return (-1);
+			}
 		}
+	}
+	return (0);
+}
+
+void		main_exec(t_job *j, t_var *var)
+{
+	while (j)
+	{
+		while (j->p)
+		{
+			if (j->p->next && j->p->split == 'A')
+				main_option_exec((&j->p), (&j->p->next), var);
+			else if (main_exec_while(j->p, var) == -1)
+				return ;
+			j->p = j->p->next;
+		}
+		j = j->next;
 	}
 }
