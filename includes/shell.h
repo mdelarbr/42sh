@@ -18,6 +18,7 @@
 ** includes **
 */
 
+# include <signal.h>
 # include <curses.h>
 # include <fcntl.h>
 # include <stdlib.h>
@@ -97,6 +98,7 @@ typedef struct			s_all
 	t_count				count;
 	char				*save;
 	char				*prompt;
+	int					index;
 }						t_all;
 /*
 ** color **
@@ -127,8 +129,6 @@ typedef struct			s_all
 # define BACK   127
 # define ENTER  10
 # define ESCAPE 27
-# define CTRLUP	2117425947
-# define CTRLDOWN	2117491483
 # define HOME	4741915
 # define END	4610843
 # define ALT_L    25115

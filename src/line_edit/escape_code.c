@@ -3,10 +3,10 @@
 /*                                                              /             */
 /*   escape_code.c                                    .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: vde-sain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
+/*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/04/23 15:05:59 by vde-sain     #+#   ##    ##    #+#       */
-/*   Updated: 2019/04/29 14:35:45 by vde-sain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/02 07:29:34 by mjalenqu    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -51,6 +51,8 @@ void		left_arrow(char *buf, t_pos *pos)
 
 t_hist		*escape_code(char *buf, t_pos *pos, t_hist *hist)
 {
+	if ((buf && buf[1] == 27) || ft_strncmp(buf + 1, "[F", 2) == 0 || ft_strncmp(buf + 1, "[H", 2) == 0)
+		find_jump(buf, pos);
 	if (ft_strncmp(buf + 1, "[A", 2) == 0)
 		hist = move_through_history(hist, pos, "up", buf);
 	else if (ft_strncmp(buf + 1, "[B", 2) == 0)

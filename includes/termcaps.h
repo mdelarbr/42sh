@@ -3,10 +3,10 @@
 /*                                                              /             */
 /*   termcaps.h                                       .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
+/*   By: mdelarbr <mdelarbr@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/28 09:15:13 by mjalenqu     #+#   ##    ##    #+#       */
-/*   Updated: 2019/04/30 13:25:06 by mjalenqu    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/02 10:27:04 by mdelarbr    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -14,7 +14,6 @@
 #ifndef TERMCAPS_H
 # define TERMCAPS_H
 
-// # include "ft_printf.h"
 # include "../libft/includes/ft_str.h"
 # include "../libft/includes/ft_int.h"
 # include "../libft/includes/ft_unix.h"
@@ -293,6 +292,7 @@ char					*remove_char(char **str, int i);
 //void					free_all(t_all *all);
 void					free_env(t_var *var);
 
+void					find_jump(char *buf, t_pos *pos);
 
 # include "lexeur.h"
 
