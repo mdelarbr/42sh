@@ -3,10 +3,10 @@
 #                                                               /              #
 #    Makefile                                         .::    .:/ .      .::    #
 #                                                  +:+:+   +:    +:  +:+:+     #
-#    By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+      #
+#    By: mdelarbr <mdelarbr@student.le-101.fr>      +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2019/03/04 18:02:46 by mjalenqu     #+#   ##    ##    #+#        #
-#    Updated: 2019/04/30 18:05:10 by mjalenqu    ###    #+. /#+    ###.fr      #
+#    Updated: 2019/05/02 11:24:30 by mdelarbr    ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -17,14 +17,14 @@ LIB_PATH = libft/libft.a
 SRC_PATH = ./src/
 OBJ_PATH = ./obj/
 INC_PATH = ./includes/
-SRC_NAME =	line_edit/calcul_line.c line_edit/check_input.c line_edit/escape_code.c line_edit/history.c line_edit/init_termcaps.c\
-			line_edit/input_is_entry.c line_edit/input_is_printable_char.c line_edit/jump.c line_edit/main_termcaps.c line_edit/move_through_history.c\
+SRC_NAME =	main/main.c\
+			line_edit/calcul_line.c line_edit/check_input.c line_edit/escape_code.c line_edit/history.c line_edit/init_termcaps.c\
+			line_edit/input_is_entry.c line_edit/input_is_printable_char.c line_edit/jump.c line_edit/move_through_history.c\
 			line_edit/search_in_history.c line_edit/env.c line_edit/input_is_remove_char.c line_edit/print_ans.c\
 			lexeur/back_slash.c lexeur/error.c\
 			lexeur/fill_fd.c lexeur/lexeur.c lexeur/fill_lexeur.c lexeur/redirection.c \
 			replace/replace.c replace/env_replace.c replace/var_replace.c \
-			exec/exec.c exec/process.c
-			
+			exec/exec.c exec/process.c exec/exec_main.c exec/tools.c exec/builtins.c
 OBJ_NAME = $(SRC_NAME:.c=.o)
 INC_NAME = termcaps.h
 
@@ -39,6 +39,7 @@ BLUE=\033[0;38;5;123m
 DARK_BLUE = \033[0;38;5;110m
 GREEN = \033[0;32m
 LIGHT_GREEN = \033[1;38;5;121m
+LIGHT_YELLOW = \033[1;33;5;121m
 LIGHT_RED = \033[1;31;5;121m
 FLASH_GREEN = \033[33;32m
 YELLOW = \033[1;33m

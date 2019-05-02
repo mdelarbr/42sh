@@ -1,32 +1,26 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   ft_strncpy.c                                     .::    .:/ .      .::   */
+/*   builtins.c                                       .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
+/*   By: mdelarbr <mdelarbr@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2018/10/08 13:02:32 by mjalenqu     #+#   ##    ##    #+#       */
-/*   Updated: 2019/04/30 19:41:52 by mjalenqu    ###    #+. /#+    ###.fr     */
+/*   Created: 2019/05/02 11:06:30 by mdelarbr     #+#   ##    ##    #+#       */
+/*   Updated: 2019/05/02 11:12:35 by mdelarbr    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "ft_str.h"
+#include "../../includes/exec.h"
 
-char			*ft_strncpy(char *dst, const char *src, size_t len)
+/*
+** TODO faire en sorte qu'on puisse exec un builtins au milieu d'autres
+** comme ls.
+*/
+
+int		find_builtins(t_job *j)
 {
-	size_t i;
-
-	i = 0;
-	while (src[i] && i < len)
-	{
-		dst[i] = src[i];
-		i++;
-	}
-	while (i < len && dst[i])
-	{
-		dst[i] = '\0';
-		i++;
-	}
-	return (dst);
+	if (ft_strcmp(j->p->cmd[0], "cd") == 0)
+		return (1);
+	return (0);
 }

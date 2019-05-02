@@ -3,10 +3,10 @@
 #                                                               /              #
 #    Makefile                                         .::    .:/ .      .::    #
 #                                                  +:+:+   +:    +:  +:+:+     #
-#    By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+      #
+#    By: mdelarbr <mdelarbr@student.le-101.fr>      +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2019/02/25 12:55:34 by shthevak     #+#   ##    ##    #+#        #
-#    Updated: 2019/04/30 18:17:03 by mjalenqu    ###    #+. /#+    ###.fr      #
+#    Updated: 2019/05/02 11:11:50 by mdelarbr    ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -111,7 +111,6 @@ all : $(OBJ_PATH) $(NAME)
 
 $(NAME): $(SOBJ) $(UOBJ) $(IOBJ) $(LOBJ) $(MOBJ)
 	@ar rcs $(NAME) $(SOBJ) $(UOBJ) $(IOBJ) $(LOBJ) $(MOBJ)
-	@echo "\n\033[0m"
 
 $(OBJ_PATH):
 	@mkdir -p $(OBJ_PATH) 2> /dev/null
@@ -122,19 +121,15 @@ $(OBJ_PATH):
 
 $(SOBJ_PATH)%.o: $(SSRC_PATH)%.c $(SINC)
 	@gcc $(FLAGS) -I $(INC_PATH) -o $@ -c $<
-	@echo "$(LIGHT_RED).\c"
 
 $(UOBJ_PATH)%.o: $(USRC_PATH)%.c $(UINC)
 	@gcc $(FLAGS) -I $(INC_PATH) -o $@ -c $<
-	@echo "$(LIGHT_RED).\c"
 
 $(IOBJ_PATH)%.o: $(ISRC_PATH)%.c $(IINC)
 	@gcc $(FLAGS) -I $(INC_PATH) -o $@ -c $<
-	@echo "$(LIGHT_RED).\c"
 
 $(MOBJ_PATH)%.o: $(MSRC_PATH)%.c $(MINC)
 	@gcc $(FLAGS) -I $(INC_PATH) -o $@ -c $<
-	@echo "$(LIGHT_RED).\c"
 
 clean: 
 	@rm -rf $(OBJ_PATH)
