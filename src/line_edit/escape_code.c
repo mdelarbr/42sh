@@ -6,7 +6,7 @@
 /*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/04/23 15:05:59 by vde-sain     #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/02 07:29:34 by mjalenqu    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/02 15:21:14 by mjalenqu    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -32,7 +32,7 @@ void		left_arrow(char *buf, t_pos *pos)
 	if (pos->act_co == 0 && pos->act_li == 0)
 		return ;
 	(void)buf;
-	if (pos->act_co == 0 && pos->act_li > pos->start_li)
+	if (pos->act_co <= 0 && pos->act_li > pos->start_li)
 	{
 		pos->act_li--;
 		if (pos->ans[pos->let_nb - 1] == '\n')

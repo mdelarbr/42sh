@@ -6,7 +6,7 @@
 /*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/04/04 11:44:25 by mjalenqu     #+#   ##    ##    #+#       */
-/*   Updated: 2019/04/30 13:48:07 by mjalenqu    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/02 15:15:45 by mjalenqu    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -148,7 +148,7 @@ char	*termcaps42sh(char *prompt, int error, t_pos *pos, t_hist *hist)
 		exit(0);
 	ret2 = init_pos(pos, buf);
 	ft_bzero(buf, 8);
-//	print_info(pos);
+	print_info(pos);
 //	print_hist(pos, hist);
 //	ft_printf("{B.T.white.}%s{eoc}", pos->prompt);
 	ft_putcolor(BYELLOW, pos->prompt, RESET);
@@ -156,7 +156,7 @@ char	*termcaps42sh(char *prompt, int error, t_pos *pos, t_hist *hist)
 	{
 		ret2 = read(0, buf, 4);
 		hist = check_input(buf, pos, hist);
-//		print_info(pos);
+		print_info(pos);
 //		print_hist(pos, hist);
 		if (buf[0] == 10 && pos->is_complete == 1)
 		{
