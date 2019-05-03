@@ -6,7 +6,7 @@
 /*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/04/25 08:12:14 by mjalenqu     #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/03 08:27:14 by mjalenqu    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/03 09:39:44 by mjalenqu    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -83,22 +83,60 @@ void		jump_right(t_pos *pos)
 
 void		go_hard(t_pos *pos)
 {
-	while (pos->ans[pos->let_nb] && pos->ans[pos->let_nb] != '\n')
+	if (pos->is_complete == 0)
 	{
-		pos->let_nb++;
-		if (pos->act_co == pos->max_co - 1)
+		while (pos->ans[pos->let_nb] && pos->ans[pos->let_nb] != '\n')
 		{
-			pos->act_co = 0;
-			pos->act_li++;
+			pos->let_nb++;
+			if (pos->act_co == pos->max_co - 1)
+			{
+				pos->act_co = 0;
+				pos->act_li++;
+			}
+			else
+				pos->act_co++;
 		}
-		else
-			pos->act_co++;
+	}
+	else
+	{
+		while (pos->ans[pos->let_nb] != '\0')
+		{
+			if (pos->ans[pos->let_nb + 1] == '\n')
+			{
+				pos->act_co = 0;
+				pos->act_li++;
+			}
+			else
+				pos->act_co++;
+			pos->let_nb++;
+		}
 	}
 	tputs(tgoto(tgetstr("cm", NULL), pos->act_co, pos->act_li), 1, ft_putchar);
 }
 
 void		or_go_home(t_pos *pos)
 {
+	if (pos->is_complete == 0)
+	{
+		while (pos->let_nb > 0 && (pos->ans[pos->let_nb - 1] != '\n'))
+		{
+			pos->let_nb--;
+			if (pos->act_co == 0)
+			{ 
+				pos->act_co = pos->max_co - 1;
+				pos->act_li--;
+			}
+			else
+				pos->act_co--;
+		}	
+	}
+	else
+	{
+		pos->act_co = pos->start_co;
+		pos->act_li = pos->start_li;
+		pos->let_nb = 0;
+	}
+	
 	while (pos->let_nb > 0 && (pos->ans[pos->let_nb - 1] != '\n'))
 	{
 		pos->let_nb--;
