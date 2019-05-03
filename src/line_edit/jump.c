@@ -6,7 +6,7 @@
 /*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/04/25 08:12:14 by mjalenqu     #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/03 09:39:44 by mjalenqu    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/03 10:00:04 by mjalenqu    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -151,17 +151,41 @@ void		or_go_home(t_pos *pos)
 	tputs(tgoto(tgetstr("cm", NULL), pos->act_co, pos->act_li), 1, ft_putchar);
 }
 
+int			nb_line(t_pos *pos)
+{
+	int i;
+	int line;
+
+	i = 0;
+	line = 1;
+	while (pos->ans[i])
+	{
+		if (pos->ans[i] == '\n')
+			line++;
+		i++;
+	}
+	return (line);
+}
+
 void		jump_UP(t_pos *pos)
 {
-	if (pos->is_complete == 0)
+	if (pos->is_complete == 0 || pos->act_li == pos->start_li)
 		return ;
+	if (pos->act_li > pos->start_li && pos->is_complete == 1)
+	{
+		pos->act_li--;
+	}
 }
 
 void		jump_DOWN(t_pos *pos)
 {
-	if (pos->is_complete == 0)
+	int line;
+
+	line = nb_line(pos);
+	if (pos->is_complete == 0 || line == 1)
 		return ;
-	
+	if (line > 1 && pos->act_li < pos->start_li + line - 1)
+		pos->act_li++;	
 }
 
 void		find_jump(char *buf, t_pos *pos)
