@@ -6,7 +6,7 @@
 /*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/28 09:15:13 by mjalenqu     #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/02 15:12:09 by mjalenqu    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/06 13:12:39 by mjalenqu    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -85,11 +85,13 @@ typedef struct		s_pos
 	int				history_loop;
 	char			*prompt;
 	int				len_prompt;
-	int				debug;
+	int				start_select;
+	char			debug;
 	int				debug2;
 	int				debug3;
 	int				debug4;
 	int				debug5;
+	char			*toto;
 	struct termios	old_term;
 	struct termios	my_term;
 }					t_pos;
@@ -175,8 +177,8 @@ void				input_is_printable_char(t_pos *pos, char *buf);
 */
 
 t_hist				*escape_code(char *buf, t_pos *pos, t_hist *hist);
-void				left_arrow(char *buf, t_pos *pos);
-void				right_arrow(char *buf, t_pos *pos);
+void				left_arrow(t_pos *pos);
+void				right_arrow(t_pos *pos);
 int					len_of_previous_line(t_pos *pos);
 
 /*
@@ -294,6 +296,8 @@ char					*remove_char(char **str, int i);
 void					free_env(t_var *var);
 
 void					find_jump(char *buf, t_pos *pos);
+void					selected(t_pos *pos, char *buf);
+int						is_select(char *buf);
 
 # include "lexeur.h"
 

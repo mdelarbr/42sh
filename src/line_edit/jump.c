@@ -6,7 +6,7 @@
 /*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/04/25 08:12:14 by mjalenqu     #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/03 10:00:04 by mjalenqu    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/06 08:35:57 by mjalenqu    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -58,7 +58,7 @@ void		jump_left(t_pos *pos)
 	}
 	if (ft_isspace(pos->ans[pos->let_nb]) == 1)
 		while (pos->let_nb > 0 && ft_isspace(pos->ans[pos->let_nb]) == 1)
-			left_arrow(NULL, pos);
+			left_arrow(pos);
 	while (pos->let_nb > 0 && ft_isspace(pos->ans[pos->let_nb - 1]) == 0)
 		pos->let_nb -= 1;
 	int len = go_to_let_nb(pos);
@@ -75,10 +75,10 @@ void		jump_right(t_pos *pos)
 	if (pos->ans[pos->let_nb] && ft_isspace(pos->ans[pos->let_nb]) == 0)
 	{
 		while (pos->ans[pos->let_nb] && ft_isspace(pos->ans[pos->let_nb]) == 0)
-			right_arrow(NULL, pos);
+			right_arrow(pos);
 	}
 	while (pos->ans[pos->let_nb] && ft_isspace(pos->ans[pos->let_nb]) == 1)
-		right_arrow(NULL, pos);
+		right_arrow(pos);
 }
 
 void		go_hard(t_pos *pos)

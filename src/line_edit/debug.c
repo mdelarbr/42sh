@@ -61,9 +61,9 @@ void	print_info(t_pos *pos)
 		tputs(tgoto(tgetstr("cm", NULL), pos->max_co - 17, 13), 1, ft_putchar);
 		printf("  histloop  = %03d/ \n", pos->history_loop);
 		tputs(tgoto(tgetstr("cm", NULL), pos->max_co - 17, 14), 1, ft_putchar);
-		printf("  debug     = %03d/ \n", pos->debug);
+		printf("  toto     = %s/ \n", pos->toto);
 		tputs(tgoto(tgetstr("cm", NULL), pos->max_co - 17, 15), 1, ft_putchar);
-		printf("  debug2    = %03d/ \n", pos->debug2);
+		printf("  select = %03d/ \n", pos->start_select);
 		tputs(tgoto(tgetstr("cm", NULL), pos->max_co - 17, 16), 1, ft_putchar);
 		printf("  debug3    = %03d/ \n", pos->debug3);
 		tputs(tgoto(tgetstr("cm", NULL), pos->max_co - 17, 17), 1, ft_putchar);

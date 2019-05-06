@@ -6,7 +6,7 @@
 /*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/04/04 11:44:25 by mjalenqu     #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/02 15:15:45 by mjalenqu    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/06 12:56:44 by mjalenqu    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -86,6 +86,7 @@ int		init_pos(t_pos *pos, char *buf)
 	pos->let_nb_saved = 0;
 	pos->history_loop = 0;
 	pos->was_incomplete = 0;
+	pos->start_select = -1;
 	pos->debug = 0;
 	pos->debug2 = 0;
 	pos->debug3 = 0;
@@ -154,7 +155,8 @@ char	*termcaps42sh(char *prompt, int error, t_pos *pos, t_hist *hist)
 	ft_putcolor(BYELLOW, pos->prompt, RESET);
 	while (1)
 	{
-		ret2 = read(0, buf, 4);
+		ret2 = read(0, buf, 8);
+		pos->toto = ft_strdup(buf);
 		hist = check_input(buf, pos, hist);
 		print_info(pos);
 //		print_hist(pos, hist);

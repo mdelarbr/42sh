@@ -6,7 +6,7 @@
 /*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/04/09 14:32:39 by mjalenqu     #+#   ##    ##    #+#       */
-/*   Updated: 2019/04/30 13:40:40 by mjalenqu    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/06 12:57:16 by mjalenqu    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -25,6 +25,11 @@ int			main(int ac, char **av, char **env)
 	hist = (t_hist *)malloc(sizeof(t_hist));
 	init_t_hist(hist);
 	my_env = init_env(env);
+	while(my_env)
+	{
+		printf("%s = %s\n", my_env->name, my_env->data);
+		my_env = my_env->next;
+	}
 	pos.prompt = NULL;
 	pos.is_complete = 1;
 	hist = create_history(&pos, hist);
@@ -43,5 +48,6 @@ int			main(int ac, char **av, char **env)
 		}
 		if ((check_error(ans)) != -1)
 			start_exec(start_lex(my_env, ans));
+			pos.start_select = -1;
 	}
 }

@@ -6,16 +6,15 @@
 /*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/04/23 15:05:59 by vde-sain     #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/03 08:36:29 by mjalenqu    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/06 12:56:05 by mjalenqu    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "termcaps.h"
 
-void		right_arrow(char *buf, t_pos *pos)
+void		right_arrow(t_pos *pos)
 {
-	(void)buf;
 	if (pos->act_co == pos->max_co - 1 || (pos->ans && pos->ans[pos->let_nb] == '\n'))
 	{
 		pos->act_co = 0;
@@ -27,11 +26,10 @@ void		right_arrow(char *buf, t_pos *pos)
 	pos->let_nb++;
 }
 
-void		left_arrow(char *buf, t_pos *pos)
+void		left_arrow(t_pos *pos)
 {
 	if (pos->act_co == 0 && pos->act_li == 0)
 		return ;
-	(void)buf;
 	if (pos->act_co <= 0 && pos->act_li > pos->start_li)
 	{
 		pos->act_li--;
@@ -59,13 +57,14 @@ t_hist		*escape_code(char *buf, t_pos *pos, t_hist *hist)
 		hist = move_through_history(hist, pos, "down", buf);
 	if (pos->let_nb < (int)ft_strlen(pos->ans) &&
 			ft_strncmp(buf + 1, "[C", 2) == 0)
-		right_arrow(buf, pos);
+		right_arrow(pos);
 	else if (pos->let_nb > 0 && ft_strncmp(buf + 1, "[D", 2) == 0)
-		left_arrow(buf, pos);
+		left_arrow(pos);
 	else if (pos->let_nb < (int)ft_strlen(pos->ans) && buf[1] == 91 &&
 			buf[2] == 51)
 		input_is_delete(pos);
 	if (ft_strcmp(buf + 1, "[D") == 0 || ft_strcmp(buf + 1, "[C") == 0)
 		pos->ans_printed = 1;
+	
 	return (hist);
 }
