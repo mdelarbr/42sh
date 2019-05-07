@@ -3,17 +3,17 @@
 /*                                                              /             */
 /*   input_is_entry.c                                 .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
+/*   By: vde-sain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/04/24 07:21:45 by vde-sain     #+#   ##    ##    #+#       */
-/*   Updated: 2019/04/30 12:51:37 by mjalenqu    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/06 09:42:46 by rlegendr    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "termcaps.h"
 
-int			find_missing_quote(char *str)
+int				find_missing_quote(char *str)
 {
 	int		i;
 	int		nb_quote;
@@ -31,7 +31,7 @@ int			find_missing_quote(char *str)
 	return (0);
 }
 
-t_hist		*entry_is_incomplete(t_pos *pos, t_hist *hist, char *buf)
+static t_hist	*entry_is_incomplete(t_pos *pos, t_hist *hist, char *buf)
 {
 	pos->act_co = pos->len_prompt;
 	prepare_to_print(pos, buf);
@@ -40,7 +40,7 @@ t_hist		*entry_is_incomplete(t_pos *pos, t_hist *hist, char *buf)
 	return (hist);
 }
 
-t_hist		*entry_is_complete(t_pos *pos, t_hist *hist)
+static t_hist	*entry_is_complete(t_pos *pos, t_hist *hist)
 {
 	while (hist->next)
 		hist = hist->next;
@@ -49,7 +49,7 @@ t_hist		*entry_is_complete(t_pos *pos, t_hist *hist)
 		return (hist);
 	if ((hist->prev && ft_strcmp(pos->ans, hist->prev->cmd) == 0))
 	{
-		ft_strdel(&hist->cmd);
+		hist->cmd = ft_secure_free(hist->cmd);
 		return (hist->prev);
 	}
 	write(pos->history, pos->ans, ft_strlen(pos->ans));
@@ -57,14 +57,14 @@ t_hist		*entry_is_complete(t_pos *pos, t_hist *hist)
 	while (hist->next)
 		hist = hist->next;
 	if (hist->cmd)
-		ft_strdel(&hist->cmd);
+		hist->cmd = ft_secure_free(hist->cmd);
 	hist->cmd = ft_strdup(pos->ans);
 	hist = add_list_back_hist(hist);
 	hist = hist->prev;
 	return (hist);
 }
 
-t_hist		*input_is_entry(t_pos *pos, t_hist *hist, char *buf)
+t_hist			*input_is_entry(t_pos *pos, t_hist *hist, char *buf)
 {
 	int		get_len;
 
@@ -75,13 +75,7 @@ t_hist		*input_is_entry(t_pos *pos, t_hist *hist, char *buf)
 		input_is_printable_char(pos, buf);
 	}
 	get_len = get_len_with_lines(pos);
-	pos->act_li = pos->start_li + get_len / pos->max_co;
-	pos->act_co = get_len % pos->max_co;
-	while (pos->act_li > pos->max_li)
-	{
-		pos->act_li -= 1;
-		prompt_is_on_last_char(pos);
-	}
+	short_update(pos, get_len);
 	if (pos->is_complete == 0)
 		entry_is_incomplete(pos, hist, buf);
 	else

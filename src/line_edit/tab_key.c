@@ -1,43 +1,34 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   main_termcaps.c                                  .::    .:/ .      .::   */
+/*   tab_key.c                                        .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: rlegendr <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2019/04/09 14:32:39 by rlegendr     #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/06 09:15:09 by rlegendr    ###    #+. /#+    ###.fr     */
+/*   Created: 2019/05/06 10:24:34 by rlegendr     #+#   ##    ##    #+#       */
+/*   Updated: 2019/05/06 12:23:47 by rlegendr    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "termcaps.h"
 
-int		main(void)
+void		scan_pos_ans(t_pos *pos)
 {
-	char	*ans;
-	t_hist	*hist;
-	t_pos	pos;
+	if (pos->let_nb == 0)
+		return ;
+	ft_putchar(pos->ans[pos->let_nb - 1]);
+	while (pos->let_nb > 0)
+		;
+}
 
-	hist = (t_hist *)malloc(sizeof(t_hist));
-	init_t_hist(hist);
-	pos.prompt = NULL;
-	pos.is_complete = 1;
-	hist = create_history(&pos, hist);
-	while (1)
-	{
-		ans = termcaps42sh("$ ", &pos, hist);
-		if (ans == NULL)
-			break ;
-		if (ft_strcmp("exit", ans) == 0)
-		{
-			free(pos.prompt);
-			free_t_hist(hist);
-			free(ans);
-			close(pos.history);
-			tcsetattr(2, TCSANOW, &(pos.old_term));
-			exit(0);
-		}
-		ans = ft_secure_free(ans);
-	}
+void		input_is_tab(t_pos *pos)
+{
+	int		usage;
+
+	usage = 1;
+	scan_pos_ans(pos);
+	(void)pos;
+	pos->ans_printed = 1;
+	return ;
 }

@@ -3,49 +3,17 @@
 /*                                                              /             */
 /*   jump.c                                           .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
+/*   By: rlegendr <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2019/04/25 08:12:14 by mjalenqu     #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/06 08:35:57 by mjalenqu    ###    #+. /#+    ###.fr     */
+/*   Created: 2019/05/06 14:23:16 by rlegendr     #+#   ##    ##    #+#       */
+/*   Updated: 2019/05/06 15:54:10 by rlegendr    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "termcaps.h"
 
-void		short_update(t_pos *pos, int len)
-{
-	pos->act_li = pos->start_li + len / pos->max_co;
-	pos->act_co = len % pos->max_co;
-	while (pos->act_li > pos->max_li)
-	{
-		pos->act_li -= 1;
-		prompt_is_on_last_char(pos);
-	}
-}
-
-int			go_to_let_nb(t_pos *pos)
-{
-	int		i;
-	int		len;
-
-	i = -1;
-	len = pos->len_prompt;
-	while (++i < pos->let_nb)
-	{
-		if (pos->ans[i] != '\n')
-			len += 1;
-		if (pos->ans[i] == '\n')
-		{
-			len += pos->max_co - (len % pos->max_co);
-			if (pos->is_complete == 0 || pos->was_incomplete == 1)
-				len += pos->len_prompt;
-		}
-	}
-	return (len);
-}
-
-void		jump_left(t_pos *pos)
+void	jump_left(t_pos *pos)
 {
 	if (pos->is_complete == 0 && pos->act_co == 2)
 		return ;
@@ -61,12 +29,12 @@ void		jump_left(t_pos *pos)
 			left_arrow(pos);
 	while (pos->let_nb > 0 && ft_isspace(pos->ans[pos->let_nb - 1]) == 0)
 		pos->let_nb -= 1;
-	int len = go_to_let_nb(pos);
-	short_update(pos, len);
+//	int len = go_to_let_nb(pos);
+	short_update(pos, go_to_let_nb(pos));
 	tputs(tgoto(tgetstr("cm", NULL), pos->act_co, pos->act_li), 1, ft_putchar);
 }
 
-void		jump_right(t_pos *pos)
+void	jump_right(t_pos *pos)
 {
 	if (pos->let_nb >= pos->len_ans)
 		return ;
@@ -81,22 +49,22 @@ void		jump_right(t_pos *pos)
 		right_arrow(pos);
 }
 
-void		go_hard(t_pos *pos)
+void	go_hard(t_pos *pos)
 {
-	if (pos->is_complete == 0)
-	{
-		while (pos->ans[pos->let_nb] && pos->ans[pos->let_nb] != '\n')
+/*	if (pos->is_complete == 0)
+	{*/
+		while (pos->ans[pos->let_nb])
 		{
-			pos->let_nb++;
-			if (pos->act_co == pos->max_co - 1)
+			if (pos->act_co == pos->max_co - 1 || pos->ans[pos->let_nb] == '\n')
 			{
 				pos->act_co = 0;
 				pos->act_li++;
 			}
 			else
 				pos->act_co++;
+			pos->let_nb++;
 		}
-	}
+/*	}
 	else
 	{
 		while (pos->ans[pos->let_nb] != '\0')
@@ -111,10 +79,10 @@ void		go_hard(t_pos *pos)
 			pos->let_nb++;
 		}
 	}
-	tputs(tgoto(tgetstr("cm", NULL), pos->act_co, pos->act_li), 1, ft_putchar);
+*/	tputs(tgoto(tgetstr("cm", NULL), pos->act_co, pos->act_li), 1, ft_putchar);
 }
 
-void		or_go_home(t_pos *pos)
+void	or_go_home(t_pos *pos)
 {
 	if (pos->is_complete == 0)
 	{
@@ -122,13 +90,13 @@ void		or_go_home(t_pos *pos)
 		{
 			pos->let_nb--;
 			if (pos->act_co == 0)
-			{ 
+			{
 				pos->act_co = pos->max_co - 1;
 				pos->act_li--;
 			}
 			else
 				pos->act_co--;
-		}	
+		}
 	}
 	else
 	{
@@ -136,22 +104,22 @@ void		or_go_home(t_pos *pos)
 		pos->act_li = pos->start_li;
 		pos->let_nb = 0;
 	}
-	
+/*
 	while (pos->let_nb > 0 && (pos->ans[pos->let_nb - 1] != '\n'))
 	{
 		pos->let_nb--;
 		if (pos->act_co == 0)
-		{ 
+		{
 			pos->act_co = pos->max_co - 1;
 			pos->act_li--;
 		}
 		else
 			pos->act_co--;
 	}
-	tputs(tgoto(tgetstr("cm", NULL), pos->act_co, pos->act_li), 1, ft_putchar);
+*/	tputs(tgoto(tgetstr("cm", NULL), pos->act_co, pos->act_li), 1, ft_putchar);
 }
 
-int			nb_line(t_pos *pos)
+int		nb_line(t_pos *pos)
 {
 	int i;
 	int line;
@@ -167,7 +135,7 @@ int			nb_line(t_pos *pos)
 	return (line);
 }
 
-void		jump_UP(t_pos *pos)
+void	jump_up(t_pos *pos)
 {
 	if (pos->is_complete == 0 || pos->act_li == pos->start_li)
 		return ;
@@ -177,7 +145,7 @@ void		jump_UP(t_pos *pos)
 	}
 }
 
-void		jump_DOWN(t_pos *pos)
+void	jump_down(t_pos *pos)
 {
 	int line;
 
@@ -185,15 +153,15 @@ void		jump_DOWN(t_pos *pos)
 	if (pos->is_complete == 0 || line == 1)
 		return ;
 	if (line > 1 && pos->act_li < pos->start_li + line - 1)
-		pos->act_li++;	
+		pos->act_li++;
 }
 
-void		find_jump(char *buf, t_pos *pos)
+void	find_jump(char *buf, t_pos *pos)
 {
-	if (ft_strcmp(buf + 2, "[A") == 0)
-		jump_UP(pos);
+	if		 (ft_strcmp(buf + 2, "[A") == 0)
+		jump_up(pos);
 	if (ft_strcmp(buf + 2, "[B") == 0)
-		jump_DOWN(pos);
+		jump_down(pos);
 	if (ft_strcmp(buf + 2, "[D") == 0)
 		jump_left(pos);
 	else if (ft_strcmp(buf + 2, "[C") == 0)

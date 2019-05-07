@@ -5,8 +5,8 @@
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2019/04/05 21:32:49 by mjalenqu     #+#   ##    ##    #+#       */
-/*   Updated: 2019/04/30 19:37:33 by mjalenqu    ###    #+. /#+    ###.fr     */
+/*   Created: 2019/04/05 21:32:49 by rlegendr     #+#   ##    ##    #+#       */
+/*   Updated: 2019/05/07 08:21:13 by mjalenqu    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -80,6 +80,8 @@ t_hist		*create_history(t_pos *pos, t_hist *hist)
 			hist->cmd = ft_strjoinf(hist->cmd, line, 3);
 			hist = add_list_back_hist(hist);
 		}
+		else if (line != NULL)
+			free(line);
 		line = NULL;
 	}
 	return (hist);

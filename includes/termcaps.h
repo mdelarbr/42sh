@@ -6,7 +6,7 @@
 /*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/28 09:15:13 by mjalenqu     #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/06 13:12:39 by mjalenqu    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/07 08:28:52 by mjalenqu    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -62,7 +62,8 @@
 # define ALT_L    25115
 # define ALT_R    26139
 
-# define HIST	".42_history"
+# define HIST		".42_history"
+# define RESIZING	28
 
 typedef struct		s_pos
 {
@@ -137,106 +138,145 @@ typedef struct			s_hist
 	int					cmd_no;
 }						t_hist;
 
-
-int		get_next_line_42sh(const int fd, char **line);
-char	*termcaps42sh(char *prompt, int error, t_pos *pos, t_hist *hist);
+void	print_info(t_pos *pos);
+void	print_hist(t_pos *pos, t_hist *hist);
 
 /*
-**INIT_FT_SELECT.C
+** CALCUL_LINE
 */
 
-void				init_terminfo(t_pos *pos);
-int					init_pos(t_pos *pos, char *buf);
-void				get_start_info(char *buf, t_pos *pos);
+int					get_len_with_lines(t_pos *pos);
+int					go_to_let_nb_saved(t_pos *pos);
+int					len_of_previous_line(t_pos *pos);
+int					count_nb_line(t_pos *pos, int *j);
+int					go_to_let_nb(t_pos *pos);
+
+/*
+** CHECK_ERROR
+*/
+
 int					check_term(void);
 
 /*
-**CHECK_INPUT.C
+** CHECK_INPUT.C
 */
 
-void				free_t_hist(t_hist *hist);
 t_hist				*check_input(char *buf, t_pos *pos, t_hist *hist);
 
 /*
-**INPUT_IS_REMOVE_CHAR.C
+** ESCAPE_CODE
 */
 
-void				input_is_backspace(t_pos *pos);
-void				remove_char_ans(t_pos *pos);
-void				input_is_delete(t_pos *pos);
+t_hist				*escape_code(char *buf, t_pos *pos, t_hist *hist);
+void				right_arrow(t_pos *pos);
+void				left_arrow(t_pos *pos);
 
 /*
-**INPUT_IS_PRINTABLE_CHAR.C
+** HISTORY.C
 */
 
+void				free_t_hist(t_hist *hist);
+void				init_t_hist(t_hist *hist);
+t_hist				*add_list_back_hist(t_hist *hist);
+t_hist				*create_history(t_pos *pos, t_hist *hist);
+
+/*
+** INITIALISATION_STOCK
+*/
+
+void				init_terminfo(t_pos *pos);
+void				init_pos(t_pos *pos, char *buf);
+void			*stock(t_pos *pos, int usage);
+
+/*
+** INPUT_IS_ENTRY
+*/
+
+int					find_missing_quote(char *str);
+t_hist				*input_is_entry(t_pos *pos, t_hist *hist, char *buf);
+
+/*
+** INPUT_IS_PRINTABLE_CHAR
+*/
 void				prompt_is_on_last_char(t_pos *pos);
 void				input_is_printable_char(t_pos *pos, char *buf);
 
 /*
-**ESCAPE_CODE.C
+** INPUT_IS_REMOVE_CHAR
 */
 
-t_hist				*escape_code(char *buf, t_pos *pos, t_hist *hist);
-void				left_arrow(t_pos *pos);
-void				right_arrow(t_pos *pos);
-int					len_of_previous_line(t_pos *pos);
+void				input_is_delete(t_pos *pos);
+int					input_is_backspace(t_pos *pos);
 
 /*
-** INPUT_IS_ENTRY.C
+** MOVE_THROUGHT_HISTORY
 */
 
-t_hist				*input_is_complete(t_pos *pos, t_hist *hist);
-t_hist				*input_is_entry(t_pos *pos, t_hist *hist, char *buf);
+t_hist				*move_through_history(t_hist *hist,
+						t_pos *pos, char *usage);
 
 /*
-**HANDLE_ANS.C
+** PRINT_ANS
 */
 
 void				prepare_to_print(t_pos *pos, char *buf);
-void				fill_char_ans(char *buf, t_pos *pos);
-void				remove_char_ans(t_pos *pos);
-int					get_len_with_lines(t_pos *pos);
+void				print_ans(t_pos *pos, int i, int act_coi);
 
 /*
-**HISTORY.C
+** SEARCH_IN_HISTORY
 */
 
-void				init_t_hist(t_hist *hist);
-t_hist				*create_history(t_pos *pos, t_hist *hist);
-t_hist				*add_list_back_hist(t_hist *hist);
-void				update_position(t_pos *pos, char *cmd);
+t_hist				*search_up_complete_in_history(t_hist *hist, t_pos *pos);
+t_hist				*search_down_complete_in_history(t_hist *hist, t_pos *pos);
 
 /*
-**MOVE_THROUGHT_HISTORY.C
+** SIGNAL
 */
 
-
-t_hist				*move_through_history(t_hist *hist, t_pos *pos, char *usage, char *buf);
+void				signal_list(void);
 
 /*
-**SEARCH_IN_HISTORY.C
+** START_TERMCAPS
 */
 
-t_hist		*search_up_complete_in_history(t_hist *hist, t_pos *pos);
-t_hist		*search_down_complete_in_history(t_hist *hist, t_pos *pos);
-t_hist		*search_up_incomplete_in_history(t_hist *hist, t_pos *pos);
-t_hist		*search_down_incomplete_in_history(t_hist *hist, t_pos *pos);
+char				*termcaps42sh(char *prompt, t_pos *pos, t_hist *hist);
+void				print_prompt(t_pos *pos);
 
 /*
-**TERMCAPS_TOOLS.C
+** TAB_KEY
 */
 
-void				print_info(t_pos *pos);
-void				print_hist(t_pos *pos, t_hist *hist);
+void				input_is_tab(t_pos *pos);
 
 /*
-**CALCUL_LINE.C
+** TOOLS
 */
 
-int					go_to_let_nb_saved(t_pos *pos);
-int					count_nb_line(t_pos *pos, int *j);
+void				clean_at_start(t_pos *pos);
+void				short_update(t_pos *pos, int len);
+void				update_position(t_pos *pos);
 
+/*
+** COPY a mettre a la norme
+*/
 
+void	display_line(t_pos		*pos);
+int		is_select(char *buf, t_pos *pos);
+void	selected(t_pos *pos, char *buf);
+void	selection_check(t_pos *pos, char *buf);
+
+/*
+** JUMP a mettre a la norme
+*/
+
+void	jump_left(t_pos *pos);
+void	jump_right(t_pos *pos);
+void	go_hard(t_pos *pos);
+void	or_go_home(t_pos *pos);
+int		nb_line(t_pos *pos);
+void	jump_up(t_pos *pos);
+void	jump_down(t_pos *pos);
+void	find_jump(char *buf, t_pos *pos);
 
 /*
 *******************************************************************************
@@ -294,10 +334,6 @@ char					*remove_char(char **str, int i);
 */
 //void					free_all(t_all *all);
 void					free_env(t_var *var);
-
-void					find_jump(char *buf, t_pos *pos);
-void					selected(t_pos *pos, char *buf);
-int						is_select(char *buf);
 
 # include "lexeur.h"
 

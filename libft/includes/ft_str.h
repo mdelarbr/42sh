@@ -6,7 +6,7 @@
 /*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/03 15:18:39 by shthevak     #+#   ##    ##    #+#       */
-/*   Updated: 2019/04/30 18:17:40 by mjalenqu    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/07 08:23:07 by mjalenqu    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -75,4 +75,5 @@ char				*ft_strcapitalizer(char *str);
 char				*ft_copy_part_str(char *str, int i, int usage);
 char				*ft_swap_let_string(char *str, int let1, int let2);
 char				*ft_strrev(char *str);
+void				*ft_secure_free(void *to_free);
 #endif
