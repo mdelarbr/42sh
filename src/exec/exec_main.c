@@ -6,7 +6,7 @@
 /*   By: mdelarbr <mdelarbr@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/04/30 11:29:02 by mdelarbr     #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/02 18:08:40 by mdelarbr    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/07 11:16:53 by mdelarbr    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -89,12 +89,18 @@ int			main_exec_while(t_process *p, t_var *var)
 
 void		main_exec(t_job *j, t_var *var)
 {
+	t_process	*tmp;
+
 	while (j)
 	{
+		tmp = j->p;
 		while (j->p)
 		{
-			if (j->p->next && j->p->split == 'A')
-				main_option_exec((&j->p), (&j->p->next), var);
+			if (j->p->next && j->p->split != '\0')
+			{
+				if (main_option_exec((&j->p), (&j->p->next), var) == -1)
+					return ;
+			}
 			else if (main_exec_while(j->p, var) == -1)
 				return ;
 			j->p = j->p->next;
