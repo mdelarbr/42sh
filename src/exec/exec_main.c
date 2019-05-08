@@ -6,7 +6,7 @@
 /*   By: mdelarbr <mdelarbr@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/04/30 11:29:02 by mdelarbr     #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/07 11:16:53 by mdelarbr    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/08 10:56:21 by mdelarbr    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -99,7 +99,7 @@ void		main_exec(t_job *j, t_var *var)
 			if (j->p->next && j->p->split != '\0')
 			{
 				if (main_option_exec((&j->p), (&j->p->next), var) == -1)
-					return ;
+					break ;
 			}
 			else if (main_exec_while(j->p, var) == -1)
 				return ;
