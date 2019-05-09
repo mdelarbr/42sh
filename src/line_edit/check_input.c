@@ -6,7 +6,7 @@
 /*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/04/23 14:41:17 by vde-sain     #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/07 08:20:44 by mjalenqu    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/09 10:33:50 by mjalenqu    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -29,11 +29,12 @@ static void		update_history(t_pos *pos, t_hist *hist, char *buf)
 		pos->history_mode = 0;
 }
 
-t_hist			*check_input(char *buf, t_pos *pos, t_hist *hist)
+t_hist			*check_input(unsigned char *buf, t_pos *pos, t_hist *hist)
 {
-	selection_check(pos, buf);
+	selection_check(pos, (char*)buf);
+//	if (check_copy(buf, pos) == 0)
 	if (buf[0] == 27)
-		hist = escape_code(buf, pos, hist);
+		hist = escape_code((char*)buf, pos, hist);
 	else
 	{
 		if (buf[0] == 9)
@@ -41,13 +42,13 @@ t_hist			*check_input(char *buf, t_pos *pos, t_hist *hist)
 		else if (buf[0] == 127)
 			pos->ans_printed = input_is_backspace(pos);
 		else if (buf[0] == 10)
-			hist = input_is_entry(pos, hist, buf);
+			hist = input_is_entry(pos, hist, (char*)buf);
 		else if (buf[0] != 127 && buf[0] != 10)
-			input_is_printable_char(pos, buf);
-		update_history(pos, hist, buf);
+			input_is_printable_char(pos, (char*)buf);
+		update_history(pos, hist, (char*)buf);
 	}
 	if (buf[0] != 10 && pos->ans_printed == 0)
-		prepare_to_print(pos, buf);
+		prepare_to_print(pos, (char*)buf);
 	pos->ans_printed = 0;
 	return (hist);
 }

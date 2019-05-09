@@ -6,7 +6,7 @@
 /*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/04/30 09:27:30 by vde-sain     #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/07 08:24:32 by mjalenqu    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/08 13:34:42 by mjalenqu    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -85,8 +85,8 @@ void	print_info(t_pos *pos)
 		printf("start_s   = %03d/\n", pos->start_select);
 		tputs(tgoto(tgetstr("cm", NULL), pos->max_co - 17, 17), 1, ft_putchar);
 		printf("debug4    = %03d/\n", pos->debug4);
-		tputs(tgoto(tgetstr("cm", NULL), pos->max_co - 17, 18), 1, ft_putchar);
-		printf("debug5    = %03d/\n", pos->debug5);
+		tputs(tgoto(tgetstr("cm", NULL), 0, 18), 1, ft_putchar);
+		printf("copy    = %s/\n", stock(NULL, 4));
 	}
 	else if (pos->max_co < 16)
 	{

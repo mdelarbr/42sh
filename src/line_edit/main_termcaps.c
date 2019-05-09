@@ -3,22 +3,26 @@
 /*                                                              /             */
 /*   main_termcaps.c                                  .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: rlegendr <marvin@le-101.fr>                +:+   +:    +:    +:+     */
+/*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/04/09 14:32:39 by rlegendr     #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/06 09:15:09 by rlegendr    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/09 10:33:36 by mjalenqu    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "termcaps.h"
 
-int		main(void)
+int		main(int ac, char **av, char **env)
 {
 	char	*ans;
 	t_hist	*hist;
 	t_pos	pos;
+	t_var	*var;
 
+	(void)ac;
+	(void)av;
+	var = init_env(env);
 	hist = (t_hist *)malloc(sizeof(t_hist));
 	init_t_hist(hist);
 	pos.prompt = NULL;

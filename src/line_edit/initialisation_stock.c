@@ -6,7 +6,7 @@
 /*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/06 08:12:35 by rlegendr     #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/07 08:27:36 by mjalenqu    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/09 10:24:05 by mjalenqu    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -49,14 +49,19 @@ static void		get_start_info(char *buf, t_pos *pos)
 		pos->start_co = ft_atoi(buf + i + 1) - 1 + pos->len_prompt;
 }
 
-void			*stock(t_pos *pos, int usage)
+void			*stock(void *to_stock, int usage)
 {
-	static t_pos *stock_pos;
+	static t_pos	*stock_pos;
+	static char		*copy;
 
 	if (usage == 0)
-		stock_pos = pos;
+		stock_pos = to_stock;
 	if (usage == 1)
 		return (stock_pos);
+	if (usage == 3)
+		copy = to_stock;
+	if (usage == 4)
+		return (copy);
 	return (NULL);
 }
 
@@ -76,8 +81,11 @@ static void		init_classic_var(t_pos *pos)
 	pos->debug5 = 0;
 }
 
-void			init_pos(t_pos *pos, char *buf)
+void			init_pos(t_pos *pos)
 {
+	char		buf[10];
+
+	ft_bzero(buf, 9);
 	pos->max_co = tgetnum("co");
 	pos->max_li = tgetnum("li") - 1;
 	if (ft_strlen(pos->prompt) == 2)
@@ -93,9 +101,10 @@ void			init_pos(t_pos *pos, char *buf)
 	get_start_info(buf + 1, pos);
 	if (pos->start_li == -1 || pos->start_co == -1)
 	{
-		//ft_printf("Error init position\n");
-		pos->start_li = 1;
+		pos->start_li = 0;
 		pos->start_co = pos->len_prompt;
+		tputs(tgoto(tgetstr("cm", NULL), 0, 0), 1, ft_putchar);
+		print_prompt(pos);
 	}
 	pos->act_li = pos->start_li;
 	pos->act_co = pos->start_co;

@@ -6,7 +6,7 @@
 /*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/06 14:22:14 by rlegendr     #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/07 09:03:29 by mjalenqu    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/09 10:29:27 by mjalenqu    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -23,29 +23,26 @@ void		print_from_begin(t_pos *pos)
 
 void	display_line(t_pos *pos)
 {
+	int		len;
+
+	len = 0;
 	if (pos->start_select == -1)
 		return ;
-	clean_at_start(pos);
 	tputs(tgetstr("vi", NULL), 1, ft_putchar);
-	if (pos->start_select > pos->let_nb)
+	if (pos->let_nb_saved == 0)
 	{
-		pos->debug5 = 222;
-		write(1, pos->ans, pos->let_nb);
-		tputs(tgetstr("mr", NULL), 1, ft_putchar);
-		write(1, pos->ans + pos->let_nb, pos->start_select - pos->let_nb);
-		tputs(tgetstr("me", NULL), 1, ft_putchar);
-		write(1, pos->ans + pos->start_select, pos->len_ans - pos->start_select);
+		clean_at_start(pos);
+		print_ans(pos, 0, pos->start_co);
 	}
 	else
 	{
-		pos->debug5 = 333;
-		write(1, pos->ans, pos->start_select);
-		tputs(tgetstr("mr", NULL), 1, ft_putchar);
-		write(1, pos->ans + pos->start_select, pos->let_nb - pos->start_select);
-		tputs(tgetstr("me", NULL), 1, ft_putchar);
-		write(1, pos->ans + pos->let_nb, pos->len_ans - pos->let_nb );
+		len = go_to_let_nb_saved(pos);
+		pos->debug = pos->start_li + len / pos->max_co;
+		tputs(tgoto(tgetstr("cm", NULL), len % pos->max_co, pos->start_li + len / pos->max_co), 1, ft_putchar);
+		tputs(tgetstr("cd", NULL), 1, ft_putchar);
+		print_ans(pos, pos->let_nb_saved, len % pos->max_co);
 	}
-	pos->ans_printed = 1;
+	tputs(tgetstr("me", NULL), 1, ft_putchar);
 }
 
 static void		select_left(t_pos *pos)
@@ -59,7 +56,7 @@ static void		select_left(t_pos *pos)
 
 static void		select_right(t_pos *pos)
 {
-	if (pos->let_nb >= pos->len_ans)
+	if (pos->let_nb >= (int)ft_strlen(pos->ans))
 		return ;
 	if (pos->start_select == -1)
 		pos->start_select = pos->let_nb;
@@ -81,6 +78,7 @@ void	selected(t_pos *pos, char *buf)
 	else if (buf[5] == 68)
 		select_left(pos);
 	display_line(pos);
+	pos->ans_printed = 1;
 }
 
 void	selection_check(t_pos *pos, char *buf)
@@ -92,6 +90,5 @@ void	selection_check(t_pos *pos, char *buf)
 	if (is_select(buf, pos) == 1)
 		selected(pos, buf);
 	else
-		pos->start_select = -1;
-	pos->debug3 = pos->start_select;
+	pos->start_select = -1;
 }

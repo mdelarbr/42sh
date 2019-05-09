@@ -6,7 +6,7 @@
 /*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/04/04 11:44:25 by rlegendr     #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/07 08:27:11 by mjalenqu    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/09 10:24:40 by mjalenqu    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -28,7 +28,7 @@ static int	start_termcaps(t_pos *pos, char *buf, char *prompt)
 	ret = check_term();
 	if (ret == -1)
 		exit(0);
-	init_pos(pos, buf);
+	init_pos(pos);
 	ft_bzero(buf, 8);
 	return (ret);
 }
@@ -38,22 +38,24 @@ static int	start_termcaps(t_pos *pos, char *buf, char *prompt)
 
 char		*termcaps42sh(char *prompt, t_pos *pos, t_hist *hist)
 {
-	int			ret;
-	char		buf[9];
+	int				ret;
+	unsigned char	buf[9];
 
 	while (hist->next)
 		hist = hist->next;
-	start_termcaps(pos, buf, prompt);
+	start_termcaps(pos, (char*)buf, prompt);
 	print_prompt(pos);
 	signal_list();
 	while (1)
 	{
 		ret = read(0, buf, 1);
+		if (buf[0] == 137)
+			return (NULL);
 		if (buf[0] == 27)
 			ret = read(0, buf + 1, 8);
 		if (pos->max_co > 2)
 			hist = check_input(buf, pos, hist);
-	print_info(pos);
+		print_info(pos);
 		if (buf[0] == 10 && pos->is_complete == 1)
 		{
 			tputs(tgoto(tgetstr("cm", NULL),

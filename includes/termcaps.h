@@ -6,7 +6,7 @@
 /*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/28 09:15:13 by mjalenqu     #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/07 08:28:52 by mjalenqu    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/09 10:24:22 by mjalenqu    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -64,6 +64,7 @@
 
 # define HIST		".42_history"
 # define RESIZING	28
+# define CTRL_C		2
 
 typedef struct		s_pos
 {
@@ -161,7 +162,7 @@ int					check_term(void);
 ** CHECK_INPUT.C
 */
 
-t_hist				*check_input(char *buf, t_pos *pos, t_hist *hist);
+t_hist				*check_input(unsigned char *buf, t_pos *pos, t_hist *hist);
 
 /*
 ** ESCAPE_CODE
@@ -185,8 +186,8 @@ t_hist				*create_history(t_pos *pos, t_hist *hist);
 */
 
 void				init_terminfo(t_pos *pos);
-void				init_pos(t_pos *pos, char *buf);
-void			*stock(t_pos *pos, int usage);
+void				init_pos(t_pos *pos);
+void				*stock(void *to_stock, int usage);
 
 /*
 ** INPUT_IS_ENTRY
