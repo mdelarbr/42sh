@@ -3,10 +3,10 @@
 /*                                                              /             */
 /*   replace.c                                        .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
+/*   By: mdelarbr <mdelarbr@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/04/15 17:27:56 by mdelarbr     #+#   ##    ##    #+#       */
-/*   Updated: 2019/04/30 13:00:29 by mjalenqu    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/09 11:07:57 by mdelarbr    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -79,7 +79,7 @@ char		*remove_env(t_var *start, char *str)
 	char	**array;
 	char	*tmp;
 
-	array = ft_strsplit(str, ' '); // TODO FAIRE UN VRAI SPLIT AVEC \T ETC.
+	array = split_space(str);
 	while (1) // TODO faire en sorte qu'on ne peut pas faire de boucle infinie comme bash on ne peut pas replace 2 fois une var.
 		if (remove_env_while(&array, start) == 0)
 			break ;
