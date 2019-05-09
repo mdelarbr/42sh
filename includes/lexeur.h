@@ -6,7 +6,7 @@
 /*   By: mdelarbr <mdelarbr@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/22 13:50:20 by mdelarbr     #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/09 10:53:47 by mdelarbr    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/09 16:24:02 by mdelarbr    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -24,6 +24,7 @@
 
 # define ENVIRONEMENT 0
 # define LOCAL 1
+# define ALIAS 2
 
 enum e_token
 {
@@ -57,6 +58,13 @@ typedef struct s_lexeur
 	char        	*redirection;
 	int				fd;
 } t_lexeur;
+
+typedef struct s_already_replace
+{
+	char						*name;
+	struct s_already_replace	*next;
+} t_replace;
+
 
 /*
 **┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -138,7 +146,7 @@ void        check_var(t_var *env, char **str);
 */
 
 char		*check_var_alias(t_var *env, char *str);
-int			f_check_var_alias(t_var *env, char *str);
+int			f_check_var(t_var *env, char *str);
 
 /*
 **┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -147,4 +155,6 @@ int			f_check_var_alias(t_var *env, char *str);
 */
 
 char		**split_space(char *str);
+void		list_add(t_replace **replace, char *array);
+void		free_replace(t_replace *replace);
 #endif

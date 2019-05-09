@@ -3,10 +3,10 @@
 /*                                                              /             */
 /*   var_replace.c                                    .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
+/*   By: mdelarbr <mdelarbr@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/04/16 17:44:11 by mdelarbr     #+#   ##    ##    #+#       */
-/*   Updated: 2019/04/30 19:39:44 by mjalenqu    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/09 16:23:51 by mdelarbr    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -34,7 +34,7 @@ char		*check_var_alias(t_var *env, char *str)
 	return (tmp);
 }
 
-int			f_check_var_alias(t_var *env, char *str)
+int			f_check_var(t_var *env, char *str)
 {
 	t_var	*start;
 

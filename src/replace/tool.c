@@ -6,7 +6,7 @@
 /*   By: mdelarbr <mdelarbr@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/09 10:52:26 by mdelarbr     #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/09 11:07:53 by mdelarbr    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/09 15:49:48 by mdelarbr    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -59,4 +59,31 @@ char		**split_space(char *str)
 	}
 	res[k] = NULL;
 	return (res);
+}
+
+void		list_add(t_replace **replace, char *array)
+{
+	t_replace	*next;
+	t_replace	*tmp;
+
+	tmp = (*replace);
+	while (tmp)
+		tmp = tmp->next;
+	next = malloc(sizeof(t_replace));
+	next->name = ft_strdup(array);
+	tmp->next = next;
+	next->next = NULL;
+}
+
+void		free_replace(t_replace *replace)
+{
+	t_replace	*tmp;
+
+	while (replace)
+	{
+		ft_strdel(&replace->name);
+		tmp = replace;
+		replace = replace->next;
+		free(&tmp);
+	}
 }

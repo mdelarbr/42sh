@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   main_termcaps.c                                  .::    .:/ .      .::   */
+/*   main.c                                           .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: mdelarbr <mdelarbr@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/04/09 14:32:39 by mjalenqu     #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/02 10:24:36 by mdelarbr    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/09 12:02:32 by mdelarbr    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -19,7 +19,7 @@ int			main(int ac, char **av, char **env)
 	t_hist	*hist;
 	t_var	*my_env;
 	t_pos	pos;
-	
+
 	(void)ac;
 	(void)av;
 	hist = (t_hist *)malloc(sizeof(t_hist));
