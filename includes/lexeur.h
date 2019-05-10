@@ -6,7 +6,7 @@
 /*   By: mdelarbr <mdelarbr@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/22 13:50:20 by mdelarbr     #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/09 16:24:02 by mdelarbr    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/10 11:04:41 by mdelarbr    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -128,7 +128,7 @@ char		*remove_env(t_var *var, char *str);
 **┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 */
 
-char		*find_env_var(t_var *env, char *str, int i);
+char		*replace_env(t_var *env, char *str, int i);
 char		*switch_word(char *str, char *tmp, int i);
 
 /*
@@ -145,7 +145,7 @@ void        check_var(t_var *env, char **str);
 **┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 */
 
-char		*check_var_alias(t_var *env, char *str);
+char		*replace_var(t_var *env, char *str);
 int			f_check_var(t_var *env, char *str);
 
 /*

@@ -3,10 +3,10 @@
 /*                                                              /             */
 /*   env_replace.c                                    .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
+/*   By: mdelarbr <mdelarbr@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/04/16 17:41:43 by mdelarbr     #+#   ##    ##    #+#       */
-/*   Updated: 2019/04/30 12:37:14 by mjalenqu    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/10 17:03:51 by mdelarbr    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -38,26 +38,49 @@ char		*switch_word(char *str, char *tmp, int i)
 	return (res);
 }
 
-char		*find_env_var(t_var *env, char *str, int i)
+char		*replace_env(t_var *env, char *str, int i)
 {
 	int		s;
 	char	*tmp;
+	char	*first;
+	char	*res;
+	char	*end;
 	t_var	*start;
 
-	s = i + 1;
-	while (str[i] && ((str[i] < 9 && str[i] > 13) || str[i] != ' '))
+	s = i;
+	end = ft_strdup("");
+	while (str[i] && str[i] != '$')
+		i++;
+	first = ft_strsub(str, s, i - s);
+	dprintf(1, "first: _%s_\n", first);
+	start = env;
+	i++;
+	s = i;
+	while (str[i] && str[i] != '$')
 		i++;
 	tmp = ft_strsub(str, s, i - s);
-	start = env;
+	dprintf(1, "tmp: _%s_\n", tmp);
+	if (str[i])
+	{
+		s = i;
+		while (str[i])
+			i++;
+		end = ft_strsub(str, s, i - s);
+		dprintf(1, "end: _%s_\n", end);
+	}
 	while (start)
 	{
-		if (ft_strcmp(tmp, start->name) == 0 && start->type == 0)
+		if (ft_strcmp(tmp, start->name) == 0 && start->type == ENVIRONEMENT)
 		{
+			res = ft_strjoin(first, start->data);
+			ft_strjoin_free(&res, end);
 			ft_strdel(&tmp);
-			return (start->data);
+			ft_strdel(&first);
+			return (res);
 		}
 		start = start->next;
 	}
 	ft_strdel(&tmp);
+	ft_strdel(&first);
 	return (ft_strdup(""));
 }

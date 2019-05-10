@@ -6,7 +6,7 @@
 /*   By: mdelarbr <mdelarbr@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/04/16 17:44:11 by mdelarbr     #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/09 16:23:51 by mdelarbr    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/10 10:53:02 by mdelarbr    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -14,7 +14,7 @@
 #include "../../includes/lexeur.h"
 #include "../../includes/termcaps.h"
 
-char		*check_var_alias(t_var *env, char *str)
+char		*replace_var(t_var *env, char *str)
 {
 	t_var	*start;
 	char	*tmp;
@@ -41,7 +41,7 @@ int			f_check_var(t_var *env, char *str)
 	start = env;
 	while (start)
 	{
-		if ((ft_strcmp(start->name, str) == 0) && start->type != ENVIRONEMENT)
+		if ((ft_strcmp(start->name, str) == 0) && start->type == LOCAL)
 			return (1);
 		start = start->next;
 	}

@@ -6,7 +6,7 @@
 /*   By: mdelarbr <mdelarbr@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/04/15 17:27:56 by mdelarbr     #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/09 16:25:10 by mdelarbr    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/10 17:04:18 by mdelarbr    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -116,11 +116,15 @@ int			remove_env_while(char ***array, t_var *var, t_replace *replace)
 				done = 1;
 			(*array)[i] = replace_alias((*array)[i], var, replace);
 		}
-		if (f_check_var(var, (*array)[i]) == 1)
-		{//TODO replace aussi les var d'environemnt la voila voila.
-			puts("ici");
+		if (ft_strstr((*array)[i], "$") != NULL)
+		{
 			done = 1;
-			(*array)[i] = check_var_alias(var, (*array)[i]);
+			(*array)[i] = replace_env(var, (*array)[i], 0);
+		}
+		if (f_check_var(var, (*array)[i]) == 1)
+		{
+			done = 1;
+			(*array)[i] = replace_var(var, (*array)[i]);
 		}
 		i++;
 	}
