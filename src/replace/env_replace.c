@@ -6,7 +6,7 @@
 /*   By: mdelarbr <mdelarbr@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/04/16 17:41:43 by mdelarbr     #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/10 17:03:51 by mdelarbr    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/12 11:57:32 by mdelarbr    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -52,21 +52,18 @@ char		*replace_env(t_var *env, char *str, int i)
 	while (str[i] && str[i] != '$')
 		i++;
 	first = ft_strsub(str, s, i - s);
-	dprintf(1, "first: _%s_\n", first);
 	start = env;
 	i++;
 	s = i;
 	while (str[i] && str[i] != '$')
 		i++;
 	tmp = ft_strsub(str, s, i - s);
-	dprintf(1, "tmp: _%s_\n", tmp);
 	if (str[i])
 	{
 		s = i;
 		while (str[i])
 			i++;
 		end = ft_strsub(str, s, i - s);
-		dprintf(1, "end: _%s_\n", end);
 	}
 	while (start)
 	{

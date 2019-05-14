@@ -6,7 +6,7 @@
 /*   By: mdelarbr <mdelarbr@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/04/18 13:44:02 by mdelarbr     #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/02 18:08:38 by mdelarbr    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/14 11:18:11 by mdelarbr    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -84,7 +84,7 @@ int			use_execve_acces(char *tmp, char **res, t_var *l_var);
 **┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 */
 
-int			find_builtins(t_process *p);
+int			find_builtins(t_process *p, t_var *var);
 void		cnf_print_error(char *str);
 
 /*
@@ -94,4 +94,13 @@ void		cnf_print_error(char *str);
 */
 
 int			main_option_exec(t_process **first, t_process **second, t_var *var);
+
+/*
+**┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+**┃                                    alias.c                                 ┃
+**┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+*/
+
+int			main_alias(t_process *p, t_var **var);
+int			main_unalias(t_process *p, t_var **var);
 #endif

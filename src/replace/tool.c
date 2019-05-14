@@ -6,7 +6,7 @@
 /*   By: mdelarbr <mdelarbr@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/09 10:52:26 by mdelarbr     #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/09 15:49:48 by mdelarbr    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/13 13:58:18 by mdelarbr    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -64,15 +64,23 @@ char		**split_space(char *str)
 void		list_add(t_replace **replace, char *array)
 {
 	t_replace	*next;
-	t_replace	*tmp;
+	t_replace	*start;
 
-	tmp = (*replace);
-	while (tmp)
-		tmp = tmp->next;
+	start = (*replace);
+	while ((*replace)->next)
+		(*replace) = (*replace)->next;
 	next = malloc(sizeof(t_replace));
 	next->name = ft_strdup(array);
-	tmp->next = next;
 	next->next = NULL;
+	(*replace)->next = next;
+	(*replace) = start;
+}
+
+void		init_replace(t_replace **replace)
+{
+	(*replace) = malloc(sizeof(t_replace));
+	(*replace)->name = ft_strdup("");
+	(*replace)->next = NULL;
 }
 
 void		free_replace(t_replace *replace)

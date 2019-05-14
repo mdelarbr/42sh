@@ -6,7 +6,7 @@
 /*   By: mdelarbr <mdelarbr@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/04/30 11:29:02 by mdelarbr     #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/08 10:56:21 by mdelarbr    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/12 13:18:00 by mdelarbr    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -65,7 +65,7 @@ int			solve_execve(char *path, char **arg, t_var *var)
 
 int			main_exec_while(t_process *p, t_var *var)
 {
-	if (find_builtins(p) == 0)
+	if (find_builtins(p, var) == 0)
 	{
 		if (ft_strchr(p->cmd[0], '/') != 0)
 		{

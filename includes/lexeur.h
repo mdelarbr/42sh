@@ -6,7 +6,7 @@
 /*   By: mdelarbr <mdelarbr@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/22 13:50:20 by mdelarbr     #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/10 11:04:41 by mdelarbr    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/13 13:38:17 by mdelarbr    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -157,4 +157,5 @@ int			f_check_var(t_var *env, char *str);
 char		**split_space(char *str);
 void		list_add(t_replace **replace, char *array);
 void		free_replace(t_replace *replace);
+void		init_replace(t_replace **replace);
 #endif

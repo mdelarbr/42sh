@@ -6,7 +6,7 @@
 #    By: mdelarbr <mdelarbr@student.le-101.fr>      +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2019/03/04 18:02:46 by mjalenqu     #+#   ##    ##    #+#        #
-#    Updated: 2019/05/09 10:52:56 by mdelarbr    ###    #+. /#+    ###.fr      #
+#    Updated: 2019/05/12 13:28:26 by mdelarbr    ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -24,7 +24,7 @@ SRC_NAME =	main/main.c\
 			lexeur/back_slash.c lexeur/error.c\
 			lexeur/fill_fd.c lexeur/lexeur.c lexeur/fill_lexeur.c lexeur/redirection.c \
 			replace/replace.c replace/env_replace.c replace/var_replace.c replace/tool.c \
-			exec/exec.c exec/process.c exec/exec_main.c exec/tools.c exec/builtins.c exec/option_exec.c
+			exec/exec.c exec/process.c exec/exec_main.c exec/tools.c exec/builtins.c exec/option_exec.c exec/alias.c
 OBJ_NAME = $(SRC_NAME:.c=.o)
 INC_NAME = termcaps.h
 
