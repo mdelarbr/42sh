@@ -6,33 +6,12 @@
 /*   By: husahuc <husahuc@student.42.fr>            +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/15 12:55:43 by husahuc      #+#   ##    ##    #+#       */
-/*   Updated: 2019/04/29 17:17:08 by husahuc     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/14 15:54:36 by husahuc     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "builtin.h"
-
-//printf a changer pour ft_printf
-
-int			verif_int(char *name)
-{
-	int i;
-
-	i = 0;
-	while (name[i])
-	{
-		if ((i == 0 && name[i] == '-') ||
-			(name[i] >= '0' && name[i] <= '9'))
-			i++;
-		else
-		{
-			printf("test: integer expression expected: %s\n", name);
-			return (-1);
-		}
-	}
-	return (0);
-}
 
 int			comp_num_operator(char *name1, char *type, char *name2)
 {
@@ -50,7 +29,7 @@ int			comp_num_operator(char *name1, char *type, char *name2)
 		return (ft_atoi(name1) <= ft_atoi(name2)) ? 0 : 1;
 	else
 	{
-		printf("test: unknown condition: %s\n", type);
+		ft_printf("test: unknown condition: %s\n", type);
 		return (2);
 	}
 }
@@ -63,7 +42,7 @@ int			comp_operator(char *name1, char *type, char *name2)
 		return (ft_strcmp(name1, name2) != 0) ? 0 : 1;
 	else if (type[0] != '-')
 	{
-		printf("test: condition expected: %s\n", type);
+		ft_printf("test: condition expected: %s\n", type);
 		return (1);
 	}
 	else
@@ -104,17 +83,17 @@ int			simple_operator(char *type, char *name)
 
 	if (type[0] != '-')
 	{
-		printf("test: unknown condition: %s\n", type);
+		ft_printf("test: unknown condition: %s\n", type);
 		return (2);
 	}
 	if (ft_strlen(type) < 2)
 	{
-		printf("zsh: parse error: condition expected: %s\n", type);
+		ft_printf("zsh: parse error: condition expected: %s\n", type);
 		return (2);
 	}
 	if (!ft_strchr("ebcdfLpSgurwx", type[1]) || ft_strlen(type) > 2)
 	{
-		printf("test: unknown condition: %s\n", type);
+		ft_printf("test: unknown condition: %s\n", type);
 		return (2);
 	}
 	if (stat(name, &s_type) == -1)
@@ -139,27 +118,18 @@ int			ft_test(char **argv, t_ft *global)
 		inv = 1;
 		argv++;
 	}
-	if (ft_tabclen(argv) == 2)
-	{
-		if (argv[1] == NULL)
-			i = 1;
-	}
+	if (ft_tabclen(argv) == 2 && argv[1] == NULL)
+		i = 1;
 	else if (ft_tabclen(argv) == 3)
 		i = simple_operator(argv[1], argv[2]);
 	else if (ft_tabclen(argv) == 4)
 		i = comp_operator(argv[1], argv[2], argv[3]);
 	else
 	{
-		printf("test: too many arguments");
+		ft_printf("test: too many arguments");
 		return (2);
 	}
 	if (inv == 1)
-	{
-		if (i == 0)
-			i = 1;
-		else if (i == 1)
-			i = 0;
-	}
-	printf("%d\n", i);
+		i = (i == 0) ? 1 : 0;
 	return (i);
 }

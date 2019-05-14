@@ -6,7 +6,7 @@
 /*   By: husahuc <husahuc@student.42.fr>            +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/23 15:48:11 by husahuc      #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/29 16:29:38 by husahuc     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/14 15:55:25 by husahuc     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -32,12 +32,18 @@ int				ft_change_dir(char *path, t_ft *ft_global, char *old);
 int				ft_error_cd(char *error, char *name);
 
 // temporary
-int		ft_tabclen(char **tab);
+int				ft_tabclen(char **tab);
 
 /*
 ** ft_test.c
 */
 int				ft_test(char **argv, t_ft *global);
+int				verif_int(char *name);
+int				comp_num_operator(char *name1, char *type, char *name2);
+int				comp_operator(char *name1, char *type, char *name2);
+int				test_simple_operator(char *type, char *name,
+				struct stat s_type);
+int				simple_operator(char *type, char *name);
 
 /*
 ** list_env.c
