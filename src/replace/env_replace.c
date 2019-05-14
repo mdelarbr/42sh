@@ -6,7 +6,7 @@
 /*   By: mdelarbr <mdelarbr@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/04/16 17:41:43 by mdelarbr     #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/14 17:20:13 by mdelarbr    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/14 18:40:09 by mdelarbr    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -87,7 +87,8 @@ char		*replace_env(t_var *env, char *str, int i)
 			i++;
 		ar[3] = ft_strsub(str, s, i - s);
 	}
+	ar[2] = replace_while(env, ar);
 	ft_strdel(&ar[0]);
 	ft_strdel(&ar[1]);
-	return (replace_while(env, ar));
+	return (ar[2]);
 }

@@ -6,31 +6,13 @@
 /*   By: mdelarbr <mdelarbr@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/04/15 17:27:56 by mdelarbr     #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/14 14:22:56 by mdelarbr    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/14 18:52:25 by mdelarbr    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "../../includes/lexeur.h"
 #include "../../includes/termcaps.h"
-
-char		*env_var(t_var *env, char *str)
-{
-	t_var	*start;
-
-	start = env;
-	while (start)
-	{
-		if (ft_strcmp(start->name, str) == 0 && start->type == ENVIRONEMENT)
-		{
-			ft_strdel(&str);
-			return (start->data);
-		}
-		start = start->next;
-	}
-	ft_strdel(&str);
-	return (ft_strdup(""));
-}
 
 char		*make_string(char **array)
 {
@@ -46,38 +28,6 @@ char		*make_string(char **array)
 			ft_strjoin_free(&res, " ");
 		i++;
 	}
-	return (res);
-}
-
-char		*replace_alias(char *array, t_var *var, t_replace *replace)
-{
-	int			i;
-	char		*res;
-	t_replace	*tmp_r;
-
-	tmp_r = replace;
-	i = 0;
-	while (var && (ft_strcmp(array, var->name) != 0 && var->type != ALIAS))
-		var = var->next;
-	if (!var)
-	{
-		res = ft_strdup(array);
-		ft_strdel(&array);
-		return (res);
-	}
-	while (tmp_r)
-	{
-		if (ft_strcmp(tmp_r->name, var->name) == 0)
-		{
-			res = ft_strdup(var->name);
-			ft_strdel(&array);
-			return (res);
-		}
-		tmp_r = tmp_r->next;
-	}
-	list_add(&replace, array);
-	res = ft_strdup(var->data);
-	ft_strdel(&array);
 	return (res);
 }
 
@@ -103,6 +53,22 @@ int			check_alias(char *array, t_var *var, t_replace *replace)
 	return (1);
 }
 
+int			replace_find_alias(char ***array, t_var *var, t_replace *r, int i)
+{
+	int		done;
+
+	done = 0;
+	if (i == 0 || find_token((*array)[i - 1], 0) != -1)
+	{
+		if (check_alias((*array)[i], var, r) == 1)
+		{
+			done = 1;
+			(*array)[i] = replace_alias((*array)[i], var, r);
+		}
+	}
+	return (done);
+}
+
 int			remove_env_while(char ***array, t_var *var, t_replace *replace)
 {
 	int		done;
@@ -112,14 +78,7 @@ int			remove_env_while(char ***array, t_var *var, t_replace *replace)
 	i = 0;
 	while ((*array)[i])
 	{
-		if (i == 0 || find_token((*array)[i - 1], 0) != -1)
-		{
-			if (check_alias((*array)[i], var, replace) == 1)
-			{
-				done = 1;
-				(*array)[i] = replace_alias((*array)[i], var, replace);
-			}
-		}
+		replace_find_alias(array, var, replace, i);
 		if (ft_strstr((*array)[i], "$") != NULL)
 		{
 			done = 1;
