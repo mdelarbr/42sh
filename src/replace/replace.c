@@ -6,7 +6,7 @@
 /*   By: mdelarbr <mdelarbr@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/04/15 17:27:56 by mdelarbr     #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/13 15:30:19 by mdelarbr    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/14 14:22:56 by mdelarbr    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -53,9 +53,9 @@ char		*replace_alias(char *array, t_var *var, t_replace *replace)
 {
 	int			i;
 	char		*res;
-	t_replace	*tmp;
+	t_replace	*tmp_r;
 
-	tmp = replace;
+	tmp_r = replace;
 	i = 0;
 	while (var && (ft_strcmp(array, var->name) != 0 && var->type != ALIAS))
 		var = var->next;
@@ -65,15 +65,15 @@ char		*replace_alias(char *array, t_var *var, t_replace *replace)
 		ft_strdel(&array);
 		return (res);
 	}
-	while (tmp)
+	while (tmp_r)
 	{
-		if (ft_strcmp(tmp->name, var->name) == 0)
+		if (ft_strcmp(tmp_r->name, var->name) == 0)
 		{
 			res = ft_strdup(var->name);
 			ft_strdel(&array);
 			return (res);
 		}
-		tmp = tmp->next;
+		tmp_r = tmp_r->next;
 	}
 	list_add(&replace, array);
 	res = ft_strdup(var->data);
@@ -90,10 +90,10 @@ int			check_alias(char *array, t_var *var, t_replace *replace)
 	tmp_var = var;
 	i = 0;
 	r = replace;
-	while (tmp_var && (ft_strcmp(array, tmp_var->name) != 0 && tmp_var->type != ALIAS))
+	while (tmp_var && (ft_strcmp(array, tmp_var->name) != 0))
 		tmp_var = tmp_var->next;
 	if (!tmp_var)
-		return (1);
+		return (0);
 	while (r)
 	{
 		if (ft_strcmp(r->name, tmp_var->name) == 0)
@@ -114,7 +114,7 @@ int			remove_env_while(char ***array, t_var *var, t_replace *replace)
 	{
 		if (i == 0 || find_token((*array)[i - 1], 0) != -1)
 		{
-			if (check_alias((*array)[i], var, replace) == 0)
+			if (check_alias((*array)[i], var, replace) == 1)
 			{
 				done = 1;
 				(*array)[i] = replace_alias((*array)[i], var, replace);
