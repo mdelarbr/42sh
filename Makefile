@@ -6,7 +6,7 @@
 #    By: mdelarbr <mdelarbr@student.le-101.fr>      +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2019/03/04 18:02:46 by mjalenqu     #+#   ##    ##    #+#        #
-#    Updated: 2019/05/14 18:01:18 by mdelarbr    ###    #+. /#+    ###.fr      #
+#    Updated: 2019/05/15 19:31:40 by husahuc     ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -31,7 +31,7 @@ INC_NAME = termcaps.h
 INC = $(addprefix $(INC_PATH), $(INC_NAME))
 SRC = $(addprefix $(SRC_PATH), $(SRC_NAME))
 OBJ = $(addprefix $(OBJ_PATH), $(OBJ_NAME))
-FLAG += -Wall -Werror -Wextra -g3 -fsanitize=address
+FLAG += -Wall -Werror -Wextra -g3
 FLAG_END = -lcurses
 NORME = norminette
 
