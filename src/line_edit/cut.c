@@ -6,7 +6,7 @@
 /*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/07 09:34:46 by mjalenqu     #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/15 09:12:22 by mjalenqu    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/15 10:20:37 by mjalenqu    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -80,39 +80,28 @@ void    cut_char(t_pos *pos)
 	}
 	else
 		pos->ans = remove_cut(pos->ans, pos->let_nb, pos->start_select);
-	// print_ans(pos, 0, pos->start_co);
-	// pos->ans_printed = 1;
+	tputs(tgetstr("ve", NULL), 1, ft_putchar);
+	clear_and_print(pos);
 }
 
 void	paste(t_pos *pos)
 {
 	char	*tmp;
+	char	co[2];
+	int		i;
 
 	tmp = stock(NULL, 4);
 	if (tmp == NULL)
 		return ;
-	if (pos->ans == NULL || pos->ans[0] == '\0')
+	i = 0;
+	co[1] = '\0';
+	while (tmp[i])
 	{
-		ft_strdel(&pos->ans);
-		pos->ans = ft_strdup(tmp);
-		pos->act_co = pos->start_co;
-		pos->act_li = pos->start_li;
-		pos->let_nb = 0;
+		co[0] = tmp[i];
+		input_is_printable_char(pos, co);
+		i++;
 	}
-	else if (tmp != NULL)
-		ft_strjoin_insert(&pos->ans, tmp, pos->let_nb);
-	pos->len_ans = ft_strlen(pos->ans);
-	if (pos->let_nb == 0)
-	{
-		print_ans(pos, 0, pos->start_co);
-		pos->ans_printed = 1;
-		pos->act_co = pos->start_co;
-		pos->act_li = pos->start_li;
-		pos->let_nb = 0;
-		tputs(tgoto(tgetstr("cm", NULL), pos->act_co, pos->act_li),
-			1, ft_putchar);
-	}
-	pos->debugchar = pos->ans;
+	clear_and_print(pos);
 }
 
 void	copy(t_pos *pos)
@@ -121,7 +110,8 @@ void	copy(t_pos *pos)
         return ;
     save_char(pos);
 	pos->start_select = -1;
-	
+	tputs(tgetstr("ve", NULL), 1, ft_putchar);
+	clear_and_print(pos);
 }
 
 void	check_copy(unsigned char *buf, t_pos *pos)
@@ -133,6 +123,4 @@ void	check_copy(unsigned char *buf, t_pos *pos)
 	else if (buf[0] == 226 && buf[1] == 136 && buf[2] == 154)
 		paste(pos);
 	pos->start_select = -1;
-	tputs(tgetstr("ve", NULL), 1, ft_putchar);
-	clear_and_print(pos);
 }
