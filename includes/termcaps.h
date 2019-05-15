@@ -6,7 +6,7 @@
 /*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/28 09:15:13 by mjalenqu     #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/09 10:24:22 by mjalenqu    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/13 09:31:20 by mjalenqu    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -18,6 +18,7 @@
 # include "../libft/includes/ft_str.h"
 # include "../libft/includes/ft_int.h"
 # include "../libft/includes/ft_unix.h"
+# include "../libft/includes/ft_printf.h"
 # include "exec.h"
 # include "check_error.h"
 # include <stdio.h>
@@ -25,6 +26,7 @@
 # include <term.h>
 # include <stdlib.h>
 # include <curses.h>
+# include <dirent.h>
 
 /*
 ** color **
@@ -93,10 +95,19 @@ typedef struct		s_pos
 	int				debug3;
 	int				debug4;
 	int				debug5;
+    char            *debugchar;
 	char			*toto;
 	struct termios	old_term;
 	struct termios	my_term;
 }					t_pos;
+
+typedef struct        s_htab
+{
+    struct s_htab    *next;
+    struct s_htab    *prev;
+    char            *content;
+    int                content_no;
+}                    t_htab;
 
 typedef struct		s_inter
 {
@@ -141,6 +152,7 @@ typedef struct			s_hist
 
 void	print_info(t_pos *pos);
 void	print_hist(t_pos *pos, t_hist *hist);
+
 
 /*
 ** CALCUL_LINE
@@ -334,6 +346,7 @@ char					*remove_char(char **str, int i);
 *******************************************************************************
 */
 //void					free_all(t_all *all);
+void					check_copy(unsigned char *buf, t_pos *pos);
 void					free_env(t_var *var);
 
 # include "lexeur.h"

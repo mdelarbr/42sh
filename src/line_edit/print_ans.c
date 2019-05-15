@@ -6,7 +6,7 @@
 /*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/04/04 12:07:48 by mjalenqu     #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/09 09:15:51 by mjalenqu    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/13 15:22:06 by mjalenqu    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -47,6 +47,7 @@ static int		global_case(int *act_co, int *act_li, char *buf, t_pos *pos)
 {
 	int		i;
 
+
 	if (*act_co == 0 || (pos->is_complete == 0 && pos->let_nb > 0 &&
 			pos->ans[pos->let_nb - 1] == '\n' && *act_co == pos->len_prompt))
 	{
@@ -66,9 +67,12 @@ static int		global_case(int *act_co, int *act_li, char *buf, t_pos *pos)
 
 void			print_ans(t_pos *pos, int i, int act_co)
 {
-	if (ft_strchr(pos->ans, '\n' != 0))
+	pos->debug = pos->act_co;
+	pos->debug2 = pos->act_li;
+	pos->debug4 = pos->start_li;
+	if (pos->ans && ft_strchr(pos->ans, '\n' != 0))
 		write(1, pos->ans + i, ft_strlen(pos->ans) - i);
-	else
+	else if (pos->ans)
 	{
 		while (pos->ans[i])
 		{

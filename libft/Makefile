@@ -5,8 +5,8 @@
 #                                                  +:+:+   +:    +:  +:+:+     #
 #    By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
-#    Created: 2019/02/25 12:55:34 by shthevak     #+#   ##    ##    #+#        #
-#    Updated: 2019/05/07 08:23:24 by mjalenqu    ###    #+. /#+    ###.fr      #
+#    Created: 2019/02/25 12:55:34 by mjalenqu     #+#   ##    ##    #+#        #
+#    Updated: 2019/05/15 08:34:52 by mjalenqu    ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -44,6 +44,8 @@ IOBJ_PATH = $(addprefix $(OBJ_PATH), int/)
 MSRC_PATH = $(addprefix $(SRC_PATH), mem/)
 MOBJ_PATH = $(addprefix $(OBJ_PATH), mem/)
 
+PSRC_PATH = $(addprefix $(SRC_PATH), ft_printf/)
+POBJ_PATH = $(addprefix $(OBJ_PATH), ft_printf/)
 
 # **************************************************************************** #
 # 									SRCS                                       #
@@ -58,7 +60,7 @@ SSRC_NAME = ft_bzero.c ft_isalpha.c ft_isascii.c ft_itoa.c ft_itoa_base.c\
 			ft_strstr.c ft_strsub.c ft_voidrev.c ft_voidswap.c ft_put_space.c\
 			ft_strsplit.c ft_free_tab.c get_next_line.c ft_putcolor.c ft_putcolor2.c ft_isspace.c\
 			ft_strncpy.c ft_strjoinf.c ft_strchr.c ft_strcapitalizer.c ft_copy_part_str.c\
-			ft_swap_let_string.c ft_strrev.c ft_secure_free.c
+			ft_swap_let_string.c ft_strrev.c ft_secure_free.c ft_strndup.c
 
 UINC_NAME = ft_unix.h
 USRC_NAME = ft_terminal_h.c ft_terminal_w.c ft_file_exists.c ft_create_file.c\
@@ -73,6 +75,12 @@ MINC_NAME = ft_mem.h
 MSRC_NAME = ft_memset.c ft_memccpy.c ft_memchr.c ft_memcmp.c ft_memcpy.c\
 			ft_memdel.c ft_memmove.c
 
+PINC_NAME = ft_printf.h
+PSRC_NAME = add_conversion.c add_flag2.c add_flags.c bonus_conversion_type_1.c\
+			bonus_conversion_type_2.c bonus_conversion_type_3.c conversion_type.c\
+			conversion_type2.c determ_data.c ft_printf.c handle_flags_order.c\
+			handle_float.c handle_prec_and_width.c others.c others2.c \
+			print_colors.c print_printf.c
 
 # **************************************************************************** #
 #  									VAR                                        #
@@ -94,12 +102,15 @@ MOBJ_NAME = $(MSRC_NAME:.c=.o)
 MOBJ = $(addprefix $(MOBJ_PATH), $(MOBJ_NAME))
 MINC = $(addprefix $(INC_PATH), $(MINC_NAME))
 
+POBJ_NAME = $(PSRC_NAME:.c=.o)
+POBJ = $(addprefix $(POBJ_PATH), $(POBJ_NAME))
+PINC = $(addprefix $(INC_PATH), $(PINC_NAME))
 
 # **************************************************************************** #
 #  									FLAG                                       #
 # **************************************************************************** #
 
-FLAGS = -Wall -Werror -Wextra -g3 #-fsanitize=adress
+FLAGS = -Wall -Werror -Wextra -g3 -O3 #-fsanitize=address
 
 # **************************************************************************** #
 # 									REGLES                                     #
@@ -107,8 +118,8 @@ FLAGS = -Wall -Werror -Wextra -g3 #-fsanitize=adress
 
 all : $(OBJ_PATH) $(NAME)
 
-$(NAME): $(SOBJ) $(UOBJ) $(IOBJ) $(LOBJ) $(MOBJ)
-	@ar rcs $(NAME) $(SOBJ) $(UOBJ) $(IOBJ) $(LOBJ) $(MOBJ)
+$(NAME): $(SOBJ) $(UOBJ) $(IOBJ) $(LOBJ) $(MOBJ) $(POBJ)
+	@ar rcs $(NAME) $(SOBJ) $(UOBJ) $(IOBJ) $(LOBJ) $(MOBJ) $(POBJ)
 	@echo "\n\033[0m"
 
 $(OBJ_PATH):
@@ -117,6 +128,7 @@ $(OBJ_PATH):
 	@mkdir -p $(UOBJ_PATH) 2> /dev/null
 	@mkdir -p $(IOBJ_PATH) 2> /dev/null
 	@mkdir -p $(MOBJ_PATH) 2> /dev/null
+	@mkdir -p $(POBJ_PATH) 2> /dev/null
 
 $(SOBJ_PATH)%.o: $(SSRC_PATH)%.c $(SINC)
 	@gcc $(FLAGS) -I $(INC_PATH) -o $@ -c $<
@@ -131,6 +143,10 @@ $(IOBJ_PATH)%.o: $(ISRC_PATH)%.c $(IINC)
 	@echo "$(LIGHT_RED).\c"
 
 $(MOBJ_PATH)%.o: $(MSRC_PATH)%.c $(MINC)
+	@gcc $(FLAGS) -I $(INC_PATH) -o $@ -c $<
+	@echo "$(LIGHT_RED).\c"
+
+$(POBJ_PATH)%.o: $(PSRC_PATH)%.c $(PINC)
 	@gcc $(FLAGS) -I $(INC_PATH) -o $@ -c $<
 	@echo "$(LIGHT_RED).\c"
 

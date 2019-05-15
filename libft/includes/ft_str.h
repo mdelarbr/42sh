@@ -5,8 +5,8 @@
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2019/03/03 15:18:39 by shthevak     #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/07 08:23:07 by mjalenqu    ###    #+. /#+    ###.fr     */
+/*   Created: 2019/03/03 15:18:39 by mjalenqu     #+#   ##    ##    #+#       */
+/*   Updated: 2019/05/13 09:22:54 by mjalenqu    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -51,6 +51,7 @@ char				*ft_strcpy(char *dest, const char *str);
 char				*ft_strncpy(char *dst, const char *str, size_t len);
 void				ft_strdel(char **str);
 char				*ft_strdup(char *str);
+char				*ft_strndup(char *str, int len);
 int					ft_strequ(const char *s1, const char *s2);
 char				*ft_strjoin(const char *s1, const char *s2);
 void				ft_strjoin_free(char **s1, const char *s2);

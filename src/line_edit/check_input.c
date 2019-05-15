@@ -5,8 +5,8 @@
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2019/04/23 14:41:17 by vde-sain     #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/09 10:33:50 by mjalenqu    ###    #+. /#+    ###.fr     */
+/*   Created: 2019/04/23 14:41:17 by mjalenqu     #+#   ##    ##    #+#       */
+/*   Updated: 2019/05/13 09:51:39 by mjalenqu    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -31,10 +31,12 @@ static void		update_history(t_pos *pos, t_hist *hist, char *buf)
 
 t_hist			*check_input(unsigned char *buf, t_pos *pos, t_hist *hist)
 {
-	selection_check(pos, (char*)buf);
-//	if (check_copy(buf, pos) == 0)
+	if (buf[0] != 226 && buf[0] != 195)
+		selection_check(pos, (char*)buf);
 	if (buf[0] == 27)
 		hist = escape_code((char*)buf, pos, hist);
+	else if (buf[0] == 226 || buf[0] == 195)
+		check_copy(buf, pos);
 	else
 	{
 		if (buf[0] == 9)

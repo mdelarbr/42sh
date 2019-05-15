@@ -6,7 +6,7 @@
 /*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/04/04 11:44:25 by rlegendr     #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/09 10:24:40 by mjalenqu    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/13 09:24:00 by mjalenqu    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -51,7 +51,7 @@ char		*termcaps42sh(char *prompt, t_pos *pos, t_hist *hist)
 		ret = read(0, buf, 1);
 		if (buf[0] == 137)
 			return (NULL);
-		if (buf[0] == 27)
+		if (buf[0] == 27 || buf[0] == 226 || buf[0] == 195)
 			ret = read(0, buf + 1, 8);
 		if (pos->max_co > 2)
 			hist = check_input(buf, pos, hist);

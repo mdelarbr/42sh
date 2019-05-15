@@ -3,13 +3,15 @@
 /*                                                              /             */
 /*   ft_bzero.c                                       .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: shthevak <marvin@le-101.fr>                +:+   +:    +:    +:+     */
+/*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2019/03/02 17:19:12 by shthevak     #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/04 13:17:27 by shthevak    ###    #+. /#+    ###.fr     */
+/*   Created: 2019/03/02 17:19:12 by mjalenqu     #+#   ##    ##    #+#       */
+/*   Updated: 2019/05/13 09:22:54 by mjalenqu    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
+
+#include "ft_str.h"
 
 void	ft_bzero(void *elem, int i)
 {

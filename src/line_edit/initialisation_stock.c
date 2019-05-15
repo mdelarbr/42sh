@@ -6,7 +6,7 @@
 /*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/06 08:12:35 by rlegendr     #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/09 10:24:05 by mjalenqu    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/14 13:32:42 by mjalenqu    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -56,12 +56,14 @@ void			*stock(void *to_stock, int usage)
 
 	if (usage == 0)
 		stock_pos = to_stock;
-	if (usage == 1)
+	else if (usage == 1)
 		return (stock_pos);
-	if (usage == 3)
+	else if (usage == 3)
 		copy = to_stock;
-	if (usage == 4)
+	else  if (usage == 4)
 		return (copy);
+	else if (usage == 5 && copy)
+		ft_strdel(&copy);
 	return (NULL);
 }
 
@@ -79,6 +81,7 @@ static void		init_classic_var(t_pos *pos)
 	pos->debug3 = 0;
 	pos->debug4 = 0;
 	pos->debug5 = 0;
+	pos->debugchar = NULL;
 }
 
 void			init_pos(t_pos *pos)

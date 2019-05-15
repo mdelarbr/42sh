@@ -5,8 +5,8 @@
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2019/04/30 09:27:30 by vde-sain     #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/08 13:34:42 by mjalenqu    ###    #+. /#+    ###.fr     */
+/*   Created: 2019/04/30 09:27:30 by mjalenqu     #+#   ##    ##    #+#       */
+/*   Updated: 2019/05/14 10:21:41 by mjalenqu    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -48,6 +48,8 @@ void	print_info(t_pos *pos)
 		
 //		tputs(tgoto(tgetstr("cm", NULL), 0, 0), 1, ft_putchar);
 //		ft_printf("{S.white.T.grey.}pos->ans  = %-80.80s/{eoc}\n", pos->ans);
+		tputs(tgoto(tgetstr("cm", NULL), 0, 0), 1, ft_putchar);
+				ft_printf("{S.white.T.grey.}search  = %-40.40s/{eoc}\n", pos->ans);
 
 		tputs(tgoto(tgetstr("cm", NULL), pos->max_co - 17, 0), 1, ft_putchar);
 		printf("act_co    = %03d/\n", pos->act_co);
@@ -86,7 +88,8 @@ void	print_info(t_pos *pos)
 		tputs(tgoto(tgetstr("cm", NULL), pos->max_co - 17, 17), 1, ft_putchar);
 		printf("debug4    = %03d/\n", pos->debug4);
 		tputs(tgoto(tgetstr("cm", NULL), 0, 18), 1, ft_putchar);
-		printf("copy    = %s/\n", stock(NULL, 4));
+		if (stock(NULL, 4))
+			printf("copy    = %s/\n", stock(NULL, 4));
 	}
 	else if (pos->max_co < 16)
 	{

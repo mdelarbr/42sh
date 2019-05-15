@@ -1,4 +1,4 @@
-/* ************************************************************************** */
+ /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
 /*   copy.c                                           .::    .:/ .      .::   */
@@ -83,7 +83,7 @@ void	selected(t_pos *pos, char *buf)
 
 void	selection_check(t_pos *pos, char *buf)
 {
-	if (pos->ans[0] == '\0')
+	if (!pos->ans || pos->ans[0] == '\0')
 		return ;
 	if (pos->start_select != -1 && is_select(buf, pos) == 0)
 		print_from_begin(pos);

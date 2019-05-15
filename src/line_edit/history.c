@@ -6,7 +6,7 @@
 /*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/04/05 21:32:49 by rlegendr     #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/07 08:21:13 by mjalenqu    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/14 13:29:29 by mjalenqu    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -79,6 +79,7 @@ t_hist		*create_history(t_pos *pos, t_hist *hist)
 			hist->cmd = ft_strnew(0);
 			hist->cmd = ft_strjoinf(hist->cmd, line, 3);
 			hist = add_list_back_hist(hist);
+			
 		}
 		else if (line != NULL)
 			free(line);
