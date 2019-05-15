@@ -6,7 +6,7 @@
 /*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/07 09:34:46 by mjalenqu     #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/15 09:06:46 by mjalenqu    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/15 09:12:22 by mjalenqu    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -121,8 +121,7 @@ void	copy(t_pos *pos)
         return ;
     save_char(pos);
 	pos->start_select = -1;
-	tputs(tgetstr("ve", NULL), 1, ft_putchar);
-	clear_and_print(pos);
+	
 }
 
 void	check_copy(unsigned char *buf, t_pos *pos)
@@ -134,4 +133,6 @@ void	check_copy(unsigned char *buf, t_pos *pos)
 	else if (buf[0] == 226 && buf[1] == 136 && buf[2] == 154)
 		paste(pos);
 	pos->start_select = -1;
+	tputs(tgetstr("ve", NULL), 1, ft_putchar);
+	clear_and_print(pos);
 }
