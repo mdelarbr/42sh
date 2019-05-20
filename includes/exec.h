@@ -3,10 +3,10 @@
 /*                                                              /             */
 /*   exec.h                                           .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: mdelarbr <mdelarbr@student.le-101.fr>      +:+   +:    +:    +:+     */
+/*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/04/18 13:44:02 by mdelarbr     #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/02 18:08:38 by mdelarbr    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/04/30 13:19:06 by mjalenqu    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -19,7 +19,6 @@
 # include <unistd.h>
 
 typedef struct			s_lexeur t_lexeur;
-typedef struct			s_var t_var;
 
 typedef	struct			s_process
 {
@@ -28,7 +27,7 @@ typedef	struct			s_process
 	pid_t				pid;
 	char				status;
 	char				split;
-	char				*token;
+	char				token;
 }						t_process;
 
 typedef struct			s_job
@@ -46,7 +45,7 @@ typedef struct			s_job
 **┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 */
 
-int		start_exec(t_lexeur **res, t_var *var);
+int		start_exec(t_lexeur **res);
 
 
 /*
@@ -56,42 +55,4 @@ int		start_exec(t_lexeur **res, t_var *var);
 */
 
 void		fill_process(t_job *j, t_lexeur **res);
-
-/*
-**┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-**┃                                 exec_main.c                                ┃
-**┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-*/
-
-void		main_exec(t_job *j, t_var *var);
-int			solve_execve(char *path, char **arg, t_var *var);
-int			main_exec_while(t_process *p, t_var *var);
-
-/*
-**┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-**┃                                 tools.c       	                           ┃
-**┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-*/
-
-char		*ft_join_env(char *s1, char const *s2);
-char		**split_env(t_var *var);
-char		*strjoin_path(char *s1, char *s2);
-int			use_execve_acces(char *tmp, char **res, t_var *l_var);
-
-/*
-**┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-**┃                                 tools.c       	                           ┃
-**┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-*/
-
-int			find_builtins(t_process *p);
-void		cnf_print_error(char *str);
-
-/*
-**┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-**┃                                 option_exec.c                              ┃
-**┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-*/
-
-int			main_option_exec(t_process **first, t_process **second, t_var *var);
 #endif

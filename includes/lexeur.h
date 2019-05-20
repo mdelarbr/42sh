@@ -6,7 +6,7 @@
 /*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/22 13:50:20 by mdelarbr     #+#   ##    ##    #+#       */
-/*   Updated: 2019/04/30 13:24:06 by mjalenqu    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/16 13:10:36 by rlegendr    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -17,6 +17,7 @@
 # include "../libft/includes/ft_int.h"
 # include "../libft/includes/ft_unix.h"
 # include "../libft/includes/ft_str.h"
+# include "../libft/includes/ft_mem.h"
 # include "termcaps.h"
 # include <stdio.h>
 # include <unistd.h>

@@ -1,26 +1,34 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   builtins.c                                       .::    .:/ .      .::   */
+/*   ft_strndup.c                                     .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: mdelarbr <mdelarbr@student.le-101.fr>      +:+   +:    +:    +:+     */
+/*   By: rlegendr <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2019/05/02 11:06:30 by mdelarbr     #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/02 18:10:24 by mdelarbr    ###    #+. /#+    ###.fr     */
+/*   Created: 2019/02/25 12:30:24 by rlegendr     #+#   ##    ##    #+#       */
+/*   Updated: 2019/05/09 15:09:54 by rlegendr    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "../../includes/exec.h"
+#include "ft_str.h"
 
-/*
-** TODO faire en sorte qu'on puisse exec un builtins au milieu d'autres
-** comme ls.
-*/
-
-int		find_builtins(t_process *p)
+char		*ft_strndup(char *s1, int n)
 {
-	if (ft_strcmp(p->cmd[0], "cd") == 0)
-		return (1);
-	return (0);
+	int		i;
+	char	*tab;
+
+	i = ft_strlen(s1);
+	if (n < i)
+		i = n;
+	if (!(tab = (char *)malloc(sizeof(char) * i + 1)))
+		return (NULL);
+	i = 0;
+	while (s1[i] != '\0' && i < n)
+	{
+		tab[i] = s1[i];
+		i++;
+	}
+	tab[i] = '\0';
+	return (tab);
 }

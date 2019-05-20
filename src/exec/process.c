@@ -6,7 +6,7 @@
 /*   By: mdelarbr <mdelarbr@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/04/26 14:34:20 by mdelarbr     #+#   ##    ##    #+#       */
-/*   Updated: 2019/04/29 17:35:12 by mdelarbr    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/04/27 15:05:25 by mdelarbr    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -19,7 +19,7 @@ int			cnt_process(t_lexeur **res, int i)
 	int		nb;
 
 	nb = 0;
-	while (res[i] && (res[i]->word || res[i]->redirection))
+	while (res[i] && res[i]->word)
 	{
 		i++;
 		nb++;
@@ -30,17 +30,16 @@ int			cnt_process(t_lexeur **res, int i)
 void		fill_cmd(t_lexeur **res, t_job **j, int *k, int *i)
 {
 	if (res[*i]->token == 4)
-		(*j)->p->token = ft_strdup(ft_strjoin(">>", res[*i]->redirection));
+		(*j)->p->token = 'R';
 	else if (res[*i]->token == 5)
-		(*j)->p->token = ft_strdup(ft_strjoin(">", res[*i]->redirection));
+		(*j)->p->token = '>';
 	else if (res[*i]->token == 6)
-		(*j)->p->token = ft_strdup(ft_strjoin("<<", res[*i]->redirection));
+		(*j)->p->token = 'L';
 	else if (res[*i]->token == 7)
-		(*j)->p->token = ft_strdup(ft_strjoin("<", res[*i]->redirection));
+		(*j)->p->token = '<';
 	else
 	{
-		if (!res[*i]->redirection)
-			(*j)->p->token = ft_strdup("");
+		(*j)->p->token = '\0';
 		(*j)->p->cmd[*k] = ft_strdup(res[*i]->word);
 		(*k)++;
 	}
@@ -74,6 +73,8 @@ void		fill_process_split(t_job **j, t_lexeur **res, int *i)
 		(*j)->p->split = '\0';
 }
 
+/* TODO faire ensorte que les >> ou << etc ne suis pas pris comme des process.*/
+
 int			fill_process_while(t_lexeur **res, t_job **j, t_process **start,
 int *i)
 {
@@ -82,7 +83,8 @@ int *i)
 	k = 0;
 	fill_process_split(j, res, i);
 	(*j)->p->cmd = malloc(sizeof(char *) * (cnt_process(res, *i) + 1));
-	while (res[*i] && (res[*i]->word || res[*i]->redirection))
+	while (res[*i] && (res[*i]->word || (res[*i]->token == 4 ||
+	res[*i]->token == 5 || res[*i]->token == 6 || res[*i]->token == 7)))
 		fill_cmd(res, j, &k, i);
 	(*j)->p->cmd[k] = NULL;
 	if (res[*i] && (res[*i]->token != 1 && res[*i]->token != 8 && res[*i]->token
@@ -101,6 +103,7 @@ int *i)
 		(*j)->p = *start;
 		return (0);
 	}
+	(*i)++;
 	return (1);
 }
 
@@ -113,10 +116,15 @@ void		fill_process(t_job *j, t_lexeur **res)
 	j->p = malloc(sizeof(t_process));
 	start = j->p;
 	j->p->status = '\0';
+	while (res[i]) // probleme le tableau ne vas pas plus loin quand c'est >> ou << FUCK.
+	{
+		printf("\nres[%d]: _%s_\n", i, res[i]->word);
+		i++;
+	}
+	i = 0;
 	while (res[i])
 	{
 		if (fill_process_while(res, &j, &start, &i) == 0)
 			break ;
-		i++;
 	}
 }

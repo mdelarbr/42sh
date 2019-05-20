@@ -6,7 +6,7 @@
 /*   By: mdelarbr <mdelarbr@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/04/18 13:43:41 by mdelarbr     #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/02 18:03:57 by mdelarbr    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/04/27 13:11:45 by mdelarbr    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -31,7 +31,7 @@ void		print_job(t_job *j)
 		start = j->p;
 		while (j->p)
 		{
-			printf("--process--[%d]->next: _%p_\tsplit:_%c_\ttoken: |%s|\n", process, j->p->next, j->p->split, j->p->token);
+			printf("--process--[%d]->next: _%p_\tsplit:_%c_\ttoken: |%c|\n", process, j->p->next, j->p->split, j->p->split);
 			process++;
 			while (j->p->cmd[i])
 			{
@@ -45,7 +45,6 @@ void		print_job(t_job *j)
 		process = 0;
 		j = j->next;
 	}
-	puts("");
 }
 
 void		init_job(t_job *j)
@@ -82,7 +81,7 @@ void		fill_job(t_job *j, t_lexeur **res)
 	j->next = NULL;
 }
 
-int			start_exec(t_lexeur **res, t_var *var)
+int			start_exec(t_lexeur **res)
 {
 	t_job		*j;
 
@@ -90,7 +89,6 @@ int			start_exec(t_lexeur **res, t_var *var)
 	init_job(j);
 	fill_job(j, res);
 	fill_process(j, res);
-	//print_job(j);
-	main_exec(j, var);
+	print_job(j);
 	return (0);
 }
