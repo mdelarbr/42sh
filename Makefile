@@ -6,7 +6,7 @@
 #    By: mjalenqu <mjalenqu@student.42.fr>          +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2019/03/04 18:02:46 by mjalenqu     #+#   ##    ##    #+#        #
-#    Updated: 2019/05/20 14:34:16 by husahuc     ###    #+. /#+    ###.fr      #
+#    Updated: 2019/05/20 16:22:02 by husahuc     ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -26,7 +26,7 @@ SRC_NAME =	main/main.c\
 			replace/replace.c replace/env_replace.c replace/var_replace.c replace/tool.c replace/alias.c\
 			exec/exec.c exec/process.c exec/exec_main.c exec/tools.c exec/builtins.c exec/option_exec.c exec/alias.c \
 			builtin/ft_test.c builtin/ft_echo.c builtin/tool.c builtin/ft_cd.c \
-			builtin/ft_set.c builtin/ft_type.c
+			builtin/ft_set.c builtin/ft_type.c builtin/ft_export.c builtin/ft_unset.c
 OBJ_NAME = $(SRC_NAME:.c=.o)
 INC_NAME = termcaps.h
 

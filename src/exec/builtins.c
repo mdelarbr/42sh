@@ -6,7 +6,7 @@
 /*   By: mdelarbr <mdelarbr@student.42.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/02 11:06:30 by mdelarbr     #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/20 14:33:39 by husahuc     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/20 16:21:06 by husahuc     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -27,7 +27,9 @@ const t_builtin	g_builtin_list[LEN_BUILTIN_LIST] =
 	{"set", &ft_set},
 	{"echo", &ft_echo},
 	{"cd", &ft_cd},
-	{"type", &ft_type}
+	{"type", &ft_type},
+	{"export", &ft_export},
+	{"unset", &ft_unset}
 };
 
 int		find_builtins(t_process *p, t_var *var)

@@ -6,7 +6,7 @@
 /*   By: husahuc <husahuc@student.42.fr>            +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/16 11:50:38 by husahuc      #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/20 14:33:46 by husahuc     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/20 16:22:40 by husahuc     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -16,7 +16,7 @@
 
 # include "exec.h"
 
-# define LEN_BUILTIN_LIST 7
+# define LEN_BUILTIN_LIST 9
 
 typedef struct	s_builtin
 {
@@ -34,10 +34,13 @@ int				ft_echo(t_process *p, t_var **var);
 int				ft_cd(t_process *p, t_var **var);
 int				ft_set(t_process *p, t_var **ptr_var);
 int				ft_type(t_process *p, t_var **var);
+int				ft_export(t_process *p, t_var **ptr_var);
+int				ft_unset(t_process *p, t_var **ptr_var);
 
 char			*ft_get_val(char *name, t_var *var, int type);
 int				ft_tabclen(char **array);
 void			add_list_env(t_var **var, int type, char *name, char *data);
+int				remove_list_var(t_var **ptr_var, int type, char *name);
 
 # define ARGUMENTS "cd: Too many arguments."
 # define CD_NO_HOME "cd: No HOME directory."
