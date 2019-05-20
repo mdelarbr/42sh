@@ -6,7 +6,7 @@
 /*   By: mdelarbr <mdelarbr@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/04/15 17:27:56 by mdelarbr     #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/15 16:26:17 by mdelarbr    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/20 19:36:21 by mdelarbr    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -69,6 +69,8 @@ int			replace_find_alias(char ***array, t_var *var, t_replace *r, int i)
 	return (done);
 }
 
+// TODO gerer les simple quotes.
+
 int			remove_env_while(char ***array, t_var *var, t_replace *replace)
 {
 	int		done;
@@ -94,19 +96,19 @@ int			remove_env_while(char ***array, t_var *var, t_replace *replace)
 	return (done);
 }
 
-char		*remove_env(t_var *start, char *str)
+// TODO faire en sorte qu'on ne peut pas faire de boucle infinie comme bash on ne peut pas replace 2 fois une var.
+
+char		**remove_env(t_var *start, char *str)
 {
 	char		**array;
-	char		*tmp;
 	t_replace	*replace;
 
 	init_replace(&replace);
 	array = split_space(str);
-	while (1) // TODO faire en sorte qu'on ne peut pas faire de boucle infinie comme bash on ne peut pas replace 2 fois une var.
+	while (1)
 		if (remove_env_while(&array, start, replace) == 0)
 			break ;
 	ft_strdel(&str);
 //	free_replace(replace);
-	tmp = make_string(array);
-	return (tmp);
+	return (array);
 }

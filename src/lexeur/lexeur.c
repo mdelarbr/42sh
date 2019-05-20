@@ -6,7 +6,7 @@
 /*   By: mdelarbr <mdelarbr@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/22 13:48:08 by mdelarbr     #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/15 16:52:34 by mdelarbr    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/20 20:35:21 by mdelarbr    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -89,7 +89,6 @@ int			cnt_wrd(char *buf)
 		token = find_token(buf, i);
 		cnt_wrd_while(buf, &i, &cnt, token);
 	}
-	printf("cnt\t%d\n", cnt);
 	return (cnt);
 }
 
@@ -98,9 +97,10 @@ int			cnt_wrd(char *buf)
 t_lexeur	**start_lex(t_var *var, char *res)
 {
 	t_lexeur	**array;
+	char		**tmp;
 
 	array = NULL;
-	res = remove_env(var, res);
-	array = fill_lex(res, array);
+	tmp = remove_env(var, res);
+	array = fill_lex(tmp, array);
 	return (array);
 }

@@ -6,7 +6,7 @@
 /*   By: mdelarbr <mdelarbr@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/27 11:29:05 by mdelarbr     #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/15 16:36:14 by mdelarbr    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/20 20:36:53 by mdelarbr    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -51,48 +51,44 @@ t_lexeur	*fill_lex_redirection(char *buf, t_lexeur *res, int *i, int token)
 t_lexeur	*fill_lex_while(char *buf, int *i, int token)
 {
 	t_lexeur	*res;
-	int			start;
 
-	printf("buf[%d]: _%c_\n", *i, buf[*i]);
 	res = malloc(sizeof(t_lexeur));
 	if (buf[*i] && token != -1)
 		return (fill_lex_redirection(buf, res, i, token));
-	else if (buf[*i] == '"')
-	{
-		fill_lex_doudle_quote(buf, i, &start);
-		fill_struct(res, ft_strsub(buf, start, *i - start), -1, NULL);
-		(*i)++;
-		return (res);
-	}
-	else if (buf[*i] && ((buf[*i] < 9 || buf[*i] > 13) && (buf[*i] != ' ')))
-	{
-		fill_lex_solve_back_slash(buf, i, &start);
-		fill_struct(res, ft_strsub(buf, start, *i - start), -1, NULL);
-		return (res);
-	}
 	else
-		(*i)++;
+	{
+		fill_struct(res, buf, -1, NULL);
+		return (res);
+	}
 	return (NULL);
 }
 
-t_lexeur	**fill_lex(char *buf, t_lexeur **array)
+t_lexeur	**fill_lex(char **buf, t_lexeur **array)
 {
 	int			i;
 	int			j;
+	int			k;
 	t_lexeur	*tmp;
 
 	i = 0;
 	j = 0;
-	printf("res->_%s_\n", buf);
-	array = malloc(sizeof(t_lexeur *) * (cnt_wrd(buf) + 1));
 	while (buf[i])
 	{
-		if (!buf[i])
+		printf("buf[%d]: _%s_\n", i, buf[i]);
+		i++;
+	}
+	array = malloc(sizeof(t_lexeur *) * (i + 1));
+	i = 0;
+	while (buf[i])
+	{
+		k = 0;
+		if (ft_strcmp(buf[i], "") == 0)
 			break ;
-		if ((tmp = find_fd(buf, &i)) != NULL)
+		if ((tmp = find_fd(buf[i], 0)) != NULL)
 			array[j] = tmp;
-		else
-			array[j] = fill_lex_while(buf, &i, find_token(buf, i));
+		else if (buf[i])
+			array[j] = fill_lex_while(buf[i], &k, find_token(buf[i], k));
+		i++;
 		j++;
 	}
 	array[j] = NULL;

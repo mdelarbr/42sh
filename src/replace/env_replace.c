@@ -6,7 +6,7 @@
 /*   By: mdelarbr <mdelarbr@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/04/16 17:41:43 by mdelarbr     #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/15 14:48:28 by mdelarbr    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/20 19:36:30 by mdelarbr    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -43,6 +43,7 @@ char		*switch_word(char *str, char *tmp, int i)
 ** [1] = fisrt;
 ** [2] = res;
 ** [3] = end;
+** [4] = for '
 */
 
 char		*replace_while(t_var *env, char *ar[4])
@@ -62,13 +63,13 @@ char		*replace_while(t_var *env, char *ar[4])
 		}
 		start = start->next;
 	}
-	return (ft_strdup(""));
+	return (ft_strdup(ar[1]));
 }
 
 char		*replace_env(t_var *env, char *str, int i)
 {
 	int		s;
-	char	*ar[4];
+	char	*ar[5];
 
 	s = i;
 	ar[3] = ft_strdup("");
@@ -77,7 +78,8 @@ char		*replace_env(t_var *env, char *str, int i)
 	ar[1] = ft_strsub(str, s, i - s);
 	i++;
 	s = i;
-	while (str[i] && str[i] != '$' && str[i] != '"')
+	while (str[i] && str[i] != '$' && str[i] != '"' &&
+	(str[i] < 9 || str[i] > 13) && str[i] != ' ')
 		i++;
 	ar[0] = ft_strsub(str, s, i - s);
 	if (str[i])
