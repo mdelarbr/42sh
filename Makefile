@@ -6,7 +6,7 @@
 #    By: mdelarbr <mdelarbr@student.le-101.fr>      +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2019/03/04 18:02:46 by mjalenqu     #+#   ##    ##    #+#        #
-#    Updated: 2019/05/14 18:01:18 by mdelarbr    ###    #+. /#+    ###.fr      #
+#    Updated: 2019/05/15 14:03:05 by mdelarbr    ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -22,7 +22,7 @@ SRC_NAME =	main/main.c\
 			line_edit/input_is_entry.c line_edit/input_is_printable_char.c line_edit/jump.c line_edit/move_through_history.c\
 			line_edit/search_in_history.c line_edit/env.c line_edit/input_is_remove_char.c line_edit/print_ans.c\
 			lexeur/back_slash.c lexeur/error.c\
-			lexeur/fill_fd.c lexeur/lexeur.c lexeur/fill_lexeur.c lexeur/redirection.c \
+			lexeur/fill_fd.c lexeur/lexeur.c lexeur/fill_lexeur.c lexeur/redirection.c lexeur/double_quote.c\
 			replace/replace.c replace/env_replace.c replace/var_replace.c replace/tool.c replace/alias.c\
 			exec/exec.c exec/process.c exec/exec_main.c exec/tools.c exec/builtins.c exec/option_exec.c exec/alias.c
 OBJ_NAME = $(SRC_NAME:.c=.o)

@@ -6,7 +6,7 @@
 /*   By: mdelarbr <mdelarbr@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/22 13:48:08 by mdelarbr     #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/02 10:28:52 by mdelarbr    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/15 16:52:34 by mdelarbr    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -61,8 +61,14 @@ void		cnt_wrd_while(char *buf, int *i, int *cnt, int token)
 		(*cnt)++;
 		(*i) += g_fill_token[token].size;
 	}
-	else if (buf[*i] && ((buf[*i] >= 9 && buf[*i] <= 13) || buf[*i] == ' '))
-		jump_space(buf, i);
+	else if (buf[*i] && buf[*i] == '"')
+	{
+		cnt++;
+		(*i)++;
+		while (buf[*i] && buf[*i] != '"')
+			(*i)++;
+		(*i)++;
+	}
 	else if (buf[*i] && ((buf[*i] < 9 || buf[*i] > 13) && buf[*i] != ' '))
 		cnt_solve_back_slash(buf, i, cnt);
 	else
@@ -83,6 +89,7 @@ int			cnt_wrd(char *buf)
 		token = find_token(buf, i);
 		cnt_wrd_while(buf, &i, &cnt, token);
 	}
+	printf("cnt\t%d\n", cnt);
 	return (cnt);
 }
 

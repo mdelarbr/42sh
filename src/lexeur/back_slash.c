@@ -6,7 +6,7 @@
 /*   By: mdelarbr <mdelarbr@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/27 16:12:36 by mdelarbr     #+#   ##    ##    #+#       */
-/*   Updated: 2019/04/15 18:20:52 by mdelarbr    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/15 16:53:36 by mdelarbr    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -19,7 +19,7 @@ void		fill_lex_solve_back_slash(char *buf, int *i, int *start)
 
 	*start = *i;
 	while (buf[*i] && ((buf[*i] < 9 || buf[*i] > 13) &&
-	(buf[*i] != ' ')))
+	(buf[*i] != ' ' && buf[*i] != '"' && buf[*i] != '\'')))
 	{
 		if ((ret = find_token(buf, *i)) != -1)
 			if (buf[*i - 1] != '\\')
@@ -34,7 +34,7 @@ void		cnt_solve_back_slash(char *buf, int *i, int *cnt)
 
 	(*cnt)++;
 	while (buf[*i] && ((buf[*i] < 9 || buf[*i] > 13) &&
-	buf[*i] != ' '))
+	buf[*i] != ' ' && buf[*i] != '"' && buf[*i] != '\''))
 	{
 		if ((ret = find_token(buf, *i)) != -1)
 			if (buf[*i - 1] != '\\')

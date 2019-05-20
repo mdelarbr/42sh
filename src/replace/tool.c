@@ -6,7 +6,7 @@
 /*   By: mdelarbr <mdelarbr@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/09 10:52:26 by mdelarbr     #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/13 13:58:18 by mdelarbr    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/15 15:40:45 by mdelarbr    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -24,13 +24,23 @@ int			cnt_size(char *str)
 	{
 		while (str[i] && ((str[i] >= 9 && str[i] <= 13) || str[i] == ' '))
 			i++;
-		if (str[i] && ((str[i] < 9 || str[i] > 13) && str[i] != ' '))
+		if (str[i] && str[i] == '"')
+		{
+			i++;
+			nb++;
+			while (str[i] && str[i] != '"')
+				i++;
+			i++;
+		}
+		else if (str[i] && ((str[i] < 9 || str[i] > 13) && str[i] != ' '))
 		{
 			nb++;
-			while (str[i] && ((str[i] < 9 || str[i] > 13) && str[i] != ' '))
+			while (str[i] && ((str[i] < 9 || str[i] > 13) && str[i] != ' '
+			&& str[i] != '"' && str[i] != '\''))
 				i++;
 		}
 	}
+	printf("nb: %d\n", nb);
 	return (nb);
 }
 
@@ -48,10 +58,23 @@ char		**split_space(char *str)
 	{
 		while (str[i] && ((str[i] >= 9 && str[i] <= 13) || str[i] == ' '))
 			i++;
+		if (str[i] && str[i] == '"')
+		{
+			i++;
+			start = i;
+			while (str[i] && str[i] != '"')
+				i++;
+			printf("s: %d\ti:%d\n", start, i);
+			res[k] = ft_strsub(str, start, i - start);
+			printf("res[k]_%s_\n", res[k]);
+			k++;
+			i++;
+		}
 		if (str[i] && ((str[i] < 9 || str[i] > 13) && str[i] != ' '))
 		{
 			start = i;
-			while (str[i] && ((str[i] < 9 || str[i] > 13) && str[i] != ' '))
+			while (str[i] && ((str[i] < 9 || str[i] > 13) && str[i] != ' '
+			&& str[i] != '"' && str[i] != '\''))
 				i++;
 			res[k] = ft_strsub(str, start, i - start);
 			k++;

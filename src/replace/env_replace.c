@@ -6,7 +6,7 @@
 /*   By: mdelarbr <mdelarbr@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/04/16 17:41:43 by mdelarbr     #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/14 18:40:09 by mdelarbr    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/15 14:48:28 by mdelarbr    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -77,7 +77,7 @@ char		*replace_env(t_var *env, char *str, int i)
 	ar[1] = ft_strsub(str, s, i - s);
 	i++;
 	s = i;
-	while (str[i] && str[i] != '$')
+	while (str[i] && str[i] != '$' && str[i] != '"')
 		i++;
 	ar[0] = ft_strsub(str, s, i - s);
 	if (str[i])

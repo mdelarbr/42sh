@@ -6,7 +6,7 @@
 /*   By: mdelarbr <mdelarbr@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/22 13:50:20 by mdelarbr     #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/14 17:59:30 by mdelarbr    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/15 13:56:57 by mdelarbr    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -105,6 +105,14 @@ void		del_back_slash(t_lexeur ***tabe);
 char		*fill_redirection(char *buf, int *i, int token);
 t_lexeur	**find_input_redirection(t_lexeur ***tabe);
 t_lexeur	**check_redirection(t_lexeur ***tabe);
+
+/*
+**┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+**┃                                double_quote.c                              ┃
+**┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+*/
+
+void		fill_lex_doudle_quote(char *buf, int *i, int *start);
 
 /*
 **┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓

@@ -6,7 +6,7 @@
 /*   By: mdelarbr <mdelarbr@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/27 11:29:05 by mdelarbr     #+#   ##    ##    #+#       */
-/*   Updated: 2019/04/28 11:31:52 by mdelarbr    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/15 16:36:14 by mdelarbr    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -53,11 +53,17 @@ t_lexeur	*fill_lex_while(char *buf, int *i, int token)
 	t_lexeur	*res;
 	int			start;
 
+	printf("buf[%d]: _%c_\n", *i, buf[*i]);
 	res = malloc(sizeof(t_lexeur));
 	if (buf[*i] && token != -1)
 		return (fill_lex_redirection(buf, res, i, token));
-	else if (buf[*i] && ((buf[*i] >= 9 && buf[*i] <= 13) || buf[*i] == ' '))
-		jump_space(buf, i);
+	else if (buf[*i] == '"')
+	{
+		fill_lex_doudle_quote(buf, i, &start);
+		fill_struct(res, ft_strsub(buf, start, *i - start), -1, NULL);
+		(*i)++;
+		return (res);
+	}
 	else if (buf[*i] && ((buf[*i] < 9 || buf[*i] > 13) && (buf[*i] != ' ')))
 	{
 		fill_lex_solve_back_slash(buf, i, &start);
@@ -77,10 +83,10 @@ t_lexeur	**fill_lex(char *buf, t_lexeur **array)
 
 	i = 0;
 	j = 0;
+	printf("res->_%s_\n", buf);
 	array = malloc(sizeof(t_lexeur *) * (cnt_wrd(buf) + 1));
 	while (buf[i])
 	{
-		jump_space(buf, &i);
 		if (!buf[i])
 			break ;
 		if ((tmp = find_fd(buf, &i)) != NULL)
