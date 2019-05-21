@@ -6,7 +6,7 @@
 /*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/07 09:34:46 by mjalenqu     #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/15 10:20:37 by mjalenqu    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/21 11:14:28 by mjalenqu    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -41,10 +41,11 @@ char	*remove_cut(char *str, int start, int end)
 	res = malloc(sizeof(char) * (ft_strlen(str) + 1));
 	while (str[i])
 	{
-		while (i >= start && i <= end)
+		while (str[i] && i >= start && i <= end)
 			i++;
 		res[j] = str[i];
-		i++;
+		if (str[i])
+			i++;
 		j++;
 	}
 	res[j] = '\0';

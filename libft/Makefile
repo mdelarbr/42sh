@@ -6,7 +6,7 @@
 #    By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2019/02/25 12:55:34 by mjalenqu     #+#   ##    ##    #+#        #
-#    Updated: 2019/05/15 08:34:52 by mjalenqu    ###    #+. /#+    ###.fr      #
+#    Updated: 2019/05/21 11:11:40 by mjalenqu    ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -110,7 +110,7 @@ PINC = $(addprefix $(INC_PATH), $(PINC_NAME))
 #  									FLAG                                       #
 # **************************************************************************** #
 
-FLAGS = -Wall -Werror -Wextra -g3 -O3 #-fsanitize=address
+FLAGS = -Wall -Werror -Wextra -g3 -O3 -fsanitize=address
 
 # **************************************************************************** #
 # 									REGLES                                     #
