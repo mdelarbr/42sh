@@ -6,7 +6,7 @@
 /*   By: mdelarbr <mdelarbr@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/27 11:29:05 by mdelarbr     #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/20 20:36:53 by mdelarbr    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/21 10:48:17 by mdelarbr    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -82,8 +82,8 @@ t_lexeur	**fill_lex(char **buf, t_lexeur **array)
 	while (buf[i])
 	{
 		k = 0;
-		if (ft_strcmp(buf[i], "") == 0)
-			break ;
+		if (buf[i + 1] && ft_strcmp(buf[i], "") == 0)
+			i++;
 		if ((tmp = find_fd(buf[i], 0)) != NULL)
 			array[j] = tmp;
 		else if (buf[i])

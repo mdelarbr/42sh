@@ -6,7 +6,7 @@
 /*   By: mdelarbr <mdelarbr@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/04/15 17:27:56 by mdelarbr     #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/20 19:36:21 by mdelarbr    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/21 11:50:13 by mdelarbr    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -74,6 +74,7 @@ int			replace_find_alias(char ***array, t_var *var, t_replace *r, int i)
 int			remove_env_while(char ***array, t_var *var, t_replace *replace)
 {
 	int		done;
+	char	*tmp;
 	int		i;
 
 	done = 0;
@@ -81,17 +82,25 @@ int			remove_env_while(char ***array, t_var *var, t_replace *replace)
 	while ((*array)[i])
 	{
 		replace_find_alias(array, var, replace, i);
-		if (ft_strstr((*array)[i], "$") != NULL)
+		if ((*array)[i][0] == '\'')
+		{
+			tmp = (*array)[i];
+			(*array)[i] = ft_strsub((*array)[i], 1, ft_strlen((*array)[i]) - 2);
+			ft_strdel(&tmp);
+			i++;
+		}
+		if ((*array)[i] && ft_strstr((*array)[i], "$") != NULL)
 		{
 			done = 1;
 			(*array)[i] = replace_env(var, (*array)[i], 0);
 		}
-		if (f_check_var(var, (*array)[i]) == 1)
+		if ((*array)[i] && f_check_var(var, (*array)[i]) == 1)
 		{
 			done = 1;
 			(*array)[i] = replace_var(var, (*array)[i]);
 		}
-		i++;
+		if ((*array)[i])
+			i++;
 	}
 	return (done);
 }
