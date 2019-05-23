@@ -6,7 +6,7 @@
 /*   By: mdelarbr <mdelarbr@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/04/02 09:44:19 by mdelarbr     #+#   ##    ##    #+#       */
-/*   Updated: 2019/04/15 18:22:38 by mdelarbr    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/20 20:36:01 by mdelarbr    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -59,30 +59,32 @@ int			check_fd(char *buf, int i)
 	return (0);
 }
 
-t_lexeur	*find_fd(char *buf, int *i)
+t_lexeur	*find_fd(char *buf, int i)
 {
 	int			fd;
 	char		*tmp;
 	int			start;
 	int			token;
-	int			j;
 
 	tmp = 0;
-	j = *i;
-	if (check_fd(buf, *i))
+	if (check_fd(buf, i))
 		return (NULL);
-	if (buf[j] && (buf[j] >= '0' && buf[j] <= '9'))
+	while (buf[i])
 	{
-		start = j;
-		while (buf[j] && (buf[j] >= '0' && buf[j] <= '9'))
-			j++;
-		token = find_token(buf, j);
-		tmp = ft_strsub(buf, start, j - start);
-		(*i) += ft_strlen(tmp);
-		if (token != 4 && token != 5 && token != 6 && token != 7)
-			return (fill_number(tmp, token));
-		fd = ft_atoi(tmp);
-		return (fill_fd(fill_redirection(buf, i, token), fd, token));
+		if (buf[i] && (buf[i] >= '0' && buf[i] <= '9'))
+		{
+			start = i;
+			while (buf[i] && (buf[i] >= '0' && buf[i] <= '9'))
+				i++;
+			token = find_token(buf, i);
+			tmp = ft_strsub(buf, start, i - start);
+			i += ft_strlen(tmp);
+			if (token != 4 && token != 5 && token != 6 && token != 7)
+				return (fill_number(tmp, token));
+			fd = ft_atoi(tmp);
+			return (fill_fd(fill_redirection(buf, &i, token), fd, token));
+		}
+		i++;
 	}
 	return (NULL);
 }

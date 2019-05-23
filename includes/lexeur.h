@@ -3,10 +3,10 @@
 /*                                                              /             */
 /*   lexeur.h                                         .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
+/*   By: mdelarbr <mdelarbr@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/22 13:50:20 by mdelarbr     #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/16 13:10:36 by rlegendr    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/20 18:20:57 by mdelarbr    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -17,7 +17,6 @@
 # include "../libft/includes/ft_int.h"
 # include "../libft/includes/ft_unix.h"
 # include "../libft/includes/ft_str.h"
-# include "../libft/includes/ft_mem.h"
 # include "termcaps.h"
 # include <stdio.h>
 # include <unistd.h>
@@ -25,6 +24,7 @@
 
 # define ENVIRONEMENT 0
 # define LOCAL 1
+# define ALIAS 2
 
 enum e_token
 {
@@ -59,6 +59,13 @@ typedef struct s_lexeur
 	int				fd;
 } t_lexeur;
 
+typedef struct s_already_replace
+{
+	char						*name;
+	struct s_already_replace	*next;
+} t_replace;
+
+
 /*
 **┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 **┃                                 lexeur.c                                   ┃
@@ -76,7 +83,7 @@ t_token     g_fill_token[10];
 **┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 */
 
-t_lexeur	**fill_lex(char *buf, t_lexeur **tabe);
+t_lexeur	**fill_lex(char **buf, t_lexeur **tabe);
 void		jump_space(char *buf, int *i);
 
 /*
@@ -101,11 +108,11 @@ t_lexeur	**check_redirection(t_lexeur ***tabe);
 
 /*
 **┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-**┃                                 redirection.c                              ┃
+**┃                                double_quote.c                              ┃
 **┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 */
 
-t_lexeur	*find_fd(char *buf, int *i);
+void		fill_lex_doudle_quote(char *buf, int *i, int *start);
 
 /*
 **┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -113,7 +120,15 @@ t_lexeur	*find_fd(char *buf, int *i);
 **┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 */
 
-char		*remove_env(t_var *var, char *str);
+t_lexeur	*find_fd(char *buf, int i);
+
+/*
+**┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+**┃                                 redirection.c                              ┃
+**┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+*/
+
+char		**remove_env(t_var *var, char *str);
 
 /*
 **┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -121,7 +136,7 @@ char		*remove_env(t_var *var, char *str);
 **┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 */
 
-char		*find_env_var(t_var *env, char *str, int i);
+char		*replace_env(t_var *env, char *str, int i);
 char		*switch_word(char *str, char *tmp, int i);
 
 /*
@@ -138,7 +153,26 @@ void        check_var(t_var *env, char **str);
 **┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 */
 
-char		*check_var_alias(t_var *env, char *str);
-int			f_check_var_alias(t_var *env, char *str);
+char		*replace_var(t_var *env, char *str);
+int			f_check_var(t_var *env, char *str);
 
+/*
+**┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+**┃                                   tool.c                                   ┃
+**┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+*/
+
+char		**split_space(char *str);
+void		list_add(t_replace **replace, char *array);
+void		free_replace(t_replace *replace);
+void		init_replace(t_replace **replace);
+
+/*
+**┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+**┃                                   tool.c                                   ┃
+**┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+*/
+
+
+char		*replace_alias(char *array, t_var *var, t_replace *replace);
 #endif

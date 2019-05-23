@@ -3,10 +3,10 @@
 /*                                                              /             */
 /*   var_replace.c                                    .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
+/*   By: mdelarbr <mdelarbr@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/04/16 17:44:11 by mdelarbr     #+#   ##    ##    #+#       */
-/*   Updated: 2019/04/30 19:39:44 by mjalenqu    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/10 10:53:02 by mdelarbr    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -14,7 +14,7 @@
 #include "../../includes/lexeur.h"
 #include "../../includes/termcaps.h"
 
-char		*check_var_alias(t_var *env, char *str)
+char		*replace_var(t_var *env, char *str)
 {
 	t_var	*start;
 	char	*tmp;
@@ -34,14 +34,14 @@ char		*check_var_alias(t_var *env, char *str)
 	return (tmp);
 }
 
-int			f_check_var_alias(t_var *env, char *str)
+int			f_check_var(t_var *env, char *str)
 {
 	t_var	*start;
 
 	start = env;
 	while (start)
 	{
-		if ((ft_strcmp(start->name, str) == 0) && start->type != ENVIRONEMENT)
+		if ((ft_strcmp(start->name, str) == 0) && start->type == LOCAL)
 			return (1);
 		start = start->next;
 	}

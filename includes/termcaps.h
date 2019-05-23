@@ -6,7 +6,7 @@
 /*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/28 09:15:13 by mjalenqu     #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/23 09:49:46 by rlegendr    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/23 11:24:36 by mjalenqu    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -14,7 +14,6 @@
 #ifndef TERMCAPS_H
 # define TERMCAPS_H
 
-// # include "ft_printf.h"
 # include "../libft/includes/ft_str.h"
 # include "../libft/includes/ft_int.h"
 # include "../libft/includes/ft_unix.h"
