@@ -6,7 +6,7 @@
 /*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/03 15:18:39 by shthevak     #+#   ##    ##    #+#       */
-/*   Updated: 2019/04/30 18:17:40 by mjalenqu    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/16 13:04:10 by rlegendr    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -17,6 +17,9 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <fcntl.h>
+# include "ft_unix.h"
+# include "ft_mem.h"
+# include "ft_int.h"
 
 /*
 ** Get Next Line Struct
@@ -51,6 +54,7 @@ char				*ft_strcpy(char *dest, const char *str);
 char				*ft_strncpy(char *dst, const char *str, size_t len);
 void				ft_strdel(char **str);
 char				*ft_strdup(char *str);
+char				*ft_strndup(char *str, int len);
 int					ft_strequ(const char *s1, const char *s2);
 char				*ft_strjoin(const char *s1, const char *s2);
 void				ft_strjoin_free(char **s1, const char *s2);
@@ -75,4 +79,8 @@ char				*ft_strcapitalizer(char *str);
 char				*ft_copy_part_str(char *str, int i, int usage);
 char				*ft_swap_let_string(char *str, int let1, int let2);
 char				*ft_strrev(char *str);
+void				*ft_secure_free(void *to_free);
+int					ft_strstr_case_unsensitive(char *str, char *tofind);
+int					ft_strncmp_case_unsensitive(char *s1, char *s2, size_t n);
+
 #endif
