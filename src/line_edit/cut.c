@@ -6,7 +6,7 @@
 /*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/07 09:34:46 by mjalenqu     #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/21 11:14:28 by mjalenqu    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/23 09:56:24 by mjalenqu    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -103,6 +103,12 @@ void	paste(t_pos *pos)
 		i++;
 	}
 	clear_and_print(pos);
+//	left_arrow(pos);
+//	right_arrow(pos);
+	short_update(pos, go_to_let_nb(pos));
+	tputs(tgoto(tgetstr("cm", NULL), pos->act_co, pos->act_li), 1, ft_putchar);
+	print_info(pos);
+	pos->ans_printed = 1;
 }
 
 void	copy(t_pos *pos)
