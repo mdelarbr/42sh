@@ -6,14 +6,14 @@
 /*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/04/09 14:32:39 by rlegendr     #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/23 11:29:17 by mjalenqu    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/23 11:58:10 by mjalenqu    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "termcaps.h"
 
-int		main(int ac, char **av, char **env)
+int				main(int ac, char **av, char **env)
 {
 	char	*ans;
 	t_hist	*hist;
@@ -46,6 +46,5 @@ int		main(int ac, char **av, char **env)
 		}
 		if ((check_error(ans)) != -1)
 			start_exec(start_lex(my_env, ans), my_env);
-//		ans = ft_secure_free(ans);
 	}
 }

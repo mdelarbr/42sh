@@ -6,7 +6,7 @@
 #    By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2019/03/04 18:02:46 by mjalenqu     #+#   ##    ##    #+#        #
-#    Updated: 2019/05/23 11:26:11 by mjalenqu    ###    #+. /#+    ###.fr      #
+#    Updated: 2019/05/24 11:04:36 by mjalenqu    ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -31,7 +31,7 @@ SRC_NAME =	main/main.c\
 			line_edit/initialisation_stock.c line_edit/tools.c line_edit/cut.c\
 			line_edit/token_init.c line_edit/token.c line_edit/signal.c line_edit/check_error.c\
 			line_edit/token_check_open.c line_edit/token_check_close.c line_edit/token_heredoc_open.c\
-			line_edit/token_heredoc_close.c line_edit/token_free.c\
+			line_edit/token_heredoc_close.c line_edit/token_free.c line_edit/copy_tools.c\
 			lexeur/back_slash.c lexeur/error.c\
 			lexeur/fill_fd.c lexeur/lexeur.c lexeur/fill_lexeur.c lexeur/redirection.c lexeur/double_quote.c\
 			replace/replace.c replace/env_replace.c replace/var_replace.c replace/tool.c replace/alias.c\

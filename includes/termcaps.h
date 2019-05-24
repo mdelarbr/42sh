@@ -6,7 +6,7 @@
 /*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/28 09:15:13 by mjalenqu     #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/23 11:24:36 by mjalenqu    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/24 11:05:19 by mjalenqu    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -379,11 +379,28 @@ void				update_position(t_pos *pos);
 /*
 ** COPY a mettre a la norme
 */
-
+void	print_from_begin(t_pos *pos);
 void	display_line(t_pos		*pos);
+void	selection_check(t_pos *pos, char *buf);
+void	select_right(t_pos *pos);
+void	select_left(t_pos *pos);
+
+/*
+** COPY_TOOLS
+*/
 int		is_select(char *buf, t_pos *pos);
 void	selected(t_pos *pos, char *buf);
-void	selection_check(t_pos *pos, char *buf);
+void	clear_and_print(t_pos *pos);
+void	save_char(t_pos *pos);
+
+/*
+** CUT
+*/
+void					check_copy(unsigned char *buf, t_pos *pos);
+void					copy(t_pos *pos);
+void					paste(t_pos *pos);
+void					cut_char(t_pos *pos);
+char					*remove_cut(char *str, int start, int end);
 
 /*
 ** JUMP a mettre a la norme

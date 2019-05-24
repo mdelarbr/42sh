@@ -1,4 +1,4 @@
- /* ************************************************************************** */
+/* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
 /*   copy.c                                           .::    .:/ .      .::   */
@@ -6,7 +6,7 @@
 /*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/06 14:22:14 by rlegendr     #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/09 10:29:27 by mjalenqu    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/24 10:38:32 by mjalenqu    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -21,7 +21,7 @@ void		print_from_begin(t_pos *pos)
 	tputs(tgoto(tgetstr("cm", NULL), pos->act_co, pos->act_li), 1, ft_putchar);
 }
 
-void	display_line(t_pos *pos)
+void		display_line(t_pos *pos)
 {
 	int		len;
 
@@ -38,14 +38,15 @@ void	display_line(t_pos *pos)
 	{
 		len = go_to_let_nb_saved(pos);
 		pos->debug = pos->start_li + len / pos->max_co;
-		tputs(tgoto(tgetstr("cm", NULL), len % pos->max_co, pos->start_li + len / pos->max_co), 1, ft_putchar);
+		tputs(tgoto(tgetstr("cm", NULL), len % pos->max_co, pos->start_li +
+					len / pos->max_co), 1, ft_putchar);
 		tputs(tgetstr("cd", NULL), 1, ft_putchar);
 		print_ans(pos, pos->let_nb_saved, len % pos->max_co);
 	}
 	tputs(tgetstr("me", NULL), 1, ft_putchar);
 }
 
-static void		select_left(t_pos *pos)
+void		select_left(t_pos *pos)
 {
 	if (pos->let_nb == 0)
 		return ;
@@ -54,7 +55,7 @@ static void		select_left(t_pos *pos)
 	left_arrow(pos);
 }
 
-static void		select_right(t_pos *pos)
+void		select_right(t_pos *pos)
 {
 	if (pos->let_nb >= (int)ft_strlen(pos->ans))
 		return ;
@@ -63,25 +64,7 @@ static void		select_right(t_pos *pos)
 	right_arrow(pos);
 }
 
-int		is_select(char *buf, t_pos *pos)
-{
-	if (buf[0] == 27 && buf[1] == 91 && buf[2] == 49 && buf[3] == 59)
-		return (1);
-	pos->start_select = -1;
-	return (0);
-}
-
-void	selected(t_pos *pos, char *buf)
-{
-	if (buf[5] == 67)
-		select_right(pos);
-	else if (buf[5] == 68)
-		select_left(pos);
-	display_line(pos);
-	pos->ans_printed = 1;
-}
-
-void	selection_check(t_pos *pos, char *buf)
+void		selection_check(t_pos *pos, char *buf)
 {
 	if (!pos->ans || pos->ans[0] == '\0')
 		return ;
@@ -90,5 +73,5 @@ void	selection_check(t_pos *pos, char *buf)
 	if (is_select(buf, pos) == 1)
 		selected(pos, buf);
 	else
-	pos->start_select = -1;
+		pos->start_select = -1;
 }

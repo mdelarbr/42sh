@@ -3,29 +3,15 @@
 /*                                                              /             */
 /*   tab_key.c                                        .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: rlegendr <marvin@le-101.fr>                +:+   +:    +:    +:+     */
+/*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/10 09:39:47 by rlegendr     #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/23 09:37:25 by rlegendr    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/23 12:01:50 by mjalenqu    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "../../includes/termcaps.h"
-
-void			debug_htab(t_htab *htab)
-{
-	if (htab == NULL)
-		return ;
-	while (htab->prev)
-		htab = htab->prev;
-	ft_printf("\n\n structure htab");
-	while (htab)
-	{
-		ft_printf("\ncontent = %s // no = %d // type = %d // lenght = %d", htab->content, htab->content_no, htab->content_type, htab->lenght_max);
-		htab = htab->next;
-	}
-}
 
 char			*get_var_name(char *ans, int i)
 {
@@ -33,10 +19,12 @@ char			*get_var_name(char *ans, int i)
 
 	while (i > 1 && ans[i - 1] != '$')
 		i -= 1;
-	if (ans[i] == 0 || ans[i] == '$' || ans[i] == '&' || ans[i] == '|' || ans[i] == ';' || ans[i] == 32)
+	if (ans[i] == 0 || ans[i] == '$' || ans[i] == '&' || ans[i] == '|' ||
+			ans[i] == ';' || ans[i] == 32)
 		return (NULL);
 	min = i;
-	while (ans[i] && ans[i] != '$' && ans[i] != '&' && ans[i] != '|' && ans[i] != ';' && ans[i] != 32)
+	while (ans[i] && ans[i] != '$' && ans[i] != '&' && ans[i] != '|' &&
+			ans[i] != ';' && ans[i] != 32)
 		i += 1;
 	if (ans[i] == 0)
 		return (ft_strdup(ans + min));
@@ -58,7 +46,8 @@ t_htab			*looking_for_var(t_pos *pos, t_htab *htab, char **name)
 		if (htab->prev == NULL)
 			htab->lenght_max = ft_strlen(htab->content);
 		else
-			htab->lenght_max = htab->prev->lenght_max < ft_strlen(htab->content) ? ft_strlen(htab->content) : htab->prev->lenght_max;
+			htab->lenght_max = htab->prev->lenght_max < ft_strlen(htab->content)
+					? ft_strlen(htab->content) : htab->prev->lenght_max;
 		var = var->next;
 	}
 	if (htab)
@@ -71,7 +60,9 @@ t_htab			*looking_for_var(t_pos *pos, t_htab *htab, char **name)
 
 int				is_on_token(char *ans)
 {
-	if (ft_strncmp(ans, "&&", 2) == 0 || ft_strncmp(ans, "&", 1) == 0 || ft_strncmp(ans, "||", 2) == 0 || ft_strncmp(ans, "|", 1) == 0 || ft_strncmp(ans, ";", 1) == 0 || ft_strncmp(ans, "`", 1) == 0)
+	if (ft_strncmp(ans, "&&", 2) == 0 || ft_strncmp(ans, "&", 1) == 0 ||
+			ft_strncmp(ans, "||", 2) == 0 || ft_strncmp(ans, "|", 1) == 0 ||
+				ft_strncmp(ans, ";", 1) == 0 || ft_strncmp(ans, "`", 1) == 0)
 		return (1);
 	return (0);
 }
