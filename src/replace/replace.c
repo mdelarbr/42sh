@@ -3,10 +3,10 @@
 /*                                                              /             */
 /*   replace.c                                        .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: mdelarbr <mdelarbr@student.le-101.fr>      +:+   +:    +:    +:+     */
+/*   By: mdelarbr <mdelarbr@student.42.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/04/15 17:27:56 by mdelarbr     #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/14 18:52:25 by mdelarbr    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/15 20:34:47 by husahuc     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -107,6 +107,8 @@ char		*remove_env(t_var *start, char *str)
 			break ;
 	ft_strdel(&str);
 //	free_replace(replace);
+	free(replace);
 	tmp = make_string(array);
+	ft_tabfree(array);
 	return (tmp);
 }

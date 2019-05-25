@@ -3,10 +3,10 @@
 /*                                                              /             */
 /*   main.c                                           .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: mdelarbr <mdelarbr@student.le-101.fr>      +:+   +:    +:    +:+     */
+/*   By: mjalenqu <mjalenqu@student.42.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/04/09 14:32:39 by mjalenqu     #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/09 12:02:32 by mdelarbr    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/25 15:06:09 by husahuc     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -39,7 +39,8 @@ int			main(int ac, char **av, char **env)
 			close(pos.history);
 			free_t_hist(hist);
 			tcsetattr(2, TCSANOW, &(pos.old_term));
-			exit(0);
+			free_env(my_env);
+			return (0);
 		}
 		if ((check_error(ans)) != -1)
 			start_exec(start_lex(my_env, ans), my_env);

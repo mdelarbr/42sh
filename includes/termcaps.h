@@ -3,10 +3,10 @@
 /*                                                              /             */
 /*   termcaps.h                                       .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
+/*   By: mjalenqu <mjalenqu@student.42.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/28 09:15:13 by mjalenqu     #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/02 15:03:44 by mjalenqu    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/25 14:18:03 by husahuc     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -238,6 +238,7 @@ int						ft_put_c(int c);
 */
 t_var					*init_env(char **env);
 char					*init_name(char *src);
+void					 free_env(t_var *ptr_env);
 
 /*
 *******************************************************************************
@@ -271,7 +272,7 @@ char					*remove_char(char **str, int i);
 *******************************************************************************
 */
 //void					free_all(t_all *all);
-void					free_env(t_var *var);
+//void					free_env(t_var *var);
 
 void					find_jump(char *buf, t_pos *pos);
 

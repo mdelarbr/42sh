@@ -3,10 +3,10 @@
 /*                                                              /             */
 /*   lexeur.c                                         .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: mdelarbr <mdelarbr@student.le-101.fr>      +:+   +:    +:    +:+     */
+/*   By: mdelarbr <mdelarbr@student.42.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/22 13:48:08 by mdelarbr     #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/02 10:28:52 by mdelarbr    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/25 15:24:27 by husahuc     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -95,5 +95,18 @@ t_lexeur	**start_lex(t_var *var, char *res)
 	array = NULL;
 	res = remove_env(var, res);
 	array = fill_lex(res, array);
+	free(res);
 	return (array);
+}
+
+void		free_lexer(t_lexeur **array)
+{
+	int i;
+
+	i = -1;
+	while (array[++i])
+	{
+		free(array[i]);
+	}
+	free(array);
 }

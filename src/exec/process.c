@@ -3,10 +3,10 @@
 /*                                                              /             */
 /*   process.c                                        .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: mdelarbr <mdelarbr@student.le-101.fr>      +:+   +:    +:    +:+     */
+/*   By: mdelarbr <mdelarbr@student.42.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/04/26 14:34:20 by mdelarbr     #+#   ##    ##    #+#       */
-/*   Updated: 2019/04/29 17:35:12 by mdelarbr    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/25 15:45:04 by husahuc     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -118,5 +118,18 @@ void		fill_process(t_job *j, t_lexeur **res)
 		if (fill_process_while(res, &j, &start, &i) == 0)
 			break ;
 		i++;
+	}
+}
+
+void		free_process(t_job *j)
+{
+	t_process *buf;
+
+	while (j->p)
+	{
+		buf = j->p->next;
+		free(j->p->token);
+		free(j->p);
+		j->p = buf;
 	}
 }

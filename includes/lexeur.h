@@ -3,10 +3,10 @@
 /*                                                              /             */
 /*   lexeur.h                                         .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: mdelarbr <mdelarbr@student.le-101.fr>      +:+   +:    +:    +:+     */
+/*   By: mdelarbr <mdelarbr@student.42.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/22 13:50:20 by mdelarbr     #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/14 17:59:30 by mdelarbr    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/25 15:26:08 by husahuc     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -73,6 +73,7 @@ typedef struct s_already_replace
 */
 
 t_lexeur	**start_lex(t_var *var, char *res);
+void		free_lexer(t_lexeur **array);
 int			find_token(char *buf, int i);
 int			cnt_wrd(char *buf);
 t_token     g_fill_token[10];
@@ -167,4 +168,6 @@ void		init_replace(t_replace **replace);
 
 
 char		*replace_alias(char *array, t_var *var, t_replace *replace);
+
+void		ft_tabfree(char **res);
 #endif
