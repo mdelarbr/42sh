@@ -5,8 +5,8 @@
 #                                                  +:+:+   +:    +:  +:+:+     #
 #    By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
-#    Created: 2019/02/25 12:55:34 by mjalenqu     #+#   ##    ##    #+#        #
-#    Updated: 2019/05/21 11:11:40 by mjalenqu    ###    #+. /#+    ###.fr      #
+#    Created: 2019/02/25 12:55:34 by shthevak     #+#   ##    ##    #+#        #
+#    Updated: 2019/05/27 08:57:46 by mjalenqu    ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -60,12 +60,13 @@ SSRC_NAME = ft_bzero.c ft_isalpha.c ft_isascii.c ft_itoa.c ft_itoa_base.c\
 			ft_strstr.c ft_strsub.c ft_voidrev.c ft_voidswap.c ft_put_space.c\
 			ft_strsplit.c ft_free_tab.c get_next_line.c ft_putcolor.c ft_putcolor2.c ft_isspace.c\
 			ft_strncpy.c ft_strjoinf.c ft_strchr.c ft_strcapitalizer.c ft_copy_part_str.c\
-			ft_swap_let_string.c ft_strrev.c ft_secure_free.c ft_strndup.c
+			ft_swap_let_string.c ft_strrev.c ft_secure_free.c ft_strndup.c\
+			ft_strstr_case_unsensitive.c ft_strncmp_case_unsensitive.c
 
 UINC_NAME = ft_unix.h
 USRC_NAME = ft_terminal_h.c ft_terminal_w.c ft_file_exists.c ft_create_file.c\
 			ft_execute.c ft_file_arights.c ft_file_rrights.c ft_file_wrights.c\
-			ft_file_xrights.c ft_is_exec.c
+			ft_file_xrights.c ft_is_exec.c is_the_same_letter_unsensitive.c
 
 IINC_NAME = ft_int.h
 ISRC_NAME = ft_atoi.c ft_int_len_base.c ft_isdigit.c ft_isxdigit.c ft_putnbr.c\
@@ -73,7 +74,7 @@ ISRC_NAME = ft_atoi.c ft_int_len_base.c ft_isdigit.c ft_isxdigit.c ft_putnbr.c\
 
 MINC_NAME = ft_mem.h
 MSRC_NAME = ft_memset.c ft_memccpy.c ft_memchr.c ft_memcmp.c ft_memcpy.c\
-			ft_memdel.c ft_memmove.c
+			ft_memdel.c ft_memmove.c ft_free_void.c ft_tabdel.c
 
 PINC_NAME = ft_printf.h
 PSRC_NAME = add_conversion.c add_flag2.c add_flags.c bonus_conversion_type_1.c\
@@ -110,7 +111,7 @@ PINC = $(addprefix $(INC_PATH), $(PINC_NAME))
 #  									FLAG                                       #
 # **************************************************************************** #
 
-FLAGS = -Wall -Werror -Wextra -g3 -O3 -fsanitize=address
+FLAGS = -Wall -Werror -Wextra -O3 -g3# -fsanitize=address
 
 # **************************************************************************** #
 # 									REGLES                                     #

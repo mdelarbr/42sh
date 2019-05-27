@@ -6,7 +6,7 @@
 #    By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2019/03/04 18:02:46 by mjalenqu     #+#   ##    ##    #+#        #
-#    Updated: 2019/05/21 11:11:36 by mjalenqu    ###    #+. /#+    ###.fr      #
+#    Updated: 2019/05/27 10:38:03 by mjalenqu    ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -17,22 +17,38 @@ LIB_PATH = libft/libft.a
 SRC_PATH = ./src/
 OBJ_PATH = ./obj/
 INC_PATH = ./includes/
-SRC_NAME =	line_edit/calcul_line.c line_edit/check_input.c line_edit/escape_code.c line_edit/history.c \
-			line_edit/input_is_entry.c line_edit/input_is_printable_char.c line_edit/jump.c line_edit/main_termcaps.c line_edit/move_through_history.c\
-			line_edit/search_in_history.c line_edit/env.c line_edit/input_is_remove_char.c line_edit/print_ans.c line_edit/debug.c\
-			line_edit/copy.c line_edit/start_termcaps.c line_edit/tab_key.c line_edit/initialisation_stock.c line_edit/tools.c line_edit/cut.c\
-			lexeur/back_slash.c lexeur/error.c line_edit/signal.c line_edit/check_error.c\
-			lexeur/fill_fd.c lexeur/lexeur.c lexeur/fill_lexeur.c lexeur/redirection.c \
-			replace/replace.c replace/env_replace.c replace/var_replace.c \
-			exec/exec.c exec/process.c
-			
+
+SRC_LINE = $(addprefix line_edit/, \
+				calcul_line.c check_error.c check_input.c control_search_history_calcul_pos.c\
+				control_search_history.c copy_tools.c copy.c cut.c env.c escape_code.c\
+				ft_errno.c history_expansion_free.c history_expansion.c history_expansions_types.c\
+				history.c initialisation_stock.c input_is_entry.c tools.c\
+				input_is_printable_char.c input_is_remove_char.c jump_up_down.c jump.c\
+				move_through_history.c print_ans.c search_in_history.c signal.c tab_key_var.c\
+				start_termcaps.c tab_key.c tab_key_all_path.c tab_key_auto_complete.c tab_key_current_dir.c\
+				tab_key_sort.c tab_key_struct.c tab_key_tools_calcul_print.c tab_key_tools_manip.c\
+				token.c token_check_close.c token_check_open.c token_free.c token_heredoc_close.c\
+				token_heredoc_open.c token_init.c)
+
+SRC_LEX = $(addprefix lexeur/, \
+				back_slash.c double_quote.c error.c fill_fd.c fill_lexeur.c lexeur.c redirection.c)
+
+SRC_EXEC = $(addprefix exec/, \
+				alias.c builtins.c exec_main.c exec.c option_exec.c process.c tools.c)
+
+SRC_REP = $(addprefix replace/, \
+				alias.c env_replace.c replace.c tool.c var_replace.c)
+				
+SRC_MAIN = $(addprefix main/, main.c)
+
+SRC_NAME = $(SRC_EXEC) $(SRC_LEX) $(SRC_LINE) $(SRC_MAIN) $(SRC_REP)
 OBJ_NAME = $(SRC_NAME:.c=.o)
 INC_NAME = termcaps.h
 
 INC = $(addprefix $(INC_PATH), $(INC_NAME))
 SRC = $(addprefix $(SRC_PATH), $(SRC_NAME))
 OBJ = $(addprefix $(OBJ_PATH), $(OBJ_NAME))
-FLAG += -Wall -Werror -Wextra -g3 -O3 -fsanitize=address
+FLAG += -Wall -Werror -Wextra -O3 -g3# -fsanitize=address
 FLAG_END = -lcurses
 NORME = norminette
 
@@ -52,7 +68,7 @@ all: $(NAME)
 $(NAME) : $(OBJ_PATH) $(OBJ) Makefile
 	@make -C libft
 	@echo "$(YELLOW)Libft$(RESET):\t...$(GREEN)\t[OK]"
-	@gcc $(FLAG) -o $@ $(OBJ) $(FLAG_END) $(LIB_PATH) -Iinclude
+	@gcc $(FLAG) -o $@ $(OBJ) $(FLAG_END) $(LIB_PATH) -I include
 	@echo "$(YELLOW)$(NAME)$(RESET):\t...$(GREEN)\t[OK]"
 
 $(OBJ_PATH):

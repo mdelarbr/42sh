@@ -6,7 +6,7 @@
 /*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/06 08:14:23 by rlegendr     #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/07 08:30:13 by mjalenqu    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/23 13:27:53 by rlegendr    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -33,7 +33,8 @@ int		check_term(void)
 	}
 	else if (ret == 0)
 	{
-		ft_putcolor("Terminal type", term_type, "is not defined in termcap database ");
+		ft_putcolor("Terminal type", term_type,
+			"is not defined in termcap database ");
 		ft_putstr("or have too few informations).\n");
 		return (-1);
 	}

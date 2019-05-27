@@ -6,12 +6,14 @@
 /*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/06 08:09:42 by rlegendr     #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/09 10:13:13 by mjalenqu    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/24 13:51:40 by vde-sain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "termcaps.h"
+
+struct s_hist **ghist;
 
 static void		resize_screen(t_pos *pos)
 {
@@ -31,13 +33,14 @@ static void		resize_screen(t_pos *pos)
 	print_prompt(pos);
 	print_ans(pos, 0, pos->start_co);
 	tputs(tgetstr("ve", NULL), 1, ft_putchar);
-	print_info(pos);
 }
 
 static void		ctrl_c(t_pos *pos)
 {
+	while ((*ghist)->next)
+		*ghist = (*ghist)->next;
 	write(1, "\n", 1);
-	free(pos->ans);
+	pos->ans = ft_secure_free(pos->ans);
 	init_pos(pos);
 	print_prompt(pos);
 }
@@ -51,8 +54,6 @@ static void		sighandler(int signum)
 		resize_screen(pos);
 	if (signum == CTRL_C)
 		ctrl_c(pos);
-	pos->debug = signum;
-	print_info(pos);
 }
 
 void			signal_list(void)

@@ -5,8 +5,8 @@
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2019/04/23 15:05:59 by mjalenqu     #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/13 09:22:34 by mjalenqu    ###    #+. /#+    ###.fr     */
+/*   Created: 2019/04/23 15:05:59 by vde-sain     #+#   ##    ##    #+#       */
+/*   Updated: 2019/05/24 10:15:40 by rlegendr    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -53,7 +53,13 @@ void		left_arrow(t_pos *pos)
 
 t_hist		*escape_code(char *buf, t_pos *pos, t_hist *hist)
 {
-	if ((buf && buf[1] == 27) || ft_strncmp(buf + 1, "[F", 2) == 0 || ft_strncmp(buf + 1, "[H", 2) == 0)
+	if (pos->ctrl_search_history == 1)
+	{
+		hist = exiting_control_mode(pos, hist);
+		return (hist);
+	}
+	if ((buf && buf[1] == 27) || ft_strncmp(buf + 1, "[F", 2) == 0 ||
+			ft_strncmp(buf + 1, "[H", 2) == 0)
 		find_jump(buf, pos);
 	if (ft_strncmp(buf + 1, "[A", 2) == 0)
 		hist = move_through_history(hist, pos, "up");
@@ -69,5 +75,7 @@ t_hist		*escape_code(char *buf, t_pos *pos, t_hist *hist)
 		input_is_delete(pos);
 	if (ft_strcmp(buf + 1, "[D") == 0 || ft_strcmp(buf + 1, "[C") == 0)
 		pos->ans_printed = 1;
+	pos->saved_ans = ft_secure_free(pos->saved_ans);
+	pos->saved_ans = ft_strdup(pos->ans);
 	return (hist);
 }

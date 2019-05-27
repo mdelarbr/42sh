@@ -6,31 +6,13 @@
 /*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/04/15 17:27:56 by mdelarbr     #+#   ##    ##    #+#       */
-/*   Updated: 2019/04/30 13:00:29 by mjalenqu    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/27 10:04:20 by mjalenqu    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "../../includes/lexeur.h"
 #include "../../includes/termcaps.h"
-
-char		*env_var(t_var *env, char *str)
-{
-	t_var	*start;
-
-	start = env;
-	while (start)
-	{
-		if (ft_strcmp(start->name, str) == 0 && start->type == ENVIRONEMENT)
-		{
-			ft_strdel(&str);
-			return (start->data);
-		}
-		start = start->next;
-	}
-	ft_strdel(&str);
-	return (ft_strdup(""));
-}
 
 char		*make_string(char **array)
 {
@@ -49,41 +31,93 @@ char		*make_string(char **array)
 	return (res);
 }
 
-int			remove_env_while(char ***array, t_var *var)
+int			check_alias(char *array, t_var *var, t_replace *replace)
+{
+	int			i;
+	t_replace	*r;
+	t_var		*tmp_var;
+
+	tmp_var = var;
+	i = 0;
+	r = replace;
+	while (tmp_var && (ft_strcmp(array, tmp_var->name) != 0))
+		tmp_var = tmp_var->next;
+	if (!tmp_var)
+		return (0);
+	while (r)
+	{
+		if (ft_strcmp(r->name, tmp_var->name) == 0)
+			return (0);
+		r = r->next;
+	}
+	return (1);
+}
+
+int			replace_find_alias(char ***array, t_var *var, t_replace *r, int i)
 {
 	int		done;
+
+	done = 0;
+	if (i == 0 || find_token((*array)[i - 1], 0) != -1)
+	{
+		if (check_alias((*array)[i], var, r) == 1)
+		{
+			done = 1;
+			(*array)[i] = replace_alias((*array)[i], var, r);
+		}
+	}
+	return (done);
+}
+
+// TODO gerer les simple quotes.
+
+int			remove_env_while(char ***array, t_var *var, t_replace *replace)
+{
+	int		done;
+	char	*tmp;
 	int		i;
 
 	done = 0;
 	i = 0;
 	while ((*array)[i])
 	{
-		if ((*array)[i][0] == '$')
+		replace_find_alias(array, var, replace, i);
+		if ((*array)[i][0] == '\'')
+		{
+			tmp = (*array)[i];
+			(*array)[i] = ft_strsub((*array)[i], 1, ft_strlen((*array)[i]) - 2);
+			ft_strdel(&tmp);
+			i++;
+		}
+		if ((*array)[i] && ft_strstr((*array)[i], "$") != NULL)
 		{
 			done = 1;
-			(*array)[i] = env_var(var, ft_strsub((*array)[i], 1,
-			ft_strlen((*array)[i])));
+			(*array)[i] = replace_env(var, (*array)[i], 0);
 		}
-		if (f_check_var_alias(var, (*array)[i]) == 1)
+		if ((*array)[i] && f_check_var(var, (*array)[i]) == 1)
 		{
 			done = 1;
-			(*array)[i] = check_var_alias(var, (*array)[i]);
+			(*array)[i] = replace_var(var, (*array)[i]);
 		}
-		i++;
+		if ((*array)[i])
+			i++;
 	}
 	return (done);
 }
 
-char		*remove_env(t_var *start, char *str)
-{
-	char	**array;
-	char	*tmp;
+// TODO faire en sorte qu'on ne peut pas faire de boucle infinie comme bash on ne peut pas replace 2 fois une var.
 
-	array = ft_strsplit(str, ' '); // TODO FAIRE UN VRAI SPLIT AVEC \T ETC.
-	while (1) // TODO faire en sorte qu'on ne peut pas faire de boucle infinie comme bash on ne peut pas replace 2 fois une var.
-		if (remove_env_while(&array, start) == 0)
+char		**remove_env(t_var *start, char *str)
+{
+	char		**array;
+	t_replace	*replace;
+
+	init_replace(&replace);
+	array = split_space(str);
+	while (1)
+		if (remove_env_while(&array, start, replace) == 0)
 			break ;
 	ft_strdel(&str);
-	tmp = make_string(array);
-	return (tmp);
+//	free_replace(replace);
+	return (array);
 }

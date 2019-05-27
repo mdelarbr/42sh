@@ -3,10 +3,10 @@
 /*                                                              /             */
 /*   lexeur.c                                         .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
+/*   By: mdelarbr <mdelarbr@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/22 13:48:08 by mdelarbr     #+#   ##    ##    #+#       */
-/*   Updated: 2019/04/30 19:38:51 by mjalenqu    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/20 20:35:21 by mdelarbr    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -61,8 +61,14 @@ void		cnt_wrd_while(char *buf, int *i, int *cnt, int token)
 		(*cnt)++;
 		(*i) += g_fill_token[token].size;
 	}
-	else if (buf[*i] && ((buf[*i] >= 9 && buf[*i] <= 13) || buf[*i] == ' '))
-		jump_space(buf, i);
+	else if (buf[*i] && buf[*i] == '"')
+	{
+		cnt++;
+		(*i)++;
+		while (buf[*i] && buf[*i] != '"')
+			(*i)++;
+		(*i)++;
+	}
 	else if (buf[*i] && ((buf[*i] < 9 || buf[*i] > 13) && buf[*i] != ' '))
 		cnt_solve_back_slash(buf, i, cnt);
 	else
@@ -91,9 +97,10 @@ int			cnt_wrd(char *buf)
 t_lexeur	**start_lex(t_var *var, char *res)
 {
 	t_lexeur	**array;
+	char		**tmp;
 
 	array = NULL;
-	res = remove_env(var, res);
-	array = fill_lex(res, array);
+	tmp = remove_env(var, res);
+	array = fill_lex(tmp, array);
 	return (array);
 }
