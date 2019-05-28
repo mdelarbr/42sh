@@ -6,7 +6,7 @@
 /*   By: mdelarbr <mdelarbr@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/09 10:52:26 by mdelarbr     #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/21 11:50:15 by mdelarbr    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/28 14:18:10 by mdelarbr    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -17,6 +17,7 @@ int			cnt_size(char *str)
 {
 	int		nb;
 	int		i;
+	int		ret;
 
 	i = 0;
 	nb = 0;
@@ -44,8 +45,13 @@ int			cnt_size(char *str)
 		{
 			nb++;
 			while (str[i] && ((str[i] < 9 || str[i] > 13) && str[i] != ' '
-			&& str[i] != '"' && str[i] != '\''))
+			&& str[i] != '"' && str[i] != '\'' && find_token(str, i) == -1))
 				i++;
+		}
+		if (str[i] && (ret = find_token(str, i)) != -1)
+		{
+			i += g_fill_token[ret].size;
+			nb++;
 		}
 	}
 	return (nb);
@@ -55,6 +61,7 @@ char		**split_space(char *str)
 {
 	int		i;
 	int		k;
+	int		ret;
 	char	**res;
 	int		start;
 
@@ -89,10 +96,16 @@ char		**split_space(char *str)
 		{
 			start = i;
 			while (str[i] && ((str[i] < 9 || str[i] > 13) && str[i] != ' '
-			&& str[i] != '"' && str[i] != '\''))
+			&& str[i] != '"' && str[i] != '\'' && find_token(str, i) == -1))
 				i++;
 			res[k] = ft_strsub(str, start, i - start);
 			k++;
+		}
+		if (str[i] && (ret = find_token(str, i)) != -1)
+		{
+			res[k] = ft_strsub(str, i, g_fill_token[ret].size);
+			k++;
+			i += g_fill_token[ret].size;
 		}
 	}
 	res[k] = NULL;
