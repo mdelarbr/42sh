@@ -3,7 +3,7 @@
 #                                                               /              #
 #    Makefile                                         .::    .:/ .      .::    #
 #                                                  +:+:+   +:    +:  +:+:+     #
-#    By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+      #
+#    By: mjalenqu <mjalenqu@student.42.fr>          +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2019/03/04 18:02:46 by mjalenqu     #+#   ##    ##    #+#        #
 #    Updated: 2019/05/28 10:07:58 by vde-sain    ###    #+. /#+    ###.fr      #
@@ -43,6 +43,16 @@ SRC_REP = $(addprefix replace/, \
 SRC_MAIN = $(addprefix main/, main.c)
 
 SRC_NAME = $(SRC_EXEC) $(SRC_LEX) $(SRC_LINE) $(SRC_MAIN) $(SRC_REP)
+SRC_NAME =	main/main.c\
+			line_edit/calcul_line.c line_edit/check_input.c line_edit/escape_code.c line_edit/history.c line_edit/init_termcaps.c\
+			line_edit/input_is_entry.c line_edit/input_is_printable_char.c line_edit/jump.c line_edit/move_through_history.c\
+			line_edit/search_in_history.c line_edit/env.c line_edit/input_is_remove_char.c line_edit/print_ans.c\
+			lexeur/back_slash.c lexeur/error.c\
+			lexeur/fill_fd.c lexeur/lexeur.c lexeur/fill_lexeur.c lexeur/redirection.c \
+			replace/replace.c replace/env_replace.c replace/var_replace.c replace/tool.c replace/alias.c\
+			exec/exec.c exec/process.c exec/exec_main.c exec/tools.c exec/builtins.c exec/option_exec.c exec/alias.c \
+			builtin/ft_test.c builtin/ft_test_int.c builtin/ft_echo.c builtin/tool.c builtin/ft_cd.c \
+			builtin/ft_set.c builtin/ft_type.c builtin/ft_export.c builtin/ft_unset.c
 OBJ_NAME = $(SRC_NAME:.c=.o)
 INC_NAME = termcaps.h
 
@@ -80,6 +90,7 @@ $(OBJ_PATH):
 	@mkdir -p obj/lexeur 2> /dev/null
 	@mkdir -p obj/replace 2> /dev/null
 	@mkdir -p obj/exec 2> /dev/null
+	@mkdir -p obj/builtin 2> /dev/null
 	@mkdir -p obj/main 2> /dev/null
 	@mkdir -p obj/ft_printf 2> /dev/null
 

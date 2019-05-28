@@ -104,3 +104,15 @@ t_lexeur	**start_lex(t_var *var, char *res)
 	array = fill_lex(tmp, array);
 	return (array);
 }
+
+void		free_lexer(t_lexeur **array)
+{
+	int i;
+
+	i = -1;
+	while (array[++i])
+	{
+		free(array[i]);
+	}
+	free(array);
+}

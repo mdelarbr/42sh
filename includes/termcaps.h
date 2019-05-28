@@ -3,7 +3,7 @@
 /*                                                              /             */
 /*   termcaps.h                                       .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
+/*   By: mjalenqu <mjalenqu@student.42.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/28 09:15:13 by mjalenqu     #+#   ##    ##    #+#       */
 /*   Updated: 2019/05/28 09:52:57 by vde-sain    ###    #+. /#+    ###.fr     */
@@ -14,7 +14,6 @@
 #ifndef TERMCAPS_H
 # define TERMCAPS_H
 
-// # include "ft_printf.h"
 # include "../libft/includes/ft_str.h"
 # include "../libft/includes/ft_int.h"
 # include "../libft/includes/ft_unix.h"
@@ -539,6 +538,7 @@ int						ft_put_c(int c);
 */
 t_var					*init_env(char **env);
 char					*init_name(char *src);
+void					 free_env(t_var *ptr_env);
 
 /*
 *******************************************************************************
@@ -572,7 +572,7 @@ char					*remove_char(char **str, int i);
 *******************************************************************************
 */
 //void					free_all(t_all *all);
-void					free_env(t_var *var);
+//void					free_env(t_var *var);
 
 /*
  * **    CONTROL_SEARCH_HISTORY.C
