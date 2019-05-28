@@ -3,10 +3,10 @@
 /*                                                              /             */
 /*   env_replace.c                                    .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: mdelarbr <mdelarbr@student.le-101.fr>      +:+   +:    +:    +:+     */
+/*   By: mdelarbr <mdelarbr@student.42.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/04/16 17:41:43 by mdelarbr     #+#   ##    ##    #+#       */
-/*   Updated: 2019/04/30 12:37:14 by mjalenqu    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/28 13:26:09 by husahuc     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -38,7 +38,27 @@ char		*switch_word(char *str, char *tmp, int i)
 	return (res);
 }
 
-char		*find_env_var(t_var *env, char *str, int i)
+/*char		*find_env_var(t_var *env, char *str, int i)
+{
+	t_var	*start;
+
+	start = env;
+	while (start)
+	{
+		if (ft_strcmp(ar[0], start->name) == 0 && start->type == ENVIRONEMENT)
+		{
+			ar[2] = ft_strjoin(ar[1], start->data);
+			ft_strjoin_free(&ar[2], ar[3]);
+			ft_strdel(&ar[0]);
+			ft_strdel(&ar[1]);
+			return (ar[2]);
+		}
+		start = start->next;
+	}
+	return (ft_strdup(ar[1]));
+}*/
+
+char		*replace_while(t_var *env, char *ar[4])
 {
 	t_var	*start;
 
