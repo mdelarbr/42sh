@@ -3,10 +3,10 @@
 /*                                                              /             */
 /*   ft_export.c                                      .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: husahuc <husahuc@student.42.fr>            +:+   +:    +:    +:+     */
+/*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/20 15:23:43 by husahuc      #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/20 15:48:47 by husahuc     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/28 14:47:04 by mjalenqu    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -40,9 +40,9 @@ int			ft_export(t_process *p, t_var **ptr_var)
 	while (p->cmd[++i])
 	{
 		if (ft_export_env(p->cmd[i], ptr_var))
-			printf("ok\n");
+			ft_printf("ok\n");
 		else
-			printf("not\n");
+			ft_printf("not\n");
 	}
 	return (0);
 }

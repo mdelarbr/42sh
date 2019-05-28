@@ -6,7 +6,7 @@
 /*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/04/18 13:43:41 by mdelarbr     #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/28 11:01:35 by mjalenqu    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/28 14:47:04 by mjalenqu    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -26,16 +26,16 @@ void		print_job(t_job *j)
 	process = 0;
 	while (j)
 	{
-//		printf("\n---jobs---[%d]->next: _%p_\tsplit: _%c_\n", job, j->next, j->split);
+//		ft_printf("\n---jobs---[%d]->next: _%p_\tsplit: _%c_\n", job, j->next, j->split);
 		job++;
 		start = j->p;
 		while (j->p)
 		{
-//			printf("--process--[%d]->next: _%p_\tsplit:_%c_\ttoken: |%s|\n", process, j->p->next, j->p->split, j->p->token);
+//			ft_printf("--process--[%d]->next: _%p_\tsplit:_%c_\ttoken: |%s|\n", process, j->p->next, j->p->split, j->p->token);
 			process++;
 			while (j->p->cmd[i])
 			{
-//				printf("cmd[%d]-> _%s_\n", i, j->p->cmd[i]);
+//				ft_printf("cmd[%d]-> _%s_\n", i, j->p->cmd[i]);
 				i++;
 			}
 			i = 0;

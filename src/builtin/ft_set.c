@@ -3,17 +3,17 @@
 /*                                                              /             */
 /*   ft_set.c                                         .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: husahuc <husahuc@student.42.fr>            +:+   +:    +:    +:+     */
+/*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/17 17:13:59 by husahuc      #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/20 15:47:41 by husahuc     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/28 14:47:04 by mjalenqu    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "../../includes/builtin.h"
 
-// Changer pour printf
+// Changer pour ft_printf
 // afficher charactere entre ''
 // faire le tri
 
@@ -26,7 +26,7 @@ int		ft_set(t_process *p, t_var **ptr_var)
 		return (1);
 	while (var)
 	{
-		printf("%s=%s\n", var->name, var->data);
+		ft_printf("%s=%s\n", var->name, var->data);
 		var = var->next;
 	}
 	return (1);

@@ -3,10 +3,10 @@
 /*                                                              /             */
 /*   ft_test_int.c                                    .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: husahuc <husahuc@student.42.fr>            +:+   +:    +:    +:+     */
+/*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/28 10:10:59 by husahuc      #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/28 10:14:42 by husahuc     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/28 14:47:04 by mjalenqu    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -25,7 +25,7 @@ int			verif_int(char *name)
 			i++;
 		else
 		{
-			printf("test: integer expression expected: %s\n", name);
+			ft_printf("test: integer expression expected: %s\n", name);
 			return (-1);
 		}
 	}
@@ -48,7 +48,7 @@ int			comp_num_operator(char *name1, char *type, char *name2)
 		return (ft_atoi(name1) <= ft_atoi(name2)) ? 0 : 1;
 	else
 	{
-		printf("test: unknown condition: %s\n", type);
+		ft_printf("test: unknown condition: %s\n", type);
 		return (2);
 	}
 }
