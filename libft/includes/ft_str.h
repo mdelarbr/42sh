@@ -6,7 +6,7 @@
 /*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/03 15:18:39 by shthevak     #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/16 13:04:10 by rlegendr    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/28 09:50:28 by vde-sain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -25,7 +25,7 @@
 ** Get Next Line Struct
 */
 
-# define BUFF_SIZE 1
+# define BUFF_SIZE 5000
 
 typedef struct		s_stock
 {

@@ -6,7 +6,7 @@
 /*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/28 09:15:13 by mjalenqu     #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/27 08:00:59 by mjalenqu    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/28 09:52:57 by vde-sain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -387,10 +387,10 @@ t_htab		*sort_list_htab(t_htab *head);
 ** TOOLS
 */
 
-void			clean_at_start(t_pos *pos);
-void			short_update(t_pos *pos, int len);
-void			update_position(t_pos *pos);
-int				is_in_selection_area(int i, t_pos *pos);
+void				clean_at_start(t_pos *pos);
+void				short_update(t_pos *pos, int len);
+void				update_position(t_pos *pos);
+int					is_in_selection_area(int i, t_pos *pos);
 
 /*
 ** COPY a mettre a la norme
@@ -417,7 +417,6 @@ void			copy(t_pos *pos);
 void			paste(t_pos *pos);
 void			cut_char(t_pos *pos);
 char			*remove_cut(char *str, int start, int end);
-
 
 /*
 ** JUMP a mettre a la norme
@@ -589,17 +588,26 @@ t_hist					*exiting_control_mode(t_pos *pos, t_hist *hist);
 int						get_pos_strstr(char *str, char *tofind, int i, int j);
 
 /*
-**    CONTROL_SEARCH_HISTORY_CALCUL_POS.C
+**CONTROL_SEARCH_HISTORY_CALCUL_LINES.C
 */
 
 void					get_right_coordinates_found(t_pos *pos, t_hist *hist,
 						t_ctrl_hist *ctrl);
-void					get_right_coordinates_not_found(t_pos *pos, t_ctrl_hist
-						*ctrl);
 int						count_cmd_line_len(t_pos *pos, char *ans, int act_co);
 void					count_ctrl_col_and_line(t_pos *pos, char *ans,
 						t_ctrl_hist *ctrl, int needle);
+
+/*
+**CONTROL_SEARCH_HISTORY_CALCUL_POS.C
+*/
+
+void					get_right_coordinates_not_found(t_pos *pos, t_ctrl_hist
+						*ctrl);
 void					get_pos_coordinates_right_again(t_pos *pos);
-void    check_copy(unsigned char *buf, t_pos *pos);
+
+
+
+
+void					check_copy(unsigned char *buf, t_pos *pos);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: vde-sain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/15 13:30:27 by vde-sain     #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/23 13:47:03 by rlegendr    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/28 09:44:33 by vde-sain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -42,9 +42,6 @@ int			get_pos_strstr(char *str, char *tofind, int i, int j)
 
 t_hist		*exiting_control_mode(t_pos *pos, t_hist *hist)
 {
-	int		link_found;
-
-	link_found = 0;
 	pos->ctrl_search_history = 0;
 	if (pos->ctrl_hist_cmd && ft_strlen(pos->ctrl_hist_cmd) > 0)
 	{
@@ -63,6 +60,9 @@ t_hist		*exiting_control_mode(t_pos *pos, t_hist *hist)
 	{
 		pos->ans = ft_secure_free(pos->ans);
 		pos->ans = ft_strnew(0);
+		pos->act_co = pos->len_prompt;
+		pos->act_li = pos->start_li;
+		hist->cmd = ft_secure_free(hist->cmd);
 	}
 	pos->let_nb = ft_strlen(pos->ans);
 	pos->ctrl_hist_cmd = ft_secure_free(pos->ctrl_hist_cmd);
@@ -73,20 +73,13 @@ void		needle_found_in_history(t_pos *pos, t_hist *hist, t_ctrl_hist *ctrl)
 {
 	write(1, hist->cmd, ft_strlen(hist->cmd));
 	get_right_coordinates_found(pos, hist, ctrl);
-	if (ctrl->act_li < pos->max_co)
-	{
-		ctrl->act_li = pos->start_li;
-		count_ctrl_col_and_line(pos, hist->cmd, ctrl, ctrl->needle);
-		if (ctrl->act_li > pos->start_li)
-			ctrl->act_co -= 1;
-		ctrl->act_li += count_cmd_line_len(pos, pos->ans, pos->len_prompt + 19);
-		if (ctrl->act_li > pos->max_co)
-		{
-			ctrl->act_li = ctrl->act_li - (ctrl->act_li - pos->max_co);
-		}
-	}
-	tputs(tgoto(tgetstr("cm", NULL), ctrl->act_co, ctrl->act_li)
-			, 1, ft_putchar);
+	ctrl->act_li = pos->start_li;
+	count_ctrl_col_and_line(pos, hist->cmd, ctrl, ctrl->needle);
+	if (ctrl->act_li > pos->start_li)
+		ctrl->act_co -= 1;
+	ctrl->act_li += count_cmd_line_len(pos, pos->ans, pos->len_prompt + 19);
+	if (ctrl->act_li > pos->max_co)
+		ctrl->act_li = ctrl->act_li - (ctrl->act_li - pos->max_co);
 	if (pos->ctrl_hist_cmd)
 		pos->ctrl_hist_cmd = ft_secure_free(pos->ctrl_hist_cmd);
 	pos->ctrl_hist_cmd = ft_strnew(ft_strlen(hist->cmd));
@@ -142,5 +135,6 @@ t_hist		*control_search_history(t_pos *pos, t_hist *hist,
 	while (hist->next)
 		hist = hist->next;
 	hist = search_occurence_in_history(pos, hist, &ctrl);
+	tputs(tgoto(tgetstr("cm", NULL), pos->act_co, pos->act_li), 1, ft_putchar);
 	return (hist);
 }

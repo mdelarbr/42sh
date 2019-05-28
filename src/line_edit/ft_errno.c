@@ -6,7 +6,7 @@
 /*   By: vde-sain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/24 07:19:15 by vde-sain     #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/24 13:53:51 by vde-sain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/28 09:36:45 by vde-sain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -15,7 +15,6 @@
 
 void			error_adding_list(char *variable, int err, t_hist *err_list)
 {
-
 	err_list->cmd = ft_strdup(variable);
 	err_list->cmd_no = err;
 	err_list = add_list_back_hist(err_list);
@@ -50,7 +49,6 @@ void			error_printing(t_hist *err_list, t_pos *pos)
 void			error_handling(t_pos *pos, char *variable, int err)
 {
 	static t_hist	*err_list;
-	
 
 	if (err_list == NULL)
 	{

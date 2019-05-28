@@ -6,7 +6,7 @@
 /*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/06 08:09:42 by rlegendr     #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/24 13:51:40 by vde-sain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/28 09:35:43 by vde-sain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -31,7 +31,15 @@ static void		resize_screen(t_pos *pos)
 	tputs(tgetstr("vi", NULL), 1, ft_putchar);
 	tputs(tgoto(tgetstr("cm", NULL), 0, pos->start_li), 1, ft_putchar);
 	print_prompt(pos);
-	print_ans(pos, 0, pos->start_co);
+
+	if (pos->ctrl_search_history == 1)
+	{
+		write(1, "(reverse-i-search)'", 19);
+		ft_printf("%s':", pos->ans);
+		write(1, pos->ctrl_hist_cmd, ft_strlen(pos->ctrl_hist_cmd));
+	}
+	else
+		print_ans(pos, 0, pos->start_co);
 	tputs(tgetstr("ve", NULL), 1, ft_putchar);
 }
 

@@ -6,7 +6,7 @@
 #    By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2019/03/04 18:02:46 by mjalenqu     #+#   ##    ##    #+#        #
-#    Updated: 2019/05/27 10:38:03 by mjalenqu    ###    #+. /#+    ###.fr      #
+#    Updated: 2019/05/28 10:07:58 by vde-sain    ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -20,8 +20,9 @@ INC_PATH = ./includes/
 
 SRC_LINE = $(addprefix line_edit/, \
 				calcul_line.c check_error.c check_input.c control_search_history_calcul_pos.c\
-				control_search_history.c copy_tools.c copy.c cut.c env.c escape_code.c\
-				ft_errno.c history_expansion_free.c history_expansion.c history_expansions_types.c\
+				control_search_history.c control_search_history_calcul_lines.c \
+				copy_tools.c copy.c cut.c env.c escape_code.c ft_errno.c\
+				history_expansion_free.c history_expansion.c history_expansions_types.c\
 				history.c initialisation_stock.c input_is_entry.c tools.c\
 				input_is_printable_char.c input_is_remove_char.c jump_up_down.c jump.c\
 				move_through_history.c print_ans.c search_in_history.c signal.c tab_key_var.c\
@@ -48,7 +49,8 @@ INC_NAME = termcaps.h
 INC = $(addprefix $(INC_PATH), $(INC_NAME))
 SRC = $(addprefix $(SRC_PATH), $(SRC_NAME))
 OBJ = $(addprefix $(OBJ_PATH), $(OBJ_NAME))
-FLAG += -Wall -Werror -Wextra -O3 -g3# -fsanitize=address
+
+FLAG += -Wall -Werror -Wextra -o3 -g3# -fsanitize=address
 FLAG_END = -lcurses
 NORME = norminette
 
