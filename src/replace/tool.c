@@ -6,7 +6,7 @@
 /*   By: mdelarbr <mdelarbr@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/09 10:52:26 by mdelarbr     #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/21 11:50:15 by mdelarbr    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/21 12:49:18 by mdelarbr    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -24,19 +24,19 @@ int			cnt_size(char *str)
 	{
 		while (str[i] && ((str[i] >= 9 && str[i] <= 13) || str[i] == ' '))
 			i++;
-		if (str[i] && str[i] == '"')
+		if (str[i] && str[i] == '"' && (i == 0 || str[i - 1] != '\\'))
 		{
 			i++;
 			nb++;
-			while (str[i] && str[i] != '"')
+			while (str[i] && str[i] != '"' && (i == 0 || str[i - 1] != '\\'))
 				i++;
 			i++;
 		}
-		if (str[i] && str[i] == '\'')
+		if (str[i] && str[i] == '\'' && (i == 0 || str[i - 1] != '\\'))
 		{
 			i++;
 			nb++;
-			while (str[i] && str[i] != '\'')
+			while (str[i] && str[i] != '\'' && (i == 0 || str[i - 1] != '\\'))
 				i++;
 			i++;
 		}
@@ -44,7 +44,7 @@ int			cnt_size(char *str)
 		{
 			nb++;
 			while (str[i] && ((str[i] < 9 || str[i] > 13) && str[i] != ' '
-			&& str[i] != '"' && str[i] != '\''))
+			&& str[i] != '"' && str[i] != '\'' && (i == 0 || str[i - 1] != '\\')))
 				i++;
 		}
 	}
@@ -65,21 +65,21 @@ char		**split_space(char *str)
 	{
 		while (str[i] && ((str[i] >= 9 && str[i] <= 13) || str[i] == ' '))
 			i++;
-		if (str[i] && str[i] == '"')
+		if (str[i] && str[i] == '"' && (i == 0 || str[i - 1] != '\\'))
 		{
 			i++;
 			start = i;
-			while (str[i] && str[i] != '"')
+			while (str[i] && str[i] != '"' && (i == 0 || str[i - 1] != '\\'))
 				i++;
 			res[k] = ft_strsub(str, start, i - start);
 			k++;
 			i++;
 		}
-		else if (str[i] && str[i] == '\'')
+		else if (str[i] && str[i] == '\'' && (i == 0 || str[i - 1] != '\\'))
 		{
 			start = i;
 			i++;
-			while (str[i] && str[i] != '\'')
+			while (str[i] && str[i] != '\'' && (i == 0 || str[i - 1] != '\\'))
 				i++;
 			res[k] = ft_strsub(str, start, (i + 1) - start);
 			k++;
@@ -89,8 +89,9 @@ char		**split_space(char *str)
 		{
 			start = i;
 			while (str[i] && ((str[i] < 9 || str[i] > 13) && str[i] != ' '
-			&& str[i] != '"' && str[i] != '\''))
+			&& str[i] != '"' && str[i] != '\'' && (i == 0 || str[i - 1] != '\\')))
 				i++;
+			printf("i: %d, s,: %d\n", i, start);
 			res[k] = ft_strsub(str, start, i - start);
 			k++;
 		}

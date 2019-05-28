@@ -6,7 +6,7 @@
 /*   By: mdelarbr <mdelarbr@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/04/15 17:27:56 by mdelarbr     #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/21 11:50:13 by mdelarbr    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/21 11:57:31 by mdelarbr    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -69,8 +69,6 @@ int			replace_find_alias(char ***array, t_var *var, t_replace *r, int i)
 	return (done);
 }
 
-// TODO gerer les simple quotes.
-
 int			remove_env_while(char ***array, t_var *var, t_replace *replace)
 {
 	int		done;
@@ -105,6 +103,7 @@ int			remove_env_while(char ***array, t_var *var, t_replace *replace)
 	return (done);
 }
 
+// TODO recheck les back slash.
 // TODO faire en sorte qu'on ne peut pas faire de boucle infinie comme bash on ne peut pas replace 2 fois une var.
 
 char		**remove_env(t_var *start, char *str)
