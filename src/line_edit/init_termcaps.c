@@ -72,12 +72,7 @@ int		init_pos(t_pos *pos, char *buf)
 	pos->max_co = tgetnum("co");
 	pos->max_li = tgetnum("li") - 1;
 	pos->history_mode = 0;
-/*	if (ft_strlen(pos->prompt) == 2)
-		pos->len_prompt = 2;
-	else*/
-		pos->len_prompt = ft_strlen(pos->prompt) % pos->max_co;
-//	if (pos->len_prompt == pos->max_co)
-//		pos->debug5 += 256485;
+	pos->len_prompt = ft_strlen(pos->prompt) % pos->max_co;
 	pos->ans = ft_strnew(0);
 	pos->saved_ans = NULL;
 	pos->len_ans = pos->len_prompt;
@@ -138,7 +133,6 @@ char	*termcaps42sh(char *prompt, int error, t_pos *pos, t_hist *hist)
 	inter = (t_inter){0, 0, 0, 0, 0, 0, 0, 0};
 	error = 0;
 
-//	ft_putstr("{T.cyan.}rle_sain{eoc} {B.}in{eoc} {B.T.blue.}mon ordinateur :){eoc}\n");
 	while (hist->next)
 		hist = hist->next;
 	if (pos->prompt == NULL)

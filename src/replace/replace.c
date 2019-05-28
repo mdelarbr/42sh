@@ -3,10 +3,10 @@
 /*                                                              /             */
 /*   replace.c                                        .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
+/*   By: mdelarbr <mdelarbr@student.42.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/04/15 17:27:56 by mdelarbr     #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/28 09:32:28 by vde-sain    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/28 13:30:01 by husahuc     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -69,8 +69,6 @@ int			replace_find_alias(char ***array, t_var *var, t_replace *r, int i)
 	return (done);
 }
 
-// TODO gerer les simple quotes.
-
 int			remove_env_while(char ***array, t_var *var, t_replace *replace)
 {
 	int		done;
@@ -82,7 +80,7 @@ int			remove_env_while(char ***array, t_var *var, t_replace *replace)
 	while ((*array)[i])
 	{
 		replace_find_alias(array, var, replace, i);
-		if ((*array)[i][0] == '\'')
+		if (ft_strstr((*array)[i], "$") != NULL)
 		{
 			tmp = (*array)[i];
 			(*array)[i] = ft_strsub((*array)[i], 1, ft_strlen((*array)[i]) - 2);
@@ -94,7 +92,7 @@ int			remove_env_while(char ***array, t_var *var, t_replace *replace)
 			done = 1;
 			(*array)[i] = replace_env(var, (*array)[i], 0);
 		}
-		if ((*array)[i] && f_check_var(var, (*array)[i]) == 1)
+		if (f_check_var(var, (*array)[i]) == 1)
 		{
 			done = 1;
 			(*array)[i] = replace_var(var, (*array)[i]);
@@ -119,5 +117,8 @@ char		**remove_env(t_var *start, char *str)
 			break ;
 	ft_strdel(&str);
 //	free_replace(replace);
+//	free(replace);
+//	tmp = make_string(array);
+//	ft_tabfree(array);
 	return (array);
 }

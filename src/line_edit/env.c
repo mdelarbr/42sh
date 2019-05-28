@@ -3,10 +3,10 @@
 /*                                                              /             */
 /*   env.c                                            .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
+/*   By: mjalenqu <mjalenqu@student.42.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/08 10:53:46 by mjalenqu     #+#   ##    ##    #+#       */
-/*   Updated: 2019/04/30 19:38:01 by mjalenqu    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/25 15:07:07 by husahuc     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -66,4 +66,18 @@ t_var	*init_env(char **env)
 	}
 	new->next = NULL;
 	return (save);
+}
+
+void	free_env(t_var *env)
+{
+	t_var *buf;
+
+	while (env)
+	{
+		buf = env->next;
+		free(env->name);
+		free(env->data);
+		free(env);
+		env = buf;
+	}
 }

@@ -3,15 +3,25 @@
 /*                                                              /             */
 /*   exec_main.c                                      .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: mdelarbr <mdelarbr@student.le-101.fr>      +:+   +:    +:    +:+     */
+/*   By: mdelarbr <mdelarbr@student.42.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/04/30 11:29:02 by mdelarbr     #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/12 13:18:00 by mdelarbr    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/15 20:03:39 by husahuc     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "../../includes/exec.h"
+
+void		ft_tabfree(char **res)
+{
+	int i;
+
+	i = -1;
+	while (res[++i])
+		free(res[i]);
+	free(res);
+}
 
 int			use_execve(char **res, t_var *l_var)
 {
@@ -31,11 +41,15 @@ int			use_execve(char **res, t_var *l_var)
 	{
 		tmp = strjoin_path(path[i], res[0]);
 		if (use_execve_acces(tmp, res, l_var) == 0)
+		{
+			ft_tabfree(path);
 			return (0);
+		}
 		i++;
 		ft_strdel(&tmp);
 	}
 	ft_strdel(&tmp);
+	ft_tabfree(path);
 	return (-1);
 }
 
@@ -56,10 +70,14 @@ int			solve_execve(char *path, char **arg, t_var *var)
 	if (pid == 0)
 	{
 		if (execve(path, arg, array) == -1)
+		{
+			ft_tabfree(array);
 			return (-1);
+		}
 	}
 	else
 		wait(&pid);
+	ft_tabfree(array);
 	return (1);
 }
 

@@ -3,10 +3,17 @@
 #                                                               /              #
 #    Makefile                                         .::    .:/ .      .::    #
 #                                                  +:+:+   +:    +:  +:+:+     #
+<<<<<<< HEAD
 #    By: mdelarbr <mdelarbr@student.le-101.fr>      +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2019/03/04 18:02:46 by mjalenqu     #+#   ##    ##    #+#        #
 #    Updated: 2019/05/28 11:25:23 by mdelarbr    ###    #+. /#+    ###.fr      #
+=======
+#    By: mjalenqu <mjalenqu@student.42.fr>          +:+   +:    +:    +:+      #
+#                                                  #+#   #+    #+    #+#       #
+#    Created: 2019/03/04 18:02:46 by mjalenqu     #+#   ##    ##    #+#        #
+#    Updated: 2019/05/28 13:16:47 by husahuc     ###    #+. /#+    ###.fr      #
+>>>>>>> 8ced55ee41fe13d9eed1c3ed67a5b3703b9d1605
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -39,10 +46,15 @@ SRC_EXEC = $(addprefix exec/, \
 
 SRC_REP = $(addprefix replace/, \
 				alias.c env_replace.c replace.c tool.c var_replace.c)
-				
+
+SRC_BUILTIN = $(addprefix builtin/, \
+				ft_test.c ft_test_int.c ft_echo.c ft_cd.c ft_set.c ft_type.c ft_export.c \
+				ft_unset.c tool.c)
+
 SRC_MAIN = $(addprefix main/, main.c)
 
-SRC_NAME = $(SRC_EXEC) $(SRC_LEX) $(SRC_LINE) $(SRC_MAIN) $(SRC_REP)
+SRC_NAME = $(SRC_EXEC) $(SRC_LEX) $(SRC_LINE) $(SRC_MAIN) $(SRC_REP) $(SRC_BUILTIN)
+
 OBJ_NAME = $(SRC_NAME:.c=.o)
 INC_NAME = termcaps.h
 
@@ -80,6 +92,7 @@ $(OBJ_PATH):
 	@mkdir -p obj/lexeur 2> /dev/null
 	@mkdir -p obj/replace 2> /dev/null
 	@mkdir -p obj/exec 2> /dev/null
+	@mkdir -p obj/builtin 2> /dev/null
 	@mkdir -p obj/main 2> /dev/null
 	@mkdir -p obj/ft_printf 2> /dev/null
 
