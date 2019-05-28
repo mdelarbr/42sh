@@ -6,7 +6,7 @@
 /*   By: husahuc <husahuc@student.42.fr>            +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/16 15:27:39 by husahuc      #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/25 15:18:03 by husahuc     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/28 10:47:20 by husahuc     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -36,14 +36,14 @@ char		*ft_get_val(char *name, t_var *var, int type)
 
 // pointeur su premier element
 
-void	remove_item_var(t_var *var)
+void		remove_item_var(t_var *var)
 {
 	free(var->name);
 	free(var->data);
 	free(var);
 }
 
-int		remove_list_var(t_var **ptr_var, int type, char *name)
+int			remove_list_var(t_var **ptr_var, int type, char *name)
 {
 	t_var *var;
 	t_var *buf;
