@@ -6,57 +6,13 @@
 /*   By: husahuc <husahuc@student.42.fr>            +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/15 12:55:43 by husahuc      #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/20 14:16:23 by husahuc     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/28 10:40:45 by husahuc     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "../../includes/exec.h"
 #include "../../includes/builtin.h"
-
-// prinf a changer
-// erreurs multiples a changer
-
-int			verif_int(char *name)
-{
-	int i;
-
-	i = 0;
-	while (name[i])
-	{
-		if ((i == 0 && name[i] == '-') ||
-			(name[i] >= '0' && name[i] <= '9'))
-			i++;
-		else
-		{
-			printf("test: integer expression expected: %s\n", name);
-			return (-1);
-		}
-	}
-	return (0);
-}
-
-
-int			comp_num_operator(char *name1, char *type, char *name2)
-{
-	if (verif_int(name1) == -1 || verif_int(name2) == -1)
-		return (2);
-	if (ft_strcmp(type, "-eq") == 0)
-		return (ft_atoi(name1) == ft_atoi(name2)) ? 0 : 1;
-	else if (ft_strcmp(type, "-ne") == 0)
-		return (ft_atoi(name1) != ft_atoi(name2)) ? 0 : 1;
-	else if (ft_strcmp(type, "-ge") == 0)
-		return (ft_atoi(name1) >= ft_atoi(name2)) ? 0 : 1;
-	else if (ft_strcmp(type, "-lt") == 0)
-		return (ft_atoi(name1) < ft_atoi(name2)) ? 0 : 1;
-	else if (ft_strcmp(type, "-le") == 0)
-		return (ft_atoi(name1) <= ft_atoi(name2)) ? 0 : 1;
-	else
-	{
-		printf("test: unknown condition: %s\n", type);
-		return (2);
-	}
-}
 
 int			comp_operator(char *name1, char *type, char *name2)
 {
@@ -129,26 +85,25 @@ int			simple_operator(char *type, char *name)
 	return (test_simple_operator(type, s_type));
 }
 
-int			ft_test(t_process *p, t_var **var)
+int			ft_test_argv(char **argv)
 {
 	int i;
 	int inv;
 
-	var = NULL;
 	i = 0;
-	if (ft_tabclen(p->cmd) <= 1)
+	if (ft_tabclen(argv) <= 1)
 		return (1);
-	if (ft_strcmp(p->cmd[1], "!") == 0)
+	if (ft_strcmp(argv[1], "!") == 0)
 	{
 		inv = 1;
-		p->cmd++;
+		argv++;
 	}
-	if (ft_tabclen(p->cmd) == 2 && p->cmd[1] == NULL)
+	if (ft_tabclen(argv) == 2 && argv[1] == NULL)
 		i = 1;
-	else if (ft_tabclen(p->cmd) == 3)
-		i = simple_operator(p->cmd[1], p->cmd[2]);
-	else if (ft_tabclen(p->cmd) == 4)
-		i = comp_operator(p->cmd[1], p->cmd[2], p->cmd[3]);
+	else if (ft_tabclen(argv) == 3)
+		i = simple_operator(argv[1], argv[2]);
+	else if (ft_tabclen(argv) == 4)
+		i = comp_operator(argv[1], argv[2], argv[3]);
 	else
 	{
 		printf("test: too many arguments");
@@ -156,6 +111,14 @@ int			ft_test(t_process *p, t_var **var)
 	}
 	if (inv == 1)
 		i = (i == 0) ? 1 : 0;
-	printf("%d\n", i);
 	return (i);
+}
+
+int			ft_test(t_process *p, t_var **var)
+{
+	int ret;
+
+	var = NULL;
+	ret = ft_test_argv(p->cmd);
+	return (ret);
 }

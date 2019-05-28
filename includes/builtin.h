@@ -6,7 +6,7 @@
 /*   By: husahuc <husahuc@student.42.fr>            +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/16 11:50:38 by husahuc      #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/20 16:22:40 by husahuc     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/28 10:13:21 by husahuc     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -41,6 +41,9 @@ char			*ft_get_val(char *name, t_var *var, int type);
 int				ft_tabclen(char **array);
 void			add_list_env(t_var **var, int type, char *name, char *data);
 int				remove_list_var(t_var **ptr_var, int type, char *name);
+
+int				verif_int(char *name);
+int				comp_num_operator(char *name1, char *type, char *name2);
 
 # define ARGUMENTS "cd: Too many arguments."
 # define CD_NO_HOME "cd: No HOME directory."

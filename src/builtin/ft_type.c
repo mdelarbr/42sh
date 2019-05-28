@@ -6,7 +6,7 @@
 /*   By: husahuc <husahuc@student.42.fr>            +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/20 14:14:27 by husahuc      #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/20 15:46:40 by husahuc     ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/28 10:09:50 by husahuc     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -61,8 +61,6 @@ char			is_function(char *function, t_var **var)
 	}
 	return (0);
 }
-
-// faire message
 
 int				ft_type(t_process *p, t_var **var)
 {
