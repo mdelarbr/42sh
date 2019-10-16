@@ -6,7 +6,7 @@
 /*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/03 15:18:39 by shthevak     #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/16 13:04:10 by rlegendr    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/10/07 16:03:56 by mjalenqu    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -20,12 +20,14 @@
 # include "ft_unix.h"
 # include "ft_mem.h"
 # include "ft_int.h"
+# include "ft_printf.h"
+# include "ft_printf_err.h"
 
 /*
 ** Get Next Line Struct
 */
 
-# define BUFF_SIZE 1
+# define BUFF_SIZE 5000
 
 typedef struct		s_stock
 {
@@ -35,7 +37,7 @@ typedef struct		s_stock
 }					t_stock;
 
 void				ft_bzero(void *elem, int i);
-void				ft_isalpha(int c);
+int					ft_isalpha(int c);
 void				ft_isascii(int c);
 int					ft_isspace(int c);
 char				*ft_itoa(int i);
@@ -54,6 +56,7 @@ char				*ft_strcpy(char *dest, const char *str);
 char				*ft_strncpy(char *dst, const char *str, size_t len);
 void				ft_strdel(char **str);
 char				*ft_strdup(char *str);
+char				*ft_strfdup(char *str);
 char				*ft_strndup(char *str, int len);
 int					ft_strequ(const char *s1, const char *s2);
 char				*ft_strjoin(const char *s1, const char *s2);
@@ -64,6 +67,7 @@ char				*ft_strnew(int size);
 char				*ft_strrmvi(char *str, int i);
 char				*ft_strstr(const char *str, const char *tofind);
 char				*ft_strsub(char const *s, unsigned int start, size_t len);
+char				*ft_strfsub(char *s, unsigned int start, size_t len);
 void				*ft_voidrev(void *s);
 void				ft_voidswap(void *s, void *d);
 void				ft_putcolor(char *s1, char *s2, char *s3);

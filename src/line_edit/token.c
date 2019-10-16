@@ -3,98 +3,56 @@
 /*                                                              /             */
 /*   token.c                                          .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: bjuarez <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
+/*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2019/04/09 08:40:32 by bjuarez      #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/22 14:58:21 by bjuarez     ###    #+. /#+    ###.fr     */
+/*   Created: 2019/10/01 18:30:42 by rlegendr     #+#   ##    ##    #+#       */
+/*   Updated: 2019/10/15 09:41:57 by rlegendr    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "termcaps.h"
+#include "../../includes/termcaps.h"
 
-static int	verif_token(char *str)
+int		token_condition(char *ans, int i)
 {
-	if (ft_strncmp(str, "&&", 2) == 0)
-		return (1);
-	if (ft_strncmp(str, "||", 2) == 0)
-		return (2);
-	if (ft_strncmp(str + 1, "|", 1) == 0 && ft_strncmp(str, "\\|", 2) != 0)
-		return (3);
-	return (0);
+	if (ans[i] == '"' && (i == 0 || (i > 0 && ans[i - 1] != 92)))
+		i = double_quote(ans, i + 1);
+	else if (ans[i] == 39 && (i == 0 || (i > 0 && ans[i - 1] != 92)))
+		i = simple_quote(ans, i + 1);
+	else if (ans[i] == '$' && ans[i + 1] == '{' && (i == 0 || (i > 0 &&
+					ans[i - 1] != 92)))
+		i = brace_param(ans, i + 2);
+	else if (ans[i] == '&' && ans[i + 1] == '&' && (i == 0 || (i > 0 &&
+					ans[i - 1] != 92)))
+		i = double_token(ans, i + 2);
+	else if (ans[i] == '|' && ans[i + 1] == '|' && (i == 0 || (i > 0 &&
+					ans[i - 1] != 92)))
+		i = double_token(ans, i + 2);
+	else if (ans[i] == '|' && (i == 0 || (i > 0 && ans[i - 1] != 92)))
+		i = simple_pipe(ans, i + 1);
+	return (i);
 }
 
-static int	find_last_token(char *ans)
+int		token(char *ans, t_pos *pos)
 {
-	int j;
-	int check;
+	int		i;
+	int		ret;
 
-	j = 0;
-	check = 0;
-	while (ans[j])
-		j++;
-	while (ans[j] <= 32 || ans[j] > 126)
-		j--;
-	j--;
-	if (ans[j - 1] == 92)
-		return (0);
-	if ((check = verif_token(&ans[j])) != 0)
-		return (check);
-	return (0);
-}
-
-static void	check_close_token(t_pos *pos, t_tok *in, t_tokench *tok)
-{
-	if (check_close_nothing(pos, in) == 1 && in->mode != 5)
+	i = 0;
+	ret = 1;
+	if (pos->active_heredoc == 0)
 	{
-		in->mode = 1;
-		tok = check_close(tok, "`", in);
+		while (ans[i])
+		{
+			i = token_condition(ans, i);
+			if (i <= -1)
+				return (0);
+			if (i < ft_strlen(ans))
+				i++;
+		}
 	}
-	if (check_close_nothing2(pos, in) == 1 && in->mode != 5)
-	{
-		in->mode = 1;
-		check_close(tok, "'", in);
-	}
-	if (check_close_tree(pos, in) == 1 && in->mode != 5 && in->bquote != 1)
-	{
-		in->mode = 2;
-		check_close(tok, in->dquote_d, in);
-	}
-	in->mode = 0;
-}
-
-static int	check_in(t_pos *pos, t_tok *in)
-{
-	if (in->heredoc == 1)
-		return (0);
-	if (in->quote == 1)
-		return (0);
-	if (in->dquote > 0)
-		return (0);
-	if (in->bquote == 1)
-		return (0);
-	if (find_last_token(pos->ans) < 4 && find_last_token(pos->ans) > 0
-		&& in->quote != 1 && in->dquote != 1 && in->bquote != 1)
+	if (ans && ft_strlen(ans) > 0 && ans[ft_strlen(ans) - 1] == 92 &&
+		odd_backslash(ft_strlen(ans) - 1, ans))
 		return (0);
 	return (1);
-}
-
-void		check_token(t_pos *pos, t_tok *in, t_tokench *tok)
-{
-	tok = NULL;
-	in->i = 0;
-	tok = add_list_back_tok_next(tok);
-	tok->prev = NULL;
-	while (pos->ans && pos->is_complete != -1 && pos->ans[in->i] != '\0')
-	{
-		while (tok && tok->next != NULL)
-			tok = tok->next;
-		check_first_token(pos, in, tok);
-		check_close_token(pos, in, tok);
-		check_heredoc(pos, in, tok);
-		if (pos->ans[in->i] != '\0')
-			in->i++;
-	}
-	pos->is_complete = check_in(pos, in);
-	free_all_check_token(in, tok);
 }

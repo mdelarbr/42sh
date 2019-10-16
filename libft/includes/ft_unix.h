@@ -6,7 +6,7 @@
 /*   By: shthevak <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/13 21:42:15 by shthevak     #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/16 17:33:02 by rlegendr    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/29 10:09:22 by vde-sain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -22,6 +22,7 @@
 # include "ft_mem.h"
 # include "ft_int.h"
 # include "ft_printf.h"
+# include "ft_printf_err.h"
 
 int ft_terminal_h(int ft);
 int	ft_terminal_w(int fd);

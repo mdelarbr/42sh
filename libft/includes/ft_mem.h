@@ -6,7 +6,7 @@
 /*   By: shthevak <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/23 16:06:35 by shthevak     #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/20 15:26:28 by rlegendr    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/29 10:09:51 by vde-sain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -19,6 +19,7 @@
 # include "ft_unix.h"
 # include "ft_int.h"
 # include "ft_printf.h"
+# include "ft_printf_err.h"
 
 void	*ft_memset(void *mem, int c, size_t l);
 void	*ft_memccpy(void *dst, const void *src, int c, size_t n);

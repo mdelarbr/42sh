@@ -6,7 +6,7 @@
 /*   By: rlegendr <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/16 10:50:36 by rlegendr     #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/16 17:54:27 by rlegendr    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/24 10:33:53 by rlegendr    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -84,4 +84,20 @@ void			free_htab(t_htab *htab)
 		free(tmp);
 		tmp = htab;
 	}
+}
+
+t_htab			*fill_new_htab(t_htab *htab, t_htab *new, int match)
+{
+	new = add_list_back_htab(new);
+	new->content = ft_strdup(htab->content);
+	new->content_type = htab->content_type;
+	new->lenght_max = ft_strlen(new->content);
+	new->content_no = new->prev == NULL ? 0 : new->prev->content_no + 1;
+	new->matching_index = match;
+	if (new->prev == NULL)
+		new->lenght_max = ft_strlen(new->content);
+	else
+		new->lenght_max = new->lenght_max > new->prev->lenght_max ?
+	ft_strlen(new->content) : new->prev->lenght_max;
+	return (new);
 }

@@ -3,10 +3,10 @@
 /*                                                              /             */
 /*   tab_key_tools_manip.c                            .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: rlegendr <marvin@le-101.fr>                +:+   +:    +:    +:+     */
+/*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/16 10:46:14 by rlegendr     #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/23 09:55:34 by rlegendr    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/10/02 08:54:37 by mjalenqu    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -17,9 +17,10 @@ t_htab			*adjust_lenght_max(t_htab *htab)
 {
 	while (htab)
 	{
-		htab->lenght_max = htab->next == NULL ? htab->lenght_max : htab->next->lenght_max;
+		htab->lenght_max = htab->next == NULL ?
+			htab->lenght_max : htab->next->lenght_max;
 		if (htab->prev == NULL)
-			break;
+			break ;
 		htab = htab->prev;
 	}
 	return (htab);
@@ -41,12 +42,12 @@ char			*get_full_path(t_pos *pos)
 	while (pos->ans[len] && pos->ans[len] != ' ')
 		len += 1;
 	search = ft_strndup(pos->ans + i, len - i);
+	search = check_for_tilde(search, stock(NULL, 6), 0, 0);
 	return (search);
 }
 
 char			*get_correct_path(char *path)
 {
-
 	int			i;
 	char		*name;
 	DIR			*test;
@@ -73,7 +74,9 @@ void			reduce_ans(t_pos *pos, char *name)
 {
 	int			search_i;
 
-	while (pos->ans[pos->let_nb] && pos->ans[pos->let_nb] != 32 && pos->ans[pos->let_nb] != '&' && pos->ans[pos->let_nb] != '|' && pos->ans[pos->let_nb] != ';')
+	while (pos->ans[pos->let_nb] && pos->ans[pos->let_nb] != 32 &&
+			pos->ans[pos->let_nb] != '&' && pos->ans[pos->let_nb] != '|' &&
+			pos->ans[pos->let_nb] != ';')
 		right_arrow(pos);
 	search_i = ft_strlen(name) - 1;
 	while (search_i >= 0 && pos->let_nb + 1 >= 0 &&
@@ -92,6 +95,12 @@ void			add_slash_on_ans(t_pos *pos)
 	i = ft_strlen(pos->ans) - 1;
 	if (i == -1)
 		return ;
+	if (pos->ans[0] == '.' && pos->ans[1] == 0)
+	{
+		pos->let_nb = 1;
+		input_is_printable_char(pos, "/");
+		return ;
+	}
 	while (pos->ans[pos->let_nb] && pos->ans[pos->let_nb] != ' ')
 		pos->let_nb += 1;
 	if (pos->ans[pos->let_nb - 1] != '/' &&

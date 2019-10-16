@@ -3,10 +3,10 @@
 /*                                                              /             */
 /*   env_replace.c                                    .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: mdelarbr <mdelarbr@student.le-101.fr>      +:+   +:    +:    +:+     */
+/*   By: mdelarbr <mdelarbr@student.42.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/04/16 17:41:43 by mdelarbr     #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/20 19:36:30 by mdelarbr    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/28 13:26:09 by husahuc     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -37,14 +37,6 @@ char		*switch_word(char *str, char *tmp, int i)
 	ft_strdel(&str);
 	return (res);
 }
-
-/*
-** [0] = tmp;
-** [1] = fisrt;
-** [2] = res;
-** [3] = end;
-** [4] = for '
-*/
 
 char		*replace_while(t_var *env, char *ar[4])
 {

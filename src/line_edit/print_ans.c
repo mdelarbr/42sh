@@ -6,7 +6,7 @@
 /*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/04/04 12:07:48 by mjalenqu     #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/13 14:08:38 by rlegendr    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/05/24 08:56:07 by vde-sain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -72,7 +72,7 @@ void			print_ans(t_pos *pos, int i, int act_co)
 	{
 		while (pos->ans[i])
 		{
-			if (pos->start_select != -1 && ((i >= pos->start_select && i <= pos->let_nb) || (i <= pos->start_select && i >= pos->let_nb)))
+			if (pos->start_select != -1 && is_in_selection_area(i, pos) == 1)
 				tputs(tgetstr("mr", NULL), 1, ft_putchar);
 			else
 				tputs(tgetstr("me", NULL), 1, ft_putchar);

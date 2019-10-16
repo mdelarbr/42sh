@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   conversion_type3.c                               .::    .:/ .      .::   */
+/*   bonus_conversion_type_1.c                        .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: vde-sain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
+/*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/30 13:49:55 by vde-sain     #+#   ##    ##    #+#       */
-/*   Updated: 2019/02/04 17:28:14 by rlegendr    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/09/27 09:26:34 by mjalenqu    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -59,6 +59,7 @@ char		*b_conv(va_list va, t_data *data)
 	int					i;
 
 	i = 0;
+	nb = 0;
 	if (data->length[0] == '\0')
 		nb = va_arg(va, unsigned int);
 	else if (ft_strcmp(data->length, "hh") == 0)

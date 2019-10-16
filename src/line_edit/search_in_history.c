@@ -6,12 +6,24 @@
 /*   By: vde-sain <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/04/25 07:58:52 by vde-sain     #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/06 09:39:55 by rlegendr    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/10/16 08:24:01 by vde-sain    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "termcaps.h"
+
+void		remove_last_link_hist(void)
+{
+	t_hist	*hist;
+
+	hist = stock(NULL, 8);
+	if (!hist)
+		return ;
+	while (hist && hist->next)
+		hist = hist->next;
+	ft_strdel(&hist->cmd);
+}
 
 t_hist		*search_up_complete_in_history(t_hist *hist, t_pos *pos)
 {

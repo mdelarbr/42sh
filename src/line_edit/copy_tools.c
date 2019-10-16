@@ -6,7 +6,7 @@
 /*   By: mjalenqu <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/05/24 10:17:12 by mjalenqu     #+#   ##    ##    #+#       */
-/*   Updated: 2019/05/24 10:37:00 by mjalenqu    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/10/15 09:35:40 by rlegendr    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -44,9 +44,13 @@ void	clear_and_print(t_pos *pos)
 
 void	save_char(t_pos *pos)
 {
-	char*save;
+	char	*save;
+	char	*to_free;
 
 	save = NULL;
+	to_free = stock(NULL, 4);
+	if (to_free)
+		free(to_free);
 	if (pos->start_select < pos->let_nb)
 		save = ft_strndup(pos->ans + pos->start_select,
 				pos->let_nb - pos->start_select + 1);
