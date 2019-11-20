@@ -6,13 +6,33 @@
 /*   By: mjalenqu <mjalenqu@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/08 10:53:46 by mjalenqu     #+#   ##    ##    #+#       */
-/*   Updated: 2019/10/15 08:20:23 by mjalenqu    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/10/25 17:07:17 by rlegendr    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "../../includes/termcaps.h"
 #include "../../includes/lexeur.h"
+
+void	shlvl(t_var *env, int ac, char **av)
+{
+	int	i;
+
+	(void)ac;
+	(void)av;
+	while (env)
+	{
+		if (ft_strcmp("SHLVL", env->name) == 0)
+		{
+			i = ft_atoi(env->data);
+			i++;
+			ft_strdel(&env->data);
+			env->data = ft_itoa(i);
+			return ;
+		}
+		env = env->next;
+	}
+}
 
 char	*init_data(char *src)
 {
@@ -49,7 +69,7 @@ t_var	*init_env(char **env, t_pos *pos, char **av, int i)
 	save = new;
 	while (new->next)
 		new = new->next;
-	new->next = malloc(sizeof(t_var));
+	new->next = ft_malloc(sizeof(t_var));
 	new = new->next;
 	while (env[i])
 	{
@@ -59,7 +79,7 @@ t_var	*init_env(char **env, t_pos *pos, char **av, int i)
 		i++;
 		if (env[i])
 		{
-			new->next = (t_var*)malloc(sizeof(t_var));
+			new->next = (t_var*)ft_malloc(sizeof(t_var));
 			new = new->next;
 		}
 	}
